@@ -1,0 +1,11 @@
+/*///////////////////////////*/
+/*///////// Book Page ////////*/
+/*///////////////////////////*/
+/* line 11, ../../../scss/includes/pageBook.scss */
+.titleBlock {
+  width: 100%; }
+  /* line 14, ../../../scss/includes/pageBook.scss */
+  .titleBlock .coverImg {
+    display: inline-block;
+    width: 100px;
+    float: left; }

@@ -1,0 +1,50 @@
+/* ///////// MISC   /////////*/
+
+
+
+   ::-webkit-input-placeholder {
+   color: #f0f0f0;
+   font-weight: normal;
+   font-weight: 100;
+/*
+   font-style: italic;
+   font-family: monospace;
+   font-size: 40px;
+   line-height: 2em;
+*/
+  }
+
+:-moz-placeholder { /* Firefox 18- */
+   color: #f0f0f0;  
+   font-weight: 100;
+/*
+   font-style: italic;
+   font-family: monospace;
+   font-size: 40px;
+   line-height: 2em;
+*/
+    }
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: #f0f0f0;  
+   font-weight: 100;
+/*
+   font-style: italic;
+      font-family: monospace;
+   font-size: 40px;
+    line-height: 2em;
+*/
+  }
+
+:-ms-input-placeholder {  
+   color: #f0f0f0;  
+   font-weight: 100;
+/*
+   font-style: italic;
+      font-family: monospace;
+   font-size: 40px;
+   line-height: 2em;
+*/
+   }
+   
+   

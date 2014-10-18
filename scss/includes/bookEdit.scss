@@ -1,0 +1,36 @@
+.searchWrap{
+	width: 100%;
+	background: #eee;
+	border-radius: 4px;
+	padding: .5em;
+	&.searchPlaces{
+		margin-top: 1em;
+	}
+	
+	button{
+		display: inline-block;
+		outline: none;
+		vertical-align: middle;
+		font-size: 1em;
+		line-height: 1.6em;
+			}
+	.form-control {
+		vertical-align: middle;
+		display: inline-block;
+		border: 1px solid #ccc;
+		background: #fff;
+		width: 80%;
+		font-size: 1.6em;
+		line-height: 1.6em;
+		padding: .2em;
+			}
+}
+
+
+.dataSection {
+	&.additonalComment{
+		//border-top: 1px dotted #222;
+		border-top: 1px solid $fsLineGrey;	
+		
+	}	
+}

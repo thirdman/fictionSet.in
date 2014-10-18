@@ -1,0 +1,10 @@
+/* line 5, ../../../scss/includes/signup.scss */
+.userForm {
+  width: 500px;
+  background: #eee;
+  padding: 10px; }
+  /* line 10, ../../../scss/includes/signup.scss */
+  .userForm .loginHead {
+    height: 50px;
+    font-size: 1.5em;
+    line-height: 50px; }

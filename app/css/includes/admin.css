@@ -1,0 +1,8 @@
+/*///////////////////////////*/
+/*///////// Admin ////////*/
+/*///////////////////////////*/
+/* line 6, ../../../scss/includes/admin.scss */
+.adminList label {
+  float: none;
+  display: inline-block;
+  min-width: 100px; }

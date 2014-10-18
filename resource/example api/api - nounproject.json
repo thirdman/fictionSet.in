@@ -1,0 +1,34 @@
+API EXAMPLE - nounproject
+
+"collections": [
+        {
+            "is_featured": "0",
+            "description": "",
+            "author": {
+                "permalink": "/TimHRL",
+                "location": "Strasbourg, Alsace, FR",
+                "name": "Tim OHREL"
+            },
+            "date_updated": "2014-06-27 15:14:54",
+            "slug": "office",
+            "sponsor_campaign_link": "",
+            "permalink": "/TimHRL/collection/office",
+            "name": "Office",
+            "is_store_item": "0",
+            "sponsor": {},
+            "template": "24",
+            "sponsor_id": "",
+            "date_created": "2014-06-27 15:14:54",
+            "author_id": "271165",
+            "id": "333",
+            "tags": [
+                "office",
+                "folder",
+                "work",
+                "paper",
+                "letter",
+                "send",
+                "mail"
+            ],
+            "is_published": "1"
+        },

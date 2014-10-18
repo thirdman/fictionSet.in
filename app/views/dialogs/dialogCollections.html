@@ -1,0 +1,112 @@
+ <!-- for when been added -->
+<span ng-show="(collectionAdded) && (!collectionProcessing)">
+	<p>Collection Created!</p>
+</span>
+
+<!-- for when initial state - show collections -->
+<span ng-hide="collectionShowCreate">
+  						<!-- {{collectionsArray | json}} --><!-- collArr -->
+  	<h4>Your Collections</h4>
+	<div class="dialogScrollWrap collectionsList">
+<!-- collArr -->
+		<div ng-repeat="thiscollection in collectionsArray" ng-if="thiscollection.collectionId" class="collectionItem" ng-class="(thiscollection.books |filter:{'bookid': bookid} ).length ? 'inCollection' : 'notInCollection' " ><!--(thiscollection.hasThisBook) ? 'inCollection' : 'notInCollection'--> 
+<!-- 		<a href="" ng-click="toggleBookInCollection(thiscollection.collectionId, $index)" > -->
+		<a href="" ng-click="(thiscollection.books |filter:{'bookid': bookid} ).length ? toggleBookInCollection(thiscollection.collectionId, $index, 'remove') : toggleBookInCollection(thiscollection.collectionId, $index, 'add') " >
+
+			<div class="collectionImg">
+				<span ng-show="(thiscollection.books |filter:timestamp).length"><!-- thiscollection.bookCount -->
+					<div class="imgWrap">
+ 						<img ng-repeat="book in thiscollection.books | orderBy:'timestamp'" src="{{book.coverUrl}}" class="collectionCoverImg" ng-if="$first">				
+					</div>
+				</span>
+				<span ng-hide="(thiscollection.books|filter:timestamp).length" class="noBook"></span>
+			</div>
+			<div class="collectionInfo"  > 
+ 	  			<h5>{{(thiscollection.title) ? thiscollection.title : 'Bookshelf'}}<span class="icon_private" ng-show="!thiscollection.isPublic" title="Private Collection">(Private)</span></h5>
+				<p ng-show="{{(thiscollection.books |filter:timestamp).length}}">{{(thiscollection.books |filter:timestamp).length}} books.</p>  
+				<p>{{(thiscollection.description == 'bookshelf') ? 'Your bookshelf is a private collection' : thiscollection.description}}</p>
+				<p class="subTitle" ng-show="{{thiscollection.timestamp}}">Updated {{ thiscollection.timestamp | date : format : timezone}}.</p> 
+ 
+				</div>
+				<div class="collectionButton">
+					<div class="iconWrap">
+					<span id="checkmark">
+					    <div id="circle"></div>
+					    <div id="stem"></div>
+					    <div id="kick"></div>
+					</span>
+					<span id="plus">
+					    <div id="circle"></div>
+					    <div id="stem"></div>
+					    <div id="kick"></div>
+					</span>
+					<span id="minus">
+					    <div id="circle"></div>
+					    <div id="stem"></div>
+					    <div id="kick"></div>
+					</span>
+					</div>
+			   </div>
+		</a>
+		</div>
+	<div class="ngdialog-buttons">
+		<button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="closeThisDialog('button')">Done</button>
+		<button class=" ngdialog-button " ng-click="showCreateCollection(bookid) ">Create New</button>
+	</div>
+</div>
+</span>
+
+
+<span ng-show="(collectionShowCreate ) && (!collectionProcessing) && (!collectionAdded)">
+	<h4>New Collection</h4>
+	<div class="contentSection">
+		 <form  >
+		     <div class="formField group">
+		     	 <label>Title:</label>
+			 	 <input type="text" ng-model="newColl.title" class="inputLarge" />
+		      </div>
+ 		     <div class="formField group"> 
+		      	<label>Description:</label> 
+		      	<textarea  type="text" ng-model="newColl.description"  class="inputLarge  " /></textarea>
+			  </div>
+<!--
+			  <div class="formField group">
+		      	<label>Feature Image (optional):</label> 
+			  	<input type="text" ng-model="newColl.imgUrl" class="inputLarge" />
+			  </div> 
+-->
+			  <div class="formField group ">
+			 	<label for="isPublic">Public:</label> 
+				<div class="roundedTwo" id="isPublic">
+						<input type="checkbox" value="None" id="roundedTwo" name="check"  ng-model="newColl.isPublic"  />
+						<label for="roundedTwo"></label>
+				</div>   
+				  <p class="subTitle">Can this collection be followed by other users</p>
+			  </div>			 
+
+
+		 </form> 
+	</div><!-- contentsection -->
+
+	<div class="ngdialog-buttons">
+		<button type="button" class="ngdialog-button ngdialog-button-secondary" ng-click="showCollections()">Back</button>
+		<button class="btn ngdialog-button ngdialog-button-primary" ng-click="createNewCollection(newColl) ">Create</button>
+	</div>
+</span>
+
+<span ng-show="(collectionProcessing) && (!collectionAdded)" class="loading">
+	<p>Adding...</p>
+</span>
+
+
+
+<!--
+
+<span ng-hide="(collectionProcessing) || (collectionFollowing)"> 
+	<div class="ngdialog-buttons">
+		<button type="button" class="ngdialog-button ngdialog-button-secondary" ng-click="closeThisDialog('button')">Cancel</button>
+		<button class="btn ngdialog-button ngdialog-button-primary" ng-click="followPlace(placeid) ">Follow</button>
+	</div>
+</span>
+-->
+

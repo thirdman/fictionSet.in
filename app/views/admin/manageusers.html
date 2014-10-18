@@ -1,0 +1,47 @@
+<div class="fullWidth homeFeat">
+	<div class="theContainerHead">
+	<h2 class="homeTitle">
+		<span class="titleHalf">Manage {{usersList.length}} Users</span>
+	</h2>
+	</div>
+</div>
+
+<div class="theContainer">
+<div class="theContent columnWrap" >
+	<div class="columnLeft column column50">		
+		<div class="contentSection collectionWrap"  >
+			<li ng-repeat="user in usersList | orderBy:'$$hashKey':true" style="border-bottom: 1px solid #ccc; list-style-type:none;" class="aUser adminListItem">
+				<div class="coverImg " ng-class="(user.picture_url) ? 'userImg' : 'noUserImg'"  ><img class="userImg" src="{{user.picture_url}}"/></div>
+				<div class="userContent">
+					<div class="userName"><label>Name:</label><strong><a ng-href="#/admin/manageruser/{{user.$id}}">{{user.displayName}}</a></strong></div>
+					<div class="userProvider"><label>Provider:</label>{{user.provider}}</div> 
+					<div class="userEmail"><label>Email:</label>{{user.email}}</div>
+					<div class="userLocation"><label>Location</label>{{user.location}}</div> 
+				</div>
+				<div class="userBadges">
+					<div ng-repeat="badge in user.badges" class="aBadge " >
+						<a ng-href="#/badges/{{badge.badgeId}}"  class="badgeLink"><img src="/imgs/badges/{{badge.filename}}" class="badgeImg" title="{{badge.description}}"></a>
+						 <a href="#/badges/{{badge.badgeId}}" class="badgeText"><span>{{badge.name}}<span></a>
+ 					</div>
+				</div>
+				
+
+				<div class="userAdmin">
+					<span ><button class="btn fsBtn" ng-click="manageBadges(user.$id)" >Badges</a></span>
+				</div>
+
+<!--
+				<div class="userBookshelf">
+					<div ng-repeat="book in user.collections.bookshelf" class="aBook " >
+						<a ng-href="#/books/{{book.bookid}}"  class="badgeLink"><img src="{{book.coverurl}}" class="badgeImg" style="width:30px;" ></a>
+						 <a href="#/books/{{book.bookid}}" class="badgeText"><span>{{book.title}}<span></a>
+						 <a href="" ng-click="moveBook(book.bookid, $parent.user.$id, bookshelf, book)">Move</a>
+ 					</div>
+				</div>
+-->
+
+			</li>
+		</div>
+	</div>
+</div>
+</div>

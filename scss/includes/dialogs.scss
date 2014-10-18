@@ -1,0 +1,331 @@
+/* ///////// Dialogs   /////////*/
+
+.ngdialog.ngdialog-theme-default .ngdialog-button{
+	float: left; //overrides the default one;
+	}
+.dialogScrollWrap{
+	width: 100%;
+//	overflow-y: auto;
+//	max-height: 330px;
+}
+
+
+.collectionsList{
+	padding: 4px;
+	margin: 4px 0;
+	.collectionItem{
+		border-top: 1px dotted #ccc;
+		margin: 4px 0;
+		&:first-child{border-top: 0px solid #eee;}		
+		&.inCollection{
+			border-top: 0px solid white;
+			a{ display: block;
+				padding: 4px;
+				background: $fsGreen;
+				border-radius: 2px;
+				text-decoration: none;
+				color: #fff;
+				h5, p{color: #fff;}
+					.iconWrap{background: darken($fsGreen,10%);}
+					#plus{display: none;}
+					#minus{display: none;}
+					#checkmark{display: inline-block;}
+
+				&:hover{
+					background: #999;
+					.iconWrap{background:#444}
+					#plus{display: none;}
+					#minus{display: inline-block;}
+					#checkmark{display: none;}
+			//		background: #ddd;
+				}
+			
+
+			}
+		}
+		&.notInCollection{
+			a{
+			padding: 4px;
+			display: block;
+			background: transparent;
+			text-decoration: none;
+					.iconWrap{display: none;}
+					#plus{display: none;}
+					#minus{display: none;}
+					#checkmark{display: none;}
+
+				&:hover{
+					background: #e7e7e7;
+					.iconWrap{display: inline-block;}
+					#plus{display: inline-block;}
+					#minus{display: none;}
+					#checkmark{display: none;}
+				//	background: #ddd;
+				}
+			}
+		}
+		.collectionImg{
+ 			//float: left;
+			display: inline-block;
+			width: 60px;
+			width: 15%;
+			width: 70px;
+			height: 58px;
+			height: 95px;
+			margin: 0 8px 0 0;
+			padding: 2px;
+			//overflow: hidden;
+			//display: block;
+			z-index: 10;
+			vertical-align: top;
+			position: relative;
+			.imgWrap{
+			//	position: relative;
+					width: 58px;
+					height: 85px;
+					display: block;
+					position: absolute;
+/*
+				  	-webkit-box-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+						box-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+*/
+					border: 1px solid #fff;
+						&:before {
+					    background: #fff;
+					    top: -3px;
+					    left: -3px;
+					    -webkit-transform: rotate(-2deg);
+					    -moz-transform: rotate(-2deg);
+					    -o-transform: rotate(-2deg);
+					    -ms-transform: rotate(-2deg);
+					    transform: rotate(-2deg);
+ 					  }
+					  &:after {
+					    background: #fff;
+					    top: 0px;
+					    left: 1px;
+					    -webkit-transform: rotate(3deg);
+					    -moz-transform: rotate(3deg);
+					    -o-transform: rotate(3deg);
+					    -ms-transform: rotate(3deg);
+					    transform: rotate(3deg);
+					  }
+
+					&:before, &:after {
+					width: 58px;
+					height: 85px;
+				  	content: "";
+				    position: absolute;
+				    z-index: -1;
+				    background: #ccc;
+				    border: 1px solid #fff;
+				  	-webkit-box-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+						box-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+					}
+				}
+
+			.collectionCoverImg{
+				width: 100%;
+				height: auto;
+				//box-shadow: 1px 1px 0px 0px rgba(0,0,0,.5), 2px 2px 0px 0px  rgba(255,255,255,.7), 3px 3px 0px rgba(0,0,0,.4), 4px 4px 0px 0px  rgba(255,255,255,.7), 5px 5px 0px rgba(0,0,0,.2);
+				box-shadow: 0px 0px 0px rgba(255,255,255,.7), 1px 1px 0px rgba(0,0,0,.3);
+				z-index: 3;
+				position: relative;
+				
+ 			}
+			.noBook{
+				background: #f9f9f9;
+				border: 1px solid #eee;
+				width: 100%;
+				height: 100%;
+				display: block;
+			}
+		}
+		h5{
+			font-size: .85em;
+			margin: 0;
+			padding: 0;
+		}
+		p{margin: 0;
+			font-size: 12px;
+		}
+		.collectionInfo{
+			display: inline-block; width: 66%;
+			vertical-align: top;
+		}
+		.collectionButton{
+			display: inline-block; 
+			width: 30px;
+			float: right;
+			vertical-align: middle;
+				button{
+				float: none;
+				padding: .5em 1em;	
+				
+				&:hover{
+					background: #222;
+				}
+				}
+			
+			.iconWrap{
+				background: #444;
+				border-radius: 4px;
+				position: relative;
+				display: inline-block;
+				width: 30px;
+				height: 30px;
+			}
+
+		}
+	
+	}
+}
+
+.icon_private{
+	background: url(../imgs/icon_lock.svg) 0px 0px no-repeat;
+	background-size: .9em auto;
+	width: 1em;
+//	height: 1em;
+	margin-left: .5em;
+	display: inline-block;
+	vertical-align: baseline;
+	//line-height: 1em;
+	padding-left: 1em;
+	color: $fsBlack;
+	font-weight: bold;
+	font-style: italic;
+}
+
+
+#checkmark {
+    display:inline-block;
+    width: 22px;
+    height:22px;
+    -ms-transform: rotate(45deg); /* IE 9 */
+    -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
+    transform: rotate(45deg);
+	position: relative;
+	left: 5px;
+	top: -1px;
+
+	#circle {
+	    position: absolute;
+	    width:0;
+	    height:0;
+	    border:15px solid #444; //#c9ff00
+	    border-radius:15px;
+	    left:0;
+	    top:0;
+	    display: none;
+	}
+	
+	#stem {
+	    position: absolute;
+	    /*
+	width:3px;
+		    height:9px;
+		    background-color:#fff;
+		    left:11px;
+		    top:6px;
+	*/
+	width: 3px;
+	height: 12px;
+	background-color: #fff;
+	left: 14px;
+	top: 8px;
+	}
+	
+	#kick {
+		position: absolute;
+		width: 6px;
+		height: 3px;
+		background-color: #fff;
+		left: 10px;
+		top: 17px;
+		/*
+			    position: absolute;
+			    width:3px;
+			    height:3px;
+			    background-color:#fff;
+			    left:8px;
+			    top:12px;
+		*/
+	}
+}
+
+#plus {
+    display:inline-block;
+    width: 22px;
+    height:22px;
+    -ms-transform: rotate(0deg); /* IE 9 */
+    -webkit-transform: rotate(0deg); /* Chrome, Safari, Opera */
+    transform: rotate(0deg);
+	
+	#circle {
+	    position: absolute;
+	    width:0;
+	    height:0;
+	    border:15px solid #444; //#c9ff00
+	    border-radius:15px;
+	    left:0;
+	    top:0;
+	    display: none;
+	    	}
+	
+	#stem {
+	position: absolute;
+ 	width: 13px;
+	height: 3px;
+	background-color: #fff;
+	left: 9px;
+	top: 13px;
+	}
+	
+	#kick {
+ 		position: absolute;
+		width: 3px;
+		height: 13px;
+		background-color: #fff;
+		left: 14px;
+		top: 8px;
+ 	}
+}
+
+#minus {
+    display:inline-block;
+    width: 22px;
+    height:22px;
+    -ms-transform: rotate(0deg); /* IE 9 */
+    -webkit-transform: rotate(0deg); /* Chrome, Safari, Opera */
+    transform: rotate(0deg);
+	
+	#circle {
+	    position: absolute;
+	    width:0;
+	    height:0;
+	    border:15px solid #444; //#c9ff00
+	    border-radius:15px;
+	    left:0;
+	    top:0;
+	    display: none;
+	}
+	
+	#stem {
+	position: absolute;
+ 	width: 13px;
+	height: 3px;
+	background-color: #fff;
+	left: 9px;
+	top: 13px;
+	}
+	
+	#kick {
+		display: none;
+ 		position: absolute;
+		width: 3px;
+		height: 12px;
+		background-color: #fff;
+		left: 3px;
+		top: 8px;
+ 	}
+}

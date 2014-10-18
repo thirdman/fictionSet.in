@@ -1,0 +1,21 @@
+	<div class="fullWidth homeFeat">
+		<div class="theContainer">
+		<h2 class="homeTitle">
+			<span class="titleHalf">Manage Places</span>
+		</h2>
+		</div>
+	</div>
+
+ 
+<div class="theContainer">
+<div class="homeBook booksWrap contentWrap" >
+<li ng-repeat="place in placelist | orderBy: '-priority'" style="border-top: 1px solid #ccc; list-style-type:none;">
+	<a ng-href="#/manageplace/{{place.$id}}">{{place.displayName}}</a> 
+	<span>ID: {{place.geonameId}} </span>
+	<span>L/L: {{place.gps.lat}}, LNG: {{place.gps.lng}}</span> 
+		<span>Cc: {{place.countryCode}}</span> 
+</li>
+
+
+</div>
+</div>

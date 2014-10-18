@@ -1,0 +1,146 @@
+ <div class="theContainer pageAccount">
+  <div class="contentWrap">
+	
+<!-- SHOW SECTION IF LOGGED IN -->
+<span ng-if="auth.user" >
+	<div class="titleBlock group">
+		<div class="coverImg userImg" ng-show="profile.picture_url" ><img class="featImg" src="{{profile.picture_url}}"/></div>
+		<h2 class="bookTitle">{{auth.user.displayName}}</h2>
+		<div class="subMenu">
+			<a href="#/profile/{{auth.user.displayName}}" class="active">profile</a>
+<!-- 			<a href="#/collections/{{auth.user.id}}">collections</a> -->
+			<a href="#/following">following</a>
+			<a href="#/account" >account</a>
+ 
+		</div>
+		<button class="btnLogout" ng-click="auth.$logout()">Logout</button>
+	</div>
+	
+	
+<div class="theContent columnWrap" >
+	<div class="columnLeft column column50">		
+		<div class="contentSection collectionWrap "  >
+			<div class="column100">
+				<h3 class="">Profile</h3>
+			</div>
+			<div class="columnLeft column column50">
+				<p><span class="iconName iconLabel icon-user"></span>{{profile.displayName}}</p>
+				<p><span class="iconEmail iconLabel icon-letter-mail"></span>{{(profile.email) ? profile.email : 'No Location Set'}}</p>
+				<p><span class="iconLocation iconLabel icon-marker"></span>{{(profile.location) ? profile.location : 'No Location Set'}}</p>
+			</div>
+			<div class="columnRight column column50">	
+ 				<p><span class="iconFollowing infoLabel icon-globe-world">Following</span> <span class="infoNumber">{{(profile.following|filter:placeid).length}} places</span></p>				
+				<p><span class="iconCollections infoLabel icon-folder-open">Collecting</span> <span class="infoNumber">{{(profile.collections|filter:timestamp).length}} collections</span></p>
+				<p><span class="iconBooks infoLabel icon-book">Contributing</span> <span class="infoNumber">{{(allBooks | filter:{'addedById': auth.user.uid}).length}} books</span>{{currentUser.uid}}</p>
+			</div>
+		</div>
+		<div class="contentSection actionWrap" ng-if="userAaa">
+			<h3>Admin</h3>
+ 			<p ng-if="userAaa"><a ng-href="#/manageplaces" class="btn">Manage Places</a> ADMIN: Manage place information</p>
+			<p ng-if="userAaa"><a ng-href="#/admin/messages" class="btn">New System Message</a> ADMIN: Add New System Notification</p>
+			<p><a ng-href="#/admin/users" class="btn">Manage Users</a> Edit Users and badges</p>
+		</div>
+
+		<div class="contentSection badgeWrap " >
+			<h3>Badges</h3>
+			<div ng-repeat="badge in profile.badges" class="aBadge" >
+				<a ng-href="#/badges/{{badge.badgeId}}"  class="badgeLink"><img src="/imgs/badges/{{badge.filename}}" class="badgeImg" title="{{badge.description}}"></a>
+				 <a href="#/badges/{{badge.badgeId}}" class="badgeText"><span>{{badge.name}}<span></a>
+			</div>
+		</div>
+ 
+		<div class=" sectionNotifications  contentSection" ng-if="userAaa">
+			<div class="loading" ng-show="isLoadingMessages"></div>
+			<span ng-show="!isLoadingMessages">
+				<h3>Notifications</h3>
+					<div ng-repeat="note in notifications | orderBy: '-timestamp' | filter: {readDistance:'!'}" class="notification msg{{note.messageType}}"><!--orderBy: '-timestamp'-->
+						<!-- <div class="user addedBy"><span class="userGroup">{{note.authorName}}</span> </div> -->
+	 				<div class="msgContent"  >{{note.messageContent}}</div>
+	 				<div class="msgMeta">{{note.timestamp | date:'d MMMM, h:m:s '}} </div>
+					<!--<div class="msgMeta">Read: {{note.readDate | date:'d MMMM, h:m:s '}} </div>  -->
+					<!--<div class="msgMeta">Difference: {{note.readDistance | date:'m'}} </div>  -->
+				</div>
+				<span class="emptyContent" ng-show="(notifications | filter: {readDistance:'!'}).length == 0">No unread messages</span>
+ 			</span>
+		</div>
+
+	</div><!-- ends col left -->
+	<div class="columnRight column column50">	
+		<div class="contentSection collectionWrap" ng-if="profile.collections.bookshelf">
+			<h3>Your Bookshelf</h3>
+			<ul>
+			<li ng-repeat="bookshelfItem in profile.collections.bookshelf.books" class="collectionItem" >
+			 	<a href="#/book/{{bookshelfItem.bookid}}" class="collectionImgLink"><img src="{{bookshelfItem.coverUrl}}" class="collectionImg"></a>
+			 	<h5><a href="#/book/{{bookshelfItem.bookid}}">{{bookshelfItem.title}}</a></h5>
+			 	<p class="subTitle">Added: {{ bookshelfItem.timestamp | date : format : timezone}}</p>
+			 </li>
+			 </ul>
+		</div>
+ 
+
+		<div class="contentSection  collectionWrap" >
+			<h3>Your Collections</h3>
+			<h4 ng-show="profile.collections"><ng-pluralize count="profile.collections"
+			when="{'0': 'No Collections',
+			    'one': '1 Collection',
+			    'other': '{} Collections.'}">
+				</ng-pluralize>
+			</h4>
+			<div class="collectionsList inProfileContext  " ng-show="profile.collections">
+				<div ng-repeat="thiscollection in profile.collections"  class="collectionItem"   >
+				<a href="#/collection/{{thiscollection.collectionId}}"   >
+					<div class="collectionImg">
+						<span  >
+							<div class="imgWrap">
+								<img ng-repeat="book in thiscollection.books | orderBy:'timestamp'" src="{{book.coverUrl}}" class="collectionCoverImg" ng-if="$first">				
+		 						<!-- <img ng-repeat="book in thiscollection.books | orderBy:'timestamp'" src="{{book.coverUrl}}" class="collectionCoverImg coverImgSmall">				 -->
+							</div>
+						</span>
+						</div>
+					<div class="collectionInfo">
+		 	  			<h5>{{(thiscollection.title) ? thiscollection.title : 'Bookshelf'}}<span class="icon_private" ng-show="!thiscollection.isPublic" title="Private Collection">Private</span></h5>
+						<p ng-show="thiscollection.createdByName">by {{thiscollection.createdByName}}.</p> 
+						<p ng-show="{{thiscollection.bookCount}}">{{thiscollection.bookCount}} books.</p> 
+							<p class="subTitle" ng-show="{{thiscollection.timestamp}}">Updated {{ thiscollection.timestamp | date : format : timezone}}.</p> 
+							</div>
+					</div>
+				</a>
+			</div>
+		</div><!-- ./contentSection --->
+
+
+		<div class="contentSection tagWrap bookPlaces followWrap" ><!-- ng-if="userAaa" -->
+			<h3>Places You Follow</h3>
+			<div ng-repeat="place in profile.following" class="aTag placeTag" >
+				<a ng-href="#/place/{{place.placeid}}" ng-class="(place.name==place.countryName) ? 'countryName' : ''" class="placeName">{{place.name}}</a>
+				<span ng-if="place.name != place.countryName"> <a href="#/place/{{place.countryName}}" class="placeCountry"><span>{{place.countryName}}<span></a></span>
+			</div>
+		</div>
+
+ 
+
+
+
+	</div><!-- column right -->
+ </div><!-- ends columnwrap -->
+ 
+ 
+ 
+ <span><!-- ends logged in user -->
+
+
+<!-- SHOW SECTION IF NOT LOGGED IN -->
+<div class="theContent columnWrap" ng-if="!auth.user" >
+    <div ng-hide="auth.user" class="bookDetail">
+		<h2>Profile</h2>
+		<p>Not logged in.</p>
+		<p>Return to front page or <a href="#/login">login</a> to view your account.</p>
+    </div>
+</div><!-- ends not logged in user -->
+
+
+ </div>
+</div>
+
+
+

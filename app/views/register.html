@@ -1,0 +1,65 @@
+
+<div class="theContainer pageEdit">
+<div class=" contentWrap" >
+
+ 
+
+<!-- SHOW SECTION IF NOT LOGGED IN -->
+ <span  >
+<div class="theContent columnWrap">
+
+<!--
+	<div class="userForm loginFacebook"  >
+      <div class="loginHead">Register using Facebook</div>
+      <button ng-click="auth.$create('facebook')" class="btn">Connect???</button>
+	</div>    
+-->
+    
+	<div class="userForm loginForm"  ng-hide="auth.user">
+		<div class="loading loginHead" ng-show="loading">Thinking....</div>
+	
+		<div class="loginHead" ng-hide="loading">Register using your email Address:</div>
+		<form  ng-hide="loading">
+		<fieldset>
+		  <div class="formField group">
+	      	<label for="login-email">Email:</label> 
+	     	 <input type="text" id="login-email" ng-model="loginReg.email" class="inputStd" placeholder="Email" />
+	      </div>
+			 	<div class="formField group">
+				 <label for="login-password">Password:</label>
+				 <input type="password" id="login-password" value="" ng-model="loginReg.password" class="inputStd" placeholder="Password"/>
+				 </div>	      
+
+			 	<div class="formField group">
+				 <label for="login-password">Display Name</label>
+				 <input type="text" id="login-name" value="" ng-model="loginReg.displayName" class="inputStd" placeholder="Your name as others will see it, eg: Susan Smith"/>
+				 </div>	      
+				 
+<!--
+			 	<div class="formField group ">
+			 	<label for="rememebrcheck">Stay Logged In:</label> 
+					<div class="roundedTwo" id="rememebrcheck">
+							<input type="checkbox" value="None" id="roundedTwo" name="check"  ng-model="loginReg.rememberMe"  />
+							<label for="roundedTwo"></label>
+				  </div>   
+				</div>			 
+-->
+
+	      <button ng-click="createUser(loginReg)" class="btn">Register</button>
+ 		</fieldset>
+		</form>
+	</div><!-- ends userForm -->
+	
+</div><!-- ends the Ctonetent -->
+</span><!-- ends of NOT logged in bit -->
+
+<!--
+ {{auth | json}}
+ {{loginReg | json}}
+-->
+ 	
+  
+  
+  </div>
+  </div>
+

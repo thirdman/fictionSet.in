@@ -1,0 +1,95 @@
+/*///////////////////////////*/
+/*///////// HOMEPAGE ////////*/
+/*///////////////////////////*/
+
+
+   h2.homeTitle{
+ 	   margin-bottom: inherit !important;
+	   display: inline-block;
+	   vertical-align: top;
+   		line-height: 3em;
+   		margin: 0;
+    }
+   .titleHalf{ 
+   		display: inline-block; text-align: right;
+   		@media only screen and (min-width: 0px) and (max-width: 887px) {
+		   max-width: 60%;
+		   min-width: inherit;
+			} 
+
+   }
+   .titleHalf input{ 
+   		width: 100%; 
+   		margin-left: 10px;  
+   		background: #fff;
+	   line-height: 1.5em;
+ 	   padding: 2px 12px; 
+	   outline: none;
+	   border: 1px solid #ddd;
+/* 	   border-bottom: 1px solid #ccc; */
+	   text-align: left;
+	   color: #666;
+	   min-width: 400px;
+	   font-size: .85em;
+	   border-radius: 4px;
+	   
+	   @media only screen and (min-width: 0px) and (max-width: 887px) {
+		   width: 100%;
+		   min-width: inherit;
+			} 
+
+
+   }
+   .titleHalf input:active{ 
+   		background: rgba(255,255,255,.7); 
+   		color: #2a2a2a; 
+	   outline: none;
+	   }
+	   
+	   
+	   
+	.titleSection  {
+	position: relative;
+	.supportingInfo{
+	   position: absolute; 
+	   right: 20px;
+	   top: 0px;
+	   text-align: center;
+//	   background: #000;
+	   width: 6em;
+	   height: 5em;
+	   //border-radius: 50%; 
+	   padding-top: .5em;
+	   z-index: 20;
+//	   border-left: 1px solid $fsGrey; 
+	   color: $fsGrey;
+	   padding-top: 1.4em;
+	   height: 100%;
+		   .largeType{
+		   font-size: 3em;
+		   display: block;
+		   line-height: .9em;
+		  margin-top: .5em;
+		  // color: #fff;
+		      }
+	   .smallType{
+		   font-size: .85em;
+		   display: block;
+		  // color: #fff;
+		   }
+		}
+
+	   @media only screen and (min-width: 0px) and (max-width: 887px) {
+		   width: inherit;
+		   right: 0;
+		   .largeType{
+			   margin-top: 5px;
+		   }
+		   
+		} 
+
+}
+	   
+
+
+	  

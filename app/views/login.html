@@ -1,0 +1,83 @@
+
+<div class="theContainer pageEdit">
+<div class=" contentWrap" >
+
+<!-- SHOW SECTION IF  LOGGED IN -->
+	<div class="theContent columnWrap" ng-if="auth.user" >
+    <div class="bookDetail">
+	      <p>Hello, {{auth.user.displayName ? auth.user.displayName : auth.user.id}} </p>
+		  <p>Return to <a href="#/home">front page</a> or <a href="#/account">view your account settings</a></p>
+      <button ng-click="auth.$logout()">Logout</button>
+     </div>
+	</div>
+
+
+<!-- SHOW SECTION IF  LOGGED IN -->
+ <span ng-show="!auth.user">
+<div class="theContent columnWrap">
+
+	<div class="userForm loginFacebook"  >
+      <div class="loginHead">Login/Sign Up using your Facebook account</div>
+      <button ng-click="auth.$login('facebook')" class="btn">Connect</button>
+	</div>    
+
+
+	<div class="userForm loginGoogle"  >
+      <div class="loginHead">Login/Sign Up using your Google account</div>
+      <button ng-click="auth.$login('google')" class="btn">Connect</button>
+	</div>    
+    
+	<div class="userForm loginForm"  ng-hide="auth.user">
+		<div class="loginHead">Login using Email Address:</div>
+		<form  >
+		<fieldset>
+		  <div class="formField group">
+	      	<label for="login-email">Email:</label> 
+	     	 <input type="text" id="login-email" ng-model="loginInfo.email" class="inputStd" placeholder="Email" />
+	      </div>
+			 	<div class="formField group">
+				 <label for="login-password">Password:</label>
+				 <input type="password" id="login-password" value="" ng-model="loginInfo.password" class="inputStd" placeholder="Password"/>
+				 </div>	      
+				 
+			 	<div class="formField group ">
+			 	<label for="rememebrcheck">Stay Logged In:</label> 
+					<div class="roundedTwo" id="rememebrcheck">
+							<input type="checkbox" value="None" id="roundedTwo" name="check"  ng-model="loginInfo.rememberMe"  />
+							<label for="roundedTwo"></label>
+				  </div>   
+				</div>			 
+
+	      <button ng-click="auth.$login('password', loginInfo)" class="btn">Login</button>
+ <!--   ng-click="doLogin()"  -->
+		</fieldset>
+		</form>
+	</div><!-- ends userForm -->
+
+	<div class="userForm loginForm"  ng-hide="auth.user">
+		<p><a href="#/register">Sign Up</a> using your email address.</p>
+	</div>
+
+	
+</div><!-- ends the Ctonetent -->
+</span><!-- ends of NOT logged in bit -->
+<!--
+<div class="userForm signupForm"  ng-hide="auth.user">
+	 <form>
+        <fieldset>
+            <label for="name">Email</label>
+            <input type="text" name="email" id="register-email" class="inputStd" />
+            <label for="password">Password</label>
+            <input type="password" name="password" id="register-password" value="" class="inputStd" />
+        </fieldset>
+    </form>
+</div>	
+-->
+
+<!-- {{auth | json}} -->
+	
+  
+  
+  </div>
+  </div>
+

@@ -1,0 +1,1 @@
+"use strict";angular.module("myApp.directives",[]).directive("delayedModel",function(){return{scope:{model:"=delayedModel"},link:function(e,l,o){l.val(e.model),e.$watch("model",function(o,d){o!==d&&l.val(e.model)});var d;l.on("keyup paste search",function(){clearTimeout(d),d=setTimeout(function(){e.model=l[0].value,l.val(e.model),e.$apply()},o.delay||100)})}}});

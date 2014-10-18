@@ -1,0 +1,78 @@
+	<div class="fullWidth homeFeat">
+		<div class="theContainer">
+		<h2 class="homeTitle">
+			<span class="titleHalf">Edit Place: {{place.displayName}}</span>
+		</h2>
+		</div>
+	</div>
+<div class="theContainer">
+<div class=" contentWrap" >
+
+ 
+<div class="theContent columnWrap" >
+		<div class="columnLeft column">		
+			<h2>Current</h2>
+	 <form ng-submit="place.$save()">
+		     <div class="formField group">
+		     	 <label>Name:</label>
+			 	 <input type="text" ng-model="place.displayName" class="inputStd" />
+		      </div>
+	 	     <div class="formField group">
+		      <label>GeoID:</label> 
+		      <input type="text" ng-model="place.geonameId" class="inputStd" />
+			  </div>
+		     <div class="formField group">
+		      <label>Lat:</label> 
+		      <input type="text" ng-model="place.gps.lat" class="inputSmall" />
+			  </div>
+		     <div class="formField group">
+		      <label>Lng:</label> 
+		      <input type="text" ng-model="place.gps.lng" class="inputSmall"  />
+			  </div>	      
+		     <div class="formField group">
+		      <label>Country Code</label> 
+		      <input type="text" ng-model="place.countryCode" class="inputSmall" class="inputSmall"  />
+			  </div>	      
+	      
+	      <button type="submit">Save Changes</button>
+	      </form>
+	</div>
+		<div class="columnRight column">		
+		  <h2>Generated</h2>
+		 <form ng-submit="geosubmit()">
+		 	
+		     <div class="formField group">
+		     	 <label>Name:</label>
+			 	 <input type="text" ng-model="geoplace.name" class="inputStd" value="geoplace.name" />
+		      </div>
+	 	     <div class="formField group">
+		      <label>GeoID:</label> 
+		      <input type="text" ng-model="geoplace.geonameId" class="inputStd" value="geoplace.geonameId"  />
+			  </div>
+		     <div class="formField group">
+		      <label>Lat:</label> 
+		      <input type="text" ng-model="geoplace.lat" class="inputSmall" value="geoplace.lat"  />
+			  </div>
+		     <div class="formField group">
+		      <label>Lng:</label> 
+		      <input type="text" ng-model="geoplace.lng" class="inputSmall" value="geoplace.lng"  />
+			  </div>	      
+
+		     <div class="formField group">
+		      <label>Country Code</label> 
+		      <input type="text" ng-model="geoplace.countryCode" class="inputSmall" value="geoplace.countryCode"  />
+			  </div>	      
+	      <button type="submit" id="copyContent">Copy Changes</button>
+
+ 	      </form>
+		 	<img src="http://api.tiles.mapbox.com/v3/thirdman.j1o1gjim/{{geoplace.lng}},{{geoplace.lat}},5/600x300.png"  >
+		  
+		  </div>
+		  </div><!-- the content -->
+		 
+			 
+<!-- {{geoplace}} -->
+
+</div>
+
+</div>

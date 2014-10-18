@@ -1,0 +1,370 @@
+   body{
+	   background: #308383;
+	   background: #f9f9f9;
+	   height: 100%;
+	   font-size: 18px;
+	   font-family: 'Roboto', sans-serif;
+	   font-weight: 300;	
+	   color: $fsBlack;
+	   padding: 0;
+	   margin: 0;
+   		@media only screen and (min-width: 0px) and (max-width: 887px) {
+	   		font-size: 14px;
+			} 
+		@media only screen and (min-width: 1200px) {
+			font-size: 18px;
+		} 
+   }
+  
+   
+   h2{
+	  font-size: 2.8em;
+	  font-weight: 300;
+	  @media only screen and (min-width: 0px) and (max-width: 887px) {
+		   font-size: 1.8em;
+	   } 
+	   &.bookTitle{
+					padding: 0;
+					margin: 0;
+		}
+   }
+
+   h3{
+    font-size: 1.4em;
+    font-weight: 300;
+    color: $fsBlack;
+	    &.bookTitle{
+					padding: 0;
+					margin: 0;
+	    }
+	    a{
+		    text-decoration: none;
+		    color: $fsBlack;
+	    }
+   }
+
+   h4{
+	   	font-size: 1em;
+	    padding: .5em 0;
+	    margin: 0;
+	    font-weight: 300;
+	    font-size: .85em;
+	    color: $fsGrey;
+	    text-transform: uppercase;
+   }
+
+   h5{ 
+/*    font-size: 1em; */
+	   padding: .5em 0;
+	   font-weight: 300;
+	   color: lighten( $fsBlack, 30%);
+	   
+		   &.bookSubtitle{
+			   		padding: 0;
+					margin: 0;
+					font-style: italic;
+		
+		   }
+
+   }
+   p{
+	   white-space: pre-line;
+	   line-height: 1.8em;
+	   margin: 0 0 .5em;
+/* 	   font-size: 16px; */
+   }
+/*
+   p+p{
+	   margin-bottom: .5em;
+   }
+*/
+
+    .subTitle{
+	   font-size: .85em;
+	   margin: 0;
+	   padding: 0;
+	   color: $fsGrey;
+   }
+
+	q { quotes: '\201c' '\201d'; 
+		font-size: 1em;
+		line-height: 1.3em;
+	}
+	q:before { content: open-quote; 
+				font-size: 2em;
+				line-height: 1em;
+				font-family: georgia;
+				position: relative;
+				top: 7px;
+				}
+	q:after  { content: close-quote; 
+				font-size: 2em;
+				line-height: 1em;
+				position: relative;
+				top: 7px;
+				font-family: georgia;
+	}
+	   
+   a{
+	   color: $fsBlack;
+   }
+   
+   ul{
+	   padding: 0;
+   }
+   
+   
+   .loading{
+	   width: 100%; text-align: center; padding: 1em; 
+	   //background: #f5f5f5;
+	   border-radius: 4px; margin: 1em 0;
+	   	 	.logo{
+		 		height: 50px; width: auto; 
+		 		display:inline-block;
+		 		vertical-align: middle;
+		 		position: relative;
+ 		 		margin-right: 5px;
+		 		-webkit-transition: all infinite ease;
+			    transition: all infinite ease;
+			    -webkit-transform-style: preserve-3d;
+			    transform-style: preserve-3d;
+				//transform: rotateY(180deg); 	
+				-webkit-animation: rotateanti .9s ease-in infinite 0s;
+				-moz-animation: rotateanti .9s ease-in infinite 0s;
+				 -o-animation: rotateanti .9s ease-in infinite 0s;
+				 -ms-animation: rotateanti .9s ease-in infinite 0s;
+				 animation: rotateanti .9s ease-in infinite 0s;
+
+	 	}
+
+   }
+   
+   
+		@-webkit-keyframes rotateanti {
+		 to {
+		    -webkit-transform: rotateY(0deg);
+		  }
+		  from {
+		    -webkit-transform: rotateY(360deg);
+		  }
+		
+		}
+		
+		@-moz-keyframes rotateanti {
+		 to {
+		     -moz-transform: rotateY(0deg);
+		  }
+		  from {
+		     -moz-transform: rotateY(360deg);
+		  }
+		
+		}
+		@-o-keyframes rotateanti {
+		 to {
+		    -o-transform: rotateY(0deg);
+		  }
+		  from {
+		    -o-transform: rotateY(360deg);
+		  }
+		
+		}
+		@-ms-keyframes rotateanti {
+		 to {
+		    -ms-transform: rotateY(0deg);
+		  }
+		  from {
+		    -ms-transform: rotateY(360deg);
+		  }
+		
+		}
+
+
+
+   
+   .fullWidth{
+	   width: 100%;
+	   &.homeFeat{
+		   background: #eee;
+	   }
+   }
+   
+   .theContainer{
+	   margin: 0 5%;
+	   padding-bottom: 100px;
+	   //temporary test of a max width:
+	   margin: 0 auto;
+	   padding-bottom: 100px;
+	   max-width: 1200px;
+	   @media only screen and (min-width: 0px) and (max-width: 887px) {
+		   	margin: 0 10px;
+			} 
+	   @media only screen and (min-width: 888px) and (max-width: 1200px) {
+		   	margin: 0 10px;
+			} 
+
+	   
+   }
+   
+   .theContainerHead{
+	   margin: 0 5%;
+	   margin: 0 auto;
+ 	   max-width: 1200px;
+	   @media only screen and (min-width: 0px) and (max-width: 887px) {
+		   margin: 0 10px;
+			} 
+	   @media only screen and (min-width: 888px) and (max-width: 1200px) {
+		   	margin: 0 10px;
+			} 
+   }
+   
+   .contentWrap{
+	  position: relative;
+   }
+   
+   .titleBlock{
+   		border-bottom: 1px solid $fsLineGrey;
+	   .btnLogout{
+	   		position: absolute;
+	   		right: 0;
+	   		top: 0;
+	   }
+	   
+   }
+   
+   
+   .contentSection{
+	   margin-bottom: 1em;
+	   h3{
+		   margin-top: 0;
+		   margin-bottom: .66em;
+	   }
+   }
+   
+   
+   .additionalSection{
+//	   border-top: 1px dotted #222;
+	   border-top: 1px solid $fsLineGrey;	
+	   margin-top: 1em;
+   }
+   
+   /////
+   
+   
+   .imgList{
+	   	background: #eee;
+		border-radius: 4px;
+		padding: 1em;
+		margin: 10px 0;
+		.imgItem{
+ 		}
+		
+		.imgWrap{
+			display: inline-block;
+			width: 90px;
+			height: 90px;
+			border-radius: 45px;
+			background: #ccc;
+			vertical-align: middle;
+				img{
+				width: 90px;
+				height: 90px;
+				border-radius: 45px;
+				}
+		}
+		.imgInfo{
+			display: inline-block;	
+		}
+
+   }
+ 
+ 
+    //////
+   /////   description wrap
+   
+   .descriptionWrap{
+   	line-height: 1.6em;
+ 	   b{
+		   font-weight: normal;
+	   }
+	   
+   }
+   
+  
+   
+   //////PRICING /////
+   .buyWrap{
+	   display: inline-block;
+	   vertical-align: top;
+   }
+   .buyLink{
+   	display: inline-block;
+   	&.btn{
+	   	margin: 0;
+	   	padding: .5em .5em .25em
+   	}
+	   .buyPrice{
+		   font-size: 1.5em;
+		   line-height: 1.5em;
+		   font-weight: 300;
+	   }
+	   .buyCurrency{
+		   font-size: .85em;
+		   color: $fsGrey;		   
+	   }
+	   .buySave{
+	   		font-size: .85em;
+	   		color: yellow;
+		   		   
+	   }
+	   .buyMerchant{
+		   font-size: .85em;
+		   line-height: .5em;
+		   padding: 0;
+		   
+	   }
+	   
+   }
+   	   .buyMore{
+		   font-size: .85em;
+		   display: block;
+		   margin: 0;
+			font-style: italic;
+			color: $fsGrey;   
+	   
+	   .buyOffersFrom{
+	   	}
+	   }
+	   
+	   
+	.appleIcon{
+		height: 20px;
+		vertical-align: top;
+		display: inline-block;
+		margin-top: -7px;
+		margin-bottom: -6px;	
+}	   
+
+
+
+
+//columns will be here eventiually
+.columnWrap{
+	.column50{
+		width: 49.5%;
+		&.columnLeft, &.columnRight{
+		width: 49.5%;		
+		}
+		
+		@media only screen and (max-width: 979px) { //and (max-width: 887px) 
+			width: 100%;
+			&.columnLeft, &.columnRight{
+			width: 100%;		
+			}
+		}
+	
+	}
+	.column100{
+		width: 100%;
+		display: block
+	}
+}

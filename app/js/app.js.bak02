@@ -1,0 +1,819 @@
+var app = angular.module("myApp", 
+	["firebase", 'ngRoute', 'myApp.directives', 'angular-underscore','ngLodash', 'angucomplete-alt']
+		);
+ 
+ /*
+
+ angular.module('myApp',
+      ['myApp.config', 'myApp.routes', 'myApp.filters', 'myApp.services', 'myApp.directives', 'myApp.controllers',
+         'simpleLoginTools', 'routeSecurity']
+   )
+*/
+ 
+
+ 
+app.config(["$routeProvider", '$locationProvider', function($routeProvider, $locationProvider) {
+  $routeProvider.when("/home", {
+    controller: "HomeCtrl",
+    templateUrl: "views/home.html",
+    resolve: {
+      // controller will not be invoked until getCurrentUser resolves
+      
+      "currentUser": ["simpleLogin", function(simpleLogin) {
+        // simpleLogin refers to our $firebaseSimpleLogin wrapper in the example above
+        // since $getCurrentUser returns a promise resolved when auth is initialized,
+        // we can simple return that here to ensure the controller waits for auth before
+        // loading
+        return simpleLogin.$getCurrentUser();
+        
+      }]
+      
+      //,
+    //"booklist"  : ["getFirebase", function(getFirebase) {
+    //	return getFirebase.all(books);
+	//	}]
+    
+  }
+  })
+  .when("/login", {
+    controller: "LoginCtrl",
+    templateUrl: "views/login.html",
+    resolve: {
+      // controller will not be invoked until getCurrentUser resolves
+      "currentUser": ["simpleLogin", function(simpleLogin) {
+         return simpleLogin.$getCurrentUser();
+      }]
+    }
+  })
+  .when("/about", {
+    controller: "AboutCtrl",
+    templateUrl: "views/about.html",
+    resolve: {
+      // controller will not be invoked until getCurrentUser resolves
+      "currentUser": ["simpleLogin", function(simpleLogin) {
+         return simpleLogin.$getCurrentUser();
+      }]
+    }
+  })
+  .when("/account", {
+    controller: "AccountCtrl",
+    templateUrl: "views/account.html",
+    resolve: {
+      // controller will not be invoked until getCurrentUser resolves
+      "currentUser": ["simpleLogin", function(simpleLogin) {
+         return simpleLogin.$getCurrentUser();
+      }]     
+ 
+
+    }
+  })
+
+ 
+  .when("/book/:id", {
+    controller: "BookCtrl",
+    templateUrl: "views/book.html",
+    resolve: {
+      // controller will not be invoked until getCurrentUser resolves
+      "currentUser": ["simpleLogin", function(simpleLogin) {
+         return simpleLogin.$getCurrentUser();
+      }]
+    }
+  })
+    
+  .when("/places", {
+    controller: "PlacesCtrl",
+    templateUrl: "views/places.html",
+    resolve: {
+      // controller will not be invoked until getCurrentUser resolves
+      "currentUser": ["simpleLogin", function(simpleLogin) {
+         return simpleLogin.$getCurrentUser();
+      }]
+    }
+  })
+
+  .when("/place/:placeid", {
+    controller: "PlaceCtrl",
+    templateUrl: "views/place.html",
+    resolve: {
+      // controller will not be invoked until getCurrentUser resolves
+      "currentUser": ["simpleLogin", function(simpleLogin) {
+         return simpleLogin.$getCurrentUser();
+      }]
+    }
+  })
+
+
+  .when("/setting/:setting", {
+    controller: "SettingCtrl",
+    templateUrl: "views/setting.html",
+    resolve: {
+      // controller will not be invoked until getCurrentUser resolves
+      "currentUser": ["simpleLogin", function(simpleLogin) {
+         return simpleLogin.$getCurrentUser();
+      }]
+    }
+  })
+
+  .when("/manageplaces/", {
+    controller: "ManagePlacesCtrl",
+    templateUrl: "views/admin/addplaces.html",
+    resolve: {
+       "currentUser": ["simpleLogin", function(simpleLogin) {
+         return simpleLogin.$getCurrentUser();
+      }]
+    }
+  })  
+
+  .when("/manageplace/:place", {
+    controller: "ManagePlaceCtrl",
+    templateUrl: "views/admin/editplace.html",
+    resolve: {
+       "currentUser": ["simpleLogin", function(simpleLogin) {
+         return simpleLogin.$getCurrentUser();
+      }]
+    }
+  })  
+
+  .when("/editbook/:id", {
+    controller: "EditBookCtrl",
+    templateUrl: "views/admin/editbook.html",
+    resolve: {
+       "currentUser": ["simpleLogin", function(simpleLogin) {
+         return simpleLogin.$getCurrentUser();
+      }]
+    }
+  })  
+
+
+
+  .otherwise({redirectTo:'/home'});
+   //ends routerpovider
+   
+  // $locationProvider.html5Mode(true);
+ //  $locationProvider.hashPrefix('!');
+
+	
+  
+  
+  
+}]); //ends config
+
+      
+      /*
+,
+      	//"$location", $scope
+ 		"book":[function( $firebase, $route, $routeParams) {
+	//	console.log($scope);
+	//	console.log($location);
+		console.log( $route );
+		console.log( $routeParams);
+		var tag = '-JTVrtrBwZTrCgwFZpU-'
+		var getResults = new firebase('https://sweltering-fire-3219.firebaseio.com/books/').child('-JTVrtrBwZTrCgwFZpU-').once('value', function(snap) {
+			var listOfRecordIds = snap.val();
+			console.log(snap.val());
+			});
+
+		//return $firebase(getResults, tag); 
+		}]
+*/
+
+
+
+
+ 
+/*
+// let's create a re-usable factory that generates the $firebaseSimpleLogin instance
+app.factory("simpleLogin", ["$firebaseSimpleLogin", function($firebaseSimpleLogin) {
+  var ref = new Firebase("https://sweltering-fire-3219.firebaseio.com/");
+  return $firebaseSimpleLogin(ref);
+ }]);
+*/
+
+
+app.factory("simpleLogin", ["$firebaseSimpleLogin", "Profile", function($firebaseSimpleLogin, Profile) {
+  var ref = new Firebase("https://sweltering-fire-3219.firebaseio.com/"); //sets the location we're authenticating for
+  var isaNewUser = true;
+  var userexists = false;
+
+  //  return $firebaseSimpleLogin(ref);
+  var auth = new FirebaseSimpleLogin(ref, function(error, user) {
+	  if (error) {
+	    // an error occurred while attempting login
+	    console.log(error);
+	        switch(error.code) {
+		      case "INVALID_EMAIL":
+			  console.log('invalid email');
+		      // handle an invalid email
+		      case "INVALID_PASSWORD":
+			  console.log('invalid password');
+		      // handle an invalid password
+		      default:
+			  console.log('Error');
+		    }
+
+		} else if (user) {
+		// user authenticated with Firebase
+	    console.log("authenticated");
+	    console.log("User ID: " + user.uid + ", Provider: " + user.provider);
+		console.log(user);
+ 		//var usersRef = new Firebase('https://sweltering-fire-3219.firebaseio.com/users');
+		ref.child('users').child(user.uid).once('value', function(snapshot) {
+ 			console.log(snapshot.val() !== null);
+ 			userexists = (snapshot.val() !== null);
+  			if (!userexists){
+	 			console.log('does not esixt, lets save');
+	 				ref.child('users').child(user.uid).set({
+			        displayName: user.displayName,
+			        provider: user.provider,
+			        picture_url: user.thirdPartyUserData.picture.data.url,
+			        provider_id: user.id
+			      });
+			}
+			});
+			
+ 	  } else {
+	  	// not (user), so...
+	    // user is logged out
+	  }
+	});
+  return $firebaseSimpleLogin(ref); // triggers the above auth function, given the referred location.
+ 
+  }]);
+
+app.factory("getFirebase", ["$scope", "$location", function($scope, $Location) {
+   var getResults = new firebase('https://sweltering-fire-3219.firebaseio.com/books').once('value', function(snap) {
+    var listOfRecordIds = snap.val();
+    console.log(snap.val());
+	
+
+	});
+
+	 return $firebase(getResults, tag); 
+}]);
+
+
+
+app.factory('DataSource', ['$http',function($http){
+       return {
+           get: function(file,callback,transform){
+                $http.get(
+                    file
+                    //,{transformResponse:transform}
+                ).
+                success(function(data, status) {
+                    console.log("Request succeeded");
+                    callback(data);
+                }).
+                error(function(data, status) {
+                    console.log("Request failed " + status);
+                });
+           }
+       };
+    }]
+  );
+
+
+
+function checkIfUserExists(userId) {
+  var usersRef = new Firebase('https://sweltering-fire-3219.firebaseio.com/users');
+  usersRef.child(userId).once('value', function(snapshot) {
+    var exists = (snapshot.val() !== null);
+    console.log('in the check...');
+    console.log(userId, exists);
+   // userExistsCallback(userId, exists);
+    return(exists);
+  });
+}
+
+ 
+ app.controller("SampleCtrl", ["$scope", "simpleLogin", function($scope, simpleLogin) {
+  $scope.auth = simpleLogin;
+}])
+
+
+
+
+app.controller("HomeCtrl", ["$scope", "currentUser", "$firebase", "$location", function($scope, currentUser, $firebase, $location) {
+  // currentUser (provided by resolve) will contain the 
+  // authenticated user or null if not logged in
+  $scope.hasData = false;
+   console.log(currentUser);
+	 var ref = new Firebase('https://sweltering-fire-3219.firebaseio.com/Books');
+	 var sync = $firebase(ref);
+ 	
+	   // if ref points to a data collection
+	   list = sync.$asArray();
+	   $scope.list = list;
+	   list.$loaded().then(function() {
+ 		 $scope.hasData = true;		 
+		 console.log('yep');
+	 });
+
+	   console.log($scope.list);
+	   // if ref points to a single record
+	   $scope.rec = sync.$asObject();
+    console.log($scope.rec);
+ 
+	//$scope.go = function(path){
+	//$location.path(path);
+	//};
+		
+
+ }]);
+
+  app.controller("BookCtrl", [ "$scope", "currentUser", "$firebase", "$routeParams", "$location", "$timeout", function($scope, currentUser, $firebase, $routeParams, $location, $timeout, lodash) { 
+   	var bookid = $routeParams.id;
+     var ref = new Firebase('https://sweltering-fire-3219.firebaseio.com/Books/' + bookid);
+	var sync = $firebase(ref);
+ 	$scope.book = sync.$asObject();
+ 	 var obj = $firebase(new Firebase('https://sweltering-fire-3219.firebaseio.com/Books/' + bookid)).$asObject();  //.$asObject();
+ 	
+ 
+ 	 $scope.bookplaces = {};
+      var placesRef = new Firebase('https://sweltering-fire-3219.firebaseio.com/places/');
+
+ 	 var locationref2 = $firebase(new Firebase('https://sweltering-fire-3219.firebaseio.com/Books/' + bookid + '/tags/0')).$asArray();  //.$asObject();
+       console.log(locationref2);
+ 
+  	 
+ 	 
+     obj.$loaded().then(function() {
+ 	 		 if(obj.tags[0].length){
+ 	 		 var locationtag = obj.tags[0];
+ 	 		 $scope.locationtag = obj.tags[0];
+ 	 		 console.log(locationtag);
+	 		 var objLoc = $firebase(new Firebase('https://sweltering-fire-3219.firebaseio.com/places/')).$asArray();  //.$asObject();
+ 
+ 	 		 	objLoc.$loaded().then(function() {
+		 		 	console.log($scope.locationtag);
+  		 		 	var thelocationtag = $scope.locationtag		 		 	
+  		 		 	var bookloc2 = _.find(objLoc,  { displayName: locationtag});
+  		 		 	console.log(bookloc2)
+					var bkLat = bookloc2.gps.lat;
+					var bkLng = bookloc2.gps.lng;
+					$scope.bkLng = bkLng;
+			 		  $scope.bkLat = bkLat;	 		 	
+
+	 		 	});
+	 		 } else {
+		 		 $scope.bkLng = "100";
+		 		 $scope.bkLat = "0";	 		 	
+
+	 		 }
+ 	     });
+
+  	console.log($scope.book);
+ 	
+ 	
+  }]);
+
+  app.controller("SettingCtrl", [ "$scope", "currentUser", "$firebase", "$routeParams", "$location", "filterFilter", function($scope, currentUser, $firebase, $routeParams, $location, filterFilter) {
+    console.log($scope);
+    var settingtag = $routeParams.setting;
+   	$scope.settingtag = settingtag;
+ 	 var ref = new Firebase('https://sweltering-fire-3219.firebaseio.com/Books/');
+	var setting = null;
+	 var obj = $firebase(new Firebase('https://sweltering-fire-3219.firebaseio.com/Books/')).$asArray();  //.$asObject();
+     // to take an action after the data loads, use $loaded() promise
+     obj.$loaded().then(function() {
+          console.log( obj );
+  		$scope.setting = filterFilter(obj, { tags: settingtag });
+ 		console.log( $scope.setting );
+
+     });
+     
+	 $scope.setting = setting;
+      
+   }]);
+
+
+  app.controller("PlaceCtrl", [ "$scope", "currentUser", "$firebase", "$routeParams", "$location", "filterFilter", "DataSource", "$q", function($scope, currentUser, $firebase, $routeParams, $location, filterFilter, DataSource, $q) {
+    console.log($scope);
+    var placeid = $routeParams.placeid;
+    	$scope.placeid = placeid;
+   	var placeInfo = null;
+   	var othername = null;
+  	var photolocation = "";
+  		$scope.othername = null;
+  		var flickrPhotoSet = null;
+  		var flickrPhotoArray = null;
+   	 var placeref = new Firebase('https://sweltering-fire-3219.firebaseio.com/places/'+placeid);
+ 	 console.log(placeref);
+ 	 var ref = new Firebase('https://sweltering-fire-3219.firebaseio.com/Books/');
+	var thePlace = null;
+	 var placeobj = $firebase( new Firebase('https://sweltering-fire-3219.firebaseio.com/places/'+placeid)).$asObject();  //.$asObject();
+     placeobj.$loaded().then(function() {
+			console.log('placeobj.geonameId is...');
+			console.log(placeobj.geonameId);
+				if(placeobj.geonameId){
+		console.log('we have a geonameId');
+				} else {
+		console.log('we dont have a geonameId');	
+				othername = placeobj.$id;
+				$scope.othername = placeobj.$id;
+				}
+
+          console.log( placeobj);
+  		$scope.placeInfo = placeobj;
+  		var photolocation = placeobj.$id;
+  		if (placeobj.geonameId){
+	  		photolocation = placeobj.name + ' ' +placeobj.countryName;
+  		};
+  		
+ 	 //this bit is photos
+	 var FLICKRPLACEURL =  'https://api.flickr.com/services/rest/?method=flickr.places.find&api_key=f33601a59d5cc2e162113d896f47474e&format=json&nojsoncallback=1&auth_token=&api_sig=&query='+photolocation;
+ 		// var APISOURCE = 'http://api.geonames.org/searchJSON?q='+ $scope.place.displayName +'&lang=en&style=short&maxRows=1&type=json&username=thirdman';
+			flickrPlace = function(data) {
+	        	$scope.dataSet = data;
+	        	console.log('the photolocation is...');
+	        	console.log(data);
+				console.log(data.places.place[0].place_id);
+				var flickrPlaceId = data.places.place[0].place_id;
+  				if (flickrPlaceId.length){
+	    			$scope.hasPhotoLocation = true;
+ 	    			//start subroutine for photos.
+//					var FLICKRPHOTOURL =  'https://api.flickr.com/services/rest/?method=flickr.places.find&api_key=f33601a59d5cc2e162113d896f47474e&format=json&nojsoncallback=1&auth_token=&api_sig=&query='+photolocation;
+	    			
+	    			var FLICKRPHOTOURL =  'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=f33601a59d5cc2e162113d896f47474e&format=json&nojsoncallback=1&auth_token=&api_sig=&per_page=10&extras=url_m&place_id='+flickrPlaceId;
+	    						flickrPhotos = function(dataPics) {
+						        	$scope.dataSet = dataPics;
+						        	console.log('the photoset is...');
+						        	console.log(dataPics);
+						        	console.log(dataPics.photos.photo);
+									if (dataPics.length){
+						    			$scope.hasPhotos = true;
+						    			flickrPhotoSet = dataPics.photos.photo;
+										//$scope.flickrPhotoSet = flickrPhotoSet;
+						    			return flickrPhotoSet;
+ 
+						    			};
+						    		}; //ends flickrPhotos
+
+								 DataSource.get(FLICKRPHOTOURL,flickrPhotos);  //this is the Photos
+   				}; // ends if flickrPlaceId  .length.
+   				}; //ends flickrplace 
+   				
+   				
+ 			 DataSource.get(FLICKRPLACEURL,flickrPlace);
+ 			
+ 
+
+     });// ends if loaded
+	 var obj = $firebase(new Firebase('https://sweltering-fire-3219.firebaseio.com/Books/')).$asArray();  //.$asObject();
+     // to take an action after the data loads, use $loaded() promise
+
+     obj.$loaded().then(function() {
+          console.log( obj );
+  		$scope.thePlace = filterFilter(obj, { places: placeid });
+ 		console.log( $scope.thePlace );
+
+     });
+      $scope.placeInfo = placeInfo;
+	 $scope.thePlace = thePlace;
+	 flickrPhotoSet = '123';
+	 $scope.flickrPhotoSet = flickrPhotoSet;
+ 	 $scope.flickrPhotoArray = flickrPhotoArray;
+	 
+
+      
+   }]);
+   
+   
+   
+ app.controller("PlacesCtrl", [ "$scope", "currentUser", "$firebase", "$routeParams", "$location", "filterFilter",  function($scope, currentUser, $firebase, $routeParams, $location,  filterFilter) {
+ 	var placeList = null;
+ 	 var ref = new Firebase('https://sweltering-fire-3219.firebaseio.com/Books/');
+ 	 var placesref = $firebase(new Firebase('https://sweltering-fire-3219.firebaseio.com/places/')).$asArray(); 
+      placesref.$loaded().then(function() {
+          console.log( placesref );
+  		$scope.placeList = placesref;
+      });
+     $scope.placeList = placeList;
+
+	 var thetags = null;
+	 var obj = $firebase(new Firebase('https://sweltering-fire-3219.firebaseio.com/Books/')).$asArray();  //.$asObject();
+     obj.$loaded().then(function() {
+//  		place = filterFilter(obj, ('unique')(tags));
+ 		var thetags = obj;
+  		$scope.thetags = obj;
+  		console.log( thetags );
+     });
+	 $scope.thetags = thetags;
+      
+   }]);
+
+
+
+
+
+
+app.controller("LoginCtrl",  ["$scope", "$location", "currentUser", "Profile", function($scope, $location, currentUser, Profile) {
+console.log(currentUser);
+   try {
+  	if (currentUser) {
+   	 console.log("logged in");
+  // 	 $scope.profile = Profile(currentUser.id);
+   	 	scope.$apply(function() { 
+   	 		$location.path("/account"); 
+   	 	});
+   	 
+   	 } else {
+   	 console.log("no one is logged in");	   	 
+   	 }
+  } 
+  catch(e) {
+	  'error';
+  }
+}]);
+
+
+app.controller("AboutCtrl",  ["$scope", "$location", "currentUser", "Profile",'$routeParams', function($scope, $location, currentUser, Profile, $routeParams) {
+	    try {
+	  	if (currentUser) {
+	   	 console.log("logged in");
+	   	 } else {
+	   	 console.log("no one is logged in");	   	 
+	   	 }
+	  } 
+	  catch(e) {
+		  'error';
+	  }
+}]);
+
+
+
+
+
+/*
+
+app.controller("AccountCtrl", ["currentUser", function(currentUser) {
+  // currentUser (provided by resolve) will contain the 
+  // authenticated user or null if not logged in
+  
+}]);
+*/
+
+
+
+// A factory to create a re-usable profile object
+// We pass in a username and get back their synchronized data
+app.factory("Profile", ["$firebase", function($firebase) {
+  return function(username) {
+  	console.log(username);
+    // create a reference to the user's profile
+    var ref = new Firebase("https://sweltering-fire-3219.firebaseio.com/users/").child(username);
+    // return it as a synchronized object
+     return $firebase(ref).$asObject();
+
+  }
+}]);
+
+ 
+app.controller("AccountCtrl", ["$scope", "Profile", "currentUser",
+  function($scope, Profile, currentUser) {
+     //$scope.profile = Profile("facebook:10154446466700713");
+      if(currentUser){
+      	$scope.profile = Profile(currentUser.uid);
+       }
+  }
+]);
+
+
+
+app.controller("ManagePlacesCtrl", ["$scope", "currentUser", "$firebase", 
+  function($scope,  currentUser, $firebase) {
+   var ref = new Firebase('https://sweltering-fire-3219.firebaseio.com/places/');
+   var placelist = null;
+ 	 var obj = $firebase(new Firebase('https://sweltering-fire-3219.firebaseio.com/places/')).$asArray();  //.$asObject();
+     obj.$loaded().then(function() {
+//  		place = filterFilter(obj, ('unique')(tags));
+ 		//var placelist = obj;
+  		$scope.placelist = obj;
+  		placelist = obj;
+      });
+	 $scope.placelist = placelist;
+  
+ 
+  }
+]);
+
+
+  app.controller("ManagePlaceCtrl", [ "$scope", "currentUser", "$firebase", "$routeParams", "$location", "filterFilter", "DataSource", function($scope, currentUser, $firebase, $routeParams, $location, filterFilter, DataSource) {
+    var placename = $routeParams.place;
+   	$scope.placename = placename;
+    console.log(placename);
+ 	 var ref = new Firebase('https://sweltering-fire-3219.firebaseio.com/places/').child(placename);
+ 	 ref.setPriority(1000);
+ 	 var sync = $firebase(ref);
+	var setting = null;
+/*
+	 var obj = $firebase(new Firebase('https://sweltering-fire-3219.firebaseio.com/Places/')).$asArray();  //.$asObject();
+     obj.$loaded().then(function() {
+          console.log( obj );
+  		$scope.setting = filterFilter(obj, { tags: settingtag });
+ 		console.log( $scope.setting );
+
+     });
+     
+	 $scope.setting = setting;
+*/
+
+ 	   // if ref points to a single record
+	   var rec = sync.$asObject();
+	   rec.$loaded().then(function() {
+	   	 $scope.place = rec;
+ 		 $scope.hasData = true;		 
+		 console.log('yep');
+
+ 	
+		 //GET LODATION DATA 	
+		 var APISOURCE = 'http://api.geonames.org/searchJSON?q='+ $scope.place.displayName +'&lang=en&style=short&maxRows=1&type=json&username=thirdman';
+			apiData = function(data) {
+	        	$scope.dataSet = data;
+	        	console.log(data);
+  				if (data.geonames.length){
+	    			$scope.hasData = true;
+ 				};    
+ 				
+ 				$scope.geoplace = data.geonames[0];
+  				};
+ 			DataSource.get(APISOURCE,apiData);  //this is the locations
+
+ 		
+ 	
+ 	 });
+	 $scope.place = rec;
+	 //$scope.geoplace = geoplace;
+	 console.log($scope.geoplace);
+    console.log($scope.place);
+ 
+	
+	$scope.geosubmit = function() {
+         if ($scope.geoplace.name) {
+
+			ref.update({ 
+			displayName: $scope.geoplace.name, 
+			geonameId: $scope.geoplace.geonameId,
+			countryCode: $scope.geoplace.countryCode,
+			gps:{
+				lat: $scope.geoplace.lat, 
+				lng: $scope.geoplace.lng
+				}
+			
+			 });
+	
+//         alert($scope.geoplace.name);
+        }
+      };
+
+
+
+      
+   }]);
+   
+   
+
+
+ 
+ 
+   app.controller("EditBookCtrl", [ "$scope", "currentUser", "$firebase", "$routeParams", "$location", "filterFilter", "DataSource", "$q", "$http", function($scope, currentUser, $firebase, $routeParams, $location, filterFilter, DataSource, $q, $http) {
+    var bookid = $routeParams.id;
+     var newSetting = null;
+     $scope.newSetting = null;
+     console.log($routeParams.id);
+
+
+      var ref = new Firebase('https://sweltering-fire-3219.firebaseio.com/Books/' + bookid);
+ 	 	 ref.setPriority(1000);
+	var sync = $firebase(ref);
+ 	 	 console.log(sync);
+ 	$scope.bookobj = sync.$asObject();
+ 	$scope.book = sync.$asObject();
+ 	console.log($scope.book);
+
+ 				$scope.autoObject = function(selectedObject) {
+ 				console.log(selectedObject);
+ 				newSetting = selectedObject.originalObject;
+                  //  loadRemoteData();
+                  var bookplaceref = new Firebase('https://sweltering-fire-3219.firebaseio.com/Books/' + bookid + '/places/');
+                  var placesref = new Firebase('https://sweltering-fire-3219.firebaseio.com/places/');
+                  bookplaceref.child(newSetting.geonameId).set(newSetting);
+                  placesref.child(newSetting.geonameId).set(newSetting);
+ 				console.log(newSetting);
+                $scope.newSetting = newSetting; 
+                };
+                
+                $scope.newSetting = newSetting;
+/*
+$scope.$watch('autoObject', function(newVal, oldVal){
+    console.log('changed');
+    console.log(newVal);
+    console.log(oldVal);
+}, true);
+  
+*/
+ 	// THIS SECTION ITERATES TAGS
+
+ 	 	// $scope.bookplaces = {};
+ 	 	 var bookLocations = $firebase(new Firebase('https://sweltering-fire-3219.firebaseio.com/Books/' + bookid + '/tags/')).$asArray();  //.$asObject();
+ 	 	 //console.log(locationref2);
+ 	 	 console.log(bookLocations);
+ 	 	 $scope.bookLocations = bookLocations;
+// 	 	 $scope.placeoptions = {}
+//		 var APISOURCE = 'http://api.geonames.org/searchJSON?q='+ $scope.place.displayName +'&lang=en&style=short&maxRows=1&type=json&username=thirdman';
+
+
+/*
+ 	 	 obj.$loaded().then(function() {
+ 	 		 if(obj.tags[0].length){
+ 	 		 var locationtag = obj.tags[0];
+ 	 		 $scope.locationtag = obj.tags[0];
+ 	 		 console.log(locationtag);
+ 	 		 
+	 		 var bookobj = $firebase(new Firebase('https://sweltering-fire-3219.firebaseio.com/places/')).$asArray();  //.$asObject();
+ 
+ 	 		 	bookobj.$loaded().then(function() {
+		 		 	console.log($scope.locationtag);
+  		 		 	var thelocationtag = $scope.locationtag		 		 	
+  		 		 	var bookloc2 = _.find(bookobj,  { displayName: locationtag});
+  		 		 	console.log(bookloc2)
+					var bkLat = bookloc2.gps.lat;
+					var bkLng = bookloc2.gps.lng;
+					$scope.bkLng = bkLng;
+			 		  $scope.bkLat = bkLat;	 		 	
+
+	 		 	});
+	 		 } else {
+		 		 $scope.bkLng = "100";
+		 		 $scope.bkLat = "0";	 		 	
+
+	 		 }
+ 	     });
+*/
+
+ 
+
+	 
+	 
+ 	 }]);
+	
+
+
+ 
+ /////////////////////////
+ //MISC FUNCTIONS
+ 
+ 
+ // this collects the unique tags
+ app.filter('uniqueTags', function() {
+    return function(list) {
+        var tags = {};
+        angular.forEach(list, function(obj, key) {
+            angular.forEach(obj.tags, function(value) {
+                tags[value] = 1;
+            })
+        });
+        var uniqueTags = [];
+		
+        for (var key in tags) {
+            uniqueTags.push(key);
+        }
+//    console.log(tags);
+//	console.log(uniqueTags);
+
+        return uniqueTags;
+
+    }
+});
+
+
+
+ 
+ 
+ 
+ 
+
+
+// this fucntion cutes the length of the title/text
+angular.module('ng').filter('cut', function () {
+        return function (value, wordwise, max, tail) {
+            if (!value) return '';
+
+            max = parseInt(max, 10);
+            if (!max) return value;
+            if (value.length <= max) return value;
+
+            value = value.substr(0, max);
+            if (wordwise) {
+                var lastspace = value.lastIndexOf(' ');
+                if (lastspace != -1) {
+                    value = value.substr(0, lastspace);
+                }
+            }
+
+            return value + (tail || ' ?');
+        };
+    });
+
+
+ 

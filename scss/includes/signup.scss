@@ -1,0 +1,44 @@
+/////////////////////
+// signup and login
+/////////////////////
+
+.userForm{
+	width: 600px;
+	background: #eee;
+//	padding: 10px;
+	margin: 0 auto;
+	
+	fieldset{
+		border: 0px solid #fff;
+	
+		.formField{
+			background: transparent;
+		}
+	}
+	
+	.loginHead{
+		//height: 50px;
+		font-size: 1.5em;
+		line-height: 50px;
+		background: rgba(0,0,0,.05);
+		padding: 10px;		
+		
+	}
+	
+	
+	&.loginFacebook{
+		background: #3391f6;
+		color: #fff;
+		margin-bottom: 8px;
+		box-shadow: 0px 0px 5px rgba(0,0,0,.3);
+	}
+
+	&.loginGoogle{
+		background: #F6C733;
+		color: #fff;
+		margin-bottom: 8px;
+		box-shadow: 0px 0px 5px rgba(0,0,0,.3);
+	}
+
+	
+}

@@ -1,0 +1,153 @@
+	<div class="fullWidth homeFeat">
+		<div class="theContainer">
+		<h2 class="homeTitle">
+			<span class="titleHalf">Add Book: {{amazonData.ItemAttributes.Title}}</span>
+		</h2>
+		</div>
+	</div>
+<div class="theContainer pageEdit">
+<div class=" contentWrap" >
+
+<div class="saving" ng-show="isSaving"  style="width: 100%; text-align: center; padding: 1em; background: #f5f5f5;border-radius: 4px; margin: 1em 0;">
+	Saving...
+</div>
+ 
+<div class="theContent columnWrap" >
+	<div class="columnLeft column">	
+		<div class="bookInfo">	
+		<img src="{{amazonData.LargeImage.URL}}" class="coverImg" style="width: 90px;">
+		<p><label>Title</label>{{amazonData.ItemAttributes.Title}}</p>
+		<p class="subTitle"><label>Author:</label>{{amazonData.ItemAttributes.Author}}</p>
+		<p><label>PublicationDate:</label>{{amazonData.ItemAttributes.PublicationDate}}</p>
+		<p><label>Publisher: </label>{{amazonData.ItemAttributes.Publisher}}</p>
+		<p><label>AMAZON ID: </label>{{amazonid}}</p>
+		<p><label>EAN: </label>{{amazonData.ItemAttributes.EAN}}</p>
+		<p><label>ISBN: </label>{{amazonData.ItemAttributes.ISBN}}</p>
+		<p class="subTitle">Description</p>
+<!--
+		<p ng-if="amazonData.EditorialReviews.EditorialReview[0]" ng-bind-html-unsafe="amazonData.EditorialReviews.EditorialReview[0].Content"></p>
+
+		<br><p>{{amazonData.EditorialReviews.EditorialReview[0].Source}}</p>
+
+		<p  ng-if="amazonData.EditorialReviews" class="subTitle">Review</p>
+		<span  ng-if="amazonData.EditorialReviews.EditorialReview[1]" ng-bind-html="amazonData.EditorialReviews.EditorialReview[1].Content"></span>
+		<p  ng-if="amazonData.EditorialReviews.EditorialReview[1]"><br>{{amazonData.EditorialReviews.EditorialReview[1].Source}}</p>
+		<p>Description:</p>
+		<span ng-bind-html="amazonData.EditorialReviews.EditorialReview[0].Content | to_trusted "></span>
+		<textarea  ng-if="amazonData.EditorialReviews.EditorialReview[0]" class="inputStd" ></textarea>
+
+-->
+ 		<textarea ng-model="theDesc"  class="inputLarge descriptionInput" ></textarea>
+
+	
+		</div>
+	</div>
+	
+	<div class="columnRight column">		
+ 
+ 			<h3>Places</h3>
+ 			<h4>Add a place to this book:</h4>
+ 			<div class="searchWrap">
+			<angucomplete-alt id="placesearch2"
+              placeholder="Search Places..."
+              pause="300"
+              selected-object="autoObject"
+              remote-url="http://api.geonames.org/searchJSON?maxRows=6&username=thirdman&q="
+              remote-url-data-field="geonames"
+              title-field="name,countryName"
+              description-field="fclName"
+              clear-selected = "yes"
+              input-class="form-control form-control-small"/>
+             </angucomplete-alt>
+			   		<!--               image-field="profilePic" -->              
+  			  </div><!-- ends search wrap -->
+
+ 			  <div ng-repeat="place in tempPlaces" class="placeList listWide" >
+ 			  		<div class="group aPlace">
+ 			  			<div class="mapThumb placeThumb" style="background-image: url(http://api.tiles.mapbox.com/v3/thirdman.j1o1gjim/{{place.lng}},{{place.lat}},4/90x90.png)"></div>
+ 			  		<div class="placeContent">
+ 			  		<div ng-if="place.name" class="placeTitle">
+		 			  	<a ng-href="#/place/{{place.geonameId}}">{{place.name}}<span ng-if="(place.name != place.toponymName) &&( place.name != place.countryName)"> ({{place.toponymName}})</span></a>
+		 			  </div>
+		 			  <span ng-if="place.adminName1" class="subTitle">{{place.adminName1}}</span>
+		 			  <span class="subTitle" ng-if="(place.adminName1) && (place.name != place.countryName)">, </span>
+		 			  <span class="subTitle" ng-if="place.name != place.countryName"><a ng-href="#/place/{{place.countryId}}">{{place.countryName}}</a></span>
+	 			  </div><!-- ends place content -->
+	 			  
+	 			  		<!-- <label ng-if="place.name"><a href="#/place/{{place.geonameId}}">{{place.name}}<span ng-if="place.name != place.toponymName"> ({{place.toponymName}})</span></a></label><label ng-if="place.adminName1">, <a href="#/place/{{place.adminName1}}">{{place.adminName1}}</a></label><label ng-if="place.name != place.countryName">, <a href="#/place/{{place.countryName}}">{{place.countryName}}</a></label> -->
+ 	 			<button ng-click="removePlace(place)" class="btnDelete">Delete</button>
+
+ 				 	 </div>
+				</div>
+ 
+  		<h3>Excerpts</h3>
+  			<div class="exceprtList listWide">
+ 			  <div ng-repeat="tempExcerpt in tempExcerpts" class="group aPlace" >
+ 	 			<q>{{tempExcerpt.excerpt}}</q>
+ 	 			<p class="subTitle">{{tempExcerpt.reference}}</p>
+ 	 			<button ng-click="removeExcerpt(tempExcerpt)" class="btnDelete">Delete</button>
+ 	 		  </div>
+  			</div>
+		 <form ng-submit="addExcerpt()">
+  			  <div class="formField group">
+		      <label>Excerpt:</label> 
+			      <textarea  type="text" ng-model="newExcerpt.excerpt" placeholder="Text excerpt"  class="inputLarge"  /></textarea>
+				  <input type="text" ng-model="newExcerpt.reference" placeholder="referece (optional)"  class="inputStd" />
+			      <button class="btn" type="submit" ng-click="addExcerpt()">Add Excerpt</button>
+			      
+			  </div>	      
+  	      </form>
+
+
+  		<h3>Tags</h3>
+  			<div class="tagList listWide">
+ 			  <div ng-repeat="tempTag in tempTags" class="group aPlace" >
+ 	 			<span class="aTag">{{tempTag.tagName}} (<a ng-click="removeTag(tempTag)" class="removeLink" >Remove</a>)</span>
+  	 			
+ 	 		  </div>
+  			</div>
+		 <form ng-submit="addTag()">
+  			  <div class="formField group">
+		      <label>Tag:</label> 
+ 				  <input type="text" ng-model="newTag.tagName"  class="inputStd" />
+			      <button class="btn" type="submit" ng-click="addTag()">Add Tag</button>
+			      
+			  </div>	      
+  	      </form>
+  	      
+  		<div class="dataSection additonalComment">
+   		<h3>Additional Comment</h3>
+   		<p>An optional personal comment about this book. (Note: this will be displayed publicly)
+		 <form >
+  			  <div class="formField group">
+			      <textarea  type="text"  ng-model="userComment" placeholder="Text"  class="inputLarge"  /></textarea>
+<!-- 			      <button class="btn" type="submit" ng-click="addTag()">Add Tag</button> -->
+			      
+			  </div>	      
+  	      </form>
+  		  </div><!-- ends dataSection.additionalComment -->
+ 
+ 			  
+  			  
+  
+		  </div><!-- columnright -->
+</div><!-- the content -->
+	<div class="fullWidth homeFeat">
+		<div class="theContainer">
+		<h2 class="homeTitle">
+		  <button ng-click="saveBook()">Save Book</button>
+		</h2>
+		</div>
+	</div>
+		  
+		  
+		 
+<!--  {{amazonData | json}} -->
+<!--
+{{tempPlaces | json}}
+<hr>
+{{tempExcerpts | json}}
+-->
+</div>
+
+</div>

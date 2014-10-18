@@ -1,0 +1,99 @@
+<mapbox map-id="thirdman.map-etswyzs4" lat="1.603569" lng="1.329453" zoom="2" class="mapFeature">
+
+  <marker current-location color="#777"></marker>
+  <div ng-repeat="marker in placesArray | filter: searchString">
+    <marker lat="{{marker.lat}}" lng="{{marker.lng}}" color="#222" symbol="library">
+      <h3><a href="#/place/{{marker.geonameId}}">{{marker.name}}</a></h3>
+      <p class="subTitle" ><a href="#/place/{{marker.countryName}}" >{{marker.countryName}}</a></p><!-- ng-if="marker.name != marker.countryName" -->
+	  <p class="bookCount">{{marker.bookCount}} Book(s)</p>
+<!--
+	  <p class="bookCount" ng-if="marker.bookCount"><ng-pluralize count="marker.bookCount"
+		 			  when="{'0': 'No Books',
+	                     'one': '1 Book',
+	                     'other': '{} Books'}">
+					 </ng-pluralize></p>
+-->
+
+    </marker>
+  </div>
+</mapbox>
+
+	<div class="fullWidth placesFeat">
+		<div class="theContainerHead">
+		 <div class="searchWrap searchPlaces">
+		 	<form ng-submit="searchPlaces()">
+			 	<input ng-model="searchString" class="form-control form-control-small" placeholder="Find a place"><button type="submit" class="btn" ng-click="searchPlaces()">Search</button>
+		 </form>
+		 </div>
+ 		</div>
+	</div>
+
+<div class="theContainer">
+<div class="contentWrap" >
+			<div ng-show="isLoading" class="loading"><img src="/imgs/brand/logo_line.svg" style="" class="logo"> Loading...</div>
+
+			<div class="placeList">
+ 			  <div ng-repeat="place in placesArray  | filter: searchString | orderBy: '-bookCount'" class="aPlace" ><!-- orderBy: '-place.bookCount' | -->
+	 			  <div class="placeThumb mapThumb" style="background-image: url(http://api.tiles.mapbox.com/v3/thirdman.j1o1gjim/{{place.lng}},{{place.lat}},4/90x90.png)"></div>
+	 			  <div class="placeContent">
+	 			  <div ng-if="place.name" class="placeTitle">
+	 			  	<a ng-href="#/place/{{place.geonameId}}">{{place.name}}<span ng-if="(place.name != place.toponymName) &&( place.name != place.countryName)"> ({{place.toponymName}})</span></a>
+	 			  </div>
+	 			  <span ng-if="place.adminName1" class="subTitle">{{place.adminName1}}</span>
+	 			  <span class="subTitle" ng-if="(place.adminName1) && (place.name != place.countryName)">, </span>
+	 			  <span class="subTitle" ng-if="place.name != place.countryName"><a ng-href="#/place/{{place.countryId}}">{{place.countryName}}</a></span>
+	 			  <p class="bookCount"><ng-pluralize count="place.bookCount"
+		 			  when="{'0': 'No Books',
+	                     'one': '1 Book',
+	                     'other': '{} Books'}">
+					 </ng-pluralize></p>
+	 			  </div><!-- ends place content -->
+ 			   </div>
+			</div>	
+
+
+<!--
+			<div class="placeList">
+ 			  <div ng-repeat="place in placeList | filter: searchString" class="aPlace" >
+	 			  <div class="mapThumb" style="background-image: url(http://api.tiles.mapbox.com/v3/thirdman.j1o1gjim/{{place.lng}},{{place.lat}},4/90x90.png)"></div>
+	 			  		<label ng-if="place.name"><a href="#/place/{{place.geonameId}}">{{place.name}}<span ng-if="place.name != place.toponymName"> ({{place.toponymName}})</span></a></label><label ng-if="place.adminName1">, {{place.adminName1}}</label><label ng-if="place.name != place.countryName">, {{place.countryName}}</label>
+ 			   </div>
+			</div>	
+-->
+
+   <span ng-show="showData">
+	   <div ng-hide="placeList.length" class="emptyContent"><p>No places found</p></div>
+   </span>
+ </div><!-- ends contentWrap -->
+
+ 
+<!--  <div ng-repeat='place in filteredPlaces(placeList.geonameId)'>g: {{place.name}}</div> -->
+ 
+ 
+ <!--
+<div ng-repeat='place in placeList'>
+	 {{place.name}}: 
+ 	 <div ng-repeat="book in (filtered = (booksList | filter:place.geonameId | limitTo: place.geonameId))  ">{{book.title}}</div>
+	 <hr>
+ </div>
+ 
+-->
+<!--
+<div ng-repeat='place in placesArray'>
+	<p> {{place.name}} - number of books = {{place.bookCount}} and they are:</p>
+	<div ng-repeat="book in place.books">{{book.title}}</div>
+ 	 <hr>
+ </div>
+ 
+-->
+  
+ 
+ 
+ {{$scope.placesArray}}
+ <!--
+        <ul class="bookList">
+     		<span ng-repeat="globaltag in thetags | uniqueTags | orderBy: '-globaltag'">
+			<a ng-href="#/settings/{{globaltag}}">{{globaltag}}</a> 
+		</span>
+		</ul>
+-->

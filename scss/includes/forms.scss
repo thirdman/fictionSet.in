@@ -1,0 +1,168 @@
+.formField{
+	background: #f2f2f2;
+	padding: .5em 1em;
+	margin: 4px 0;
+	border-radius: 4px;
+}
+
+	input.text_field,
+	select.selectlist,
+	input.password,
+	input[type=text],
+	input[type=file],
+	input[type="password"],
+	textarea {
+	line-height: 2em;
+		margin: 0;
+ 		border: 1px solid #aaa;
+		padding: 3px;
+		border-radius: 4px;
+		box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.05) inset;
+		background-color: #f9f9f9;
+		color: #333;
+		background: #fafafa;
+		font-size: .85em;
+
+			&:focus {
+			background-color: #FFF;
+			border: 1px solid $fsBlack;
+		}
+
+	
+		&.inputStd{
+			width: 300px;
+		}
+
+		&.inputLarge{
+			width: 100%;
+		}
+		&.inputTall{
+			min-height: 200px;
+		}
+
+		&.inputSmall{
+			width: 100px;
+		}
+	}
+
+ label{ 
+	 float: left; 
+ 	width: 200px;
+ 	}
+ 	
+ 	
+ 	button, .btn{
+ 		outline: none;
+	 	border-radius: 6px;
+			margin: 1em;
+			background: $fsBlack;
+			color: #f9f9f9;
+			padding: .5em;
+			border: 1px solid #222;
+			cursor: pointer;
+			text-decoration: none;
+
+		   &:hover{
+			   background: lighten($fsBlack, 10%);
+			   color: #fff;
+		   }
+
+ 	}
+ 	
+ 	.fsBtn{
+ 	border: 0;
+		border-radius: 3px;
+		cursor: pointer;
+		 font-family: inherit;
+		font-size: .8em;
+		letter-spacing: .1em;
+		line-height: 1em;
+		margin: 0 0 0 .5em;
+		padding: .75em 2em;
+		text-transform: uppercase;
+		}
+
+ 	
+ 	.btnDelete{
+	 	float: right;
+ 	}
+ 	.removeLink{
+	 	color: red;
+	 	text-decoration: underline;
+	 	font-size: .85em;
+ 	}
+ 	
+ 	
+ 	
+   .descriptionInput{
+		min-height: 270px;
+		font-size: 12px;
+		   
+   }
+ 	
+///////////////////
+/////////CHECKBOX
+/////////////////
+input[type=checkbox] {
+	visibility: hidden;
+}
+ 
+/* .roundedTwo */
+.roundedTwo {
+display: inline-block;
+  width: 30px;
+  height: 30px;
+  position: relative;
+ // margin: 20px auto;
+  background: #fcfff4;
+  //@include background (linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%) );
+//  border-radius: 50px;
+  border-radius: 4px;
+   box-shadow : inset 0px 1px 1px white, 0px 0px 3px rgba(0,0,0,0.3);
+  label {
+    width: 22px;
+    height: 22px;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    cursor: pointer;
+    background: #eee;
+    background: rgba(0,0,0,.2);
+    //@include background ( linear-gradient(top, #222 0%, #45484d 100%) );
+//    border-radius :50px;
+    border-radius: 2px;
+  box-shadow :inset 0px 1px 0px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,.7);
+    &:after {
+      content: '';
+      width: 12px;
+      height: 8px;
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      border: 3px solid #eee;
+      border-top: none;
+      border-right: none;
+      background: transparent;
+      opacity: 0;
+//      @include opacity ( 0 );
+  		-webkit-transform: rotate(-45deg);
+  //    @include transform ( rotate(-45deg) );
+    }
+    &:hover::after {
+     opacity: 0.5;
+     // @include opacity ( 0.3 );
+    }
+  }
+  input[type=checkbox] {
+    visibility: hidden;
+    &:checked + label {
+   	 background: $fsGreen;
+		}
+    &:checked + label:after {
+      //@include opacity ( 1 );
+      opacity: 1;
+      border-color: #fff;
+    } 
+  }   
+}
+/* end .roundedTwo */

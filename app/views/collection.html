@@ -1,0 +1,68 @@
+<div class="fullWidth homeFeat featCollection">
+	<div class="theContainerHead">
+		<span ng-repeat="book in theCollection.books " class="headerBookItem">
+ 			<img ng-src="{{book.coverUrl}}" class="bookImg" >
+ 		</span>
+ 	</div>
+</div>
+
+ 
+<div class="theContainer">
+	<div class="contentWrap" >
+		<div class="titleBlock group">
+ 			<h2 class="bookTitle">{{ theCollection.title }}</h2>
+			<h5 class="bookSubtitle">Collection by {{  theCollection.createdByName }}</h5>
+		</div>
+		<div class="featBlock featInfo" ng-if="theCollection.description">
+			<p class="">{{  theCollection.description }}</p>
+			<p>{{ bookCount}} Books</p>
+			<p class="">Edited: {{ theCollection.timestamp | date : format : timezone}}</p>
+			<p class="">Public: {{theCollection.isPublic ? 'Yes' : 'No'}}</p>
+		</div>
+	
+	    <ul class="bookList">
+				 <li ng-repeat="item in theCollection.books  |   filter:filters | orderBy: '-timestamp' " class="listItem">
+				        <div class="imgWrap">
+				    		<a ng-href="#/book/{{item.bookid}}"><img ng-src="{{item.coverUrl}}" class="bookImg bookImgSmall" ></a>
+						</div>
+ 						<div class="theContent">
+		 					<h3 class="bookTitle"><a ng-href="#/book/{{item.bookid}}">{{ item.title  | cut:true:50:' ...' }}</a></h3>
+ 		 					<p>Added:  {{ item.addedToCollectionDate | date : format : timezone}}</p>
+<!-- 		 					<p ng-show="item.description">{{  item.description | to_plain |cut:true:180:' ...' }}</p> -->
+				            <div class="bookInfo ">
+							<!--
+	<div class="placeList">
+								Places:
+										<span ng-repeat="place in item.places" class="aTag"  >
+										<a ng-href="#/place/{{place.geonameId}}" ng-class="(place.name==place.countryName) ? 'countryName' : ''" class="placeName">{{place.name}}</a><span ng-if="place.name != place.countryName"> <a href="#/place/{{place.countryName}}" class="placeCountry"><span>{{place.countryCode}}<span></a></span>
+									</span>
+									
+								</div>
+-->
+ 			 	          </div>
+
+				</li>
+			</ul>
+
+   <span ng-show="showData">
+	   <div ng-hide="(list|filter:searchBar).length" class="emptyContent"><p>No items found</p></div>
+   </span>
+   
+ </div><!-- ends contentWrap -->
+
+			<div class="additionalSection columnWrap">
+				<div class="column column50">
+					<h4>Follow</h4>
+ 					<!-- <span ng-if="userAaa"> -->
+ 							<a href="" ng-click="clickToOpen()" ng-hide="isFollowing" class="followIcon">Follow This Collection</a>
+ 							<p ng-show="isFollowing" class="followIcon active" >Following {{placeInfo.name}}.  <button class="btn" ng-click="stopFollowing()">Stop Following</button>
+ 							</p>
+ 					<!-- 	</span> -->
+				</div>
+
+				<div class="column column50">
+ 				</div>
+			</div><!-- ends additonal section -->
+ </div> <!-- ends the containser -->
+
+ 

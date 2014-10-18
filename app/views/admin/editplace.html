@@ -1,0 +1,82 @@
+	<div class="fullWidth homeFeat">
+		<div class="theContainer">
+		<h2 class="homeTitle">
+			<span class="titleHalf">Edit Place: {{place.name}}</span>
+		</h2>
+		</div>
+	</div>
+<div class="theContainer">
+<div class=" contentWrap" >
+
+ 
+<div class="theContent columnWrap" >
+		<div class="columnLeft column">		
+			<h2>Current</h2>
+	 <form ng-submit="place.$save()">
+		     <div class="formField group">
+		     	 <label>Name:</label>
+			 	 <input type="text" ng-model="place.name" class="inputStd" />
+		      </div>
+	 	     <div class="formField group">
+		      <label>GeoID:</label> 
+		      <input type="text" ng-model="place.geonameId" class="inputStd" />
+			  </div>
+		     <div class="formField group">
+		      <label>Lat:</label> 
+		      <input type="text" ng-model="place.lat" class="inputSmall" />
+			  </div>
+		     <div class="formField group">
+		      <label>Lng:</label> 
+		      <input type="text" ng-model="place.lng" class="inputSmall"  />
+			  </div>	      
+		     <div class="formField group">
+		      <label>Country Code</label> 
+		      <input type="text" ng-model="place.countryCode" class="inputSmall" class="inputSmall"  />
+			  </div>	      
+		     <div class="formField group">
+		      <label>Country Name</label> 
+		      <input type="text" ng-model="place.countryName" class="inputSmall" class="inputStd"  />
+			  </div>	      
+
+		     <div class="formField group">
+		      <p>adminName1: {{place.adminName1}}</p> 
+		      <p>countryId: {{place.countryId }}</p> 
+		      <p>toponymName: {{place.toponymName}}</p> 		      
+			  </div>	      
+		 	<img src="http://api.tiles.mapbox.com/v3/thirdman.j1o1gjim/{{place.lng}},{{place.lat}},5/500x300.png" style="width: 100%;" >
+
+ 	      <button type="submit">Save Changes</button>
+	      </form>
+	</div>
+		<div class="columnRight column">		
+		  <h2>Images</h2>
+		  <div class="searchWrap">
+		 <form ng-submit="searchBooks()">
+		 	<input ng-model="urlString" class="form-control form-control-small" placeholder="Add an image url">
+		 	<input ng-model="urlSource" class="form-control form-control-small" placeholder="Source (instagram/vsco/flickr etc)">
+		 	<input ng-model="urlSourceUrl" class="form-control form-control-small" placeholder="Source Link (ie to the page)">
+		 	<input ng-model="urlAuthor" class="form-control form-control-small" placeholder="Image Author Name">
+		 	<input ng-model="urlAuthorUrl" class="form-control form-control-small" placeholder="Author Link (ie to their profile)">
+		 	<button type="submit" class="btn" ng-click="addUrl()">Add</button>
+		 </form>
+		 </div>
+
+		  
+		  	<div ng-repeat="img in place.images" class="imgList" >
+		  		<div class="imgItem">
+		  		<div class="imgWrap" ><img src="{{img.src}}" class="imgThumb"  ></div>
+		  		<div class="imgInfo">
+			  		<span>By <a href="{{img.sourceUrl}}">{{img.author}}</a> on {{img.source}}</span><a href="{{img.authorUrl}}">link</a><br>
+			  		<span>Added by <a href="#/user/{{img.addedById}}">{{img.addedByName}}</a> </span>
+		  		</div>
+		  		</div>
+		  	</div> 
+		  </div><!-- column --> 
+</div><!-- the content -->
+		 
+			 
+<!-- {{geoplace}} -->
+
+</div>
+
+</div>

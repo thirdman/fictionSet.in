@@ -1,0 +1,46 @@
+/////////////////////
+// mapbox
+/////////////////////
+
+.mapFeature{
+	
+	height: 450px;
+	width: 100%;
+	display: block;
+}
+.angular-mapbox-map{
+	
+}
+
+
+.leaflet-popup-content-wrapper{
+	padding-right: 20px !important;
+}
+.leaflet-container h3{
+	margin: 0 !important;
+}
+.leaflet-popup-content {
+	padding: 10px 20px 15px 10px;
+	margin: 0;
+	line-height: inherit;
+	min-width: 100px;
+	h3{
+		margin: 0;
+		font-size: 1.3em;
+		a{
+			font-size: 1.3em;
+			color: $fsBlack;
+		}
+	}
+	
+	p.subTitle{
+		margin: .25em 0;
+		font-style: italic;
+		color: #bbb;
+		white-space: nowrap;
+		a{
+			color: $fsBlack;
+		}
+	}
+	
+}

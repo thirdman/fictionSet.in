@@ -1,0 +1,48 @@
+/* ///////// MISC   /////////*/
+/* line 5, ../../../scss/includes/misc.scss */
+::-webkit-input-placeholder {
+  color: #f0f0f0;
+  font-weight: 100;
+  /*
+     font-style: italic;
+     font-family: monospace;
+     font-size: 40px;
+     line-height: 2em;
+  */ }
+
+/* line 16, ../../../scss/includes/misc.scss */
+:-moz-placeholder {
+  /* Firefox 18- */
+  color: #f9f9f9;
+  font-weight: 100;
+  /*
+     font-style: italic;
+     font-family: monospace;
+     font-size: 40px;
+     line-height: 2em;
+  */ }
+
+/* line 27, ../../../scss/includes/misc.scss */
+::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #f9f9f9;
+  font-weight: 100;
+  /*
+     font-style: italic;
+        font-family: monospace;
+     font-size: 40px;
+      line-height: 2em;
+  */ }
+
+/* line 38, ../../../scss/includes/misc.scss */
+:-ms-input-placeholder {
+  color: #f9f9f9;
+  font-weight: 100;
+  /*
+     font-style: italic;
+        font-family: monospace;
+     font-size: 40px;
+     line-height: 2em;
+  */ }
+
+

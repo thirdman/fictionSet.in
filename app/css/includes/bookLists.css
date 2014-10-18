@@ -1,0 +1,21 @@
+/* ///////// Lists   /////////*/
+/* line 2, ../../../scss/includes/bookLists.scss */
+ul {
+  list-style: none;
+  list-style-type: none; }
+  /* line 6, ../../../scss/includes/bookLists.scss */
+  ul.bookList {
+    padding: 0;
+    margin: 0; }
+    /* line 10, ../../../scss/includes/bookLists.scss */
+    ul.bookList li {
+      list-style-type: none;
+      padding: 1em; }
+    /* line 16, ../../../scss/includes/bookLists.scss */
+    ul.bookList .imgWrap {
+      display: inline-block;
+      width: 30%; }
+    /* line 21, ../../../scss/includes/bookLists.scss */
+    ul.bookList .theContent {
+      display: inline-block;
+      width: 70%; }

@@ -1,0 +1,77 @@
+ <div class="theContainer pageAccount">
+  <div class="contentWrap">
+	
+<!-- SHOW SECTION IF LOGGED IN -->
+<span ng-if="auth.user" >
+	<div class="titleBlock group">
+		<div class="coverImg userImg" ng-show="profile.picture_url" ><img class="featImg" src="{{profile.picture_url}}"/></div>
+		<h2 class="bookTitle">{{auth.user.displayName}}</h2>
+		<div class="subMenu">
+			<a href="#/profile/{{auth.user.displayName}}" >profile</a>
+<!-- 			<a href="#/collections/{{auth.user.id}}">collections</a> -->
+			<a href="#/following/" class="active">following</a>
+			<a href="#/account" >account</a>
+ 
+		</div>
+		<button class="btnLogout" ng-click="auth.$logout()">Logout</button>
+	</div>
+	
+	
+<div class="theContent columnWrap" >
+	<div class="columnLeft column column50">		
+ 
+ 		<div class="contentSection tagWrap bookPlaces followWrap" ><!-- ng-if="userAaa" -->
+			<h3>Places You Follow</h3>
+			<div ng-repeat="place in profile.following" class="aTag placeTag" >
+				<a ng-href="#/place/{{place.placeid}}" ng-class="(place.name==place.countryName) ? 'countryName' : ''" class="placeName">{{place.name}}</a>
+				<span ng-if="place.name != place.countryName"> <a href="#/place/{{place.countryName}}" class="placeCountry"><span>{{place.countryName}}<span></a></span>
+			</div>
+		</div>
+
+		<div class=" sectionNotifications  contentSection" ng-if="userAaa">
+			<div class="loading" ng-show="isLoadingMessages"></div>
+			<span ng-show="!isLoadingMessages">
+				<h3>Notifications</h3>
+					<div ng-repeat="note in notifications | orderBy: '-timestamp' | filter: {readDistance:'!'}" class="notification msg{{note.messageType}}"><!--orderBy: '-timestamp'-->
+						<!-- <div class="user addedBy"><span class="userGroup">{{note.authorName}}</span> </div> -->
+	 				<div class="msgContent"  >{{note.messageContent}}</div>
+	 				<div class="msgMeta">{{note.timestamp | date:'d MMMM, h:m:s '}} </div>
+					<!--<div class="msgMeta">Read: {{note.readDate | date:'d MMMM, h:m:s '}} </div>  -->
+					<!--<div class="msgMeta">Difference: {{note.readDistance | date:'m'}} </div>  -->
+				</div>
+				<span class="emptyContent" ng-show="(notifications | filter: {readDistance:'!').length == 0">No unread messages</span>
+ 			</span>
+		</div>
+
+	</div><!-- ends col left -->
+	<div class="columnRight column column50">	
+  
+
+		<div class="contentSection  collectionWrap" >
+			<h3>Collections You Follow</h3>
+			<p>Coming Soon.</p>
+ 		</div><!-- ./contentSection --->
+
+ 	</div><!-- column right -->
+ </div><!-- ends columnwrap -->
+ 
+ 
+ 
+ <span><!-- ends logged in user -->
+
+
+<!-- SHOW SECTION IF NOT LOGGED IN -->
+<div class="theContent columnWrap" ng-if="!auth.user" >
+    <div ng-hide="auth.user" class="bookDetail">
+		<h2>Profile</h2>
+		<p>Not logged in.</p>
+		<p>Return to front page or <a href="#/login">login</a> to view your account.</p>
+    </div>
+</div><!-- ends not logged in user -->
+
+
+ </div>
+</div>
+
+
+

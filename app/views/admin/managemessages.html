@@ -1,0 +1,49 @@
+	<div class="fullWidth homeFeat">
+		<div class="theContainerHead">
+		<h2 class="homeTitle">System Messages</h2>
+		</div>
+	</div>
+<div class="theContainer">
+	<div class=" contentWrap" >
+
+<div class="loading" ng-show="isLoading"  style="">
+	Saving...
+</div>
+ 
+<div class="theContent columnWrap" >
+	<div class="columnLeft column column50">	
+	
+	<div class="contentSection">
+		 <form  >
+		     <div class="formField group">
+		     	 <label>Title:</label>
+			 	 <input type="text" ng-model="message.title" class="inputStd" />
+		      </div>
+	 	     <div class="formField group">
+		      	<label>Author:</label> 
+		      	<input type="text" ng-model="messageAuthor" class="inputStd"  />
+			  </div> 
+		     <div class="formField group">
+		      	<label>Content:</label> 
+		      	<textarea  type="text" ng-model="message.content"  class="inputLarge inputTall" /></textarea>
+			  </div>
+			  <div class="formField group">
+		      	<label>Link:</label> 
+			  	<input type="text" ng-model="message.link" class="inputStd" />
+			  </div> 
+ 
+	      <button type="submit" ng-click="updateMessages()">Insert Message</button>
+
+		 </form> 
+	</div><!-- contentsection -->
+	
+	
+ 	</div>
+	
+	<div class="columnRight column">		
+	</div><!-- columnright -->
+</div><!-- the content -->
+ 		  
+		  
+ </div>
+ </div>

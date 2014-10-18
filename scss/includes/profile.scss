@@ -1,0 +1,123 @@
+/*///////////////////////////*/
+/*///////// Profile & account ////////*/
+/*///////////////////////////*/
+.pageAccount{
+	.titleBlock{
+		width: 100%;
+		padding: 1em 0;
+		position: relative;
+		text-align: center;
+ 				.coverImg.userImg{
+				margin-top: .5em;
+				margin-right: inherit;
+				//margin-top: -50px;
+				width: 70px;			
+				height: 70px;
+				border-radius: 35px;
+				overflow: hidden;
+				box-shadow: none;
+				float: inherit;
+				margin-right: inherit
+					img{
+						box-shadow: none;
+					}
+				}
+		}
+
+	.contentSection{
+		//border-bottom: 1px dotted #222;	
+		border-bottom: 1px solid $fsLineGrey;	
+		padding-bottom: 1em;
+	}
+}
+
+
+.subMenu{
+	a{
+		text-decoration: none;
+		text-transform: capitalize;
+		font-size: .8em;
+		margin: 0 10px;
+		&.active{
+			border-bottom: 3px solid #ccc;
+		}
+	}
+}
+
+.infoLabel{
+	min-width: 50%;
+	display: inline-block;
+	vertical-align: top;
+	&[class^="icon-"]:before, &[class*=" icon-"]:before{
+		margin-right: 8px;
+	}
+
+}
+.iconLabel{
+	&[class^="icon-"]:before, &[class*=" icon-"]:before{
+		margin-right: 8px;
+		//color: $fsGrey;
+	}
+}
+.infoNumber{
+	
+}
+
+
+/*///////////////////////////*/
+/*///////// badges ////////*/
+.aBadge{
+width: 160px;
+height: 180px;
+display: inline-block;
+	.badgeLink{
+		.badgeImg{
+			width: 160px;
+			height: 160px;
+		}
+	}
+	.badgeText{
+	text-align: center;
+	width: 100%;
+	text-transform: uppercase;
+	display: block;
+	display: none;
+	}
+
+
+	//this bit for the admin dialog
+	.adminBadges &{
+		width: 100%;
+		height: 80px;
+		.badgeLink{
+			display: inline-block;
+			vertical-align: middle;
+			
+			.badgeImg{
+				width: 50px;
+				height: 50px;
+				//opacity: .2;
+			    .unassigned &{
+					background: #ccc;				
+				}
+			}			
+		}
+	.badgeText{
+			display: inline-block;
+			vertical-align: middle;
+			width: auto;
+			text-transform: capitalize;
+	}
+	.badgeButton{	
+		display: inline-block;
+		vertical-align: middle;
+		line-height: 1em;
+		float: right;
+		position: relative;
+		right: 10px;
+		top: 20px;
+		font-size: 12px;
+	}
+	
+	}
+}

@@ -1,0 +1,206 @@
+/* ///////// places   /////////*/
+.placeList{
+	.aPlace{
+		background: #eee;
+		background: #fff;
+		box-shadow: 0px 0px 2px rgba(0,0,0,.18);
+		border-radius: 4px;
+		//padding: 1em;
+		margin: 10px 0;
+		width: 50%;
+		margin-right: 2px;
+		margin: 2px;
+		margin-bottom: 8px;
+//		width: 49%;
+//		margin-right: 2px;
+		width: 29.5%;
+		margin-right: 1%;
+		display: inline-block;
+		vertical-align: top;
+		overflow: hidden;
+		height: 90px;
+		@media only screen and (max-width: 979px) { 
+			width: 100%;
+ 		}
+		
+		.placeThumb{
+			display: inline-block;
+			width: 20%;
+			max-width: 90px;
+			height: 90px;
+			//border-radius: 45px;
+			background: #ccc;
+			vertical-align: top;
+		}
+		
+		.placeContent{
+			width: 78%;
+			display: inline-block;
+			vertical-align: top;
+			padding-left: 8px;
+			a{
+				text-decoration: none;
+			}
+			.placeTitle{
+				width: 100%;
+				font-size: 1.15em;
+				//font-size: 1.3vw;
+				line-height: 1em;
+				font-weight: 300;
+				margin: 8px 0 4px;
+ 			}
+			.subTitle{
+				margin: .25em 0;
+				color: $fsGrey;
+				font-style: italic;
+				a{
+					color: $fsGrey;
+				}
+			}
+			.bookCount{ 
+				font-size: .85em;
+			}
+		}
+		
+		label{
+			//display: inline-block;
+			float: inherit;
+			width: inherit;
+			padding: 2px;
+			vertical-align: middle;
+			
+		}
+		
+	}
+}
+
+
+.placesFeat{
+
+	.searchWrap.searchPlaces{
+		margin-top: 0;
+		background: transparent;
+	
+	}
+}
+
+
+.exceprtList{
+	.aPlace{
+	font-size: 12px;
+	q{
+		display: inline;
+		line-height: 16px;
+		font-size: 20px;
+		
+	}
+/*
+	&:before{
+		display: inline-block;
+		content: "\"";
+	}
+*/
+	}
+	p{	font-size: 12px;
+	line-height: 16px;
+		margin: .5em 0;
+		.subTitle{
+		}
+	}
+}
+
+.listWide{
+ 	.aPlace{
+	width: 100%;		
+	}
+}
+
+
+.leaflet-container h3{
+	font-size: 1em;
+}
+.marker{}
+
+
+
+
+
+//////////////////////////////////////////////////////
+///////////// Places in lists ///////////////////
+//////////////////////////////////////////////////////
+.bookList .placeList, .bookPlaces{
+	.aTag{
+		height: 30px;
+		display: inline-block;
+		margin-bottom: 4px;
+		margin-right: 4px;
+		a{
+			&.placeName{
+			display: inline-block;
+			background: $fsLightGrey;
+			background: #ddd;
+			border-radius: 20px ;
+			padding: 2px 1.25em 2px .5em;
+			display: inline-block;
+			text-decoration: none;
+			height: 30px;
+			vertical-align: middle;
+				&.countryName {
+				color: $fsLightGrey;
+ 				background: #222;
+ 				padding: 2px .5em;
+				}
+			&:hover{
+				background: #eee;
+				&.countryName{
+					background: #333;
+				}
+			}
+			}
+			&.placeCountry{
+				font-size: 12px;
+				color: $fsLightGrey;
+ 				background: #222;
+				padding: 4px;
+				border-radius: 20px;
+				text-decoration: none;
+ 				position: relative;
+				font-size: 1em;
+				display: inline-block;
+				margin-left: -1.25em;
+				margin-right: .5em;
+				text-align: center;
+				height: 30px;
+				width: 30px;
+				vertical-align: middle;
+				padding: 0;
+				span{
+					font-size: 12px;
+					line-height: 20px;
+				}
+				
+				&:hover{
+					background: #444;
+				}
+				
+ 			}
+			
+		}
+
+	}
+}
+
+.followWrap.bookPlaces .aTag a.placeCountry{
+	width: auto;
+	padding: 0px 8px;
+}
+
+.distancePlaces{
+	width: 100%;
+	.aTag{
+		display: inline-block;
+	}
+	.distanceWrap{
+		display: inline-block;
+	}
+}

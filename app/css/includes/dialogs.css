@@ -1,0 +1,6 @@
+/* ///////// Collections   /////////*/
+/* line 4, ../../../scss/includes/dialogs.scss */
+.dialogScrollWrap {
+  width: 100%;
+  background: #f9f9f9;
+  overflow-y: scroll; }

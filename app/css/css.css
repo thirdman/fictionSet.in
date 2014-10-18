@@ -1,0 +1,2304 @@
+/* Set up Variable Colors */
+/* line 8, ../../scss/css.scss */
+*, *:before, *:after {
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box !important; }
+
+/* line 1, ../../scss/includes/reset.scss */
+*, *:before, *:after {
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box !important; }
+
+/* line 7, ../../scss/includes/reset.scss */
+.group:after, .clearfix:after {
+  content: "";
+  display: table;
+  clear: both; }
+
+/* line 13, ../../scss/includes/reset.scss */
+html, body, #content {
+  height: 100%;
+  width: 100%; }
+
+/* line 20, ../../scss/includes/reset.scss */
+body {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300; }
+
+/* ///////// MISC   /////////*/
+/* line 5, ../../scss/includes/misc.scss */
+::-webkit-input-placeholder {
+  color: #f0f0f0;
+  font-weight: normal;
+  font-weight: 100;
+  /*
+     font-style: italic;
+     font-family: monospace;
+     font-size: 40px;
+     line-height: 2em;
+  */ }
+
+/* line 17, ../../scss/includes/misc.scss */
+:-moz-placeholder {
+  /* Firefox 18- */
+  color: #f0f0f0;
+  font-weight: 100;
+  /*
+     font-style: italic;
+     font-family: monospace;
+     font-size: 40px;
+     line-height: 2em;
+  */ }
+
+/* line 28, ../../scss/includes/misc.scss */
+::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #f0f0f0;
+  font-weight: 100;
+  /*
+     font-style: italic;
+        font-family: monospace;
+     font-size: 40px;
+      line-height: 2em;
+  */ }
+
+/* line 39, ../../scss/includes/misc.scss */
+:-ms-input-placeholder {
+  color: #f0f0f0;
+  font-weight: 100;
+  /*
+     font-style: italic;
+        font-family: monospace;
+     font-size: 40px;
+     line-height: 2em;
+  */ }
+
+/* app css stylesheet */
+/* line 3, ../../scss/includes/firebase.scss */
+.hide {
+  display: none; }
+
+/* line 7, ../../scss/includes/firebase.scss */
+.menu {
+  list-style: none; }
+
+/* line 11, ../../scss/includes/firebase.scss */
+.menu.user {
+  float: right; }
+
+/* line 15, ../../scss/includes/firebase.scss */
+.menu > li {
+  display: inline; }
+
+/* line 19, ../../scss/includes/firebase.scss */
+.menu > li.hide {
+  display: none; }
+
+/* line 23, ../../scss/includes/firebase.scss */
+.menu > li:before {
+  content: "";
+  padding-right: 0.5em; }
+
+/* line 28, ../../scss/includes/firebase.scss */
+.menu.user > li:before {
+  content: ""; }
+
+/* line 33, ../../scss/includes/firebase.scss */
+.menu > li:nth-child(1):before {
+  content: "";
+  padding: 0; }
+
+/* line 38, ../../scss/includes/firebase.scss */
+p.status {
+  color: red; }
+
+/* line 42, ../../scss/includes/firebase.scss */
+p.status.good, p.good {
+  color: green; }
+
+/* line 46, ../../scss/includes/firebase.scss */
+form label {
+  display: inline-block; }
+
+/* line 50, ../../scss/includes/firebase.scss */
+form label span {
+  display: block;
+  font-weight: bold; }
+
+/* line 55, ../../scss/includes/firebase.scss */
+.error {
+  color: red; }
+
+/* line 60, ../../scss/includes/firebase.scss */
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important; }
+
+/* line 1, ../../scss/includes/common.scss */
+body {
+  background: #308383;
+  background: #f9f9f9;
+  height: 100%;
+  font-size: 18px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  color: #2a2a2a;
+  padding: 0;
+  margin: 0; }
+  @media only screen and (min-width: 0px) and (max-width: 887px) {
+    /* line 1, ../../scss/includes/common.scss */
+    body {
+      font-size: 14px; } }
+  @media only screen and (min-width: 1200px) {
+    /* line 1, ../../scss/includes/common.scss */
+    body {
+      font-size: 18px; } }
+
+/* line 20, ../../scss/includes/common.scss */
+h2 {
+  font-size: 2.8em;
+  font-weight: 300; }
+  @media only screen and (min-width: 0px) and (max-width: 887px) {
+    /* line 20, ../../scss/includes/common.scss */
+    h2 {
+      font-size: 1.8em; } }
+  /* line 26, ../../scss/includes/common.scss */
+  h2.bookTitle {
+    padding: 0;
+    margin: 0; }
+
+/* line 32, ../../scss/includes/common.scss */
+h3 {
+  font-size: 1.4em;
+  font-weight: 300;
+  color: #2a2a2a; }
+  /* line 36, ../../scss/includes/common.scss */
+  h3.bookTitle {
+    padding: 0;
+    margin: 0; }
+  /* line 40, ../../scss/includes/common.scss */
+  h3 a {
+    text-decoration: none;
+    color: #2a2a2a; }
+
+/* line 46, ../../scss/includes/common.scss */
+h4 {
+  font-size: 1em;
+  padding: .5em 0;
+  margin: 0;
+  font-weight: 300;
+  font-size: .85em;
+  color: #aaa;
+  text-transform: uppercase; }
+
+/* line 56, ../../scss/includes/common.scss */
+h5 {
+  /*    font-size: 1em; */
+  padding: .5em 0;
+  font-weight: 300;
+  color: #767676; }
+  /* line 62, ../../scss/includes/common.scss */
+  h5.bookSubtitle {
+    padding: 0;
+    margin: 0;
+    font-style: italic; }
+
+/* line 70, ../../scss/includes/common.scss */
+p {
+  white-space: pre-line;
+  line-height: 1.8em;
+  margin: 0 0 .5em;
+  /* 	   font-size: 16px; */ }
+
+/*
+   p+p{
+	   margin-bottom: .5em;
+   }
+*/
+/* line 82, ../../scss/includes/common.scss */
+.subTitle {
+  font-size: .85em;
+  margin: 0;
+  padding: 0;
+  color: #aaa; }
+
+/* line 89, ../../scss/includes/common.scss */
+q {
+  quotes: '\201c' '\201d';
+  font-size: 1em;
+  line-height: 1.3em; }
+
+/* line 93, ../../scss/includes/common.scss */
+q:before {
+  content: open-quote;
+  font-size: 2em;
+  line-height: 1em;
+  font-family: georgia;
+  position: relative;
+  top: 7px; }
+
+/* line 100, ../../scss/includes/common.scss */
+q:after {
+  content: close-quote;
+  font-size: 2em;
+  line-height: 1em;
+  position: relative;
+  top: 7px;
+  font-family: georgia; }
+
+/* line 108, ../../scss/includes/common.scss */
+a {
+  color: #2a2a2a; }
+
+/* line 112, ../../scss/includes/common.scss */
+ul {
+  padding: 0; }
+
+/* line 117, ../../scss/includes/common.scss */
+.loading {
+  width: 100%;
+  text-align: center;
+  padding: 1em;
+  border-radius: 4px;
+  margin: 1em 0; }
+  /* line 121, ../../scss/includes/common.scss */
+  .loading .logo {
+    height: 50px;
+    width: auto;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    margin-right: 5px;
+    -webkit-transition: all infinite ease;
+    transition: all infinite ease;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-animation: rotateanti .9s ease-in infinite 0s;
+    -moz-animation: rotateanti .9s ease-in infinite 0s;
+    -o-animation: rotateanti .9s ease-in infinite 0s;
+    -ms-animation: rotateanti .9s ease-in infinite 0s;
+    animation: rotateanti .9s ease-in infinite 0s; }
+
+@-webkit-keyframes rotateanti {
+  to {
+    -webkit-transform: rotateY(0deg); }
+  from {
+    -webkit-transform: rotateY(360deg); } }
+@-moz-keyframes rotateanti {
+  to {
+    -moz-transform: rotateY(0deg); }
+  from {
+    -moz-transform: rotateY(360deg); } }
+@-o-keyframes rotateanti {
+  to {
+    -o-transform: rotateY(0deg); }
+  from {
+    -o-transform: rotateY(360deg); } }
+@-ms-keyframes rotateanti {
+  to {
+    -ms-transform: rotateY(0deg); }
+  from {
+    -ms-transform: rotateY(360deg); } }
+/* line 184, ../../scss/includes/common.scss */
+.fullWidth {
+  width: 100%; }
+  /* line 186, ../../scss/includes/common.scss */
+  .fullWidth.homeFeat {
+    background: #eee; }
+
+/* line 191, ../../scss/includes/common.scss */
+.theContainer {
+  margin: 0 5%;
+  padding-bottom: 100px;
+  margin: 0 auto;
+  padding-bottom: 100px;
+  max-width: 1200px; }
+  @media only screen and (min-width: 0px) and (max-width: 887px) {
+    /* line 191, ../../scss/includes/common.scss */
+    .theContainer {
+      margin: 0 10px; } }
+  @media only screen and (min-width: 888px) and (max-width: 1200px) {
+    /* line 191, ../../scss/includes/common.scss */
+    .theContainer {
+      margin: 0 10px; } }
+
+/* line 208, ../../scss/includes/common.scss */
+.theContainerHead {
+  margin: 0 5%;
+  margin: 0 auto;
+  max-width: 1200px; }
+  @media only screen and (min-width: 0px) and (max-width: 887px) {
+    /* line 208, ../../scss/includes/common.scss */
+    .theContainerHead {
+      margin: 0 10px; } }
+  @media only screen and (min-width: 888px) and (max-width: 1200px) {
+    /* line 208, ../../scss/includes/common.scss */
+    .theContainerHead {
+      margin: 0 10px; } }
+
+/* line 220, ../../scss/includes/common.scss */
+.contentWrap {
+  position: relative; }
+
+/* line 224, ../../scss/includes/common.scss */
+.titleBlock {
+  border-bottom: 1px solid #ddd; }
+  /* line 226, ../../scss/includes/common.scss */
+  .titleBlock .btnLogout {
+    position: absolute;
+    right: 0;
+    top: 0; }
+
+/* line 235, ../../scss/includes/common.scss */
+.contentSection {
+  margin-bottom: 1em; }
+  /* line 237, ../../scss/includes/common.scss */
+  .contentSection h3 {
+    margin-top: 0;
+    margin-bottom: .66em; }
+
+/* line 244, ../../scss/includes/common.scss */
+.additionalSection {
+  border-top: 1px solid #ddd;
+  margin-top: 1em; }
+
+/* line 253, ../../scss/includes/common.scss */
+.imgList {
+  background: #eee;
+  border-radius: 4px;
+  padding: 1em;
+  margin: 10px 0; }
+  /* line 261, ../../scss/includes/common.scss */
+  .imgList .imgWrap {
+    display: inline-block;
+    width: 90px;
+    height: 90px;
+    border-radius: 45px;
+    background: #ccc;
+    vertical-align: middle; }
+    /* line 268, ../../scss/includes/common.scss */
+    .imgList .imgWrap img {
+      width: 90px;
+      height: 90px;
+      border-radius: 45px; }
+  /* line 274, ../../scss/includes/common.scss */
+  .imgList .imgInfo {
+    display: inline-block; }
+
+/* line 284, ../../scss/includes/common.scss */
+.descriptionWrap {
+  line-height: 1.6em; }
+  /* line 286, ../../scss/includes/common.scss */
+  .descriptionWrap b {
+    font-weight: normal; }
+
+/* line 295, ../../scss/includes/common.scss */
+.buyWrap {
+  display: inline-block;
+  vertical-align: top; }
+
+/* line 299, ../../scss/includes/common.scss */
+.buyLink {
+  display: inline-block; }
+  /* line 301, ../../scss/includes/common.scss */
+  .buyLink.btn {
+    margin: 0;
+    padding: 0.5em 0.5em 0.25em; }
+  /* line 305, ../../scss/includes/common.scss */
+  .buyLink .buyPrice {
+    font-size: 1.5em;
+    line-height: 1.5em;
+    font-weight: 300; }
+  /* line 310, ../../scss/includes/common.scss */
+  .buyLink .buyCurrency {
+    font-size: .85em;
+    color: #aaa; }
+  /* line 314, ../../scss/includes/common.scss */
+  .buyLink .buySave {
+    font-size: .85em;
+    color: yellow; }
+  /* line 319, ../../scss/includes/common.scss */
+  .buyLink .buyMerchant {
+    font-size: .85em;
+    line-height: .5em;
+    padding: 0; }
+
+/* line 327, ../../scss/includes/common.scss */
+.buyMore {
+  font-size: .85em;
+  display: block;
+  margin: 0;
+  font-style: italic;
+  color: #aaa; }
+
+/* line 339, ../../scss/includes/common.scss */
+.appleIcon {
+  height: 20px;
+  vertical-align: top;
+  display: inline-block;
+  margin-top: -7px;
+  margin-bottom: -6px; }
+
+/* line 352, ../../scss/includes/common.scss */
+.columnWrap .column50 {
+  width: 49.5%; }
+  /* line 354, ../../scss/includes/common.scss */
+  .columnWrap .column50.columnLeft, .columnWrap .column50.columnRight {
+    width: 49.5%; }
+  @media only screen and (max-width: 979px) {
+    /* line 352, ../../scss/includes/common.scss */
+    .columnWrap .column50 {
+      width: 100%; }
+      /* line 360, ../../scss/includes/common.scss */
+      .columnWrap .column50.columnLeft, .columnWrap .column50.columnRight {
+        width: 100%; } }
+/* line 366, ../../scss/includes/common.scss */
+.columnWrap .column100 {
+  width: 100%;
+  display: block; }
+
+/* line 1, ../../scss/includes/forms.scss */
+.formField {
+  background: #f2f2f2;
+  padding: .5em 1em;
+  margin: 4px 0;
+  border-radius: 4px; }
+
+/* line 8, ../../scss/includes/forms.scss */
+input.text_field,
+select.selectlist,
+input.password,
+input[type=text],
+input[type=file],
+input[type="password"],
+textarea {
+  line-height: 2em;
+  margin: 0;
+  border: 1px solid #aaa;
+  padding: 3px;
+  border-radius: 4px;
+  box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.05) inset;
+  background-color: #f9f9f9;
+  color: #333;
+  background: #fafafa;
+  font-size: .85em; }
+  /* line 26, ../../scss/includes/forms.scss */
+  input.text_field:focus,
+  select.selectlist:focus,
+  input.password:focus,
+  input[type=text]:focus,
+  input[type=file]:focus,
+  input[type="password"]:focus,
+  textarea:focus {
+    background-color: #FFF;
+    border: 1px solid #2a2a2a; }
+  /* line 32, ../../scss/includes/forms.scss */
+  input.text_field.inputStd,
+  select.selectlist.inputStd,
+  input.password.inputStd,
+  input[type=text].inputStd,
+  input[type=file].inputStd,
+  input[type="password"].inputStd,
+  textarea.inputStd {
+    width: 300px; }
+  /* line 36, ../../scss/includes/forms.scss */
+  input.text_field.inputLarge,
+  select.selectlist.inputLarge,
+  input.password.inputLarge,
+  input[type=text].inputLarge,
+  input[type=file].inputLarge,
+  input[type="password"].inputLarge,
+  textarea.inputLarge {
+    width: 100%; }
+  /* line 39, ../../scss/includes/forms.scss */
+  input.text_field.inputTall,
+  select.selectlist.inputTall,
+  input.password.inputTall,
+  input[type=text].inputTall,
+  input[type=file].inputTall,
+  input[type="password"].inputTall,
+  textarea.inputTall {
+    min-height: 200px; }
+  /* line 43, ../../scss/includes/forms.scss */
+  input.text_field.inputSmall,
+  select.selectlist.inputSmall,
+  input.password.inputSmall,
+  input[type=text].inputSmall,
+  input[type=file].inputSmall,
+  input[type="password"].inputSmall,
+  textarea.inputSmall {
+    width: 100px; }
+
+/* line 48, ../../scss/includes/forms.scss */
+label {
+  float: left;
+  width: 200px; }
+
+/* line 54, ../../scss/includes/forms.scss */
+button, .btn {
+  outline: none;
+  border-radius: 6px;
+  margin: 1em;
+  background: #2a2a2a;
+  color: #f9f9f9;
+  padding: .5em;
+  border: 1px solid #222;
+  cursor: pointer;
+  text-decoration: none; }
+  /* line 65, ../../scss/includes/forms.scss */
+  button:hover, .btn:hover {
+    background: #444444;
+    color: #fff; }
+
+/* line 72, ../../scss/includes/forms.scss */
+.fsBtn {
+  border: 0;
+  border-radius: 3px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: .8em;
+  letter-spacing: .1em;
+  line-height: 1em;
+  margin: 0 0 0 .5em;
+  padding: .75em 2em;
+  text-transform: uppercase; }
+
+/* line 86, ../../scss/includes/forms.scss */
+.btnDelete {
+  float: right; }
+
+/* line 89, ../../scss/includes/forms.scss */
+.removeLink {
+  color: red;
+  text-decoration: underline;
+  font-size: .85em; }
+
+/* line 97, ../../scss/includes/forms.scss */
+.descriptionInput {
+  min-height: 270px;
+  font-size: 12px; }
+
+/* line 106, ../../scss/includes/forms.scss */
+input[type=checkbox] {
+  visibility: hidden; }
+
+/* .roundedTwo */
+/* line 111, ../../scss/includes/forms.scss */
+.roundedTwo {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  position: relative;
+  background: #fcfff4;
+  border-radius: 4px;
+  box-shadow: inset 0px 1px 1px white, 0px 0px 3px rgba(0, 0, 0, 0.3); }
+  /* line 122, ../../scss/includes/forms.scss */
+  .roundedTwo label {
+    width: 22px;
+    height: 22px;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    cursor: pointer;
+    background: #eee;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 2px;
+    box-shadow: inset 0px 1px 0px rgba(0, 0, 0, 0.5), 0px 1px 0px rgba(255, 255, 255, 0.7); }
+    /* line 135, ../../scss/includes/forms.scss */
+    .roundedTwo label:after {
+      content: '';
+      width: 12px;
+      height: 8px;
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      border: 3px solid #eee;
+      border-top: none;
+      border-right: none;
+      background: transparent;
+      opacity: 0;
+      -webkit-transform: rotate(-45deg); }
+    /* line 151, ../../scss/includes/forms.scss */
+    .roundedTwo label:hover::after {
+      opacity: 0.5; }
+  /* line 156, ../../scss/includes/forms.scss */
+  .roundedTwo input[type=checkbox] {
+    visibility: hidden; }
+    /* line 158, ../../scss/includes/forms.scss */
+    .roundedTwo input[type=checkbox]:checked + label {
+      background: #a8d164; }
+    /* line 161, ../../scss/includes/forms.scss */
+    .roundedTwo input[type=checkbox]:checked + label:after {
+      opacity: 1;
+      border-color: #fff; }
+
+/* end .roundedTwo */
+/* line 1, ../../scss/includes/header.scss */
+#header {
+  padding: 1em;
+  background: #2a2a2a;
+  background: #fafafa;
+  background: #f4f4f4;
+  box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.1);
+  width: 100%; }
+  @media only screen and (min-width: 980px) {
+    /* line 1, ../../scss/includes/header.scss */
+    #header {
+      padding: 1em; } }
+  /* line 14, ../../scss/includes/header.scss */
+  #header a, #header .navicon-button {
+    vertical-align: middle;
+    color: #666;
+    text-decoration: none;
+    font-weight: 300; }
+    /* line 21, ../../scss/includes/header.scss */
+    #header a:hover, #header .navicon-button:hover {
+      color: #fff;
+      color: #2a2a2a; }
+  /* line 27, ../../scss/includes/header.scss */
+  #header .menu {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0; }
+    /* line 32, ../../scss/includes/header.scss */
+    #header .menu.user {
+      float: right; }
+  /* line 36, ../../scss/includes/header.scss */
+  #header .logo {
+    height: 26px;
+    width: auto;
+    display: inline-block;
+    position: relative;
+    top: 8px;
+    margin-right: 5px;
+    -webkit-transition: all .5s ease;
+    transition: all .5s ease;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d; }
+    /* line 46, ../../scss/includes/header.scss */
+    #header .logo:hover {
+      transform: rotateY(180deg); }
+  /* line 52, ../../scss/includes/header.scss */
+  #header .logoWrap {
+    width: 230px;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin-left: -100px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center; }
+    /* line 62, ../../scss/includes/header.scss */
+    #header .logoWrap .headerLogo {
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 8px;
+      position: relative; }
+      /* line 70, ../../scss/includes/header.scss */
+      #header .logoWrap .headerLogo .alphaTag {
+        position: absolute;
+        left: 0;
+        top: 1em;
+        color: #999;
+        font-size: 10px;
+        font-style: italic;
+        display: none; }
+    /* line 85, ../../scss/includes/header.scss */
+    #header .logoWrap form#headerSearch {
+      display: inline-block;
+      display: none; }
+      /* line 88, ../../scss/includes/header.scss */
+      #header .logoWrap form#headerSearch input.search-text {
+        width: 90px;
+        padding: 5px 5px 5px 25px;
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 12px;
+        vertical-align: middle;
+        color: #bbb;
+        border: none;
+        background-color: #fff;
+        background-repeat: no-repeat;
+        background-position: 7px 50%;
+        background-image: url(/imgs/icon_search.png);
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+        outline: none;
+        box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.4) inset; }
+  /* line 110, ../../scss/includes/header.scss */
+  #header input.search-text::-webkit-input-placeholder {
+    color: #ccc; }
+  /* line 111, ../../scss/includes/header.scss */
+  #header input.search-text:-moz-placeholder {
+    color: #ccc; }
+  /* line 112, ../../scss/includes/header.scss */
+  #header input.search-text::-moz-placeholder {
+    color: #ccc; }
+  /* line 113, ../../scss/includes/header.scss */
+  #header input.search-text:-ms-input-placeholder {
+    color: #ccc; }
+  /* line 120, ../../scss/includes/header.scss */
+  #header .supportingInfo {
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    text-align: center;
+    background: #000;
+    width: 5em;
+    height: 5em;
+    border-radius: 50%;
+    padding-top: .5em;
+    z-index: 20; }
+  /* line 132, ../../scss/includes/header.scss */
+  #header .supportingInfo .smallType {
+    font-size: .85em;
+    display: block;
+    color: #fff; }
+  /* line 137, ../../scss/includes/header.scss */
+  #header .supportingInfo .largeType {
+    font-size: 3em;
+    display: block;
+    line-height: .9em;
+    color: #fff; }
+
+/*///////////////////////////*/
+/*///////// HOMEPAGE ////////*/
+/*///////////////////////////*/
+/* line 6, ../../scss/includes/pageHome.scss */
+h2.homeTitle {
+  margin-bottom: inherit !important;
+  display: inline-block;
+  vertical-align: top;
+  line-height: 3em;
+  margin: 0; }
+
+/* line 13, ../../scss/includes/pageHome.scss */
+.titleHalf {
+  display: inline-block;
+  text-align: right; }
+  @media only screen and (min-width: 0px) and (max-width: 887px) {
+    /* line 13, ../../scss/includes/pageHome.scss */
+    .titleHalf {
+      max-width: 60%;
+      min-width: inherit; } }
+
+/* line 21, ../../scss/includes/pageHome.scss */
+.titleHalf input {
+  width: 100%;
+  margin-left: 10px;
+  background: #fff;
+  line-height: 1.5em;
+  padding: 2px 12px;
+  outline: none;
+  border: 1px solid #ddd;
+  /* 	   border-bottom: 1px solid #ccc; */
+  text-align: left;
+  color: #666;
+  min-width: 400px;
+  font-size: .85em;
+  border-radius: 4px; }
+  @media only screen and (min-width: 0px) and (max-width: 887px) {
+    /* line 21, ../../scss/includes/pageHome.scss */
+    .titleHalf input {
+      width: 100%;
+      min-width: inherit; } }
+
+/* line 43, ../../scss/includes/pageHome.scss */
+.titleHalf input:active {
+  background: rgba(255, 255, 255, 0.7);
+  color: #2a2a2a;
+  outline: none; }
+
+/* line 51, ../../scss/includes/pageHome.scss */
+.titleSection {
+  position: relative; }
+  /* line 53, ../../scss/includes/pageHome.scss */
+  .titleSection .supportingInfo {
+    position: absolute;
+    right: 20px;
+    top: 0px;
+    text-align: center;
+    width: 6em;
+    height: 5em;
+    padding-top: .5em;
+    z-index: 20;
+    color: #aaa;
+    padding-top: 1.4em;
+    height: 100%; }
+    /* line 68, ../../scss/includes/pageHome.scss */
+    .titleSection .supportingInfo .largeType {
+      font-size: 3em;
+      display: block;
+      line-height: .9em;
+      margin-top: .5em; }
+    /* line 75, ../../scss/includes/pageHome.scss */
+    .titleSection .supportingInfo .smallType {
+      font-size: .85em;
+      display: block; }
+  @media only screen and (min-width: 0px) and (max-width: 887px) {
+    /* line 51, ../../scss/includes/pageHome.scss */
+    .titleSection {
+      width: inherit;
+      right: 0; }
+      /* line 85, ../../scss/includes/pageHome.scss */
+      .titleSection .largeType {
+        margin-top: 5px; } }
+
+/*///////////////////////////*/
+/*///////// Profile & account ////////*/
+/*///////////////////////////*/
+/* line 5, ../../scss/includes/profile.scss */
+.pageAccount .titleBlock {
+  width: 100%;
+  padding: 1em 0;
+  position: relative;
+  text-align: center; }
+  /* line 10, ../../scss/includes/profile.scss */
+  .pageAccount .titleBlock .coverImg.userImg {
+    margin-top: .5em;
+    margin-right: inherit;
+    width: 70px;
+    height: 70px;
+    border-radius: 35px;
+    overflow: hidden;
+    box-shadow: none;
+    float: inherit;
+    margin-right: inherit img;
+      margin-right-box-shadow: none; }
+/* line 27, ../../scss/includes/profile.scss */
+.pageAccount .contentSection {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 1em; }
+
+/* line 36, ../../scss/includes/profile.scss */
+.subMenu a {
+  text-decoration: none;
+  text-transform: capitalize;
+  font-size: .8em;
+  margin: 0 10px; }
+  /* line 41, ../../scss/includes/profile.scss */
+  .subMenu a.active {
+    border-bottom: 3px solid #ccc; }
+
+/* line 47, ../../scss/includes/profile.scss */
+.infoLabel {
+  min-width: 50%;
+  display: inline-block;
+  vertical-align: top; }
+  /* line 51, ../../scss/includes/profile.scss */
+  .infoLabel[class^="icon-"]:before, .infoLabel[class*=" icon-"]:before {
+    margin-right: 8px; }
+
+/* line 57, ../../scss/includes/profile.scss */
+.iconLabel[class^="icon-"]:before, .iconLabel[class*=" icon-"]:before {
+  margin-right: 8px; }
+
+/*///////////////////////////*/
+/*///////// badges ////////*/
+/* line 69, ../../scss/includes/profile.scss */
+.aBadge {
+  width: 160px;
+  height: 180px;
+  display: inline-block; }
+  /* line 74, ../../scss/includes/profile.scss */
+  .aBadge .badgeLink .badgeImg {
+    width: 160px;
+    height: 160px; }
+  /* line 79, ../../scss/includes/profile.scss */
+  .aBadge .badgeText {
+    text-align: center;
+    width: 100%;
+    text-transform: uppercase;
+    display: block;
+    display: none; }
+  /* line 89, ../../scss/includes/profile.scss */
+  .adminBadges .aBadge {
+    width: 100%;
+    height: 80px; }
+    /* line 92, ../../scss/includes/profile.scss */
+    .adminBadges .aBadge .badgeLink {
+      display: inline-block;
+      vertical-align: middle; }
+      /* line 96, ../../scss/includes/profile.scss */
+      .adminBadges .aBadge .badgeLink .badgeImg {
+        width: 50px;
+        height: 50px; }
+        /* line 100, ../../scss/includes/profile.scss */
+        .unassigned .adminBadges .aBadge .badgeLink .badgeImg {
+          background: #ccc; }
+    /* line 105, ../../scss/includes/profile.scss */
+    .adminBadges .aBadge .badgeText {
+      display: inline-block;
+      vertical-align: middle;
+      width: auto;
+      text-transform: capitalize; }
+    /* line 111, ../../scss/includes/profile.scss */
+    .adminBadges .aBadge .badgeButton {
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1em;
+      float: right;
+      position: relative;
+      right: 10px;
+      top: 20px;
+      font-size: 12px; }
+
+/*///////////////////////////*/
+/*///////// Book Page ////////*/
+/*///////////////////////////*/
+/* line 5, ../../scss/includes/pageBook.scss */
+.bookDetail {
+  max-width: 66em;
+  margin: 0 auto; }
+
+/* line 10, ../../scss/includes/pageBook.scss */
+.theBookMapImg {
+  width: 100%; }
+
+/* line 14, ../../scss/includes/pageBook.scss */
+.mapImg {
+  background-color: #eee;
+  background: url() center center/cover no-repeat;
+  overflow: hidden; }
+
+/* line 30, ../../scss/includes/pageBook.scss */
+.titleBlock {
+  width: 100%;
+  padding: 1em 0;
+  position: relative; }
+  /* line 36, ../../scss/includes/pageBook.scss */
+  .pageEdit .titleBlock .coverImg {
+    margin-top: .5em;
+    width: 50px;
+    height: 200%;
+    box-shadow: none; }
+    /* line 41, ../../scss/includes/pageBook.scss */
+    .pageEdit .titleBlock .coverImg img {
+      box-shadow: none; }
+  /* line 50, ../../scss/includes/pageBook.scss */
+  .titleBlock .coverImg {
+    display: inline-block;
+    width: 150px;
+    float: left;
+    margin-right: 2em;
+    position: relative;
+    margin-top: -110px;
+    /*
+    			height: 226px;
+    			overflow: hidden;
+    */ }
+    @media only screen and (min-width: 0px) and (max-width: 887px) {
+      /* line 50, ../../scss/includes/pageBook.scss */
+      .titleBlock .coverImg {
+        width: 80px;
+        margin-right: 1em;
+        margin-top: -70px; } }
+    /* line 69, ../../scss/includes/pageBook.scss */
+    .titleBlock .coverImg img {
+      width: 100%;
+      box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2); }
+
+/* line 80, ../../scss/includes/pageBook.scss */
+.featBlock {
+  border-bottom: 1px solid #ddd;
+  padding: 1em 4%; }
+  /* line 84, ../../scss/includes/pageBook.scss */
+  .featBlock .excerpt {
+    font-size: 1.7em;
+    font-style: italic; }
+  /* line 88, ../../scss/includes/pageBook.scss */
+  .featBlock.featInfo {
+    padding: 1em 0; }
+
+/* line 109, ../../scss/includes/pageBook.scss */
+.tagWrap {
+  padding: 0 0 1em 0; }
+
+/* line 114, ../../scss/includes/pageBook.scss */
+.sideBarItem {
+  padding: 0 0 1em 0;
+  width: 100%;
+  display: block; }
+  /* line 120, ../../scss/includes/pageBook.scss */
+  .sideBarItem .collectionWrap {
+    background: #eee;
+    border-radius: 2px;
+    padding: .5em; }
+
+/* line 127, ../../scss/includes/pageBook.scss */
+.sectionAddedBy {
+  font-size: .75em; }
+  @media only screen and (max-width: 979px) {
+    /* line 127, ../../scss/includes/pageBook.scss */
+    .sectionAddedBy {
+      font-size: 1em; } }
+  /* line 134, ../../scss/includes/pageBook.scss */
+  .sectionAddedBy .addedBy.user {
+    color: #aaa; }
+  /* line 138, ../../scss/includes/pageBook.scss */
+  .sectionAddedBy .userComment {
+    background: #eee;
+    color: #999;
+    border-radius: 4px;
+    padding: 10px;
+    position: relative;
+    margin-top: 8px;
+    font-style: italic; }
+    /* line 147, ../../scss/includes/pageBook.scss */
+    .sectionAddedBy .userComment:before {
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 0 9px 10px 9px;
+      border-color: transparent transparent #eee transparent;
+      position: relative;
+      left: 9px;
+      top: -10px;
+      content: "";
+      position: absolute; }
+
+/* line 164, ../../scss/includes/pageBook.scss */
+.sectionNotifications .notification {
+  border-bottom: 1px solid #eee;
+  margin-bottom: 8px;
+  padding: 0 0 10px 0; }
+  /* line 168, ../../scss/includes/pageBook.scss */
+  .sectionNotifications .notification:first-child {
+    border-top: 1px solid #eee; }
+  /* line 173, ../../scss/includes/pageBook.scss */
+  .sectionNotifications .notification.msgSystem:before, .sectionNotifications .notification.msgUser:before, .sectionNotifications .notification.msgBook:before {
+    background: #aaa;
+    height: 30px;
+    display: inline-block;
+    float: left;
+    color: #eee;
+    border-radius: 4px;
+    text-align: center;
+    line-height: 30px;
+    font-size: .75em;
+    padding: 0 1em;
+    margin-right: 1em; }
+  /* line 189, ../../scss/includes/pageBook.scss */
+  .sectionNotifications .notification.msgSystem:before {
+    content: "FS"; }
+  /* line 194, ../../scss/includes/pageBook.scss */
+  .sectionNotifications .notification.msgBook:before {
+    content: "Book"; }
+  /* line 199, ../../scss/includes/pageBook.scss */
+  .sectionNotifications .notification.msgUser:before {
+    content: "User"; }
+/* line 205, ../../scss/includes/pageBook.scss */
+.sectionNotifications .msgContent {
+  position: relative; }
+/* line 210, ../../scss/includes/pageBook.scss */
+.sectionNotifications .msgMeta {
+  color: #aaa;
+  font-size: .85em; }
+
+/* line 217, ../../scss/includes/pageBook.scss */
+.bookmarkSection {
+  position: absolute;
+  right: 60px;
+  top: -19px;
+  z-index: 9999; }
+  @media only screen and (max-width: 979px) {
+    /* line 217, ../../scss/includes/pageBook.scss */
+    .bookmarkSection {
+      right: 0;
+      top: -14px; } }
+  /* line 227, ../../scss/includes/pageBook.scss */
+  .bookmarkSection .doingBookmarking {
+    display: none;
+    color: #aaa;
+    cursor: pointer;
+    font-size: .5em;
+    height: 1.5em;
+    line-height: 1.5em;
+    width: 200px;
+    display: block;
+    margin-top: 14px; }
+    @media only screen and (max-width: 979px) {
+      /* line 227, ../../scss/includes/pageBook.scss */
+      .bookmarkSection .doingBookmarking {
+        width: 50px; } }
+
+/* line 244, ../../scss/includes/pageBook.scss */
+.relatedGroup {
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 1em; }
+
+/* line 250, ../../scss/includes/pageBook.scss */
+.icon {
+  text-transform: uppercase;
+  font-size: .75em; }
+  /* line 255, ../../scss/includes/pageBook.scss */
+  .icon.iconAdd {
+    color: #2a2a2a;
+    cursor: pointer; }
+    /* line 258, ../../scss/includes/pageBook.scss */
+    .icon.iconAdd.inCollection {
+      color: red; }
+    /* line 261, ../../scss/includes/pageBook.scss */
+    .icon.iconAdd:before {
+      display: inline-block;
+      position: relative;
+      top: 0;
+      margin-right: 10px;
+      min-width: 30px;
+      min-height: 30px;
+      width: 30px;
+      height: 30px;
+      background: url(../imgs/icon_markerempty.svg) 0px 0px no-repeat;
+      background-size: 30px 30px;
+      content: "+";
+      font-weight: bold;
+      font-weight: 800;
+      line-height: 25px;
+      text-align: center; }
+    /* line 280, ../../scss/includes/pageBook.scss */
+    .icon.iconAdd:hover {
+      color: red; }
+  /* line 289, ../../scss/includes/pageBook.scss */
+  .icon .iconFill {
+    fill: #ff00ff; }
+  /* line 293, ../../scss/includes/pageBook.scss */
+  .icon.iconBookmark {
+    color: #2a2a2a;
+    cursor: pointer;
+    font-size: .5em;
+    width: 200px;
+    display: block; }
+    @media only screen and (max-width: 979px) {
+      /* line 293, ../../scss/includes/pageBook.scss */
+      .icon.iconBookmark {
+        width: 50px; }
+        /* line 301, ../../scss/includes/pageBook.scss */
+        .icon.iconBookmark span {
+          display: none; } }
+    /* line 304, ../../scss/includes/pageBook.scss */
+    .icon.iconBookmark:before {
+      display: inline-block;
+      position: relative;
+      top: 0;
+      width: 50px;
+      height: 50px;
+      background: url(../imgs/icon_bookmarkempty.svg) 0px 0px no-repeat;
+      background-size: 50px 50px;
+      content: "+";
+      font-weight: 800;
+      line-height: 45px;
+      text-align: center;
+      font-size: 30px;
+      padding-right: 11px;
+      color: #f9f9f9; }
+    /* line 321, ../../scss/includes/pageBook.scss */
+    .icon.iconBookmark.inCollection {
+      color: red; }
+      /* line 323, ../../scss/includes/pageBook.scss */
+      .icon.iconBookmark.inCollection:before {
+        background: url(../imgs/icon_bookmark_longheart_red.svg) 0px 0px no-repeat;
+        height: 100px;
+        background-size: 50px;
+        content: "-";
+        color: #E50000; }
+      /* line 331, ../../scss/includes/pageBook.scss */
+      .icon.iconBookmark.inCollection:hover:before {
+        color: #fff; }
+    /* line 337, ../../scss/includes/pageBook.scss */
+    .icon.iconBookmark:hover {
+      color: red; }
+      /* line 339, ../../scss/includes/pageBook.scss */
+      .icon.iconBookmark:hover:before {
+        color: red; }
+
+@media only screen and (min-width: 980px) {
+  /* line 348, ../../scss/includes/pageBook.scss */
+  .columnWrap {
+    margin-top: 1em;
+    display: table;
+    width: 100%; }
+    /* line 353, ../../scss/includes/pageBook.scss */
+    .columnWrap .column {
+      display: table-cell;
+      vertical-align: top; }
+    /* line 358, ../../scss/includes/pageBook.scss */
+    .columnWrap .columnLeft {
+      width: 38%;
+      padding-right: 1em; }
+    /* line 361, ../../scss/includes/pageBook.scss */
+    .columnWrap .columnRight {
+      width: 60%;
+      border-left: 1px solid #ddd;
+      padding-left: 2em;
+      margin-left: 2em; }
+      /* line 367, ../../scss/includes/pageBook.scss */
+      .columnWrap .columnRight .columnRight {
+        padding-left: 1em;
+        margin-left: 1em; } }
+@media only screen and (max-width: 979px) {
+  /* line 378, ../../scss/includes/pageBook.scss */
+  .columnLeft {
+    border-bottom: 1px solid #ddd; } }
+/*
+	.titleBlock{
+	background: #000;
+	height: 400px;
+left: 50%;
+margin-left: -150px;
+position: absolute;
+text-align: center;
+top: 80px;
+width: 400px;
+padding: 0 30px;
+border-radius: 200px;
+		color: #fff;
+		display: table-cell;
+		vertical-align: middle;
+		.coverImg{
+			display: inline-block; 
+			width: 100px;
+			float: left;
+			margin-right: 1em;
+			img{width: 100%;}
+		}
+		h2{  margin-top: 130px; }
+		h5{}
+	
+	}
+*/
+/*///////////////////////////*/
+/*///////// Place Page ////////*/
+/*///////////////////////////*/
+/* line 4, ../../scss/includes/pagePlace.scss */
+.headerFeature {
+  position: relative; }
+  /* line 7, ../../scss/includes/pagePlace.scss */
+  .headerFeature.headerPlace .mapImg {
+    background-color: #eee;
+    background: url() center center/cover no-repeat;
+    overflow: hidden;
+    padding-top: 400px; }
+    @media only screen and (min-width: 0px) and (max-width: 887px) {
+      /* line 7, ../../scss/includes/pagePlace.scss */
+      .headerFeature.headerPlace .mapImg {
+        padding-top: 140px; } }
+  /* line 23, ../../scss/includes/pagePlace.scss */
+  .headerFeature .headImgWrap {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 400px;
+    height: 100%; }
+    /* line 30, ../../scss/includes/pagePlace.scss */
+    .headerFeature .headImgWrap .headImg {
+      float: left;
+      height: 100%; }
+
+/* line 38, ../../scss/includes/pagePlace.scss */
+.featTitle {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 2000;
+  overflow: hidden; }
+  /* line 44, ../../scss/includes/pagePlace.scss */
+  .featTitle h1 {
+    margin: 0;
+    padding: 0 .1em 0 0;
+    font-style: italic;
+    color: #eee;
+    font-size: 290px;
+    font-size: 16vw;
+    font-weight: 100;
+    letter-spacing: -.05em;
+    white-space: nowrap;
+    margin-bottom: -4.6vw;
+    text-shadow: 1px 1px 25px rgba(0, 0, 0, 0.1); }
+
+/* line 59, ../../scss/includes/pagePlace.scss */
+.featSubTitle {
+  position: absolute;
+  bottom: -2.5em;
+  right: 1em;
+  z-index: 2000;
+  overflow: hidden; }
+  /* line 65, ../../scss/includes/pagePlace.scss */
+  .featSubTitle span {
+    font-size: 2em;
+    font-weight: 100;
+    letter-spacing: -.05em;
+    white-space: nowrap;
+    color: #bbb; }
+
+/* line 76, ../../scss/includes/pagePlace.scss */
+.placesFeat .searchPlaces {
+  margin-top: 0; }
+
+/* line 83, ../../scss/includes/pagePlace.scss */
+.followIcon:before {
+  content: "";
+  display: inline-block;
+  vertical-align: bottom;
+  background: url(../imgs/icon_markerempty.svg) 0px 0px no-repeat;
+  background-size: 20px auto;
+  margin-right: 4px;
+  width: 20px;
+  height: 22px; }
+/* line 94, ../../scss/includes/pagePlace.scss */
+.followIcon.active:before {
+  vertical-align: middle; }
+
+/* ///////// Lists   /////////*/
+/* line 2, ../../scss/includes/bookLists.scss */
+ul {
+  list-style: none;
+  list-style-type: none; }
+  /* line 6, ../../scss/includes/bookLists.scss */
+  ul.bookList {
+    padding: 0;
+    margin: 0; }
+    /* line 10, ../../scss/includes/bookLists.scss */
+    ul.bookList li {
+      list-style-type: none;
+      position: relative;
+      /* 			padding: 1em; */
+      /*
+      			display: table-cell;
+      			width: 33.3%;
+      			float: left;
+      			height: 0;
+       			padding-bottom:33.3%;
+      			height: 0;
+      
+      */
+      width: 31.3%;
+      margin: 1%;
+      float: left;
+      padding-bottom: 28.3%;
+      overflow: hidden;
+      /*
+       			background: #f2f2f2;
+       			&:nth-child(2n+2){
+      	 			background: #e0e0e0;
+       			}
+      */
+      /*
+            -webkit-perspective: 1000;
+        -moz-perspective: 1000;
+        -o-perspective: 1000;
+        perspective: 1000;
+      */ }
+      @media only screen and (min-width: 0px) and (max-width: 887px) {
+        /* line 10, ../../scss/includes/bookLists.scss */
+        ul.bookList li {
+          /* phones */
+          width: 100%;
+          padding-bottom: 40%;
+          overflow: visible;
+          float: none;
+          padding-bottom: inherit;
+          padding-bottom: inherit;
+          overflow: visible;
+          float: none;
+          margin: 1em 0;
+          padding-top: 1em;
+          position: inherit;
+          display: table;
+          padding-bottom: .5em;
+          border-bottom: 1px solid #ddd; } }
+      @media only screen and (min-width: 888px) and (max-width: 2399px) {
+        /* line 10, ../../scss/includes/bookLists.scss */
+        ul.bookList li {
+          /* tablet */
+          width: 48%;
+          padding-bottom: 29%; } }
+    /* line 76, ../../scss/includes/bookLists.scss */
+    ul.bookList .imgWrap {
+      display: table-cell;
+      display: inline-block;
+      width: 29%;
+      height: 100%;
+      vertical-align: top;
+      overflow: hidden;
+      position: absolute;
+      			/*
+      transition: all .5s ease;
+      			-webkit-transform-style: preserve-3d;
+      			transform-style: preserve-3d;
+      				position: relative;
+      				&:hover{
+      					transform: rotateY(180deg);
+      					-webkit-backface-visibility: hidden; 
+      					backface-visibility: hidden;
+      				}
+      */
+      /*
+      			.front, .back {
+      				-webkit-backface-visibility: hidden;
+      				-moz-backface-visibility: hidden;
+      			  -o-backface-visibility: hidden;
+      				backface-visibility: hidden;
+      				}
+      			.back{
+      			position: absolute;
+      			top: 0;
+      			left: 0;
+      			 width: 100%;	
+      			 height: 300px;
+      	-webkit-transform: rotateY(180deg);
+      		-moz-transform: rotateY(180deg);
+      	  -o-transform: rotateY(180deg);
+      		transform: rotateY(180deg);
+      		z-index: 1;
+      		background: #f8f8f8;
+      			 }
+      			.front{
+      			 width: 100%;	
+      			z-index: 2;
+      			position: absolute;
+      			top:0; 
+      			left: 0;	
+      			}
+      */ }
+      @media only screen and (min-width: 0px) and (max-width: 887px) {
+        /* line 76, ../../scss/includes/bookLists.scss */
+        ul.bookList .imgWrap {
+          position: inherit;
+          overflow: visible;
+          height: auto;
+          width: 12%; } }
+      /* line 135, ../../scss/includes/bookLists.scss */
+      ul.bookList .imgWrap a {
+        width: 100%;
+        display: inline-block;
+        margin: 0 auto;
+        /* 			 text-align: center; */
+        padding-right: 3px; }
+        /* line 143, ../../scss/includes/bookLists.scss */
+        ul.bookList .imgWrap a img {
+          width: 100%;
+          box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+          /* 	max-height: 100%; */ }
+          @media only screen and (min-width: 0px) and (max-width: 887px) {
+            /* line 143, ../../scss/includes/bookLists.scss */
+            ul.bookList .imgWrap a img {
+              box-shadow: none; } }
+    /* line 156, ../../scss/includes/bookLists.scss */
+    ul.bookList .theContent {
+      display: table-cell;
+      display: inline-block;
+      width: 70%;
+      vertical-align: top;
+      /* 			background: #fff; */
+      padding: 0 1em;
+      position: absolute;
+      left: 30%;
+      height: 100%; }
+      @media only screen and (min-width: 0px) and (max-width: 887px) {
+        /* line 156, ../../scss/includes/bookLists.scss */
+        ul.bookList .theContent {
+          position: inherit;
+          overflow: visible;
+          height: auto;
+          width: 87%; } }
+
+/* line 1, ../../scss/includes/bookEdit.scss */
+.searchWrap {
+  width: 100%;
+  background: #eee;
+  border-radius: 4px;
+  padding: .5em; }
+  /* line 6, ../../scss/includes/bookEdit.scss */
+  .searchWrap.searchPlaces {
+    margin-top: 1em; }
+  /* line 10, ../../scss/includes/bookEdit.scss */
+  .searchWrap button {
+    display: inline-block;
+    outline: none;
+    vertical-align: middle;
+    font-size: 1em;
+    line-height: 1.6em; }
+  /* line 17, ../../scss/includes/bookEdit.scss */
+  .searchWrap .form-control {
+    vertical-align: middle;
+    display: inline-block;
+    border: 1px solid #ccc;
+    background: #fff;
+    width: 80%;
+    font-size: 1.6em;
+    line-height: 1.6em;
+    padding: .2em; }
+
+/* line 31, ../../scss/includes/bookEdit.scss */
+.dataSection.additonalComment {
+  border-top: 1px solid #ddd; }
+
+/* ///////// places   /////////*/
+/* line 3, ../../scss/includes/placeList.scss */
+.placeList .aPlace {
+  background: #eee;
+  background: #fff;
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.18);
+  border-radius: 4px;
+  margin: 10px 0;
+  width: 50%;
+  margin-right: 2px;
+  margin: 2px;
+  margin-bottom: 8px;
+  width: 29.5%;
+  margin-right: 1%;
+  display: inline-block;
+  vertical-align: top;
+  overflow: hidden;
+  height: 90px; }
+  @media only screen and (max-width: 979px) {
+    /* line 3, ../../scss/includes/placeList.scss */
+    .placeList .aPlace {
+      width: 100%; } }
+  /* line 26, ../../scss/includes/placeList.scss */
+  .placeList .aPlace .placeThumb {
+    display: inline-block;
+    width: 20%;
+    max-width: 90px;
+    height: 90px;
+    background: #ccc;
+    vertical-align: top; }
+  /* line 36, ../../scss/includes/placeList.scss */
+  .placeList .aPlace .placeContent {
+    width: 78%;
+    display: inline-block;
+    vertical-align: top;
+    padding-left: 8px; }
+    /* line 41, ../../scss/includes/placeList.scss */
+    .placeList .aPlace .placeContent a {
+      text-decoration: none; }
+    /* line 44, ../../scss/includes/placeList.scss */
+    .placeList .aPlace .placeContent .placeTitle {
+      width: 100%;
+      font-size: 1.15em;
+      line-height: 1em;
+      font-weight: 300;
+      margin: 8px 0 4px; }
+    /* line 52, ../../scss/includes/placeList.scss */
+    .placeList .aPlace .placeContent .subTitle {
+      margin: .25em 0;
+      color: #aaa;
+      font-style: italic; }
+      /* line 56, ../../scss/includes/placeList.scss */
+      .placeList .aPlace .placeContent .subTitle a {
+        color: #aaa; }
+    /* line 60, ../../scss/includes/placeList.scss */
+    .placeList .aPlace .placeContent .bookCount {
+      font-size: .85em; }
+  /* line 65, ../../scss/includes/placeList.scss */
+  .placeList .aPlace label {
+    float: inherit;
+    width: inherit;
+    padding: 2px;
+    vertical-align: middle; }
+
+/* line 80, ../../scss/includes/placeList.scss */
+.placesFeat .searchWrap.searchPlaces {
+  margin-top: 0;
+  background: transparent; }
+
+/* line 89, ../../scss/includes/placeList.scss */
+.exceprtList .aPlace {
+  font-size: 12px;
+  /*
+  	&:before{
+  		display: inline-block;
+  		content: "\"";
+  	}
+  */ }
+  /* line 91, ../../scss/includes/placeList.scss */
+  .exceprtList .aPlace q {
+    display: inline;
+    line-height: 16px;
+    font-size: 20px; }
+/* line 104, ../../scss/includes/placeList.scss */
+.exceprtList p {
+  font-size: 12px;
+  line-height: 16px;
+  margin: .5em 0; }
+
+/* line 113, ../../scss/includes/placeList.scss */
+.listWide .aPlace {
+  width: 100%; }
+
+/* line 119, ../../scss/includes/placeList.scss */
+.leaflet-container h3 {
+  font-size: 1em; }
+
+/* line 132, ../../scss/includes/placeList.scss */
+.bookList .placeList .aTag, .bookPlaces .aTag {
+  height: 30px;
+  display: inline-block;
+  margin-bottom: 4px;
+  margin-right: 4px; }
+  /* line 138, ../../scss/includes/placeList.scss */
+  .bookList .placeList .aTag a.placeName, .bookPlaces .aTag a.placeName {
+    display: inline-block;
+    background: #eee;
+    background: #ddd;
+    border-radius: 20px;
+    padding: 2px 1.25em 2px .5em;
+    display: inline-block;
+    text-decoration: none;
+    height: 30px;
+    vertical-align: middle; }
+    /* line 148, ../../scss/includes/placeList.scss */
+    .bookList .placeList .aTag a.placeName.countryName, .bookPlaces .aTag a.placeName.countryName {
+      color: #eee;
+      background: #222;
+      padding: 2px .5em; }
+    /* line 153, ../../scss/includes/placeList.scss */
+    .bookList .placeList .aTag a.placeName:hover, .bookPlaces .aTag a.placeName:hover {
+      background: #eee; }
+      /* line 155, ../../scss/includes/placeList.scss */
+      .bookList .placeList .aTag a.placeName:hover.countryName, .bookPlaces .aTag a.placeName:hover.countryName {
+        background: #333; }
+  /* line 160, ../../scss/includes/placeList.scss */
+  .bookList .placeList .aTag a.placeCountry, .bookPlaces .aTag a.placeCountry {
+    font-size: 12px;
+    color: #eee;
+    background: #222;
+    padding: 4px;
+    border-radius: 20px;
+    text-decoration: none;
+    position: relative;
+    font-size: 1em;
+    display: inline-block;
+    margin-left: -1.25em;
+    margin-right: .5em;
+    text-align: center;
+    height: 30px;
+    width: 30px;
+    vertical-align: middle;
+    padding: 0; }
+    /* line 177, ../../scss/includes/placeList.scss */
+    .bookList .placeList .aTag a.placeCountry span, .bookPlaces .aTag a.placeCountry span {
+      font-size: 12px;
+      line-height: 20px; }
+    /* line 182, ../../scss/includes/placeList.scss */
+    .bookList .placeList .aTag a.placeCountry:hover, .bookPlaces .aTag a.placeCountry:hover {
+      background: #444; }
+
+/* line 193, ../../scss/includes/placeList.scss */
+.followWrap.bookPlaces .aTag a.placeCountry {
+  width: auto;
+  padding: 0px 8px; }
+
+/* line 198, ../../scss/includes/placeList.scss */
+.distancePlaces {
+  width: 100%; }
+  /* line 200, ../../scss/includes/placeList.scss */
+  .distancePlaces .aTag {
+    display: inline-block; }
+  /* line 203, ../../scss/includes/placeList.scss */
+  .distancePlaces .distanceWrap {
+    display: inline-block; }
+
+/* ///////// Collections   /////////*/
+/* line 5, ../../scss/includes/collections.scss */
+.collectionWrap ul {
+  padding: .25em;
+  margin: 0; }
+  /* line 9, ../../scss/includes/collections.scss */
+  .collectionWrap ul li.collectionItem {
+    font-size: .75em;
+    overflow: hidden;
+    display: inline-block;
+    height: 77px;
+    width: 58px; }
+    /* line 17, ../../scss/includes/collections.scss */
+    .collectionWrap ul li.collectionItem a.collectionImgLink {
+      margin: 2px;
+      background: transparent;
+      border-radius: 2px;
+      width: 50px;
+      height: 75px;
+      display: inline-block;
+      overflow: hidden;
+      vertical-align: top;
+      box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); }
+      /* line 28, ../../scss/includes/collections.scss */
+      .collectionWrap ul li.collectionItem a.collectionImgLink img {
+        width: 100%; }
+    /* line 38, ../../scss/includes/collections.scss */
+    .collectionWrap ul li.collectionItem h5 {
+      display: none;
+      display: inline-block;
+      vertical-align: top; }
+/* line 48, ../../scss/includes/collections.scss */
+.collectionWrap li.followItem {
+  display: inline-block;
+  background: #eee;
+  padding: 2px 10px;
+  margin: 2px 4px 2px 0;
+  border-radius: 4px; }
+  /* line 54, ../../scss/includes/collections.scss */
+  .collectionWrap li.followItem:before {
+    display: inline-block;
+    background: url(../imgs/icon_markerempty.svg) 0px 0px no-repeat;
+    background-size: 20px auto;
+    margin-right: 4px; }
+  /* line 60, ../../scss/includes/collections.scss */
+  .collectionWrap li.followItem h5 {
+    margin: 0;
+    font-size: 1.1em;
+    padding: 0; }
+    /* line 64, ../../scss/includes/collections.scss */
+    .collectionWrap li.followItem h5 a {
+      text-decoration: none; }
+  /* line 68, ../../scss/includes/collections.scss */
+  .collectionWrap li.followItem p.subTitle {
+    font-style: italic;
+    font-size: .85em; }
+    /* line 71, ../../scss/includes/collections.scss */
+    .collectionWrap li.followItem p.subTitle a {
+      color: #aaa; }
+
+/* line 79, ../../scss/includes/collections.scss */
+.featCollection {
+  padding: 10px; }
+  /* line 82, ../../scss/includes/collections.scss */
+  .featCollection .headerBookItem {
+    display: inline-block;
+    height: 100px;
+    margin: 0; }
+    /* line 86, ../../scss/includes/collections.scss */
+    .featCollection .headerBookItem img.bookImg {
+      height: 100px;
+      width: auto; }
+
+/* line 95, ../../scss/includes/collections.scss */
+.collectionsList a {
+  text-decoration: none; }
+/* line 97, ../../scss/includes/collections.scss */
+.collectionsList.inBookContext .collectionItem {
+  width: 32.6%;
+  border: 1px solid #ccc;
+  background: #fff;
+  box-shadow: 1px 1px 4px #eee;
+  border-radius: 4px;
+  margin-left: 10px;
+  height: 91px;
+  display: inline-block; }
+  /* line 106, ../../scss/includes/collections.scss */
+  .collectionsList.inBookContext .collectionItem:first-child {
+    margin-left: 0;
+    border-top: 1px solid #ccc; }
+  /* line 110, ../../scss/includes/collections.scss */
+  .collectionsList.inBookContext .collectionItem .collectionImg {
+    border-radius: 4px 0 0 4px;
+    overflow: hidden;
+    height: 89px;
+    width: 80px;
+    padding: 0px;
+    background: #f3f3f3;
+    border-right: 1px solid #eee;
+    border-radius: 4px 0 0 4px; }
+    /* line 119, ../../scss/includes/collections.scss */
+    .collectionsList.inBookContext .collectionItem .collectionImg .imgWrap {
+      width: 82px;
+      overflow: hidden;
+      height: 90px;
+      border: 0px solid white; }
+      /* line 124, ../../scss/includes/collections.scss */
+      .collectionsList.inBookContext .collectionItem .collectionImg .imgWrap .collectionCoverImg.coverImgSmall {
+        box-shadow: none;
+        width: 20px;
+        margin: 0;
+        padding: 0;
+        display: inline;
+        float: left;
+        height: 30px; }
+      /* line 133, ../../scss/includes/collections.scss */
+      .collectionsList.inBookContext .collectionItem .collectionImg .imgWrap:before, .collectionsList.inBookContext .collectionItem .collectionImg .imgWrap:after {
+        display: none; }
+/* line 143, ../../scss/includes/collections.scss */
+.collectionsList.inProfileContext .collectionItem {
+  width: 48%;
+  display: inline-block;
+  vertical-align: top;
+  border-top: 1px solid white; }
+  /* line 149, ../../scss/includes/collections.scss */
+  .collectionsList.inProfileContext .collectionItem .collectionInfo h5 {
+    color: #2a2a2a; }
+
+/* ///////// Dialogs   /////////*/
+/* line 3, ../../scss/includes/dialogs.scss */
+.ngdialog.ngdialog-theme-default .ngdialog-button {
+  float: left; }
+
+/* line 6, ../../scss/includes/dialogs.scss */
+.dialogScrollWrap {
+  width: 100%; }
+
+/* line 13, ../../scss/includes/dialogs.scss */
+.collectionsList {
+  padding: 4px;
+  margin: 4px 0; }
+  /* line 16, ../../scss/includes/dialogs.scss */
+  .collectionsList .collectionItem {
+    border-top: 1px dotted #ccc;
+    margin: 4px 0; }
+    /* line 19, ../../scss/includes/dialogs.scss */
+    .collectionsList .collectionItem:first-child {
+      border-top: 0px solid #eee; }
+    /* line 20, ../../scss/includes/dialogs.scss */
+    .collectionsList .collectionItem.inCollection {
+      border-top: 0px solid white; }
+      /* line 22, ../../scss/includes/dialogs.scss */
+      .collectionsList .collectionItem.inCollection a {
+        display: block;
+        padding: 4px;
+        background: #a8d164;
+        border-radius: 2px;
+        text-decoration: none;
+        color: #fff; }
+        /* line 28, ../../scss/includes/dialogs.scss */
+        .collectionsList .collectionItem.inCollection a h5, .collectionsList .collectionItem.inCollection a p {
+          color: #fff; }
+        /* line 29, ../../scss/includes/dialogs.scss */
+        .collectionsList .collectionItem.inCollection a .iconWrap {
+          background: #92c53d; }
+        /* line 30, ../../scss/includes/dialogs.scss */
+        .collectionsList .collectionItem.inCollection a #plus {
+          display: none; }
+        /* line 31, ../../scss/includes/dialogs.scss */
+        .collectionsList .collectionItem.inCollection a #minus {
+          display: none; }
+        /* line 32, ../../scss/includes/dialogs.scss */
+        .collectionsList .collectionItem.inCollection a #checkmark {
+          display: inline-block; }
+        /* line 34, ../../scss/includes/dialogs.scss */
+        .collectionsList .collectionItem.inCollection a:hover {
+          background: #999; }
+          /* line 36, ../../scss/includes/dialogs.scss */
+          .collectionsList .collectionItem.inCollection a:hover .iconWrap {
+            background: #444; }
+          /* line 37, ../../scss/includes/dialogs.scss */
+          .collectionsList .collectionItem.inCollection a:hover #plus {
+            display: none; }
+          /* line 38, ../../scss/includes/dialogs.scss */
+          .collectionsList .collectionItem.inCollection a:hover #minus {
+            display: inline-block; }
+          /* line 39, ../../scss/includes/dialogs.scss */
+          .collectionsList .collectionItem.inCollection a:hover #checkmark {
+            display: none; }
+    /* line 47, ../../scss/includes/dialogs.scss */
+    .collectionsList .collectionItem.notInCollection a {
+      padding: 4px;
+      display: block;
+      background: transparent;
+      text-decoration: none; }
+      /* line 52, ../../scss/includes/dialogs.scss */
+      .collectionsList .collectionItem.notInCollection a .iconWrap {
+        display: none; }
+      /* line 53, ../../scss/includes/dialogs.scss */
+      .collectionsList .collectionItem.notInCollection a #plus {
+        display: none; }
+      /* line 54, ../../scss/includes/dialogs.scss */
+      .collectionsList .collectionItem.notInCollection a #minus {
+        display: none; }
+      /* line 55, ../../scss/includes/dialogs.scss */
+      .collectionsList .collectionItem.notInCollection a #checkmark {
+        display: none; }
+      /* line 57, ../../scss/includes/dialogs.scss */
+      .collectionsList .collectionItem.notInCollection a:hover {
+        background: #e7e7e7; }
+        /* line 59, ../../scss/includes/dialogs.scss */
+        .collectionsList .collectionItem.notInCollection a:hover .iconWrap {
+          display: inline-block; }
+        /* line 60, ../../scss/includes/dialogs.scss */
+        .collectionsList .collectionItem.notInCollection a:hover #plus {
+          display: inline-block; }
+        /* line 61, ../../scss/includes/dialogs.scss */
+        .collectionsList .collectionItem.notInCollection a:hover #minus {
+          display: none; }
+        /* line 62, ../../scss/includes/dialogs.scss */
+        .collectionsList .collectionItem.notInCollection a:hover #checkmark {
+          display: none; }
+    /* line 67, ../../scss/includes/dialogs.scss */
+    .collectionsList .collectionItem .collectionImg {
+      display: inline-block;
+      width: 60px;
+      width: 15%;
+      width: 70px;
+      height: 58px;
+      height: 95px;
+      margin: 0 8px 0 0;
+      padding: 2px;
+      z-index: 10;
+      vertical-align: top;
+      position: relative; }
+      /* line 82, ../../scss/includes/dialogs.scss */
+      .collectionsList .collectionItem .collectionImg .imgWrap {
+        width: 58px;
+        height: 85px;
+        display: block;
+        position: absolute;
+        /*
+        				  	-webkit-box-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+        						box-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+        */
+        border: 1px solid #fff; }
+        /* line 93, ../../scss/includes/dialogs.scss */
+        .collectionsList .collectionItem .collectionImg .imgWrap:before {
+          background: #fff;
+          top: -3px;
+          left: -3px;
+          -webkit-transform: rotate(-2deg);
+          -moz-transform: rotate(-2deg);
+          -o-transform: rotate(-2deg);
+          -ms-transform: rotate(-2deg);
+          transform: rotate(-2deg); }
+        /* line 103, ../../scss/includes/dialogs.scss */
+        .collectionsList .collectionItem .collectionImg .imgWrap:after {
+          background: #fff;
+          top: 0px;
+          left: 1px;
+          -webkit-transform: rotate(3deg);
+          -moz-transform: rotate(3deg);
+          -o-transform: rotate(3deg);
+          -ms-transform: rotate(3deg);
+          transform: rotate(3deg); }
+        /* line 114, ../../scss/includes/dialogs.scss */
+        .collectionsList .collectionItem .collectionImg .imgWrap:before, .collectionsList .collectionItem .collectionImg .imgWrap:after {
+          width: 58px;
+          height: 85px;
+          content: "";
+          position: absolute;
+          z-index: -1;
+          background: #ccc;
+          border: 1px solid #fff;
+          -webkit-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+          box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); }
+      /* line 127, ../../scss/includes/dialogs.scss */
+      .collectionsList .collectionItem .collectionImg .collectionCoverImg {
+        width: 100%;
+        height: auto;
+        box-shadow: 0px 0px 0px rgba(255, 255, 255, 0.7), 1px 1px 0px rgba(0, 0, 0, 0.3);
+        z-index: 3;
+        position: relative; }
+      /* line 136, ../../scss/includes/dialogs.scss */
+      .collectionsList .collectionItem .collectionImg .noBook {
+        background: #f9f9f9;
+        border: 1px solid #eee;
+        width: 100%;
+        height: 100%;
+        display: block; }
+    /* line 144, ../../scss/includes/dialogs.scss */
+    .collectionsList .collectionItem h5 {
+      font-size: .85em;
+      margin: 0;
+      padding: 0; }
+    /* line 149, ../../scss/includes/dialogs.scss */
+    .collectionsList .collectionItem p {
+      margin: 0;
+      font-size: 12px; }
+    /* line 152, ../../scss/includes/dialogs.scss */
+    .collectionsList .collectionItem .collectionInfo {
+      display: inline-block;
+      width: 66%;
+      vertical-align: top; }
+    /* line 156, ../../scss/includes/dialogs.scss */
+    .collectionsList .collectionItem .collectionButton {
+      display: inline-block;
+      width: 30px;
+      float: right;
+      vertical-align: middle; }
+      /* line 161, ../../scss/includes/dialogs.scss */
+      .collectionsList .collectionItem .collectionButton button {
+        float: none;
+        padding: .5em 1em; }
+        /* line 165, ../../scss/includes/dialogs.scss */
+        .collectionsList .collectionItem .collectionButton button:hover {
+          background: #222; }
+      /* line 170, ../../scss/includes/dialogs.scss */
+      .collectionsList .collectionItem .collectionButton .iconWrap {
+        background: #444;
+        border-radius: 4px;
+        position: relative;
+        display: inline-block;
+        width: 30px;
+        height: 30px; }
+
+/* line 184, ../../scss/includes/dialogs.scss */
+.icon_private {
+  background: url(../imgs/icon_lock.svg) 0px 0px no-repeat;
+  background-size: .9em auto;
+  width: 1em;
+  margin-left: .5em;
+  display: inline-block;
+  vertical-align: baseline;
+  padding-left: 1em;
+  color: #2a2a2a;
+  font-weight: bold;
+  font-style: italic; }
+
+/* line 200, ../../scss/includes/dialogs.scss */
+#checkmark {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  -ms-transform: rotate(45deg);
+  /* IE 9 */
+  -webkit-transform: rotate(45deg);
+  /* Chrome, Safari, Opera */
+  transform: rotate(45deg);
+  position: relative;
+  left: 5px;
+  top: -1px; }
+  /* line 211, ../../scss/includes/dialogs.scss */
+  #checkmark #circle {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 15px solid #444;
+    border-radius: 15px;
+    left: 0;
+    top: 0;
+    display: none; }
+  /* line 222, ../../scss/includes/dialogs.scss */
+  #checkmark #stem {
+    position: absolute;
+    /*
+width:3px;
+	    height:9px;
+	    background-color:#fff;
+	    left:11px;
+	    top:6px;
+*/
+    width: 3px;
+    height: 12px;
+    background-color: #fff;
+    left: 14px;
+    top: 8px; }
+  /* line 238, ../../scss/includes/dialogs.scss */
+  #checkmark #kick {
+    position: absolute;
+    width: 6px;
+    height: 3px;
+    background-color: #fff;
+    left: 10px;
+    top: 17px;
+    /*
+    	    position: absolute;
+    	    width:3px;
+    	    height:3px;
+    	    background-color:#fff;
+    	    left:8px;
+    	    top:12px;
+    */ }
+
+/* line 256, ../../scss/includes/dialogs.scss */
+#plus {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  -ms-transform: rotate(0deg);
+  /* IE 9 */
+  -webkit-transform: rotate(0deg);
+  /* Chrome, Safari, Opera */
+  transform: rotate(0deg); }
+  /* line 264, ../../scss/includes/dialogs.scss */
+  #plus #circle {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 15px solid #444;
+    border-radius: 15px;
+    left: 0;
+    top: 0;
+    display: none; }
+  /* line 275, ../../scss/includes/dialogs.scss */
+  #plus #stem {
+    position: absolute;
+    width: 13px;
+    height: 3px;
+    background-color: #fff;
+    left: 9px;
+    top: 13px; }
+  /* line 284, ../../scss/includes/dialogs.scss */
+  #plus #kick {
+    position: absolute;
+    width: 3px;
+    height: 13px;
+    background-color: #fff;
+    left: 14px;
+    top: 8px; }
+
+/* line 294, ../../scss/includes/dialogs.scss */
+#minus {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  -ms-transform: rotate(0deg);
+  /* IE 9 */
+  -webkit-transform: rotate(0deg);
+  /* Chrome, Safari, Opera */
+  transform: rotate(0deg); }
+  /* line 302, ../../scss/includes/dialogs.scss */
+  #minus #circle {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 15px solid #444;
+    border-radius: 15px;
+    left: 0;
+    top: 0;
+    display: none; }
+  /* line 313, ../../scss/includes/dialogs.scss */
+  #minus #stem {
+    position: absolute;
+    width: 13px;
+    height: 3px;
+    background-color: #fff;
+    left: 9px;
+    top: 13px; }
+  /* line 322, ../../scss/includes/dialogs.scss */
+  #minus #kick {
+    display: none;
+    position: absolute;
+    width: 3px;
+    height: 12px;
+    background-color: #fff;
+    left: 3px;
+    top: 8px; }
+
+/*///////////////////////////*/
+/*///////// Admin ////////*/
+/*///////////////////////////*/
+/* line 5, ../../scss/includes/admin.scss */
+.adminListItem {
+  padding: .5em; }
+  /* line 7, ../../scss/includes/admin.scss */
+  .adminListItem label {
+    float: none;
+    display: inline-block;
+    min-width: 60px; }
+  /* line 13, ../../scss/includes/admin.scss */
+  .adminListItem .userImg {
+    display: inline-block;
+    vertical-align: top;
+    height: 90px;
+    width: 90px;
+    border-radius: 45px;
+    overflow: hidden; }
+    /* line 14, ../../scss/includes/admin.scss */
+    .adminListItem .userImg img {
+      max-height: 90px; }
+  /* line 18, ../../scss/includes/admin.scss */
+  .adminListItem .noUserImg {
+    display: inline-block;
+    vertical-align: top;
+    height: 90px;
+    width: 90px;
+    border-radius: 45px;
+    overflow: hidden;
+    background: #ccc; }
+    /* line 21, ../../scss/includes/admin.scss */
+    .adminListItem .noUserImg img {
+      display: none; }
+  /* line 23, ../../scss/includes/admin.scss */
+  .adminListItem .userContent {
+    display: inline-block;
+    vertical-align: top;
+    padding-left: 1em;
+    min-width: 200px; }
+  /* line 24, ../../scss/includes/admin.scss */
+  .adminListItem .userBadges {
+    display: inline-block;
+    vertical-align: top;
+    padding-left: 1em; }
+    /* line 25, ../../scss/includes/admin.scss */
+    .adminListItem .userBadges .aBadge {
+      width: 50px;
+      height: 60px;
+      display: inline-block; }
+      /* line 29, ../../scss/includes/admin.scss */
+      .adminListItem .userBadges .aBadge .badgeImg {
+        width: 50px;
+        height: 50px; }
+      /* line 33, ../../scss/includes/admin.scss */
+      .adminListItem .userBadges .aBadge .badgeText {
+        display: none; }
+  /* line 38, ../../scss/includes/admin.scss */
+  .adminListItem .userAdmin {
+    display: inline-block;
+    vertical-align: top;
+    padding-left: 1em; }
+
+/* line 5, ../../scss/includes/signup.scss */
+.userForm {
+  width: 600px;
+  background: #eee;
+  margin: 0 auto; }
+  /* line 11, ../../scss/includes/signup.scss */
+  .userForm fieldset {
+    border: 0px solid #fff; }
+    /* line 14, ../../scss/includes/signup.scss */
+    .userForm fieldset .formField {
+      background: transparent; }
+  /* line 19, ../../scss/includes/signup.scss */
+  .userForm .loginHead {
+    font-size: 1.5em;
+    line-height: 50px;
+    background: rgba(0, 0, 0, 0.05);
+    padding: 10px; }
+  /* line 29, ../../scss/includes/signup.scss */
+  .userForm.loginFacebook {
+    background: #3391f6;
+    color: #fff;
+    margin-bottom: 8px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3); }
+  /* line 36, ../../scss/includes/signup.scss */
+  .userForm.loginGoogle {
+    background: #F6C733;
+    color: #fff;
+    margin-bottom: 8px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3); }
+
+/* line 5, ../../scss/includes/mapbox.scss */
+.mapFeature {
+  height: 450px;
+  width: 100%;
+  display: block; }
+
+/* line 16, ../../scss/includes/mapbox.scss */
+.leaflet-popup-content-wrapper {
+  padding-right: 20px !important; }
+
+/* line 19, ../../scss/includes/mapbox.scss */
+.leaflet-container h3 {
+  margin: 0 !important; }
+
+/* line 22, ../../scss/includes/mapbox.scss */
+.leaflet-popup-content {
+  padding: 10px 20px 15px 10px;
+  margin: 0;
+  line-height: inherit;
+  min-width: 100px; }
+  /* line 27, ../../scss/includes/mapbox.scss */
+  .leaflet-popup-content h3 {
+    margin: 0;
+    font-size: 1.3em; }
+    /* line 30, ../../scss/includes/mapbox.scss */
+    .leaflet-popup-content h3 a {
+      font-size: 1.3em;
+      color: #2a2a2a; }
+  /* line 36, ../../scss/includes/mapbox.scss */
+  .leaflet-popup-content p.subTitle {
+    margin: .25em 0;
+    font-style: italic;
+    color: #bbb;
+    white-space: nowrap; }
+    /* line 41, ../../scss/includes/mapbox.scss */
+    .leaflet-popup-content p.subTitle a {
+      color: #2a2a2a; }

@@ -1,0 +1,223 @@
+	<div class="fullWidth homeFeat">
+		<div class="theContainerHead">
+		<h2 class="homeTitle">
+			<span class="titleHalf">Edit Book</span>
+		</h2>
+		<a class="btn" href="/#/book/{{book.$id}}" style="position: absolute; right: 10px;">back</a>
+		</div>
+	</div>
+<div class="theContainer pageEdit">
+<div class=" contentWrap" >
+	<div class="titleBlock group">
+		<div class="coverImg"><img class="featImg" ng-if="book.coverurl" src="{{book.coverurl}}"/></div>
+		<h2 class="bookTitle">{{ book.title }}</h2>
+		<h5 class="bookSubtitle">by {{  book.author }}</h5>
+	</div>
+
+ 
+<div class="theContent columnWrap" >
+		<div class="columnLeft column">		
+			<h2>Current</h2>
+	 <form ng-submit="book.$save()">
+		     <div class="formField group">
+		     	 <label>Title:</label>
+			 	 <input type="text" ng-model="book.title" class="inputStd" />
+		      </div>
+	 	     <div class="formField group">
+		      <label>Author:</label> 
+		      <input type="text" ng-model="book.author" class="inputStd" />
+			  </div>
+		     <div class="formField group">
+		      <label>Cover Url:</label> 
+		      <input type="text" ng-model="book.coverurl"  class="inputStd" />
+			  </div>
+
+		     <div class="formField group">
+		      <label>Description:</label> 
+		      <textarea  type="text" ng-model="book.description"  class="inputLarge" /></textarea>
+			  </div>
+
+		     <div class="formField group">
+		      <label>Isbn</label> 
+		      <input type="text" ng-model="book.isbn" class="inputSmall"  />
+			  </div>	      
+		     <div class="formField group">
+		      <label>Isbn13:</label> 
+		      <input type="text" ng-model="book.isbn13" class="inputSmall"  />
+			  </div>	      
+
+
+		     <div class="formField group">
+		      <label>Timestamp:</label> 
+		      <input type="text" ng-model="book.timestamp"  />
+			  </div>
+
+		     <div class="formField group">
+		      <label>Datasource:</label> 
+		      <input type="text" ng-model="book.infosource" class="inputStd"  />
+			  </div>	      
+
+			  
+		     <div class="formField group">
+		      <label>Goodreads Id:</label> 
+		      <input type="text" ng-model="book.gr_id" class="inputSmall"  />
+			  </div>	      
+			  
+			 <div class="formField group">
+		      <label>Amazon Id:</label> 
+		      <input type="text" ng-model="book.amazon_id" class="inputSmall"  />
+			  </div>	      
+
+			 <div class="formField group">
+		      <label>Apple Id:</label> 
+		      <input type="text" ng-model="book.apple_id" class="inputSmall"  />
+			  </div>	      			  
+			 
+			 <div class="formField group">
+		      <label>Location Image:</label> 
+		      <input type="text" ng-model="book.locationimg"  class="inputStd" />
+			  </div>
+		   
+	      <button type="submit">Save Changes</button>
+	      </form>
+	</div>
+		<div class="columnRight column">		
+		  <h2>Location</h2>
+
+ 			  <h3>Places</h3>
+ 			  <div ng-repeat="place in book.places" class="placeList listWide" >
+ 			  		<div class="group aPlace">
+ 			  			<div class="placeThumb mapThumb" style="background-image: url(http://api.tiles.mapbox.com/v3/thirdman.j1o1gjim/{{place.lng}},{{place.lat}},4/90x90.png)"></div>
+
+	 			  <div class="placeContent">
+	 			  <div ng-if="place.name" class="placeTitle">
+		 			  	<a ng-href="#/place/{{place.geonameId}}">{{place.name}}<span ng-if="(place.name != place.toponymName) &&( place.name != place.countryName)"> ({{place.toponymName}})</span></a>
+		 			  </div>
+		 			  <span ng-if="place.adminName1" class="subTitle">{{place.adminName1}}</span>
+		 			  <span class="subTitle" ng-if="(place.adminName1) && (place.name != place.countryName)">, </span>
+		 			  <span class="subTitle" ng-if="place.name != place.countryName"><a ng-href="#/place/{{place.countryId}}">{{place.countryName}}</a></span>
+	 			  </div><!-- ends place content -->
+	 			  <button ng-click="removePlace(place)" class="btnDelete ngdialog-button ngdialog-button-primary">Remove</button>
+ 				 	 </div>
+				</div>
+				<h4>Add a place to this book:</h4>
+
+
+				<div class="searchWrap">
+			<angucomplete-alt id="placesearch2"
+              placeholder="Search Places..."
+              pause="300"
+              selected-object="autoObject"
+              remote-url="http://api.geonames.org/searchJSON?maxRows=6&username=thirdman&q="
+              remote-url-data-field="geonames"
+              title-field="name,countryName"
+              description-field="fclName"
+              
+               input-class="form-control form-control-small"/>
+               </angucomplete-alt>
+<!--               image-field="profilePic" -->              
+ 
+ 			  </div><!-- ends place search -->
+
+  	      
+  			  	<h2>{{$scope.selectedObject}}</h2>
+ 			  <div ng-model="selectedObject"></div>
+
+
+
+ 			  <h3>Tags</h3>
+			  <div ng-repeat="tag in book.tags" class="aTag" >
+ 			  		<div class="formField group">
+	 			  		<label >{{tag}}</label>
+ 				 	 </div>
+				</div>
+
+
+  			  	 <!--    $http.jsonp("http://api.geonames.org/searchJSON?callback=JSON_CALLBACK&q="+cityName+"&maxRows=6").success(function(data){ -->
+<!--               url="http://api.geonames.org/searchJSON?callback=JSON_CALLBACK&maxRows=6&username=thirdman&q=" -->
+
+
+<!--
+ <div ng-model="newSetting"></div>
+<div ng-bind="newSetting.name"></div>
+<div ng-bind="newSetting.adminName1"></div>
+<div ng-bind="newSetting.countryCode"></div>
+<div ng-bind="newSetting.countryName"></div>
+<div ng-bind="newSetting.fcl"></div>
+<div ng-bind="newSetting.fclName"></div>
+<div ng-bind="newSetting.fcode"></div>
+<div ng-bind="newSetting.fcodeName"></div>
+<div ng-bind="newSetting.geonameId"></div>
+<div ng-bind="newSetting.lat"></div>
+ <div ng-bind="newSetting.lng"></div>
+<div ng-bind="newSetting.name"></div>
+<div ng-bind="newSetting.toponymName"></div>
+<div ng-bind="newSetting.title"></div>
+
+adminCode1: "01"
+adminName1: "An Giang"
+countryCode: "VN"
+countryId: "1562822"
+countryName: "Vietnam"
+fcl: "H"
+fclName: "stream, lake, ..."
+fcode: "LK"
+fcodeName: "lake"
+geonameId: 1587761
+lat: "10.91667"
+lng: "105.06667"
+name: "B?ng B“nh Thin L?n"
+population: 0
+toponymName: "B?ng B“nh Thin L?n"
+__proto__: Object
+title: "B?ng B“nh Thin L?n B?ng B“nh Thin L?n Vietnam"
+ 
+-->
+
+ 			  
+  			  
+ 			  
+ 
+ 			  {{selectedObject | json}}
+ 
+  
+ 
+		  <h2>Excerpts</h2>
+		 <form ng-submit="excerptadd()">
+  			  <div class="formField group">
+		      <label>Excerpt:</label> 
+			      <textarea  type="text" ng-model="book.excerpt"  class="inputLarge"  /></textarea>
+			  </div>	      
+  	      </form>
+ 		  
+
+		  <h2>Images</h2>
+		 <form ng-submit="imageadd()">
+  			  <div class="formField group">
+		      <label>image:</label> 
+			      <textarea  type="text" ng-model="book.locationimg"  class="inputLarge"  /></textarea>
+			  </div>	      
+  	      </form>
+ 		  
+
+  		<div class="dataSection additonalComment">
+   		<h3>Additional Comment</h3>
+   		<p>An optional personal comment about this book. (Note: this will be displayed publicly)
+		 <form >
+  			  <div class="formField group">
+			      <textarea  type="text"  ng-model="book.userComment" placeholder="Text"  class="inputLarge"  /></textarea>
+			  </div>	      
+  	      </form>
+  		  </div><!-- ends dataSection.additionalComment -->
+
+
+		  </div>
+		  </div><!-- the content -->
+		 
+ 
+
+</div>
+<button ng-click="removePriority()"/>remove priority (null)</button>
+<button ng-click="setPriority()"/>set priority (1000)</button>
+
+</div>

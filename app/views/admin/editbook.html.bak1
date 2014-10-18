@@ -1,0 +1,189 @@
+	<div class="fullWidth homeFeat">
+		<div class="theContainer">
+		<h2 class="homeTitle">
+			<span class="titleHalf">Edit Book</span>
+		</h2>
+		</div>
+	</div>
+<div class="theContainer pageEdit">
+<div class=" contentWrap" >
+	<div class="titleBlock group">
+		<div class="coverImg"><img class="featImg" ng-if="book.coverurl" src="{{book.coverurl}}"/></div>
+		<h2 class="bookTitle">{{ book.title }}</h2>
+		<h5 class="bookSubtitle">by {{  book.author }}</h5>
+	</div>
+
+ 
+<div class="theContent columnWrap" >
+		<div class="columnLeft column">		
+			<h2>Current</h2>
+	 <form ng-submit="book.$save()">
+		     <div class="formField group">
+		     	 <label>Title:</label>
+			 	 <input type="text" ng-model="book.title" class="inputStd" />
+		      </div>
+	 	     <div class="formField group">
+		      <label>Author:</label> 
+		      <input type="text" ng-model="book.author" class="inputStd" />
+			  </div>
+		     <div class="formField group">
+		      <label>Cover Url:</label> 
+		      <input type="text" ng-model="book.coverurl"  class="inputStd" />
+			  </div>
+
+		     <div class="formField group">
+		      <label>Description:</label> 
+		      <textarea  type="text" ng-model="book.description"  class="inputLarge" /></textarea>
+			  </div>
+
+		     <div class="formField group">
+		      <label>Isbn</label> 
+		      <input type="text" ng-model="book.isbn" class="inputSmall"  />
+			  </div>	      
+		     <div class="formField group">
+		      <label>Isbn13:</label> 
+		      <input type="text" ng-model="book.isbn13" class="inputSmall"  />
+			  </div>	      
+
+
+		     <div class="formField group">
+		      <label>Timestamp:</label> 
+		      <input type="text" ng-model="book.timestamp"  />
+			  </div>
+
+		     <div class="formField group">
+		      <label>Datasource:</label> 
+		      <input type="text" ng-model="book.infosource" class="inputStd"  />
+			  </div>	      
+
+			  
+		     <div class="formField group">
+		      <label>Goodreads Id:</label> 
+		      <input type="text" ng-model="book.gr_id" class="inputSmall"  />
+			  </div>	      
+			  
+			 <div class="formField group">
+		      <label>Amazon Id:</label> 
+		      <input type="text" ng-model="book.amazon_id" class="inputSmall"  />
+			  </div>	      
+
+			 <div class="formField group">
+		      <label>Apple Id:</label> 
+		      <input type="text" ng-model="book.apple_id" class="inputSmall"  />
+			  </div>	      			  
+			 
+			 <div class="formField group">
+		      <label>Location Image:</label> 
+		      <input type="text" ng-model="book.locationimg"  class="inputStd" />
+			  </div>
+		   
+	      <button type="submit">Save Changes</button>
+	      </form>
+	</div>
+		<div class="columnRight column">		
+		  <h2>Location</h2>
+		 <form ng-submit="additionalsubmit()">
+ 			  <h3>Tags</h3>
+ 			  <div ng-repeat="tag in book.tags" class="aTag" >
+ 			  		<div class="formField group">
+	 			  		<label >{{tag}}</label>
+<!-- 	 			  		<input type="text" ng-model="tag" class="inputSmall"  /> -->
+				  </div>
+				</div>
+
+  			  	 <!--    $http.jsonp("http://api.geonames.org/searchJSON?callback=JSON_CALLBACK&q="+cityName+"&maxRows=6").success(function(data){ -->
+<!--               url="http://api.geonames.org/searchJSON?callback=JSON_CALLBACK&maxRows=6&username=thirdman&q=" -->
+
+<h4>geonames</h4>
+
+<div>{{autoResult.title}}</div>
+<div ng-bind="autoResult.originalObject.name"></div>
+
+ 
+<angucomplete-alt id="placesearch2"
+              placeholder="Search places"
+              pause="100"
+              selected-object="autoObject"
+              remote-url="http://api.geonames.org/searchJSON?maxRows=6&username=thirdman&q="
+              remote-url-data-field="geonames"
+              title-field="name,name,countryName"
+              description-field="countryName adminName1 fclName"
+               input-class="form-control form-control-small"/></angucomplete-alt>
+<!--               image-field="profilePic" -->              
+ 			  <span ng-bind="autoResult" bold-span ng-binding>text heere</span>
+
+<h4>flickr</h4>              
+              <angucomplete-alt id="placesearch3"
+              placeholder="Search places"
+              pause="100"
+              selected-object="flickrResult"
+              remote-url="https://api.flickr.com/services/rest/?method=flickr.places.find&api_key=f33601a59d5cc2e162113d896f47474e&format=json&nojsoncallback=1&auth_token=&api_sig=&query="
+              remote-url-data-field="places.place"
+              title-field="woe_name"
+              description-field="_content"
+			  selected-object="placeoptions"
+              input-class="form-control form-control-small"/></angucomplete-alt>
+
+			  <span ng-bind="flickrResult" bold-span ng-binding></span>
+
+			  
+
+
+ 			  <div class="formField group">
+		      <label>Tag:</label> 
+			      <input type="text" ng-model="book.tag.id" class="inputSmall"  />
+			      <input type="text" ng-model="book.tag.displayName" class="inputSmall"  />
+			      <input type="text" ng-model="book.tag.geonameId" class="inputSmall"  />
+			      <input type="text" ng-model="book.tag.gps.lat" class="inputSmall"  />
+			      <input type="text" ng-model="book.tag.gps.lng" class="inputSmall"  />
+			      <input type="text" ng-model="book.tag.countryCode" class="inputSmall"  />
+			  </div>	      
+			  
+			  
+ 	      </form>
+ 	      
+	 	      <div>{{placeoptions}}</div>
+	 	      <div ng-bind="autoResult"></div>
+ 			  	<h2>{{autoResult.name}}</h2>
+ 			  <div ng-model="autoResult">
+ 			  	</div>
+ 			  
+ 			  	  {{autoResult}}
+ 			  
+ 			  
+ 
+ 			  {{flickrResult | json}}
+ 
+ 			  <div ng-repeat="place in flickrResult" class="aTag" >
+ 			  	<span>{{place.title}}</span>
+ 			  	{{place |json}}
+ 			  </div>
+ 
+ 
+		  <h2>Excerpts</h2>
+		 <form ng-submit="excerptadd()">
+  			  <div class="formField group">
+		      <label>Tag:</label> 
+			      <textarea  type="text" ng-model="book.excerpt"  class="inputLarge"  /></textarea>
+			  </div>	      
+  	      </form>
+ 		  
+
+		  <h2>Images</h2>
+		 <form ng-submit="imageadd()">
+  			  <div class="formField group">
+		      <label>image:</label> 
+			      <textarea  type="text" ng-model="book.locationimg"  class="inputLarge"  /></textarea>
+			  </div>	      
+  	      </form>
+ 		  
+
+
+		  </div>
+		  </div><!-- the content -->
+		 
+ 
+
+</div>
+
+</div>

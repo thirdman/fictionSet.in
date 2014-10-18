@@ -1,0 +1,495 @@
+  "Places" : {
+    "Canada" : {
+      "displayName" : "Canada",
+      "gps" : {
+        "lat" : -34.34,
+        "lng" : 12.23
+      }
+    }
+  },
+
+
+  {
+    "Paris" : {
+      "displayName" : "Paris",
+		geonameId: 2988507,
+      "gps" : {
+		lng: "2.3488",
+		lat: "48.85341"
+		},
+		}
+		 
+  },
+    
+  {
+    "France" : {
+      "displayName" : "France",
+	  "geonameId": 3017382,
+      "gps" : {
+		"lng": "2",
+		lat: "46"
+      }
+    }
+  },
+    
+      {
+    "Japan" : {
+      "displayName" : "Japan",
+      "gps" : {
+        "lat" : -34.34,
+        "lng" : 12.23
+      }
+    }
+  },
+    
+      {
+    "India" : {
+      "displayName" : "India",
+      "gps" : {
+        "lat" : -34.34,
+        "lng" : 12.23
+      }
+    }
+  },
+      
+      {
+    "London" : {
+      "displayName" : "London",
+      "gps" : {
+        "lat" : -34.34,
+        "lng" : 12.23
+      }
+    }
+  },
+      
+            {
+    "England" : {
+      "displayName" : "England",
+      "gps" : {
+        "lat" : -34.34,
+        "lng" : 12.23
+      }
+    }
+  },
+      
+            {
+    "United Kingdom" : {
+      "displayName" : "United Kingdom",
+      "gps" : {
+        "lat" : -34.34,
+        "lng" : 12.23
+      }
+    }
+  },
+      
+            {
+    "United States" : {
+      "displayName" : "United States",
+      "gps" : {
+        "lat" : -34.34,
+        "lng" : 12.23
+      }
+    }
+  },
+        
+  
+              {
+    "South Carolina" : {
+      "displayName" : "South Carolina",
+      "gps" : {
+        "lat" : -34.34,
+        "lng" : 12.23
+      }
+    }
+  },
+      
+                  {
+    "Guernsey" : {
+      "displayName" : "Guernsey",
+      "gps" : {
+        "lat" : -34.34,
+        "lng" : 12.23
+      }
+    }
+  },
+      
+                  {
+    "England" : {
+      "displayName" : "England",
+      "gps" : {
+        "lat" : -34.34,
+        "lng" : 12.23
+      }
+    }
+  },
+      
+                  {
+    "South Africa" : {
+      "displayName" : "South Africa",
+      "gps" : {
+        "lat" : -34.34,
+        "lng" : 12.23
+      }
+    }
+  },
+      
+                  {
+    "Spain" : {
+      "displayName" : "Spain",
+      "gps" : {
+        "lat" : -34.34,
+        "lng" : 12.23
+      }
+    }
+  },
+      
+{
+    "Barcelona" : {
+      "displayName" : "Barcelona",
+      "gps" : {
+        "lat" : -34.34,
+        "lng" : 12.23
+      }
+    }
+  },
+
+{
+    "Afghanistan" : {
+      "displayName" : "Afghanistan",
+      "gps" : {
+        "lat" : -34.34,
+        "lng" : 12.23
+      }
+    }
+  },
+
+{
+    "Kabul" : {
+      "displayName" : "Kabul",
+      "gps" : {
+        "lat" : -34.34,
+        "lng" : 12.23
+      }
+    }
+  },
+
+{
+    "Herat" : {
+      "displayName" : "Herat",
+      "gps" : {
+        "lat" : -34.34,
+        "lng" : 12.23
+      }
+    }
+  },
+
+{
+    "Terrell County" : {
+      "displayName" : "Terrell County",
+      "gps" : {
+        "lat" : -34.34,
+        "lng" : 12.23
+      }
+    }
+  },
+
+{
+    "Texas" : {
+      "displayName" : "Texas",
+      "gps" : {
+        "lat" : -34.34,
+        "lng" : 12.23
+      }
+    }
+  },
+
+{
+    "Tuscany" : {
+      "displayName" : "Tuscany",
+      "gps" : {
+        "lat" : -34.34,
+        "lng" : 12.23
+      }
+    }
+  },
+      
+
+
+{
+    "Italy" : {
+      "displayName" : "Italy",
+      "gps" : {
+        "lat" : -34.34,
+        "lng" : 12.23
+      }
+    }
+  },
+      
+      
+{
+    "Kyoto" : {
+      "displayName" : "Kyoto",
+      "gps" : {
+        "lat" : -34.34,
+        "lng" : 12.23
+      }
+    }
+  },
+      
+      
+{
+    "Amsterdam" : {
+      "displayName" : "Amsterdam",
+      "gps" : {
+        "lat" : -34.34,
+        "lng" : 12.23
+      }
+    }
+  },
+      
+      
+{
+    "Netherlands" : {
+      "displayName" : "Netherlands",
+      "gps" : {
+        "lat" : -34.34,
+        "lng" : 12.23
+      }
+    }
+  },
+      
+      
+{
+    "New York" : {
+      "displayName" : "New York",
+      "gps" : {
+        "lat" : -34.34,
+        "lng" : 12.23
+      }
+    }
+  },
+      
+      
+{
+    "Las Vegas" : {
+      "displayName" : "Las Vegas",
+      "gps" : {
+        "lat" : -34.34,
+        "lng" : 12.23
+      }
+    }
+  },
+      
+      
+{
+    "Nevada" : {
+      "displayName" : "Nevada",
+      "gps" : {
+        "lat" : -34.34,
+        "lng" : 12.23
+      }
+    }
+  },
+        
+
+{
+    "Pamplona" : {
+      "displayName" : "Pamplona",
+      "gps" : {
+        "lat" : -34.34,
+        "lng" : 12.23
+      }
+    }
+  },
+        
+        {
+    "Jamaica" : {
+      "displayName" : "Jamaica",
+      "gps" : {
+        "lat" : -34.34,
+        "lng" : 12.23
+      }
+    }
+  },
+        
+        {
+    "San Sebastian" : {
+      "displayName" : "San Sebastian",
+      "gps" : {
+        "lat" : -34.34,
+        "lng" : 12.23
+      }
+    }
+  },
+        
+        {
+    "Provence" : {
+      "displayName" : "Provence",
+      "gps" : {
+        "lat" : -34.34,
+        "lng" : 12.23
+      }
+    }
+  },
+          
+{
+    "Thailand" : {
+      "displayName" : "Thailand",
+      "gps" : {
+        "lat" : -34.34,
+        "lng" : 12.23
+      }
+    }
+  },
+        
+        {
+    "Thailand" : {
+      "displayName" : "Thailand",
+      "gps" : {
+        "lat" : -34.34,
+        "lng" : 12.23
+      }
+    }
+  },
+        
+        {
+    "Kingston" : {
+      "displayName" : "Kingston",
+      "gps" : {
+        "lat" : -34.34,
+        "lng" : 12.23
+      }
+    }
+  },
+        
+        {
+    "Honduras" : {
+      "displayName" : "Honduras",
+      "gps" : {
+        "lat" : -34.34,
+        "lng" : 12.23
+      }
+    }
+  },
+        
+        {
+    "Berlin" : {
+      "displayName" : "Berlin",
+      "gps" : {
+        "lat" : -34.34,
+        "lng" : 12.23
+      }
+    }
+  },
+        
+        {
+    "New Zealand" : {
+      "displayName" : "New Zealand",
+      "gps" : {
+        "lat" : -34.34,
+        "lng" : 12.23
+      }
+    }
+  },
+       
+               {
+    "West Coast" : {
+      "displayName" : "West Coast",
+      "gps" : {
+        "lat" : -34.34,
+        "lng" : 12.23
+      }
+    }
+  },
+       
+               {
+    "Czech Republic" : {
+      "displayName" : "Czech Republic",
+      "gps" : {
+        "lat" : -34.34,
+        "lng" : 12.23
+      }
+    }
+  },
+       
+               {
+    "Prague" : {
+      "displayName" : "Prague",
+      "gps" : {
+        "lat" : -34.34,
+        "lng" : 12.23
+      }
+    }
+  },
+       
+               {
+    "Hokitika" : {
+      "displayName" : "Hokitika",
+      "gps" : {
+        "lat" : -34.34,
+        "lng" : 12.23
+      }
+    }
+  },
+                                                        
+        {
+    "Dunedin" : {
+      "displayName" : "Dunedin",
+      "gps" : {
+        "lat" : -34.34,
+        "lng" : 12.23
+      }
+    }
+  },
+       
+               {
+    "Crete" : {
+      "displayName" : "Crete",
+      "gps" : {
+        "lat" : -34.34,
+        "lng" : 12.23
+      }
+    }
+  },
+       
+               {
+    "Moosonee" : {
+      "displayName" : "Moosonee",
+      "gps" : {
+        "lat" : -34.34,
+        "lng" : 12.23
+      }
+    }
+  },
+       
+               {
+    "Moose Factory" : {
+      "displayName" : "Moose Factory",
+      "gps" : {
+        "lat" : -34.34,
+        "lng" : 12.23
+      }
+    }
+  },
+       
+       
+               {
+    "Ontario" : {
+      "displayName" : "Ontario",
+      "gps" : {
+        "lat" : -34.34,
+        "lng" : 12.23
+      }
+    }
+  },
+
+       
+               {
+    "Rome" : {
+      "displayName" : "Rome",
+      "gps" : {
+        "lat" : -34.34,
+        "lng" : 12.23
+      }
+    }
+  },       

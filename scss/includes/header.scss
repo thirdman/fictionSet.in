@@ -1,0 +1,147 @@
+   #header{
+	   padding: 1em ;
+	   background: $fsBlack;
+	   background: #fafafa;
+	   background: #f4f4f4;
+	   box-shadow: 0px 1px 0px rgba(0,0,0,0.1);
+	   
+ 	   width: 100%;
+ 	    	@media only screen and (min-width: 980px) { 
+ 	    	padding: 1em;
+ 	    	} 
+
+
+ 	   a, .navicon-button{
+	 	//   display: inline-block; 
+	 	   vertical-align: middle;
+	 	  // color: #ccc;
+	 	  color: #666;
+	 	   text-decoration: none;
+	 	   font-weight: 300; 
+	 	   &:hover{
+		 	   color: #fff;
+		 	   color: $fsBlack;
+	 	   }
+	 	}
+
+	 	.menu{
+		 	display: inline-block;
+		 	vertical-align: middle;
+		 	margin: 0;
+		 	
+		 	&.user{
+			 	float: right;
+		 	}
+	 	}
+	 	.logo{
+		 		height: 26px; width: auto; 
+		 		display:inline-block;
+		 		position: relative;
+		 		top: 8px;
+		 		margin-right: 5px;
+		 		-webkit-transition: all .5s ease;
+			    transition: all .5s ease;
+			    -webkit-transform-style: preserve-3d;
+			    transform-style: preserve-3d;
+		 	&:hover{
+						transform: rotateY(180deg); 	
+		 	}
+	 	}
+	 	
+///// LOGO AND SUCH
+.logoWrap{
+    width: 230px;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin-left: -100px;
+    height: 60px;
+	line-height: 60px;
+    text-align: center;
+ 	.headerLogo{
+		display: inline-block;
+		vertical-align: middle;
+		margin-right: 8px;
+		position: relative;		
+		//background: url(/imgs/brand/logo_line.svg) 0px 18px no-repeat;
+		//background-size: auto 26px;
+		//padding-left: 26px;
+		.alphaTag{
+			position: absolute;
+			left: 0;
+			top: 1em;
+			color: #999;
+			font-size: 10px;
+			font-style: italic;
+			display: none;
+		}
+	
+		&:hover{
+			//transform: rotateY(180deg);
+			//backface-visibility: hidden;
+		}
+	}
+	form#headerSearch{
+		display: inline-block;
+		display: none;
+		input.search-text {
+			width: 90px;
+			padding: 5px 5px 5px 25px;
+			font-family: Helvetica, Arial, sans-serif;
+			font-size: 12px;
+			vertical-align: middle;
+			color: #bbb;
+			border: none;
+			background-color: #fff;
+			//background-color: #eee;
+			background-repeat: no-repeat;
+			background-position: 7px 50%;
+			background-image: url(/imgs/icon_search.png);
+			-webkit-border-radius: 4px;
+			-moz-border-radius: 4px;
+			border-radius: 4px;
+			outline: none;
+			box-shadow: 0px 0px 2px rgba(0,0,0,.4) inset;
+ 			}
+		}
+}
+
+input.search-text::-webkit-input-placeholder {color: #ccc;}
+input.search-text:-moz-placeholder {    color: #ccc;        }
+input.search-text::-moz-placeholder {    color: #ccc;      }
+input.search-text:-ms-input-placeholder {     color: #ccc;       }
+
+
+
+// SUPPORTING INFO
+// Black circle containing the number of books. Potentially delete
+
+.supportingInfo{
+	   position: fixed; 
+	   right: 20px;
+	   top: 20px;
+	   text-align: center;
+	   background: #000;
+	   width: 5em;
+	   height: 5em;
+	   border-radius: 50%; 
+	   padding-top: .5em;
+	   z-index: 20;
+   }
+    .supportingInfo .smallType{
+	   font-size: .85em;
+	   display: block;
+	   color: #fff;
+    }
+   .supportingInfo .largeType{
+	   font-size: 3em;
+	   display: block;
+	   line-height: .9em;
+	   color: #fff;
+	      }
+//ends supporting info
+   }
+   //ends header
+   
+

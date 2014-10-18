@@ -1,0 +1,50 @@
+	<div class="fullWidth homeFeat">
+		<div class="theContainerHead">
+		<h2 class="homeTitle">
+			<span class="titleHalf">Add Book</span>
+		</h2>
+		</div>
+	</div>
+<div class="theContainer pageEdit">
+<div class="contentWrap" >
+ 
+ 
+<div class="theContent columnWrap" >
+	<div class="columnLeft column">	
+	<p>Note: Adding books is a bit hit and miss at the moment. You *should* be able to do it, but if you have problems email me and let me know what you were trying to do. <br>- Gareth</p>	
+	</div>
+	
+	<div class="columnRight column">		
+		  <h3>Search for a book to add</h3>
+  				<h4>Search by Name / Author / Isbn:</h4>
+		 <div class="searchWrap">
+		 	<form ng-submit="searchBooks()">
+		 <input ng-model="searchString" class="form-control form-control-small" placeholder="Search for a book"><button type="submit" class="btn" ng-click="searchBooks()">Search</button>
+		 </form>
+		 </div>
+		 <div ng-show="isLooking" class="loading"><img src="/imgs/brand/logo_line.svg" style="" class="logo"> Searching...</div>
+ 
+ 
+		 <div ng-repeat="book in dataSearch" ng-show="hasData"  style="width: 100%;  padding: 1em; background: #f5f5f5; border-radius: 4px; margin: 1em 0;">
+			<div class="bookRpt group" style="  border-bottom: 1px solid #eee; margin-bottom:4px;">
+				<div style="min-width: 100px;float: left; margin-right: 10px; width: 14%;vertical-align: top;">
+					<img src = "{{book.SmallImage.URL}}" style="width: 75px;">
+				</div>
+				<div style="display:inline-block; width: 65%; vertical-align: top;">
+					<h3 style="margin: 4px 0;">{{book.ItemAttributes.Title}}</h3>
+					<h5 class="bookSubtitle">by {{book.ItemAttributes.Author}}</h5>
+				</div>
+				<div style="display: inline-block; width: 15%; vertical-align: middle;">
+		  			<a href="/#/addbook/{{book.ASIN.0}}" class="btn">Select</a>
+				</div>
+			</div>
+		</div>
+
+	</div><!-- columnright -->
+</div><!-- the content -->
+		 
+ 
+
+</div>
+
+</div>

@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <title>FictionSet.In</title>
+  <link rel="stylesheet" href="css/css.css"/>
+  <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
+ <link href="https://fontastic.s3.amazonaws.com/rBAnPva87Pe7293pcrcjdC/icons.css" rel="stylesheet">
+	
+
+<!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.17/angular.min.js"></script> -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.js"></script>
+    <script src="https://cdn.firebase.com/js/client/1.0.18/firebase.js"></script>
+	<script src="https://cdn.firebase.com/js/simple-login/1.6.2/firebase-simple-login.js"></script>
+<!--<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-route.js"></script> -->
+	 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
+     <script src="https://cdn.firebase.com/libs/angularfire/0.8.0/angularfire.min.js"></script>
+     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular-resource.min.js"></script>
+     <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>     
+    <script src="//api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.js"></script>
+    <script src="vendor/angular-mapbox.min.js"></script>
+
+    <script src="vendor/angular-underscore.min.js"></script>
+    <script src="vendor/jsonpath.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.underscore.min.js"></script>
+    <script src="vendor/ng-lodash.min.js"></script>
+    <script src="vendor/angucomplete-alt.js"></script>
+    <script src="vendor/ngDialog.min.js"></script>
+
+	
+	<link rel="stylesheet" href="vendor/angucomplete-alt.css"/>
+	<link rel="stylesheet" href="vendor/mapbox.css"/>
+	<link rel="stylesheet" href="vendor/css/ngDialog.min.css"/>	
+	<link rel="stylesheet" href="vendor/css/ngDialog-theme-default.min.css"/>
+  
+	
+
+    <script src="js/app.js"></script>
+	<script src="js/directives.js"></script>
+ 
+
+  <meta name="viewport" content="initial-scale=1.0">
+  <base href="/">
+
+ </head>
+<!-- <body ng-cloak> -->
+   <body ng-controller="AuthCtrl">
+
+<div id="header" class="header" style="display: inline-block;">
+     <div class="navicon-button x" snap-toggle>
+	  <ul class="menu">
+	    <li><a href="#/home">Books</a></li>
+	    <li><a href="#/places">Places</a></li>
+	    <li><a href="#/near">Near You</a></li>
+	    <li><a href="#/about">About</a></li>
+	  </ul>
+	  <ul class="menu user">
+	    <li ng-hide="auth.user"><a href="#/login">login</a></li>
+	    <li ng-show="auth.user"><a href="#/addbook">Submit a Book</a> | <a href="#/profile">{{auth.user.displayName ? auth.user.displayName : 'Account'}}</a></li>
+ <!--
+ 	    <li ng-show ="['logout','error']"><a href="#/login">login</a></li>
+	    <li ng-show-auth="'login'"><a href="#/account">{{auth.user.displayName}}</a></li>
+-->
+ 	  </ul>
+ 	  
+ 	  <div class="logoWrap">
+		  	<img src="/imgs/brand/logo_line.svg" style="" class="logo">
+ 	    	<a href="#" class="headerLogo" ><span class="headerName">Fictionset.in</span><span class="alphaTag">alpha</span></a>
+	 		<form id="headerSearch">
+		 			<input class="search-text placeholder" type="text" name="q" placeholder="Search " delayed-model="searchBar.places" data-delay="50" value="">
+		 	</form>
+		</div>
+
+    </div>
+</div>    
+ 	
+ 	
+
+  	  <div class="view-animate-container " ng-view>
+<!--
+ 		  <div id="content" snap-content ng-view anim-class  class="view" snap-options="snapOpts" >
+ 
+
+		  </div>
+-->
+	</div>
+ </body>
+</html>
+
+

@@ -1,0 +1,68 @@
+	<div class="fullWidth homeFeat">
+		<div class="theContainerHead titleSection">
+		<h2 class="homeTitle">
+			<span class="titleHalf">Fiction set in</span><span class="titleHalf"><input class="largesearch" delayed-model="searchBar.places" data-delay="50" placeholder="any location"></span>
+		</h2>
+				<div class="supportingInfo" ng-show="hasData" >
+			 		<span class="largeType">{{(list|filter:searchBar).length}}</span>
+			 		<span class="smallType">
+					<span   ng-hide="(list|filter:searchBar).length == list.length">of {{list.length}} </span>Books
+					</span>
+				</div>
+		</div>
+	</div>
+
+<div class="theContainer">
+<div class="homeBook booksWrap contentWrap" ><!--    ng-repeat="randombook in collection  |  limitTo: 100 | filter:searchBar | orderBy: '-timestamp' "   -->
+	<div class="loading" ng-hide="hasData"><img src="/imgs/brand/logo_line.svg" style="" class="logo"> loading...</div>
+	<ul class="bookList">
+		<li ng-repeat="item in list | orderBy: '-timestamp' |  limitTo: 100 | filter:searchBar  " class="listItem" >
+				        <div class="imgWrap">
+				    		<a ng-href="#/book/{{item.$id}}" class="front">
+				    			<img ng-src="{{item.coverurl}}" class="bookImg bookImgSmall" >
+				    		</a>
+<!-- 				    		<div class="back">{{ item.title  | cut:true:40:' ...' }}</div> -->
+						</div>
+						
+						<div class="theContent">
+		 					<h3 class="bookTitle"><a ng-href="#/book/{{item.$id}}">{{ item.title  | cut:true:50:' ...' }}</a></h3>
+		 					<!--<h5 class="bookSubtitle">by {{  item.author }}</h5> -->
+		 					<p ng-show="item.description" class="bookListDescription">{{  item.description |  to_plain  | cut:true:160:' ...' }}</p>
+ 				            <div class="bookInfo">
+								<div class="placeList">
+									<span ng-repeat="place in item.places" class="aTag"  >
+										<a ng-href="#/place/{{place.geonameId}}" ng-class="(place.name==place.countryName) ? 'countryName' : ''" class="placeName">{{place.name}}</a><span ng-if="place.name != place.countryName"> <a href="#/place/{{place.countryName}}" class="placeCountry"><span>{{place.countryCode}}<span></a></span>
+									</span>
+								</div>
+<!-- 								<p class="subTitle">{{ item.timestamp | date:'d MMM, y' }}</p> -->
+								<!--
+									<div class="tags">
+								Tags:
+									<span ng-repeat="tag in item.tags" class="aTag" >
+										<a ng-href="#/place/{{tag}}">{{tag}}</a>
+									</span>
+								</div>
+-->
+			 	            </div>
+			 	          </div>
+		</li>
+	</ul>
+
+
+
+   
+   
+   <span ng-show="hasData">
+	   <div ng-hide="(list|filter:searchBar).length" class="emptyContent"><p>No items found</p></div>
+   </span>
+	<div class="homeSection">
+ 	</div>
+</div><!-- ends homeBook -->
+
+</div> <!-- ends the containser -->
+
+<!-- <li ng-repeat="item in list">{{item|json}}</li> -->
+
+<!-- debug $asObject data -->
+<!-- {{rec|json}} -->
+

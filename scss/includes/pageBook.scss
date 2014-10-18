@@ -1,0 +1,410 @@
+/*///////////////////////////*/
+/*///////// Book Page ////////*/
+/*///////////////////////////*/
+
+	.bookDetail{
+		max-width: 66em;
+   		margin: 0 auto;
+
+	}
+	.theBookMapImg{
+		width: 100%;
+	}
+
+	.mapImg{
+		background-color: #eee;
+ 	   background: url()  center center / cover no-repeat; 
+ 	   overflow: hidden;
+ 	 //  padding-top: 400px;
+ 	// height: 400px;
+ 	 
+ 	   
+ 	   			@media only screen and (min-width: 0px) and (max-width: 887px) {
+//	 	   			padding-top: 140px;
+	//		height: 140px;
+			} 
+
+	}
+	
+	h2{}
+	.titleBlock{
+		width: 100%;
+		padding: 1em 0;
+		position: relative;
+
+		.pageEdit &{
+				.coverImg{
+				margin-top: .5em;
+				width: 50px;			
+				height: 200%;
+				box-shadow: none;
+					img{
+						box-shadow: none;
+					}
+				
+				}
+
+		}
+			
+
+		.coverImg{
+			display: inline-block; 
+			width: 150px;
+			float: left;
+			margin-right: 2em;
+			position: relative;
+			margin-top: -110px;
+/*
+			height: 226px;
+			overflow: hidden;
+*/
+			@media only screen and (min-width: 0px) and (max-width: 887px) {
+				width: 80px;
+				margin-right: 1em;
+				margin-top: -70px;
+			} 
+
+
+			
+			img{width: 100%;
+							box-shadow:1px 1px 3px rgba(0,0,0,.2);
+
+			}
+		}
+		h2{  }
+		h5{}
+	
+	}
+	
+	
+	.featBlock{
+		border-bottom: 1px solid $fsLineGrey;	
+		//border-top: 1px solid $fsLineGrey;	
+		padding: 1em 4%;
+		.excerpt{
+			font-size: 1.7em;
+			font-style: italic;
+		}
+		&.featInfo{
+			padding: 1em 0;
+		}
+	}
+	
+	
+	
+	.bookInfo{
+		.theContent{
+			//border-bottom: 1px dotted $fsBlack;
+ 			@media only screen and (min-width: 980px) { //and (max-width: 887px) 
+			//width: 70%;
+			//float: right
+			} 
+
+		}
+	   
+	   
+
+	}
+	
+	.tagWrap{
+		padding: 0 0 1em 0;
+		//border-bottom: 1px dotted $fsBlack;
+	}
+	
+	.sideBarItem{
+		padding: 0 0 1em 0;
+		width: 100%;
+		//border-bottom: 1px dotted $fsBlack;
+		display: block;
+		
+		.collectionWrap{
+			background: $fsLightGrey;
+			border-radius: 2px;
+			padding: .5em;
+		}			
+	} 
+
+.sectionAddedBy{
+			font-size: .75em;
+			@media only screen and (max-width: 979px) {
+				font-size: 1em;
+			} //ends max width
+
+	.addedBy{
+		&.user{
+			color: $fsGrey;
+		}
+	}
+	.userComment{
+		background: $fsLightGrey;
+		color: #999;
+		border-radius: 4px;
+		padding: 10px;
+		//font-size: .75em;
+		position: relative;
+		margin-top: 8px;
+		font-style: italic;
+		&:before{
+			width: 0;
+			height: 0;
+			border-style: solid;
+			border-width: 0 9px 10px 9px;
+			border-color: transparent transparent $fsLightGrey transparent;
+			position: relative;
+			left: 9px;
+			top: -10px;
+			content: "";
+			position: absolute;
+		}
+	}
+	
+}
+
+.sectionNotifications{
+	.notification{
+		border-bottom: 1px solid $fsLightGrey;
+		margin-bottom: 8px;
+		padding: 0 0 10px 0;
+		&:first-child{
+			border-top: 1px solid $fsLightGrey;
+			};
+	
+		&.msgSystem, &.msgUser, &.msgBook{
+			&:before{
+				background: $fsGrey;
+ 				height: 30px;
+				display: inline-block;
+				float: left;
+				color: $fsLightGrey;
+				border-radius: 4px;
+				text-align: center;
+				line-height: 30px;
+ 				font-size: .75em;
+				padding: 0 1em;
+				margin-right: 1em;
+			}
+		}
+
+		&.msgSystem{
+			&:before{
+ 				content: "FS";
+ 			}
+		}
+		&.msgBook{
+			&:before{
+ 				content: "Book";
+ 			}
+		}
+		&.msgUser{
+			&:before{
+ 				content: "User";
+ 			}
+		}
+
+	}
+ 	.msgContent{
+		//background: $fsLightGrey;
+		//color: $fsGrey;
+  		position: relative;
+		}
+	.msgMeta{
+		color: $fsGrey;
+		font-size: .85em;
+	}
+}
+
+
+.bookmarkSection{
+	position: absolute;
+	right: 60px;
+	top: -19px;
+	z-index: 9999;
+			@media only screen and (max-width: 979px) { //and (max-width: 887px) 
+				right: 0;
+				top: -14px;
+				} //ends max width
+ 
+	.doingBookmarking{
+		display: none;
+ 		color: $fsGrey;
+		cursor: pointer;
+		font-size: .5em;
+		height: 1.5em;
+		line-height: 1.5em;
+		width: 200px;
+		display: block;
+		margin-top: 14px;
+			@media only screen and (max-width: 979px) { //and (max-width: 887px) 
+				width: 50px;
+			} //ends max width
+
+	}
+ }
+ 
+.relatedGroup{
+	display: inline-block; 
+	vertical-align: top;
+	margin-right: 1em;
+}
+
+ .icon{
+		//background: $fsLightGrey;
+		text-transform: uppercase;
+		font-size: .75em;
+		
+		&.iconAdd{
+			color: $fsBlack;
+			cursor: pointer;
+			&.inCollection{
+				color: red;
+			}
+			&:before{
+				display: inline-block;
+				position: relative;
+				top:0;
+				margin-right: 10px;
+				min-width: 30px;
+				min-height: 30px;
+				width: 30px;	
+				height: 30px;
+				background: url(../imgs/icon_markerempty.svg) 0px 0px no-repeat;
+				background-size: 30px 30px; 
+				content: "+";
+				font-weight: bold;
+				font-weight: 800;
+				line-height: 25px;
+				text-align: center;
+ 				
+			}
+			
+			&:hover{
+				color: red;
+				//background: $fsGrey;
+				//border-radius: 2px;
+				&:before{
+ 				}
+			}
+		}
+		
+		.iconFill{
+			fill: #ff00ff;
+		}
+		
+		&.iconBookmark{
+			color: $fsBlack;
+			cursor: pointer;
+			font-size: .5em;
+			width: 200px;
+			display: block;
+				@media only screen and (max-width: 979px) { //and (max-width: 887px) 
+					width: 50px;
+					span{display: none;;}
+				} //ends max width
+
+			&:before{
+				display: inline-block;
+				position: relative;
+				top:0;
+				//margin-right: 10px;
+				width: 50px;	
+				height: 50px;
+				background: url(../imgs/icon_bookmarkempty.svg) 0px 0px no-repeat;
+				background-size: 50px 50px; 
+				content: "+";
+				font-weight: 800;
+				line-height: 45px;
+				text-align: center;
+				font-size: 30px;
+				padding-right: 11px;
+ 				color: #f9f9f9;
+			}
+			&.inCollection{
+				color: red;
+				&:before{
+					background: url(../imgs/icon_bookmark_longheart_red.svg) 0px 0px no-repeat;
+					height: 100px;
+					background-size: 50px;
+					content: "-";
+					color: #E50000;
+				}
+				&:hover{
+					&:before{
+						color: #fff;
+					}
+				}
+			}
+			
+			&:hover{
+				color: red;
+ 				&:before{
+ 				color: red;
+				}
+			}
+		}
+		
+	}
+
+			@media only screen and (min-width: 980px) { //and (max-width: 887px) 
+			.columnWrap{
+				margin-top: 1em;
+				display: table;
+				width: 100%;
+			
+				.column{
+					display: table-cell;
+					vertical-align: top;
+				}
+				
+				.columnLeft{ width: 38%;
+					padding-right: 1em;
+				}
+				.columnRight{ 
+					width: 60%;
+//					border-left: 1px dotted $fsBlack;
+					border-left: 1px solid $fsLineGrey;
+					padding-left: 2em;
+					margin-left: 2em;
+					.columnRight{ //additional one shouldnt need such a big margin/padding
+						padding-left: 1em;
+						margin-left: 1em;						
+					}
+
+				}
+			}
+			} //ends min width
+			
+		@media only screen and (max-width: 979px) { //and (max-width: 887px) 
+		
+			.columnLeft{
+				border-bottom: 1px solid $fsLineGrey;
+			}
+		} //ends max width
+					
+	////// circle version
+/*
+	.titleBlock{
+	background: #000;
+	height: 400px;
+left: 50%;
+margin-left: -150px;
+position: absolute;
+text-align: center;
+top: 80px;
+width: 400px;
+padding: 0 30px;
+border-radius: 200px;
+		color: #fff;
+		display: table-cell;
+		vertical-align: middle;
+		.coverImg{
+			display: inline-block; 
+			width: 100px;
+			float: left;
+			margin-right: 1em;
+			img{width: 100%;}
+		}
+		h2{  margin-top: 130px; }
+		h5{}
+	
+	}
+*/

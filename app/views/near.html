@@ -1,0 +1,60 @@
+<div class="theContainer">
+	<div class="titleBlock group">
+ 		<h2 class="bookTitle">Near You</h2>
+ 	</div>
+     
+    <div class="contentWrap columnWrap">
+		<div class="column columnLeft column50"  >
+			<div class="contentSection">
+				<div class="loading" ng-show="isLoadingBooks">
+					<img src="/imgs/brand/logo_line.svg" style="" class="logo"> Finding books near you...
+					<p>{{booksMsg}}</p>
+				</div>
+ 			<span ng-hide="isLoadingBooks">
+				<h3>Books Near You</h3>
+				<p>{{booksMsg}}</p>
+				<div ng-repeat="book in booksByDistance |  orderBy: 'closestDistance' | limitTo: 10" class="tagWrap bookPlaces distancePlaces" >
+ 		  			<div class="aTag placeTag" style="min-height: 70px;">
+		 		  		<div style="display: inline-block;vertical-align: top; width: 50px; height: 77px; overflow: hidden">
+		 		  			<a href="#/book/{{book.$id}}"><img src="{{book.coverurl}}" style="width: 100%;"></a>
+		 		  		</div>
+		 		  		<div style="display:inline-block;vertical-align: top;">
+		 		  			<a href="#/book/{{book.$id}}">{{book.title}}</a><br>{{book.closestPlaceName}} <strong>{{book.closestDistance | number:1}}Km</strong><br>
+		 		  			<span class="distanceAway" style="font-size: .7em; font-style: italic;">Places: 
+		 		  				<span ng-repeat="bookPlace in book.places">{{bookPlace.name}}: {{bookPlace.distanceAway | number:1}}Km </span>
+		 		  			</span>
+		 		  		</div>
+		 		  	</div>
+ 		  		</div>
+ 			</span><!-- ends is loading books -->
+		</div><!-- ends contentSection -->
+ 	</div><!--ends column -->
+ 		
+	<div class="column columnRight column50"  >
+		<div class="contentSection">
+				<div class="loading" ng-show="isLoadingPlaces">
+					<img src="/imgs/brand/logo_line.svg" style="" class="logo"> Finding places near you...
+					<p>{{msgLocation}}</p>
+				</div>
+
+				<span ng-hide="isLoadingPlaces">
+					<h3>Places Near You</h3>
+					<p>{{msgLocation}}</p>
+		  			<div ng-repeat="distantPlace in distListitems |  orderBy: 'distanceAway' | limitTo:10 " class="tagWrap bookPlaces distancePlaces" >
+			  			<div class="aTag placeTag">
+	   						<a ng-href="#/place/{{distantPlace.geonameId}}" ng-class="(distantPlace.name==distantPlace.countryName) ? 'countryName' : ''" class="placeName">{{distantPlace.name}}</a><span ng-if="distantPlace.name != distantPlace.countryName"> <a href="#/place/{{distantPlace.countryName}}" class="placeCountry"><span>{{distantPlace.countryCode}}<span></a></span>
+	   					</div>
+	   					<div class="distanceWrap">{{distantPlace.distanceAway |number:1}}Km
+	   					</div>
+	   				</div>
+	   				<span class="footnote" style="font-size: .7em; font-style: italic; color: #999;">Note: Countries are found by their geotag location, not by their border. Some odd results may appear where a country appears further away than it actually is.
+	   				</span>
+
+	 			</span><! ends ng-hide if loading-->
+	 			</div><!-- ends contentSection -->
+	 		</div><!--ends column -->
+   </div><!-- ends contentWrap -->
+ </div> <!-- ends the containser -->
+
+ 
+ 

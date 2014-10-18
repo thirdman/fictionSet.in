@@ -1,0 +1,250 @@
+ <div ng-if="bkLat.length">
+<div class="mapImg fullWidth"  style=""><img src="{{mapUrlString}}" class="theBookMapImg"> </div>
+</div>
+
+<!--
+older versionx
+http://api.tiles.mapbox.com/v4/thirdman.j1o1gjim/pin-m-library+222({{bkLng}},{{bkLat}})/{{bkLng}},{{bkLat}},5/1200x300.png?access_token=pk.eyJ1IjoidGhpcmRtYW4iLCJhIjoidjBOQ0lrYyJ9.8zzETVcyoBg2nlMquUR1TA
+background-image: url(http://api.tiles.mapbox.com/v3/thirdman.j1o1gjim/{{bkLng}},{{bkLat}},5/1200x300.png)
+http://api.tiles.mapbox.com/v3/thirdman.j1o1gjim/pin-s-library+444(38,1)/{{bkLng}},{{bkLat}},5/1200x300.png
+http://api.tiles.mapbox.com/v4/thirdman.j1o1gjim/-73.99,40.70,13/500x300.png?access_token=pk.eyJ1IjoidGhpcmRtYW4iLCJhIjoidjBOQ0lrYyJ9.8zzETVcyoBg2nlMquUR1TA)
+
+
+http://api.tiles.mapbox.com/v4/examples.map-zr0njcqy/pin-s-bus+f44(-73.99,40.70,13)/-73.99,40.70,13/500x300.png?access_token=pk.eyJ1IjoidGhpcmRtYW4iLCJhIjoidjBOQ0lrYyJ9.8zzETVcyoBg2nlMquUR1TA
+
+markers=icon:http://dev-nz.nomosone.com/i/themes/theme_23/images/mapMarker.png%7C%7C-45.8732755,170.50445650000006&amp;
+-->
+<div ng-if="!bkLat.length">
+    <div class="mapImg fullWidth" ></div>
+<!--     style="background-image: url(http://api.tiles.mapbox.com/v3/thirdman.j1o1gjim/172.633,-43.533,5/1200x300.png) -->
+</div>
+
+
+  
+<div class="theContainer">
+  <div class="contentWrap">
+	<div class="bookmarkSection"   > <!-- ng-if="userAaa" -->
+		<div class="icon collectionAdd iconBookmark" ng-class="(inCollection) ? 'inCollection' : ''"  ng-click="collectionsAdd(bookid, bookshelf, 'bookshelf')"  >
+			<span ng-show="inCollection">In Your Bookshelf</span>
+			<span ng-show="!inCollection">Save to Your Bookshelf</span>
+		</div>
+		<div class="doingBookmarking" ng-show="isBookmarking">Working...</div>
+ 	</div>								
+<!--
+userColl is {{userColl}}<br>
+add <a href="#" ng-click="pushToColl()">add book</a>
+-->
+ 
+<div class="bookDetail">
+	<div class="titleBlock group">
+		<div class="coverImg"><img class="featImg" ng-if="book.coverurl" src="{{book.coverurl}}"/></div>
+		<h2 class="bookTitle">{{ book.title }}</h2>
+		<h5 class="bookSubtitle">by {{  book.author }}</h5>
+	</div>
+ 
+	<div ng-show="isLoading" class="loading"><img src="/imgs/brand/logo_line.svg" style="" class="logo"> Loading...</div>
+
+	<div class="featBlock" ng-if="book.excerpts">
+		<span ng-repeat="excerpt in book.excerpts"  ng-show="$first">
+			<div class="featText"  ><p class="excerpt">&ldquo;{{  excerpt.excerpt }}&rdquo;</p></div>
+		</span>
+	</div>
+ 
+ 
+
+		<div class="bookInfo columnWrap">
+		<div class="column columnLeft column50" id="bookMeta">
+			<div class="tagWrap bookPlaces sideBarItem">
+ 					<h4><span class="iconLabel icon-marker"></span>Set In:</h4>
+					<div ng-repeat="place in book.places" class="aTag placeTag" >
+ 								<a ng-href="#/place/{{place.geonameId}}" ng-class="(place.name==place.countryName) ? 'countryName' : ''" class="placeName">{{place.name}}</a><span ng-if="place.name != place.countryName"> <a href="#/place/{{place.countryName}}" class="placeCountry"><span>{{place.countryCode}}<span></a></span>
+ 					</div>
+<!--
+ 					<div ng-repeat="location in book.tags"  class="aTag" >
+					<a ng-href="#/setting/{{location}}"><mapimg caption="title" map-location="tag" map-zoom="8" map-size="100"   />     <tagcount tag-thetag="{{location}}"></tagcount></a>
+					</div>
+-->
+			</div><!-- ends tags -->
+			
+<!--
+			<div class="buyWrap sideBarItem">
+				<h4>Bookshelves</h4>
+				<div class="collectionWrap">
+					<div class="icon collectionAdd iconAdd" ng-class="(inCollection) ? 'inCollection' : ''" ng-click="collectionsAdd(bookid)"><span ng-show="inCollection">Saved</span><span ng-show="!inCollection">Save to Your Bookshelf</span></div>
+				</div>
+			</div>
+-->
+			
+			<div class="buyWrap sideBarItem">
+				<div class="loading" ng-show="isLoadingAmazon">Finding Prices...</div>
+				<div class="noContent" ng-show"noAmazon"></div>
+				<div class="hasContent" ng-show="hasAmazon" >
+				
+				
+				<h4>Buy This book</h4>
+				<div class="buyWrap">
+					<a href="http://www.amazon.com/dp/{{amazonData.ASIN.0}}/?tag=fisein-20" class="buyLink btn" target="_blank" ng-show="amazonData.Offers.Offer.OfferListing.Price.FormattedPrice.length"
+					><div class="buyMerchant">{{amazonData.Offers.Offer.Merchant.Name}}</div><span class="buyPrice">{{amazonData.Offers.Offer.OfferListing.Price.FormattedPrice}}</span><span ng-if="amazonData.Offers.Offer.OfferListing.PercentageSaved" class="buyCurrency">{{amazonData.Offers.Offer.OfferListing.Price.CurrencyCode}}</span> <span class="buySave">(Save {{amazonData.Offers.Offer.OfferListing.PercentageSaved}}%)</span></a>
+					<a href="{{amazonData.Offers.MoreOffersUrl}}" ng-show="amazonData.Offers.Offer.OfferListing.Price.FormattedPrice.length" target="_blank" class="buyMore">More new &amp; used <span class="buyOffersFrom">(from {{amazonData.OfferSummary.LowestNewPrice.FormattedPrice}})</span></a>
+					</p>
+					</div>
+				<div class="buyWrap">
+					<a href="https://itunes.apple.com/us/book/{{appleData.trackName}}/id{{appleData.trackId}}?at=11lKfH" class="buyLink btn" target="_blank" ng-show="appleData.formattedPrice"
+					><div class="buyMerchant"><img src="http://fictionset.in/imgs/icon_apple.png" class="appleIcon">iBooks {{appleData.kind}}</div><span class="buyPrice">{{appleData.formattedPrice}}</span><span ng-if="appleData.currency" class="buyCurrency">{{appleData.currency}}</span></a>
+					</p>
+					</div> <!-- ends buy wraps-->
+
+ 					
+				</div>
+			</div>
+
+			<div class="sideBarItem sectionAddedBy" ng-if="book.addedById">
+	 				<div class="user addedBy"><span class=" iconLabel icon-user"></span>Added by <span class="userGroup">{{book.addedByName}}</span></div>
+				<div class="userComment" ng-if="book.userComment">{{book.userComment}}</div>
+			</div>
+			
+		</div><!-- column -->
+
+
+		<div class="theContent column columnRight" >
+			<h4><span class="iconLabel icon-book-alt2">Description:</h4>
+<!-- 				<span class="descriptionWrap">{{  book.description | to_lines}}</span> -->
+<!-- 			<span class="descriptionWrap" ng-bind-html="book.description | to_lines"  ></span> -->
+<!-- 				<span ng-bind-html="book.description | to_trusted_lines"  ></span> -->
+			<p class="descriptionWrap" ng-bind="book.description | to_plain"  ></p>
+ 
+			<!-- <p>{{  book.description }}</p> -->
+
+
+			 <div class="bookImages" ng-if="book.locationimg">
+			    <img class="locationImg" ng-if="book.locationimg" src="{{book.locationimg}}" style="height: 200px;"/>
+			</div>
+
+		</div>
+
+
+ 	    </div><!-- bookinfo -->
+
+			<div class="additionalSection columnWrap">
+ 					<div class="contentSection collectionWrap column column50"  >
+						<h4><span class="iconLabel icon-book"></span>Set in the same country/countries</h4>
+							<span ng-repeat="relatedCountry in relatedBooks" class="relatedGroup">Set in <a href="#/place/{{relatedCountry.countryId}}">{{relatedCountry.countryName}}</a>
+							<!-- now do the related books for each country ... -->
+									<ul>
+									 	<li ng-repeat="relatedBook in relatedCountry.countryBooks" class="collectionItem" >
+									 	<a href="#/book/{{relatedBook.$id}}" class="collectionImgLink"><img src="{{relatedBook.coverurl}}" class="collectionImg"></a>
+									 	<h5><a href="#/book/{{relatedBook.$id}}">{{relatedBook.title}}</a></h5>
+										 </li>
+									</ul>
+								<!-- ends the related book -->
+							</span>						
+							<!-- ends the loop of countries -->
+					</div>
+
+
+					<div class="contentSection collectionWrap column column50"  >
+						<h4><span class="iconLabel icon-book"></span>Set in Neighbouring Countries</h4>
+							<span ng-repeat="bk in neighbourRelatedBooks" class="relatedGroup"><a href="#/place/{{bk.countryId}}">{{bk.name}}</a> <span>({{bk.countryBooks.length}})<br></span><!--   track by $index -->
+							<!-- now do the related books for each country ... -->
+									<ul ng-show="bk.countryBooks">
+									 	<li ng-repeat="relatedBook in bk.countryBooks" class="collectionItem" >
+									 	<a href="#/book/{{relatedBook.$id}}" class="collectionImgLink"><img src="{{relatedBook.coverurl}}" class="collectionImg"></a>
+									 	<h5><a href="#/book/{{relatedBook.$id}}">{{relatedBook.title}}</a></h5>
+										 </li>
+									</ul>
+								<!-- ends the related book -->
+							</span>						
+							<!-- ends the loop of countries -->
+					</div>
+ 			</div><!-- ends additonal section -->
+
+ 			<div class="additionalSection columnWrap"   ng-show="bookInCollectionsArray.length">
+	 			<h4 ng-show="bookInCollectionsArray.length"><span class="iconLabel icon-book-bookmark"></span><ng-pluralize count="bookInCollectionsArray.length"
+					when="{'0': 'Not in any collections',
+					    'one': 'Found in 1 Collection',
+					    'other': 'Found in {} Collections.'}">
+					</ng-pluralize>
+				</h4>
+  				<div class="collectionsList inBookContext" ng-show="bookInCollectionsArray.length">
+						<div ng-repeat="thiscollection in bookInCollectionsArray"  class="collectionItem" ng-if="thiscollection.isPublic" > 
+						<a href="#/collection/{{thiscollection.$id}}"   >
+							<div class="collectionImg">
+								<span  >
+									<div class="imgWrap">
+				 						<img ng-repeat="book in thiscollection.books | orderBy:'timestamp'" src="{{book.coverUrl}}" class="collectionCoverImg coverImgSmall">				
+									</div>
+								</span>
+ 							</div>
+							<div class="collectionInfo">
+				 	  			<h5>{{(thiscollection.title) ? thiscollection.title : 'Bookshelf'}}<span class="icon_private" ng-show="!thiscollection.isPublic" title="Private Collection">(Private)</span></h5>
+								<p ng-if="thiscollection.createdByName">by {{thiscollection.createdByName}}.</p> 
+								<p ng-show="{{thiscollection.bookCount}}">{{thiscollection.bookCount}} books.</p> 
+ 								<p class="subTitle" ng-show="{{thiscollection.timestamp}}">Updated {{ thiscollection.timestamp | date : format : timezone}}.</p> 
+ 								{{thiscollection.books.length}}
+								</div>
+							</div>
+						</a>
+					</div>
+ 			</div><!-- ./additonalsection --->
+
+
+ 			<div class="additionalSection columnWrap"    ><!-- {{(arrCollections | filter:{'isPublic':true})}} -->
+	 			<h4 ng-show="arrCollections.length"><ng-pluralize count="(arrCollections | filter: bookid ).length"
+					when="{'0': 'Not in any collections',
+					    'one': 'Found in 1 collection',
+					    'other': 'Found in {} collections.'}">
+					</ng-pluralize> <ng-pluralize count="(arrCollections | filter: bookid  | filter:{'isPublic':false}).length"
+					when="{'0': '',
+					    'one': '(1 private)',
+					    'other': '({} private)'}">
+					</ng-pluralize>
+ 				</h4>
+  				<div class="collectionsList inBookContext " ng-show="arrCollections.length">
+						<div ng-repeat="thiscollection in arrCollections | filter: bookid"  class="collectionItem" ng-if="thiscollection.isPublic" > 
+						<a href="#/collection/{{thiscollection.$id}}"   >
+							<div class="collectionImg">
+								<span  >
+									<div class="imgWrap">
+				 						<img ng-repeat="book in thiscollection.books | orderBy:'timestamp'" src="{{book.coverUrl}}" class="collectionCoverImg coverImgSmall">				
+									</div>
+								</span>
+ 							</div>
+							<div class="collectionInfo">
+				 	  			<h5>{{(thiscollection.title) ? thiscollection.title : 'Bookshelf'}}<span class="icon_private" ng-show="!thiscollection.isPublic" title="Private Collection">(Private)</span></h5>
+								<p ng-if="thiscollection.createdByName">by {{thiscollection.createdByName}}.</p> 
+								<p ng-show="{{thiscollection.bookCount}}">{{thiscollection.bookCount}} books.</p> 
+ 								<p class="subTitle" ng-show="{{thiscollection.timestamp}}">Updated {{ thiscollection.timestamp | date : format : timezone}}.</p> 
+ 								{{thiscollection.books.length}}
+								</div>
+							</div>
+						</a>
+					</div>
+ 			</div><!-- ./additonalsection --->
+ 			
+ 			
+ 			
+
+			<div class="additionalSection columnWrap">
+				<div class="column column50">
+					<h4>Details</h4>
+					<span>Isbn: {{  book.isbn }}</span><br>
+					<span>Isbn13: {{  book.isbn13 }}</span>
+				</div>
+
+				<div class="column column50">
+					<h4>Statistics</h4>
+<!-- 					<span ng-if="userAaa"><a href="" ng-click="clickToOpen()">Add to collections</a></span> -->
+					<span ><button class="btn fsBtn" ng-click="clickToOpen()" ng-if="!currentUser">+ Collections</a></span>
+				</div>
+ 			</div><!-- ends additonal section -->
+			
+		
+		
+
+ 			<p  ng-if="userAaa"><a href="#/editbook/{{book.$id}}">edit</a></p>
+		
+		</div><!-- ends bookdetail -->
+
+</div><!-- ends contentWrap -->
+</div><!-- ends thecontainer -->
+ 

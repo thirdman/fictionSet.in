@@ -1,0 +1,10 @@
+/* line 1, ../../../scss/includes/bookEdit.scss */
+.searchWrap {
+  width: 100%;
+  background: #eee;
+  border-radius: 4px;
+  padding: 1em; }
+  /* line 7, ../../../scss/includes/bookEdit.scss */
+  .placeSearch .form-control {
+    border: 1px solid #ccc;
+    background: #fff; }

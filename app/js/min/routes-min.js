@@ -1,0 +1,1 @@
+"use strict";angular.module("myApp.routes",["ngRoute"]).config(["$routeProvider",function(t){t.when("/home",{templateUrl:"partials/home.html",controller:"HomeCtrl"}),t.when("/account",{authRequired:!0,templateUrl:"partials/account.html",controller:"AccountCtrl"}),t.when("/login",{templateUrl:"partials/login.html",controller:"LoginCtrl"}),t.otherwise({redirectTo:"/home"})}]);

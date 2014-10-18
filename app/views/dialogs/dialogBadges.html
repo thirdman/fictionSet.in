@@ -1,0 +1,77 @@
+ <!-- for when been added -->
+<!--
+<span ng-show="(collectionAdded) && (!collectionProcessing)">
+	<p>Added!</p>
+</span>
+-->
+
+<!-- for when initial state - show badges -->
+<span ng-hide="badgeNew" class="adminBadges">
+  	<h4>User Badges</h4>
+	<div class="dialogScrollWrap collectionsList">
+		<div ng-repeat="badge in allBadges" class="aBadge " > <!--unassigned-->
+			<a ng-href="#/badges/{{badge.badgeId}}"  class="badgeLink"><img src="/imgs/badges/{{badge.filename}}" class="badgeImg" title="{{badge.description}}"></a>
+			 <a href="#/badges/{{badge.badgeId}}" class="badgeText"><span>{{badge.name}}<span></a>
+			<div class="badgeButton"> 
+				<button class=" ngdialog-button " ng-click="addBadge( theUserId, badge.badgeId, allBadges )">Assign</button>
+			</div>
+		</div>
+
+<div class="ngdialog-buttons">
+		<button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="closeThisDialog('button')">Done</button>
+<!-- 		<button class=" ngdialog-button " ng-click="showCreateCollection(bookid) ">Create New</button> -->
+	</div>
+	{{allbadges | json}}
+</div>
+</span>
+
+
+<!--
+<span ng-show="(collectionShowCreate ) && (!collectionProcessing) && (!collectionAdded)">
+	<h4>New Collection</h4>
+	<div class="contentSection">
+		 <form  >
+		     <div class="formField group">
+		     	 <label>Title:</label>
+			 	 <input type="text" ng-model="newColl.title" class="inputLarge" />
+		      </div>
+ 		     <div class="formField group"> 
+		      	<label>Description:</label> 
+		      	<textarea  type="text" ng-model="newColl.description"  class="inputLarge  " /></textarea>
+			  </div>
+ 			  <div class="formField group ">
+			 	<label for="isPublic">Public:</label> 
+				<div class="roundedTwo" id="isPublic">
+						<input type="checkbox" value="None" id="roundedTwo" name="check"  ng-model="newColl.isPublic"  />
+						<label for="roundedTwo"></label>
+				</div>   
+				  <p class="subTitle">Can this collection be followed by other users</p>
+			  </div>			 
+
+
+		 </form> 
+	</div> 
+
+	<div class="ngdialog-buttons">
+		<button type="button" class="ngdialog-button ngdialog-button-secondary" ng-click="showCollections()">Back</button>
+		<button class="btn ngdialog-button ngdialog-button-primary" ng-click="createNewCollection(newColl) ">Create</button>
+	</div>
+</span>
+-->
+
+<span ng-show="(collectionProcessing) && (!collectionAdded)" class="loading">
+	<p>Adding...</p>
+</span>
+
+
+
+<!--
+
+<span ng-hide="(collectionProcessing) || (collectionFollowing)"> 
+	<div class="ngdialog-buttons">
+		<button type="button" class="ngdialog-button ngdialog-button-secondary" ng-click="closeThisDialog('button')">Cancel</button>
+		<button class="btn ngdialog-button ngdialog-button-primary" ng-click="followPlace(placeid) ">Follow</button>
+	</div>
+</span>
+-->
+

@@ -1,0 +1,98 @@
+/*///////////////////////////*/
+/*///////// Place Page ////////*/
+/*///////////////////////////*/
+.headerFeature{
+	position: relative;
+	&.headerPlace{
+	.mapImg{
+		background-color: #eee;
+ 	   background: url()  center center / cover no-repeat; 
+ 	   overflow: hidden;
+ 	   padding-top: 400px;
+ 	// height: 400px;
+ 	 
+ 	   
+ 	   			@media only screen and (min-width: 0px) and (max-width: 887px) {
+  	   			padding-top: 140px;
+	//		height: 140px;
+			} 
+
+	}
+	}
+
+	.headImgWrap{
+		position: absolute;
+		left: 0;
+		top: 0;
+		height: 400px;
+		height: 100%;
+		
+		.headImg{
+			float: left;
+			height: 100%;
+		}
+		
+	}
+}
+
+.featTitle{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 2000;
+    overflow: hidden;
+	h1{
+		margin: 0;
+		padding: 0 .1em 0 0;
+		font-style: italic;
+	    color: #eee;
+	    font-size: 290px;
+	    font-size: 16vw;
+	    font-weight: 100;
+	    letter-spacing: -.05em;
+	    white-space: nowrap;
+	    margin-bottom: -4.6vw;
+	    text-shadow: 1px 1px 25px rgba(0,0,0,.1);
+	}
+}
+
+.featSubTitle{
+	position: absolute;
+    bottom: -2.5em;
+    right: 1em;
+    z-index: 2000;
+    overflow: hidden;
+	span{
+		font-size: 2em;
+		font-weight: 100;
+	    letter-spacing: -.05em;
+	    white-space: nowrap;
+	    color: #bbb;
+	}
+}
+
+
+.placesFeat{
+	.searchPlaces{
+		margin-top: 0;
+	}
+}
+
+
+.followIcon{
+ 		&:before{
+		content: "";
+			display: inline-block;
+			vertical-align: 	bottom;
+			background: url(../imgs/icon_markerempty.svg) 0px 0px no-repeat;
+			background-size: 20px auto;
+			margin-right: 4px;
+			width: 20px;
+			height: 22px;
+			}
+		&.active{
+ 			&:before{
+				vertical-align: middle;	
+			}
+		}
+}

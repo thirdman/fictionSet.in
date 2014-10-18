@@ -1,0 +1,21 @@
+/*///////////////////////////*/
+/*///////// Book Page ////////*/
+/*///////////////////////////*/
+/* line 5, ../../../scss/includes/profile.scss */
+.pageAccount .titleBlock {
+  width: 100%;
+  padding: 1em 0;
+  position: relative;
+  text-align: center; }
+  /* line 10, ../../../scss/includes/profile.scss */
+  .pageAccount .titleBlock .coverImg.userImg {
+    margin-top: .5em;
+    margin-top: -40px;
+    width: 70px;
+    height: 70px;
+    border-radius: 35px;
+    overflow: hidden;
+    box-shadow: none;
+    float: inherit;
+    margin-right: inherit img;
+      margin-right-box-shadow: none; }

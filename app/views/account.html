@@ -1,0 +1,82 @@
+ <div class="theContainer pageAccount">
+  <div class="contentWrap">
+ 	
+	
+	<!-- SHOW SECTION IF NOT LOGGED IN -->
+	<div class="theContent columnWrap" ng-if="!auth.user" >
+    <div ng-hide="auth.user" class="bookDetail">
+		<h2>Account</h2>
+		<p>Not logged in.</p>
+		<p>Return to front page or <a href="#/login">login</a> to view your account.</p>
+<!--         <p>Welcome, please log in using facebook: <button ng-click="auth.$login('facebook')">Login</button></p> -->
+    </div>
+	</div>
+	
+	<!-- SHOW SECTION IF LOGGED IN -->
+<span ng-if="auth.user" >
+
+ 	<div class="titleBlock group">
+		<div class="coverImg userImg" ng-show="profile.picture_url" ><img class="featImg" src="{{profile.picture_url}}"/></div>
+		<h2 class="bookTitle">{{auth.user.displayName}}</h2>
+		<div class="subMenu">
+			<a href="#/profile/{{auth.user.displayName}}">profile</a>
+<!-- 			<a href="#/collections/{{auth.user.id}}">collections</a> -->
+			<a href="#/following">following</a>
+			<a href="#/account" class="active">account</a>
+ 
+		</div>
+		<button class="btnLogout" ng-click="auth.$logout()">Logout</button>
+	</div>
+	
+	
+<div class="theContent columnWrap" >
+	<div class="column column50">		
+		<h3 class="bookSubtitle">Account Settings</h3>
+ 		<form ng-submit="profile.$save()">
+		   <div class="formField group">
+			   <label>Name:</label>
+			   <input type="text" ng-model="profile.displayName" class="inputStd"/>
+		  </div>	      
+		  <div class="formField group">
+		      <label>Email:</label> 
+			  <input type="text" ng-model="profile.email" class="inputStd" />
+	      </div>
+		  <div class="formField group">
+		      <label>location:</label> 
+			  <input type="text" ng-model="profile.location" class="inputStd" />
+	      </div>
+		  
+		  <h4>Set Location:</h4>
+ 			<div class="searchWrap">
+				<angucomplete-alt id="locationSet"
+		            placeholder="Search Locations..."
+				  	pause="200"
+				  	selected-object="autoObject"
+				  	remote-url="http://api.geonames.org/searchJSON?maxRows=6&username=thirdman&q="
+	              	remote-url-data-field="geonames"
+	            	title-field="name"
+	        	    description-field="countryName"
+		            input-class="form-control form-control-small"
+		            model="profile.location"/>
+				</angucomplete-alt>
+  			  </div><!-- ends search wrap -->
+
+
+
+	      <button type="submit">Save Changes</button>
+	    </form>
+
+	</div>
+	<div class="column">	
+			</div><!-- column right -->
+ </div><!-- ends columnwrap -->
+ 
+ 
+<span><!-- ends logged in user -->
+
+
+ </div>
+</div>
+
+
+
