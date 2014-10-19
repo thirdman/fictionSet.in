@@ -254,15 +254,36 @@ a {
 /* line 112, ../../scss/includes/common.scss */
 ul {
   padding: 0; }
+  /* line 115, ../../scss/includes/common.scss */
+  ul.list {
+    margin: .5em 1em; }
+    /* line 117, ../../scss/includes/common.scss */
+    ul.list li {
+      margin-bottom: .5em; }
+      /* line 119, ../../scss/includes/common.scss */
+      ul.list li.uncompleted, ul.list li.completed {
+        margin-left: 30px; }
+        /* line 121, ../../scss/includes/common.scss */
+        ul.list li.uncompleted:before, ul.list li.completed:before {
+          color: #2a2a2a;
+          text-decoration: inherit;
+          display: inline-block;
+          min-width: 30px;
+          margin-left: -30px; }
+      /* line 129, ../../scss/includes/common.scss */
+      ul.list li.completed {
+        text-decoration: line-through;
+        color: #aaa;
+        font-style: italic; }
 
-/* line 117, ../../scss/includes/common.scss */
+/* line 141, ../../scss/includes/common.scss */
 .loading {
   width: 100%;
   text-align: center;
   padding: 1em;
   border-radius: 4px;
   margin: 1em 0; }
-  /* line 121, ../../scss/includes/common.scss */
+  /* line 145, ../../scss/includes/common.scss */
   .loading .logo {
     height: 50px;
     width: auto;
@@ -300,14 +321,14 @@ ul {
     -ms-transform: rotateY(0deg); }
   from {
     -ms-transform: rotateY(360deg); } }
-/* line 184, ../../scss/includes/common.scss */
+/* line 208, ../../scss/includes/common.scss */
 .fullWidth {
   width: 100%; }
-  /* line 186, ../../scss/includes/common.scss */
+  /* line 210, ../../scss/includes/common.scss */
   .fullWidth.homeFeat {
     background: #eee; }
 
-/* line 191, ../../scss/includes/common.scss */
+/* line 215, ../../scss/includes/common.scss */
 .theContainer {
   margin: 0 5%;
   padding-bottom: 100px;
@@ -315,61 +336,61 @@ ul {
   padding-bottom: 100px;
   max-width: 1200px; }
   @media only screen and (min-width: 0px) and (max-width: 887px) {
-    /* line 191, ../../scss/includes/common.scss */
+    /* line 215, ../../scss/includes/common.scss */
     .theContainer {
       margin: 0 10px; } }
   @media only screen and (min-width: 888px) and (max-width: 1200px) {
-    /* line 191, ../../scss/includes/common.scss */
+    /* line 215, ../../scss/includes/common.scss */
     .theContainer {
       margin: 0 10px; } }
 
-/* line 208, ../../scss/includes/common.scss */
+/* line 232, ../../scss/includes/common.scss */
 .theContainerHead {
   margin: 0 5%;
   margin: 0 auto;
   max-width: 1200px; }
   @media only screen and (min-width: 0px) and (max-width: 887px) {
-    /* line 208, ../../scss/includes/common.scss */
+    /* line 232, ../../scss/includes/common.scss */
     .theContainerHead {
       margin: 0 10px; } }
   @media only screen and (min-width: 888px) and (max-width: 1200px) {
-    /* line 208, ../../scss/includes/common.scss */
+    /* line 232, ../../scss/includes/common.scss */
     .theContainerHead {
       margin: 0 10px; } }
 
-/* line 220, ../../scss/includes/common.scss */
+/* line 244, ../../scss/includes/common.scss */
 .contentWrap {
   position: relative; }
 
-/* line 224, ../../scss/includes/common.scss */
+/* line 248, ../../scss/includes/common.scss */
 .titleBlock {
   border-bottom: 1px solid #ddd; }
-  /* line 226, ../../scss/includes/common.scss */
+  /* line 250, ../../scss/includes/common.scss */
   .titleBlock .btnLogout {
     position: absolute;
     right: 0;
     top: 0; }
 
-/* line 235, ../../scss/includes/common.scss */
+/* line 259, ../../scss/includes/common.scss */
 .contentSection {
   margin-bottom: 1em; }
-  /* line 237, ../../scss/includes/common.scss */
+  /* line 261, ../../scss/includes/common.scss */
   .contentSection h3 {
     margin-top: 0;
     margin-bottom: .66em; }
 
-/* line 244, ../../scss/includes/common.scss */
+/* line 268, ../../scss/includes/common.scss */
 .additionalSection {
   border-top: 1px solid #ddd;
   margin-top: 1em; }
 
-/* line 253, ../../scss/includes/common.scss */
+/* line 277, ../../scss/includes/common.scss */
 .imgList {
   background: #eee;
   border-radius: 4px;
   padding: 1em;
   margin: 10px 0; }
-  /* line 261, ../../scss/includes/common.scss */
+  /* line 285, ../../scss/includes/common.scss */
   .imgList .imgWrap {
     display: inline-block;
     width: 90px;
@@ -377,54 +398,54 @@ ul {
     border-radius: 45px;
     background: #ccc;
     vertical-align: middle; }
-    /* line 268, ../../scss/includes/common.scss */
+    /* line 292, ../../scss/includes/common.scss */
     .imgList .imgWrap img {
       width: 90px;
       height: 90px;
       border-radius: 45px; }
-  /* line 274, ../../scss/includes/common.scss */
+  /* line 298, ../../scss/includes/common.scss */
   .imgList .imgInfo {
     display: inline-block; }
 
-/* line 284, ../../scss/includes/common.scss */
+/* line 308, ../../scss/includes/common.scss */
 .descriptionWrap {
   line-height: 1.6em; }
-  /* line 286, ../../scss/includes/common.scss */
+  /* line 310, ../../scss/includes/common.scss */
   .descriptionWrap b {
     font-weight: normal; }
 
-/* line 295, ../../scss/includes/common.scss */
+/* line 319, ../../scss/includes/common.scss */
 .buyWrap {
   display: inline-block;
   vertical-align: top; }
 
-/* line 299, ../../scss/includes/common.scss */
+/* line 323, ../../scss/includes/common.scss */
 .buyLink {
   display: inline-block; }
-  /* line 301, ../../scss/includes/common.scss */
+  /* line 325, ../../scss/includes/common.scss */
   .buyLink.btn {
     margin: 0;
     padding: 0.5em 0.5em 0.25em; }
-  /* line 305, ../../scss/includes/common.scss */
+  /* line 329, ../../scss/includes/common.scss */
   .buyLink .buyPrice {
     font-size: 1.5em;
     line-height: 1.5em;
     font-weight: 300; }
-  /* line 310, ../../scss/includes/common.scss */
+  /* line 334, ../../scss/includes/common.scss */
   .buyLink .buyCurrency {
     font-size: .85em;
     color: #aaa; }
-  /* line 314, ../../scss/includes/common.scss */
+  /* line 338, ../../scss/includes/common.scss */
   .buyLink .buySave {
     font-size: .85em;
     color: yellow; }
-  /* line 319, ../../scss/includes/common.scss */
+  /* line 343, ../../scss/includes/common.scss */
   .buyLink .buyMerchant {
     font-size: .85em;
     line-height: .5em;
     padding: 0; }
 
-/* line 327, ../../scss/includes/common.scss */
+/* line 351, ../../scss/includes/common.scss */
 .buyMore {
   font-size: .85em;
   display: block;
@@ -432,7 +453,7 @@ ul {
   font-style: italic;
   color: #aaa; }
 
-/* line 339, ../../scss/includes/common.scss */
+/* line 363, ../../scss/includes/common.scss */
 .appleIcon {
   height: 20px;
   vertical-align: top;
@@ -440,20 +461,20 @@ ul {
   margin-top: -7px;
   margin-bottom: -6px; }
 
-/* line 352, ../../scss/includes/common.scss */
+/* line 376, ../../scss/includes/common.scss */
 .columnWrap .column50 {
   width: 49.5%; }
-  /* line 354, ../../scss/includes/common.scss */
+  /* line 378, ../../scss/includes/common.scss */
   .columnWrap .column50.columnLeft, .columnWrap .column50.columnRight {
     width: 49.5%; }
   @media only screen and (max-width: 979px) {
-    /* line 352, ../../scss/includes/common.scss */
+    /* line 376, ../../scss/includes/common.scss */
     .columnWrap .column50 {
       width: 100%; }
-      /* line 360, ../../scss/includes/common.scss */
+      /* line 384, ../../scss/includes/common.scss */
       .columnWrap .column50.columnLeft, .columnWrap .column50.columnRight {
         width: 100%; } }
-/* line 366, ../../scss/includes/common.scss */
+/* line 390, ../../scss/includes/common.scss */
 .columnWrap .column100 {
   width: 100%;
   display: block; }
@@ -604,7 +625,7 @@ input[type=checkbox] {
     background: #eee;
     background: rgba(0, 0, 0, 0.2);
     border-radius: 2px;
-    box-shadow: inset 0px 1px 0px rgba(0, 0, 0, 0.5), 0px 1px 0px rgba(255, 255, 255, 0.7); }
+    box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.2), 0px 1px 0px rgba(255, 255, 255, 0.7); }
     /* line 135, ../../scss/includes/forms.scss */
     .roundedTwo label:after {
       content: '';
@@ -2264,6 +2285,126 @@ width:3px;
     color: #fff;
     margin-bottom: 8px;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3); }
+
+/* line 47, ../../scss/includes/signup.scss */
+.formGroup {
+  margin: 2em auto;
+  padding: .5em; }
+  /* line 50, ../../scss/includes/signup.scss */
+  .formGroup.loginForm {
+    width: 500px;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.4); }
+    /* line 55, ../../scss/includes/signup.scss */
+    .formGroup.loginForm button.btn {
+      padding: .5em 1em;
+      font-size: 1em;
+      border: 0px solid white;
+      width: 40%; }
+      /* line 61, ../../scss/includes/signup.scss */
+      .formGroup.loginForm button.btn span:before {
+        font-size: 1.2em;
+        margin-right: .5em;
+        vertical-align: top; }
+      /* line 68, ../../scss/includes/signup.scss */
+      .formGroup.loginForm button.btn.loginFacebook {
+        background: #428bca; }
+      /* line 71, ../../scss/includes/signup.scss */
+      .formGroup.loginForm button.btn.loginGoogle {
+        background: #e05348; }
+      /* line 74, ../../scss/includes/signup.scss */
+      .formGroup.loginForm button.btn.loginEmail {
+        width: 90%; }
+    /* line 79, ../../scss/includes/signup.scss */
+    .formGroup.loginForm .dialogHead {
+      text-align: center;
+      background: #323a45;
+      border-radius: 3px 3px 0 0; }
+      /* line 84, ../../scss/includes/signup.scss */
+      .formGroup.loginForm .dialogHead .dialogLogo {
+        margin: 0 auto;
+        height: 50px;
+        position: relative;
+        top: -5px; }
+        /* line 90, ../../scss/includes/signup.scss */
+        .formGroup.loginForm .dialogHead .dialogLogo img {
+          width: 50px;
+          height: auto; }
+    /* line 96, ../../scss/includes/signup.scss */
+    .formGroup.loginForm h3.groupHead {
+      /* text-transform: uppercase; */
+      /* color: #999; */
+      font-size: 1em;
+      text-align: center; }
+    /* line 102, ../../scss/includes/signup.scss */
+    .formGroup.loginForm .socialLoginWrap {
+      text-align: center; }
+    /* line 106, ../../scss/includes/signup.scss */
+    .formGroup.loginForm .divider {
+      height: 20px;
+      margin-top: 40px;
+      text-align: center;
+      border-top: 1px solid #eee;
+      width: 90%;
+      margin: 40px 5% 0; }
+      /* line 113, ../../scss/includes/signup.scss */
+      .formGroup.loginForm .divider .divideOr {
+        background: #eee;
+        width: 40px;
+        height: 40px;
+        border-radius: 20px;
+        display: inline-block;
+        margin: 0 auto;
+        color: #fff;
+        text-align: center;
+        line-height: 40px;
+        position: relative;
+        top: -20px;
+        text-transform: uppercase;
+        color: #aaa;
+        font-style: italic;
+        font-size: .75em; }
+    /* line 131, ../../scss/includes/signup.scss */
+    .formGroup.loginForm .emailLoginForm {
+      border: 0px solid white;
+      margin: 0;
+      text-align: center; }
+      /* line 135, ../../scss/includes/signup.scss */
+      .formGroup.loginForm .emailLoginForm fieldset {
+        border: 0px solid white; }
+      /* line 138, ../../scss/includes/signup.scss */
+      .formGroup.loginForm .emailLoginForm .formField.group {
+        text-align: left;
+        background: #fff;
+        margin: 0;
+        padding: .5em 1em; }
+        /* line 144, ../../scss/includes/signup.scss */
+        .formGroup.loginForm .emailLoginForm .formField.group label {
+          font-size: .75em;
+          color: #aaa;
+          font-style: italic; }
+        /* line 149, ../../scss/includes/signup.scss */
+        .formGroup.loginForm .emailLoginForm .formField.group .inputStd {
+          width: 100%;
+          border: 0px;
+          box-shadow: 1px 1px 3px -1px rgba(0, 0, 0, 0.2) inset;
+          background: #f2f2f2; }
+        /* line 155, ../../scss/includes/signup.scss */
+        .formGroup.loginForm .emailLoginForm .formField.group .roundedTwo label {
+          float: right;
+          margin-right: 4px; }
+
+/* line 167, ../../scss/includes/signup.scss */
+.pageViewContainer.loginPage {
+  background: url(http://api.tiles.mapbox.com/v3/thirdman.k07mfne9/-2.69531,54.75844,2/1200x900.png) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover; }
+  /* line 175, ../../scss/includes/signup.scss */
+  .pageViewContainer.loginPagebody {
+    background: transparent; }
 
 /* line 5, ../../scss/includes/mapbox.scss */
 .mapFeature {

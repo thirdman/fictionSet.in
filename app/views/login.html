@@ -16,6 +16,41 @@
  <span ng-show="!auth.user">
 <div class="theContent columnWrap">
 
+	<div class="formGroup loginForm">
+		<div class="dialogHead">
+			<div class="dialogLogo"><img src="/imgs/brand/logo_line.svg" style="" class="logo"></div>
+		</div>
+		<h3 class="groupHead">Log in to your fictionset.in account</h3>
+		<div class="socialLoginWrap">
+			<button ng-click="auth.$login('facebook')" class="btn loginFacebook"><span class="icon-facebook-squared">Facebook</span></button>
+			<button ng-click="auth.$login('google')" class="btn loginGoogle"><span class="icon-google-plus">Google</span></button>
+		</div>
+		<div class="divider">
+			<span class="divideOr">or</span>
+		</div>
+		<form class="emailLoginForm" >
+			<fieldset>
+				 <div class="formField group">
+			      	<label for="login-email">Email:</label> 
+			     	 <input type="text" id="login-email" ng-model="loginInfo.email" class="inputStd" placeholder="Email" />
+			     </div>
+				 <div class="formField group">
+					 <label for="login-password">Password:</label>
+					 <input type="password" id="login-password" value="" ng-model="loginInfo.password" class="inputStd" placeholder="Password"/>
+				</div>	      
+				<div class="formField group ">
+				 	<label for="rememebrcheck">Stay Logged In:</label> 
+					<div class="roundedTwo" id="rememebrcheck">
+						<input type="checkbox" value="None" id="roundedTwo" name="check"  ng-model="loginInfo.rememberMe"  />
+						<label for="roundedTwo"></label>
+					</div>   
+				</div>			 
+		      <button ng-click="auth.$login('password', loginInfo)" class="btn loginEmail">Login</button>
+			</fieldset>
+		</form>
+
+	</div>
+	
 	<div class="userForm loginFacebook"  >
       <div class="loginHead">Login/Sign Up using your Facebook account</div>
       <button ng-click="auth.$login('facebook')" class="btn">Connect</button>

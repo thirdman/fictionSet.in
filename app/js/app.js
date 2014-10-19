@@ -1,5 +1,5 @@
-var app = angular.module("myApp",  
-	["firebase", 'ngRoute', 'myApp.directives', 'angular-underscore','ngLodash', 'angucomplete-alt', 'ngResource', 'angularMapbox', 'ngDialog']
+var app = angular.module("myApp", 
+	["firebase", 'ngRoute', 'myApp.directives', 'angular-underscore','ngLodash', 'angucomplete-alt', 'ngResource', 'angularMapbox', 'ngDialog', 'ngResource']
 		);
 
 app.config(["$routeProvider", '$locationProvider','ngDialogProvider', function($routeProvider, $locationProvider, ngDialogProvider) {
@@ -16,6 +16,8 @@ app.config(["$routeProvider", '$locationProvider','ngDialogProvider', function($
   $routeProvider.when("/home", {
     controller: "HomeCtrl",
     templateUrl: "views/home.html",
+    title: 'Home',
+    pageClass: 'homePage',
     resolve: {
       // controller will not be invoked until getCurrentUser resolves
       "currentUser": ["simpleLogin", function(simpleLogin) {
@@ -36,6 +38,8 @@ app.config(["$routeProvider", '$locationProvider','ngDialogProvider', function($
   .when("/login", {
     controller: "LoginCtrl",
     templateUrl: "views/login.html",
+    title: 'Login',
+    pageClass: 'loginPage',
     resolve: {
       // controller will not be invoked until getCurrentUser resolves
       "currentUser": ["simpleLogin", function(simpleLogin) {
@@ -252,7 +256,15 @@ app.config(["$routeProvider", '$locationProvider','ngDialogProvider', function($
   
 }]); //ends config
 
-      
+
+app.run(['$location', '$rootScope', function($location, $rootScope) {
+    $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
+        $rootScope.title = current.$$route.title;
+        $rootScope.pageClass = current.$$route.pageClass;
+         console.log($rootScope);
+    });
+}]);
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // FACTORIES  (move elsewhere at some point
@@ -2242,7 +2254,7 @@ app.controller("LoginCtrl",  ["$scope", "$location", "currentUser", "simpleLogin
   	if (currentUser) {
 	   	 console.log("logged in");
     	 	$scope.$apply(function() { 
-   	 			$location.path("/account"); 
+   	 			$location.path("/profile"); 
    	 		});
     	 
    	 } else {
@@ -2253,8 +2265,8 @@ app.controller("LoginCtrl",  ["$scope", "$location", "currentUser", "simpleLogin
 	  'error';
   }
   $scope.loginInfo = {}
-    
-}]);
+   $scope.pageClass = "loginPage"; 
+ }]);
 
 app.controller("RegisterCtrl",  ["$firebaseSimpleLogin", "$scope", "$location", "simpleLogin", function($firebaseSimpleLogin, $scope, $location, simpleLogin) {
 

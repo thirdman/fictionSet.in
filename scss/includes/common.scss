@@ -111,6 +111,30 @@
    
    ul{
 	   padding: 0;
+   
+	   &.list{
+	   	margin: .5em 1em;
+		   li{
+		   	margin-bottom: .5em;
+				&.uncompleted, &.completed{
+				margin-left: 30px;
+					&:before{
+						color: $fsBlack;
+						text-decoration: inherit;
+						display: inline-block;
+						min-width: 30px;
+						margin-left: -30px;
+					}
+				}
+				&.completed{
+					text-decoration: line-through; 
+					color: $fsGrey;
+					font-style: italic;
+				}
+			}
+	   }
+
+	   			
    }
    
    
