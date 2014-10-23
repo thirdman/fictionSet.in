@@ -209,7 +209,38 @@
 	   width: 100%;
 	   &.homeFeat{
 		   background: #eee;
+		   background: url(/imgs/bg_world_dark.png) no-repeat center center scroll;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+			.titleSection{
+				text-align: center;
+				.homeTitle{
+					color: #eee;
+				}
+			}
 	   }
+	   &.pageFeat{
+		   background: transparent;
+		   .titleSection{
+			border-bottom: 1px solid $fsLineGrey;
+			}
+	   }
+	   &.darkFeat{
+		   background: url(/imgs/bg_world_dark.png) no-repeat center center scroll;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+			.theContainerHead{
+				padding: 2em;
+				h3{
+					color: #eee;
+				}
+			}
+	   }
+
    }
    
    .theContainer{
@@ -313,9 +344,18 @@
 	   
    }
    
+//////////////////////////////////////////////////////
+//////////  BUTTONS              /////////////////////
+//////////////////////////////////////////////////////
+button.btn, a.btn{
+	&.actionBtn{
+		font-size: 1.5em;
+	}	
+}
+
   
    
-   //////PRICING /////
+//////PRICING /////
    .buyWrap{
 	   display: inline-block;
 	   vertical-align: top;
@@ -391,4 +431,54 @@
 		width: 100%;
 		display: block
 	}
+}
+
+//////////////////////////////////////////
+//////////////CONTENT IMAGES
+//////////////////////////////////////////
+.contentImg{
+	&.imgWrapCenter	{
+		text-align: center;
+		margin: 1em auto;
+		img.contentImgCircle{
+			width: 300px;
+			height: 300px;
+			margin: 10 auto;
+			border-radius: 50%;
+			position: relative;
+			
+		}
+	}
+} 
+
+
+////////////////////////////////////////////////
+//////// ERROR MESSAGES
+////////////////////////////////////////////////
+.message.error{
+	color: red;
+//	border: 1px solid red;
+	margin: 1em -1em;
+	padding: 1em;
+	background: red;
+	color: #fff;
+	/* border-radius: 3px; */
+	box-shadow: 1px 1px 3px rgba(0,0,0,.3);
+	h3{
+		font-weight: normal;
+		color: #fff;
+		border-bottom: 1px solid white;
+	}
+}
+
+.emptyContent{
+	text-align: center;
+	margin: 2em auto;
+	&:before{
+		font-size: 2em;
+		line-height: 2em;
+		vertical-align: middle;
+		margin-right: 10px;
+	}
+	
 }

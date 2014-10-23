@@ -1,13 +1,18 @@
-	<div class="fullWidth homeFeat">
-		<div class="theContainer">
-		<h2 class="homeTitle">
-			<span class="titleHalf">Add Book: {{amazonData.ItemAttributes.Title}}</span>
-		</h2>
-		</div>
+<div class="fullWidth darkFeat">
+	<div class="theContainerHead">
+		<button ng-click="saveBook()" class="btn actionBtn" style="float: right;">Save Book</button>
+		<h3 class="pageTitle">Add Book</h3>
 	</div>
+</div>
+ 
 <div class="theContainer pageEdit">
 <div class=" contentWrap" >
-
+	<div class="titleBlock group">
+		<div class="coverImg"><img class="featImg" ng-if="amazonData.LargeImage.URL" src="{{amazonData.LargeImage.URL}}"/></div>
+		<h2 class="bookTitle">{{amazonData.ItemAttributes.Title}}</h2>
+		<h5 class="bookSubtitle">by {{amazonData.ItemAttributes.Author}}</h5>
+	</div>
+	
 <div class="saving" ng-show="isSaving"  style="width: 100%; text-align: center; padding: 1em; background: #f5f5f5;border-radius: 4px; margin: 1em 0;">
 	Saving...
 </div>
@@ -15,9 +20,8 @@
 <div class="theContent columnWrap" >
 	<div class="columnLeft column">	
 		<div class="bookInfo">	
-		<img src="{{amazonData.LargeImage.URL}}" class="coverImg" style="width: 90px;">
-		<p><label>Title</label>{{amazonData.ItemAttributes.Title}}</p>
-		<p class="subTitle"><label>Author:</label>{{amazonData.ItemAttributes.Author}}</p>
+ 		<p><label>Title</label>{{amazonData.ItemAttributes.Title}}</p>
+		<p><label>Author:</label>{{amazonData.ItemAttributes.Author}}</p>
 		<p><label>PublicationDate:</label>{{amazonData.ItemAttributes.PublicationDate}}</p>
 		<p><label>Publisher: </label>{{amazonData.ItemAttributes.Publisher}}</p>
 		<p><label>AMAZON ID: </label>{{amazonid}}</p>
@@ -41,13 +45,13 @@
 
 	
 		</div>
-	</div>
+	</div><!-- column left -->
 	
 	<div class="columnRight column">		
- 
+		<div class="contentSection">
  			<h3>Places</h3>
  			<h4>Add a place to this book:</h4>
- 			<div class="searchWrap">
+ 			<div class="searchWrap formField group">
 			<angucomplete-alt id="placesearch2"
               placeholder="Search Places..."
               pause="300"
@@ -79,45 +83,38 @@
 
  				 	 </div>
 				</div>
- 
-  		<h3>Excerpts</h3>
+		</div>
+		<div class="contentSection borderTop">
+			<h3>Excerpts</h3>
   			<div class="exceprtList listWide">
- 			  <div ng-repeat="tempExcerpt in tempExcerpts" class="group aPlace" >
- 	 			<q>{{tempExcerpt.excerpt}}</q>
- 	 			<p class="subTitle">{{tempExcerpt.reference}}</p>
- 	 			<button ng-click="removeExcerpt(tempExcerpt)" class="btnDelete">Delete</button>
- 	 		  </div>
+ 			  	<div ng-repeat="tempExcerpt in tempExcerpts" class="group aPlace" >
+ 	 				<q>{{tempExcerpt.excerpt}}</q>
+ 	 				<p class="subTitle">{{tempExcerpt.reference}}</p>
+ 	 				<button ng-click="removeExcerpt(tempExcerpt)" class="btnDelete">Delete</button>
+ 	 			</div>
   			</div>
-		 <form ng-submit="addExcerpt()">
-  			  <div class="formField group">
-		      <label>Excerpt:</label> 
-			      <textarea  type="text" ng-model="newExcerpt.excerpt" placeholder="Text excerpt"  class="inputLarge"  /></textarea>
-				  <input type="text" ng-model="newExcerpt.reference" placeholder="referece (optional)"  class="inputStd" />
-			      <button class="btn" type="submit" ng-click="addExcerpt()">Add Excerpt</button>
-			      
-			  </div>	      
-  	      </form>
+  			<form ng-submit="addExcerpt()">
+  			  	<div class="formField group">
+  			  		<label>Excerpt:</label> 
+  			  		<textarea  type="text" ng-model="newExcerpt.excerpt" placeholder="Text excerpt"  class="inputLarge"  /></textarea>
+  			  		<input type="text" ng-model="newExcerpt.reference" placeholder="referece (optional)"  class="inputStd" />
+  			  		<button class="btn" type="submit" ng-click="addExcerpt()">Add Excerpt</button>
+  			  	</div>	      
+			</form>
+		</div>
 
+  		 <div class="contentSection">
+	  		 <h3>Tags</h3>
+				<div ng-controller="TagCtrl" class="formField group">
+				<tags-input ng-model="tempTags">
+				  <auto-complete source="loadTags($query)" min-length="1" ></auto-complete>
+				</tags-input>
+				</div>
+  		 </div>
 
-  		<h3>Tags</h3>
-  			<div class="tagList listWide">
- 			  <div ng-repeat="tempTag in tempTags" class="group aPlace" >
- 	 			<span class="aTag">{{tempTag.tagName}} (<a ng-click="removeTag(tempTag)" class="removeLink" >Remove</a>)</span>
-  	 			
- 	 		  </div>
-  			</div>
-		 <form ng-submit="addTag()">
-  			  <div class="formField group">
-		      <label>Tag:</label> 
- 				  <input type="text" ng-model="newTag.tagName"  class="inputStd" />
-			      <button class="btn" type="submit" ng-click="addTag()">Add Tag</button>
-			      
-			  </div>	      
-  	      </form>
-  	      
-  		<div class="dataSection additonalComment">
+   		<div class="dataSection contentSection additonalComment">
    		<h3>Additional Comment</h3>
-   		<p>An optional personal comment about this book. (Note: this will be displayed publicly)
+   		<p>An optional personal comment about this book. (Note: this will be displayed publicly)</p>
 		 <form >
   			  <div class="formField group">
 			      <textarea  type="text"  ng-model="userComment" placeholder="Text"  class="inputLarge"  /></textarea>
@@ -132,22 +129,17 @@
   
 		  </div><!-- columnright -->
 </div><!-- the content -->
-	<div class="fullWidth homeFeat">
-		<div class="theContainer">
-		<h2 class="homeTitle">
-		  <button ng-click="saveBook()">Save Book</button>
-		</h2>
+
+<div class="contentWrap columnWrap" >
+	<div class="fullWidth darkFeat">
+		<div class="theContainerHead">
+	  		<button ng-click="saveBook()" class="btn actionBtn">Save Book</button>
 		</div>
 	</div>
-		  
-		  
-		 
-<!--  {{amazonData | json}} -->
-<!--
-{{tempPlaces | json}}
-<hr>
-{{tempExcerpts | json}}
--->
-</div>
+
+</div>	
+		
+
+</div><!-- ends theContent-->
 
 </div>

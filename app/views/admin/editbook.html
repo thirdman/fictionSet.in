@@ -1,11 +1,9 @@
-	<div class="fullWidth homeFeat">
-		<div class="theContainerHead">
-		<h2 class="homeTitle">
-			<span class="titleHalf">Edit Book</span>
-		</h2>
-		<a class="btn" href="/#/book/{{book.$id}}" style="position: absolute; right: 10px;">back</a>
-		</div>
+<div class="fullWidth darkFeat">
+	<div class="theContainerHead">
+		<a class="btn actionBtn" href="/#/book/{{book.$id}}" style="float:right;">back</a>
+		<h3 class="pageTitle">Edit Book</h3>
 	</div>
+</div>
 <div class="theContainer pageEdit">
 <div class=" contentWrap" >
 	<div class="titleBlock group">
@@ -128,59 +126,9 @@
  			  <h3>Tags</h3>
 			  <div ng-repeat="tag in book.tags" class="aTag" >
  			  		<div class="formField group">
-	 			  		<label >{{tag}}</label>
+	 			  		<label >{{tag.tagId}}</label>
  				 	 </div>
 				</div>
-
-
-  			  	 <!--    $http.jsonp("http://api.geonames.org/searchJSON?callback=JSON_CALLBACK&q="+cityName+"&maxRows=6").success(function(data){ -->
-<!--               url="http://api.geonames.org/searchJSON?callback=JSON_CALLBACK&maxRows=6&username=thirdman&q=" -->
-
-
-<!--
- <div ng-model="newSetting"></div>
-<div ng-bind="newSetting.name"></div>
-<div ng-bind="newSetting.adminName1"></div>
-<div ng-bind="newSetting.countryCode"></div>
-<div ng-bind="newSetting.countryName"></div>
-<div ng-bind="newSetting.fcl"></div>
-<div ng-bind="newSetting.fclName"></div>
-<div ng-bind="newSetting.fcode"></div>
-<div ng-bind="newSetting.fcodeName"></div>
-<div ng-bind="newSetting.geonameId"></div>
-<div ng-bind="newSetting.lat"></div>
- <div ng-bind="newSetting.lng"></div>
-<div ng-bind="newSetting.name"></div>
-<div ng-bind="newSetting.toponymName"></div>
-<div ng-bind="newSetting.title"></div>
-
-adminCode1: "01"
-adminName1: "An Giang"
-countryCode: "VN"
-countryId: "1562822"
-countryName: "Vietnam"
-fcl: "H"
-fclName: "stream, lake, ..."
-fcode: "LK"
-fcodeName: "lake"
-geonameId: 1587761
-lat: "10.91667"
-lng: "105.06667"
-name: "B?ng Bình Thiên L?n"
-population: 0
-toponymName: "B?ng Bình Thiên L?n"
-__proto__: Object
-title: "B?ng Bình Thiên L?n B?ng Bình Thiên L?n Vietnam"
- 
--->
-
- 			  
-  			  
- 			  
- 
- 			  {{selectedObject | json}}
- 
-  
  
 		  <h2>Excerpts</h2>
 		 <form ng-submit="excerptadd()">
@@ -217,7 +165,10 @@ title: "B?ng Bình Thiên L?n B?ng Bình Thiên L?n Vietnam"
  
 
 </div>
+<!--
+
 <button ng-click="removePriority()"/>remove priority (null)</button>
 <button ng-click="setPriority()"/>set priority (1000)</button>
+-->
 
 </div>

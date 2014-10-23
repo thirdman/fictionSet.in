@@ -14,10 +14,53 @@
       <button ng-click="auth.$create('facebook')" class="btn">Connect???</button>
 	</div>    
 -->
-    
-	<div class="userForm loginForm"  ng-hide="auth.user">
-		<div class="loading loginHead" ng-show="loading">Thinking....</div>
+	<div class="formGroup loginForm"  ng-hide="auth.user">
+		<div class="dialogHead">
+			<div class="dialogLogo"><img src="/imgs/brand/logo_line_white.svg" style="" class="logo"></div>
+		</div>
+		<h3 class="groupHead"  ng-hide="loading">Sign up using your social media account</h3>
+		<div class="socialLoginWrap"  ng-hide="loading">
+			<button ng-click="auth.$login('facebook')" class="btn loginFacebook"><span class="icon-facebook-squared">Facebook</span></button>
+			<button ng-click="auth.$login('google')" class="btn loginGoogle"><span class="icon-google-plus">Google</span></button>
+		</div>
+		<div class="divider"  ng-hide="loading">
+			<span class="divideOr">or</span>
+		</div>
+
+		<h3 class="loading groupHead " ng-show="loading"><img src="/imgs/brand/logo_line.svg"  class="logo"> Thinking...</h3>
+<!-- 		<h3 class="groupHead" ng-show="loading">Thinking....</h3> -->
+		<div class="message error" ng-if="iserror">
+			<h3>{{(errorTitle) ? errorTitle : 'Error'}}</h3>
+			<p class="subtitle">{{theerror.code}}</p>
+			<p>{{theerror.message}}</p>
+		</div>
+		
+		<h3 class="groupHead" ng-hide="loading">Sign up using your email Address:</h3>
+
+		<form class="emailLoginForm" ng-hide="loading">
+			<fieldset>
+				<div class="formField group">
+					<label for="login-email">Email:</label> 
+					<input type="text" id="login-email" ng-model="loginReg.email" class="inputStd" placeholder="Email" />
+				</div>
+				<div class="formField group">
+					<label for="login-password">Password:</label>
+					<input type="password" id="login-password" value="" ng-model="loginReg.password" class="inputStd" placeholder="Password"/>
+				</div>	      
+				<div class="formField group">
+					<label for="login-password">Display Name</label>
+					<input type="text" id="login-name" value="" ng-model="loginReg.displayName" class="inputStd" placeholder="Your name as others will see it, eg: Susan Smith"/>
+				</div>	      
+				<button ng-click="createUser(loginReg)"  class="btn loginEmail">Sign Up</button>
+			</fieldset>
+		</form>
+	</div> 
 	
+
+
+
+	
+<!--
 		<div class="loginHead" ng-hide="loading">Register using your email Address:</div>
 		<form  ng-hide="loading">
 		<fieldset>
@@ -35,20 +78,10 @@
 				 <input type="text" id="login-name" value="" ng-model="loginReg.displayName" class="inputStd" placeholder="Your name as others will see it, eg: Susan Smith"/>
 				 </div>	      
 				 
-<!--
-			 	<div class="formField group ">
-			 	<label for="rememebrcheck">Stay Logged In:</label> 
-					<div class="roundedTwo" id="rememebrcheck">
-							<input type="checkbox" value="None" id="roundedTwo" name="check"  ng-model="loginReg.rememberMe"  />
-							<label for="roundedTwo"></label>
-				  </div>   
-				</div>			 
--->
-
-	      <button ng-click="createUser(loginReg)" class="btn">Register</button>
+ 	      <button ng-click="createUser(loginReg)" class="btn">Register</button>
  		</fieldset>
 		</form>
-	</div><!-- ends userForm -->
+-->
 	
 </div><!-- ends the Ctonetent -->
 </span><!-- ends of NOT logged in bit -->

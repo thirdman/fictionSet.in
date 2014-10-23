@@ -1,5 +1,5 @@
 var app = angular.module("myApp", 
-	["firebase", 'ngRoute', 'myApp.directives', 'angular-underscore','ngLodash', 'angucomplete-alt', 'ngResource', 'angularMapbox', 'ngDialog', 'ngResource']
+	["firebase", 'ngRoute', 'myApp.directives', 'angular-underscore','ngLodash', 'angucomplete-alt', 'ngResource', 'angularMapbox', 'ngDialog', 'ngResource', 'ngTagsInput']
 		);
 
 app.config(["$routeProvider", '$locationProvider','ngDialogProvider', function($routeProvider, $locationProvider, ngDialogProvider) {
@@ -41,15 +41,16 @@ app.config(["$routeProvider", '$locationProvider','ngDialogProvider', function($
     title: 'Login',
     pageClass: 'loginPage',
     resolve: {
-      // controller will not be invoked until getCurrentUser resolves
-      "currentUser": ["simpleLogin", function(simpleLogin) {
+       "currentUser": ["simpleLogin", function(simpleLogin) {
          return simpleLogin.$getCurrentUser();
       }]
     }
   })
   .when("/register", {
     controller: "RegisterCtrl",
-    templateUrl: "views/register.html"
+    templateUrl: "views/register.html",
+    title: 'Sign Up',
+    pageClass: 'loginPage'
     //,
 /*
     resolve: {
@@ -259,8 +260,9 @@ app.config(["$routeProvider", '$locationProvider','ngDialogProvider', function($
 
 app.run(['$location', '$rootScope', function($location, $rootScope) {
     $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
-        $rootScope.title = current.$$route.title;
-        $rootScope.pageClass = current.$$route.pageClass;
+        $rootScope.title = $location.title;
+        //$rootScope.pageClass = $location.pageClass;
+        $rootScope.pageClass =  current.$$route.pageClass
          console.log($rootScope);
     });
 }]);
@@ -271,7 +273,11 @@ app.run(['$location', '$rootScope', function($location, $rootScope) {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
- 
+app.factory("simpleLogin1", ["$firebaseSimpleLogin", function($firebaseSimpleLogin) {
+  var ref = new Firebase("https://sweltering-fire-3219.firebaseio.com/");
+  return $firebaseSimpleLogin(ref);
+}]);
+
 
 app.factory("simpleLogin", ["$firebaseSimpleLogin", "Profile", "$rootScope", function($firebaseSimpleLogin, Profile, $rootScope) {
   var ref = new Firebase("https://sweltering-fire-3219.firebaseio.com/"); //sets the location we're authenticating for
@@ -280,12 +286,16 @@ app.factory("simpleLogin", ["$firebaseSimpleLogin", "Profile", "$rootScope", fun
   var currentUserImg;
   var userRole = 0;
   var userAaa = false;
+  $rootScope.theerror = '';
+ // $scope.iserror = false;
 
   //  return $firebaseSimpleLogin(ref);
   var auth = new FirebaseSimpleLogin(ref, function(error, user) {
 	  if (error) {
 	    // an error occurred while attempting login
 	    console.log(error);
+			  $rootScope.theerror = error;
+			  
 	        switch(error.code) {
 		      case "INVALID_EMAIL":
 			  console.log('invalid email');
@@ -295,8 +305,11 @@ app.factory("simpleLogin", ["$firebaseSimpleLogin", "Profile", "$rootScope", fun
 		      // handle an invalid password
 		      default:
 			  console.log('Error');
-		    }
+			//$scope.$apply();
+			
 
+		    }
+ 
 		} else if (user) {
 		// user authenticated with Firebase
 	    console.log("authenticated");
@@ -341,8 +354,8 @@ app.factory("simpleLogin", ["$firebaseSimpleLogin", "Profile", "$rootScope", fun
 	  console.log(' not (user), so...');
 	  //user is logged out
 	  }
-	});
-	return $firebaseSimpleLogin(ref); // triggers the above auth function, given the referred location.
+	});//
+	return $firebaseSimpleLogin(ref);
   }]);
 
 app.factory("getFirebase", ["$scope", "$location", function($scope, $Location) {
@@ -2157,9 +2170,7 @@ if(collectionobj.title){
 					var cleanedTempBook = $scope.tempBook;
 					console.log(cleanedTempBook);
 					var cleanedTempBook = angular.copy(cleanedTempBook);
-//					console.log('after angularcopy...');
-//					console.log(cleanedTempBook);
-					//SAVE BOOK
+ 					//SAVE BOOK
 					//var newPostRef = refBook.push($scope.tempBook);
 					var newPostRef = refBook.push(cleanedTempBook);
 					var postID = newPostRef.name();
@@ -2178,13 +2189,13 @@ if(collectionobj.title){
  					     });
 					//refBook.child(postID).child('places').set(cleanedPlaces);
 					//refPlaces.update(cleanedPlaces);
-
 					var cleanedTags = $scope.tempTags;
-					var cleanedTags = angular.copy(cleanedTags)
-					angular.forEach( cleanedTags, function(aTag, key) {
-						refBook.child(postID).child('tags').child(aTag.tagName).set(aTag);
-//						refTags.child(aTag.tagName).set(aTag.tagName);
-						refTags.child(aTag.tagName).child('books').push(postID);
+					var cleanedTags = angular.copy(cleanedTags);
+ 					angular.forEach(cleanedTags, function(aTag, key) {
+						refBook.child(postID).child('tags').child(aTag.text).set({
+							tagId: aTag.text
+						});
+ 						refTags.child(aTag.text).child('books').push(postID);
 					});
 					var cleanedExcerpts = $scope.tempExcerpts;
 					var cleanedExcerpts = angular.copy(cleanedExcerpts)
@@ -2248,8 +2259,9 @@ app.controller("DialogCollectionsAdd",  ["$scope", "$location", "ngDialog", "sim
 // USER ADMIN
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*
 
-app.controller("LoginCtrl",  ["$scope", "$location", "currentUser", "simpleLogin", function($scope, $location, currentUser,   simpleLogin) {
+app.controller("LoginCtrl",  ["$scope", "$location", "currentUser", "simpleLogin", '$http', function($scope, $location, currentUser, simpleLogin, $http) {
   try {
   	if (currentUser) {
 	   	 console.log("logged in");
@@ -2263,10 +2275,16 @@ app.controller("LoginCtrl",  ["$scope", "$location", "currentUser", "simpleLogin
   } 
   catch(e) {
 	  'error';
-  }
+	  console.log(e)
+   }
   $scope.loginInfo = {}
-   $scope.pageClass = "loginPage"; 
+  $scope.pageClass = "loginPage"; 
  }]);
+ 
+*/
+ 
+ 
+/*
 
 app.controller("RegisterCtrl",  ["$firebaseSimpleLogin", "$scope", "$location", "simpleLogin", function($firebaseSimpleLogin, $scope, $location, simpleLogin) {
 
@@ -2339,27 +2357,9 @@ app.controller("RegisterCtrl",  ["$firebaseSimpleLogin", "$scope", "$location", 
  		});//ends var auth...
 
  	}
-/*
-   var createUser = function(email, password) {
-       var ref = new Firebase('https://sweltering-fire-3219.firebaseio.com');
-      var auth = new FirebaseSimpleLogin(ref, function(error, user) {
-        if (error) {
-          // an error occurred while attempting login
-          console.log(error);
-        } else if (user) {
-          // user authenticated with Firebase
-         // $rootScope.loginReg = user;
-          $location.path('/stores').replace();
-          $scope.$apply();
-        } else {
-          // user is logged out
-        }
-      });
-    //  AuthService.createUser(email, password, auth);
-    }
-*/
-    
+     
  }]);
+*/
  
 app.controller("AccountCtrl", ["$scope", "Profile", "currentUser", "$firebase","$location","filterFilter",
   function($scope, Profile, currentUser, $firebase, $location, filterFilter) {
@@ -3081,6 +3081,85 @@ app.controller("AddMessageCtrl", [ "$scope", "currentUser", "$firebase", "$route
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+app.controller('TagCtrl', ['$scope', '$http', '$firebase', 'tags', '$filter', 'uniqueFilter', function($scope, $http, $firebase, tags, $filter, uniqueFilter) {
+	var refTheTags = new Firebase('https://sweltering-fire-3219.firebaseio.com/tags/');
+	refTheTags.once('value', function(snapshot) {
+	   	var taglist = snapshot.val();
+	   	var tempList = [];
+	   	var tempListTags = [];
+	   	
+	   	angular.forEach(taglist, function(value, key){
+		   	var thisObj = {};
+		 	thisObj.text = value.tagId;
+		 	tempListTags.push(thisObj);
+	    });
+		//console.log($filter('unique')(tempListTags));
+		
+		$scope.loadTags = function(query) {
+		    return tags.load(query, tempListTags);
+		};
+	});
+
+}]);
+
+app.service('tags', function($q, filterFilter) {
+	// EXAMPLE: 
+	//  var tags = [
+	//    { "text": "Tag1" },
+	//    { "text": "Tag2" }
+	//  ];
+	this.load = function(query, tagArray) {
+    	var deferred = $q.defer();
+		var newTagArray = filterFilter(tagArray, query);
+	  	console.log(newTagArray);
+	  	deferred.resolve(newTagArray);
+	  	return deferred.promise;
+	};
+});
+
+          
+      /*
+    
+app.controller('TypeaheadController', ['$scope', 'JSTagsCollection', function($scope, JSTagsCollection) {
+  // Build JSTagsCollection
+  
+  $scope.tags = new JSTagsCollection(["jsTag", "angularJS"]);
+
+  // Export jsTags options, inlcuding our own tags object
+  $scope.jsTagOptions = {
+    'tags': $scope.tags
+  };
+  
+  // **** Typeahead code **** //
+  
+  // Build suggestions array
+  var suggestions = ['jsTag', 'c#', 'java', 'javascript', 'jquery', 'android' , 'php', 'c++', 'python', 'ios', 'mysql', 'iphone', 'sql', 'html', 'css', 'objective-c', 'ruby-on-rails', 'c', 'sql-server', 'ajax', 'xml', '.net', 'ruby', 'regex', 'database', 'vb.net', 'arrays', 'eclipse', 'json', 'django', 'linux', 'xcode', 'windows', 'html5', 'winforms', 'r', 'wcf', 'visual-studio-2010', 'forms', 'performance', 'excel', 'spring', 'node.js', 'git', 'apache', 'entity-framework', 'asp.net', 'web-services', 'linq', 'perl', 'oracle', 'action-script', 'wordpress', 'delphi', 'jquery-ui', 'tsql', 'mongodb', 'neo4j', 'angularJS', 'unit-testing', 'postgresql', 'scala', 'xaml', 'http', 'validation', 'rest', 'bash', 'django', 'silverlight', 'cake-php', 'elgg', 'oracle', 'cocoa', 'swing', 'mocha', 'amazon-web-services'];
+  suggestions = suggestions.map(function(item) { return { "suggestion": item } });
+  
+  // Instantiate the bloodhound suggestion engine
+  var suggestions = new Bloodhound({
+    datumTokenizer: function(d) { return Bloodhound.tokenizers.whitespace(d.suggestion); },
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    local: suggestions
+  });
+
+  // Initialize the bloodhound suggestion engine
+  suggestions.initialize();
+
+  // Single dataset example
+  $scope.exampleData = {
+    displayKey: 'suggestion',
+    source: suggestions.ttAdapter()
+  };
+  
+  // Typeahead options object
+  $scope.exampleOptions = {
+    hint: false,
+    highlight: true
+  };
+}]);
+*/
+
 
 /*
  
@@ -3124,7 +3203,21 @@ function getAccessLevel(userid){
     }
 });
 
-
+/*
+app.filter('unique', function() {
+    return function(input, key) {
+        var unique = {};
+        var uniqueList = [];
+        for(var i = 0; i < input.length; i++){
+            if(typeof unique[input[i][key]] == "undefined"){
+                unique[input[i][key]] = "";
+                uniqueList.push(input[i]);
+            }
+        }
+        return uniqueList;
+    };
+});
+*/
 
  
  app.filter('to_trusted', ['$sce', function($sce){
@@ -3307,4 +3400,6 @@ function arrayObjectIndexOf(arr, obj){
     };
     return -1;
 } 
+
+ 
 

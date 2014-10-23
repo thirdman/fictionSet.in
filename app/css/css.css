@@ -30,7 +30,7 @@ body {
 /* ///////// MISC   /////////*/
 /* line 5, ../../scss/includes/misc.scss */
 ::-webkit-input-placeholder {
-  color: #f0f0f0;
+  color: #ccc;
   font-weight: normal;
   font-weight: 100;
   /*
@@ -43,7 +43,7 @@ body {
 /* line 17, ../../scss/includes/misc.scss */
 :-moz-placeholder {
   /* Firefox 18- */
-  color: #f0f0f0;
+  color: #ccc;
   font-weight: 100;
   /*
      font-style: italic;
@@ -55,7 +55,7 @@ body {
 /* line 28, ../../scss/includes/misc.scss */
 ::-moz-placeholder {
   /* Firefox 19+ */
-  color: #f0f0f0;
+  color: #ccc;
   font-weight: 100;
   /*
      font-style: italic;
@@ -66,7 +66,7 @@ body {
 
 /* line 39, ../../scss/includes/misc.scss */
 :-ms-input-placeholder {
-  color: #f0f0f0;
+  color: #ccc;
   font-weight: 100;
   /*
      font-style: italic;
@@ -74,6 +74,55 @@ body {
      font-size: 40px;
      line-height: 2em;
   */ }
+
+/* line 52, ../../scss/includes/misc.scss */
+hr {
+  border: 0px solid white;
+  border-top: 1px solid #ddd;
+  height: 1px;
+  background: transparent; }
+
+/* line 59, ../../scss/includes/misc.scss */
+.infoBox {
+  background: #ffec6b;
+  padding: 1em;
+  border-radius: 10px; }
+
+/* line 68, ../../scss/includes/misc.scss */
+.borderTop {
+  border-top: 1px solid #ddd; }
+
+/* line 72, ../../scss/includes/misc.scss */
+.borderBottom {
+  border-bottom: 1px solid #ddd; }
+
+/* OVERRIDES FOR TAGS*/
+/* line 79, ../../scss/includes/misc.scss */
+tags-input .tags {
+  border: 1px solid #ddd !important;
+  border-radius: 4px !important;
+  outline: none !important;
+  box-shadow: none !important;
+  -moz-appearance: inherit !important;
+  -webkit-appearance: inherit !important;
+  -ms-appearance: inherit !important; }
+  /* line 88, ../../scss/includes/misc.scss */
+  tags-input .tags.focused {
+    box-shadow: inherit !important; }
+
+/* line 93, ../../scss/includes/misc.scss */
+.tag-item {
+  background: #aaa !important;
+  border: 0px solid #949494 !important;
+  cursor: default;
+  display: inline-block;
+  -webkit-border-radius: 2px 3px 3px 2px;
+  -moz-border-radius: 2px 3px 3px 2px;
+  border-radius: 2px 3px 3px 2px;
+  height: 22px; }
+  /* line 105, ../../scss/includes/misc.scss */
+  .tag-item .remove-button {
+    color: #ccc; }
 
 /* app css stylesheet */
 /* line 3, ../../scss/includes/firebase.scss */
@@ -326,9 +375,39 @@ ul {
   width: 100%; }
   /* line 210, ../../scss/includes/common.scss */
   .fullWidth.homeFeat {
-    background: #eee; }
+    background: #eee;
+    background: url(/imgs/bg_world_dark.png) no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover; }
+    /* line 217, ../../scss/includes/common.scss */
+    .fullWidth.homeFeat .titleSection {
+      text-align: center; }
+      /* line 219, ../../scss/includes/common.scss */
+      .fullWidth.homeFeat .titleSection .homeTitle {
+        color: #eee; }
+  /* line 224, ../../scss/includes/common.scss */
+  .fullWidth.pageFeat {
+    background: transparent; }
+    /* line 226, ../../scss/includes/common.scss */
+    .fullWidth.pageFeat .titleSection {
+      border-bottom: 1px solid #ddd; }
+  /* line 230, ../../scss/includes/common.scss */
+  .fullWidth.darkFeat {
+    background: url(/imgs/bg_world_dark.png) no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover; }
+    /* line 236, ../../scss/includes/common.scss */
+    .fullWidth.darkFeat .theContainerHead {
+      padding: 2em; }
+      /* line 238, ../../scss/includes/common.scss */
+      .fullWidth.darkFeat .theContainerHead h3 {
+        color: #eee; }
 
-/* line 215, ../../scss/includes/common.scss */
+/* line 246, ../../scss/includes/common.scss */
 .theContainer {
   margin: 0 5%;
   padding-bottom: 100px;
@@ -336,61 +415,61 @@ ul {
   padding-bottom: 100px;
   max-width: 1200px; }
   @media only screen and (min-width: 0px) and (max-width: 887px) {
-    /* line 215, ../../scss/includes/common.scss */
+    /* line 246, ../../scss/includes/common.scss */
     .theContainer {
       margin: 0 10px; } }
   @media only screen and (min-width: 888px) and (max-width: 1200px) {
-    /* line 215, ../../scss/includes/common.scss */
+    /* line 246, ../../scss/includes/common.scss */
     .theContainer {
       margin: 0 10px; } }
 
-/* line 232, ../../scss/includes/common.scss */
+/* line 263, ../../scss/includes/common.scss */
 .theContainerHead {
   margin: 0 5%;
   margin: 0 auto;
   max-width: 1200px; }
   @media only screen and (min-width: 0px) and (max-width: 887px) {
-    /* line 232, ../../scss/includes/common.scss */
+    /* line 263, ../../scss/includes/common.scss */
     .theContainerHead {
       margin: 0 10px; } }
   @media only screen and (min-width: 888px) and (max-width: 1200px) {
-    /* line 232, ../../scss/includes/common.scss */
+    /* line 263, ../../scss/includes/common.scss */
     .theContainerHead {
       margin: 0 10px; } }
 
-/* line 244, ../../scss/includes/common.scss */
+/* line 275, ../../scss/includes/common.scss */
 .contentWrap {
   position: relative; }
 
-/* line 248, ../../scss/includes/common.scss */
+/* line 279, ../../scss/includes/common.scss */
 .titleBlock {
   border-bottom: 1px solid #ddd; }
-  /* line 250, ../../scss/includes/common.scss */
+  /* line 281, ../../scss/includes/common.scss */
   .titleBlock .btnLogout {
     position: absolute;
     right: 0;
     top: 0; }
 
-/* line 259, ../../scss/includes/common.scss */
+/* line 290, ../../scss/includes/common.scss */
 .contentSection {
   margin-bottom: 1em; }
-  /* line 261, ../../scss/includes/common.scss */
+  /* line 292, ../../scss/includes/common.scss */
   .contentSection h3 {
     margin-top: 0;
     margin-bottom: .66em; }
 
-/* line 268, ../../scss/includes/common.scss */
+/* line 299, ../../scss/includes/common.scss */
 .additionalSection {
   border-top: 1px solid #ddd;
   margin-top: 1em; }
 
-/* line 277, ../../scss/includes/common.scss */
+/* line 308, ../../scss/includes/common.scss */
 .imgList {
   background: #eee;
   border-radius: 4px;
   padding: 1em;
   margin: 10px 0; }
-  /* line 285, ../../scss/includes/common.scss */
+  /* line 316, ../../scss/includes/common.scss */
   .imgList .imgWrap {
     display: inline-block;
     width: 90px;
@@ -398,54 +477,58 @@ ul {
     border-radius: 45px;
     background: #ccc;
     vertical-align: middle; }
-    /* line 292, ../../scss/includes/common.scss */
+    /* line 323, ../../scss/includes/common.scss */
     .imgList .imgWrap img {
       width: 90px;
       height: 90px;
       border-radius: 45px; }
-  /* line 298, ../../scss/includes/common.scss */
+  /* line 329, ../../scss/includes/common.scss */
   .imgList .imgInfo {
     display: inline-block; }
 
-/* line 308, ../../scss/includes/common.scss */
+/* line 339, ../../scss/includes/common.scss */
 .descriptionWrap {
   line-height: 1.6em; }
-  /* line 310, ../../scss/includes/common.scss */
+  /* line 341, ../../scss/includes/common.scss */
   .descriptionWrap b {
     font-weight: normal; }
 
-/* line 319, ../../scss/includes/common.scss */
+/* line 351, ../../scss/includes/common.scss */
+button.btn.actionBtn, a.btn.actionBtn {
+  font-size: 1.5em; }
+
+/* line 359, ../../scss/includes/common.scss */
 .buyWrap {
   display: inline-block;
   vertical-align: top; }
 
-/* line 323, ../../scss/includes/common.scss */
+/* line 363, ../../scss/includes/common.scss */
 .buyLink {
   display: inline-block; }
-  /* line 325, ../../scss/includes/common.scss */
+  /* line 365, ../../scss/includes/common.scss */
   .buyLink.btn {
     margin: 0;
     padding: 0.5em 0.5em 0.25em; }
-  /* line 329, ../../scss/includes/common.scss */
+  /* line 369, ../../scss/includes/common.scss */
   .buyLink .buyPrice {
     font-size: 1.5em;
     line-height: 1.5em;
     font-weight: 300; }
-  /* line 334, ../../scss/includes/common.scss */
+  /* line 374, ../../scss/includes/common.scss */
   .buyLink .buyCurrency {
     font-size: .85em;
     color: #aaa; }
-  /* line 338, ../../scss/includes/common.scss */
+  /* line 378, ../../scss/includes/common.scss */
   .buyLink .buySave {
     font-size: .85em;
     color: yellow; }
-  /* line 343, ../../scss/includes/common.scss */
+  /* line 383, ../../scss/includes/common.scss */
   .buyLink .buyMerchant {
     font-size: .85em;
     line-height: .5em;
     padding: 0; }
 
-/* line 351, ../../scss/includes/common.scss */
+/* line 391, ../../scss/includes/common.scss */
 .buyMore {
   font-size: .85em;
   display: block;
@@ -453,7 +536,7 @@ ul {
   font-style: italic;
   color: #aaa; }
 
-/* line 363, ../../scss/includes/common.scss */
+/* line 403, ../../scss/includes/common.scss */
 .appleIcon {
   height: 20px;
   vertical-align: top;
@@ -461,23 +544,61 @@ ul {
   margin-top: -7px;
   margin-bottom: -6px; }
 
-/* line 376, ../../scss/includes/common.scss */
+/* line 416, ../../scss/includes/common.scss */
 .columnWrap .column50 {
   width: 49.5%; }
-  /* line 378, ../../scss/includes/common.scss */
+  /* line 418, ../../scss/includes/common.scss */
   .columnWrap .column50.columnLeft, .columnWrap .column50.columnRight {
     width: 49.5%; }
   @media only screen and (max-width: 979px) {
-    /* line 376, ../../scss/includes/common.scss */
+    /* line 416, ../../scss/includes/common.scss */
     .columnWrap .column50 {
       width: 100%; }
-      /* line 384, ../../scss/includes/common.scss */
+      /* line 424, ../../scss/includes/common.scss */
       .columnWrap .column50.columnLeft, .columnWrap .column50.columnRight {
         width: 100%; } }
-/* line 390, ../../scss/includes/common.scss */
+/* line 430, ../../scss/includes/common.scss */
 .columnWrap .column100 {
   width: 100%;
   display: block; }
+
+/* line 440, ../../scss/includes/common.scss */
+.contentImg.imgWrapCenter {
+  text-align: center;
+  margin: 1em auto; }
+  /* line 443, ../../scss/includes/common.scss */
+  .contentImg.imgWrapCenter img.contentImgCircle {
+    width: 300px;
+    height: 300px;
+    margin: 10 auto;
+    border-radius: 50%;
+    position: relative; }
+
+/* line 458, ../../scss/includes/common.scss */
+.message.error {
+  color: red;
+  margin: 1em -1em;
+  padding: 1em;
+  background: red;
+  color: #fff;
+  /* border-radius: 3px; */
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3); }
+  /* line 467, ../../scss/includes/common.scss */
+  .message.error h3 {
+    font-weight: normal;
+    color: #fff;
+    border-bottom: 1px solid white; }
+
+/* line 474, ../../scss/includes/common.scss */
+.emptyContent {
+  text-align: center;
+  margin: 2em auto; }
+  /* line 477, ../../scss/includes/common.scss */
+  .emptyContent:before {
+    font-size: 2em;
+    line-height: 2em;
+    vertical-align: middle;
+    margin-right: 10px; }
 
 /* line 1, ../../scss/includes/forms.scss */
 .formField {
@@ -792,50 +913,57 @@ h2.homeTitle {
   margin-bottom: inherit !important;
   display: inline-block;
   vertical-align: top;
-  line-height: 3em;
-  margin: 0; }
+  line-height: 7em;
+  margin: 0;
+  width: 80%; }
 
-/* line 13, ../../scss/includes/pageHome.scss */
+/* line 14, ../../scss/includes/pageHome.scss */
 .titleHalf {
   display: inline-block;
   text-align: right; }
   @media only screen and (min-width: 0px) and (max-width: 887px) {
-    /* line 13, ../../scss/includes/pageHome.scss */
+    /* line 14, ../../scss/includes/pageHome.scss */
     .titleHalf {
       max-width: 60%;
       min-width: inherit; } }
 
-/* line 21, ../../scss/includes/pageHome.scss */
+/* line 22, ../../scss/includes/pageHome.scss */
 .titleHalf input {
   width: 100%;
   margin-left: 10px;
   background: #fff;
+  background: rgba(206, 207, 208, 0.3);
   line-height: 1.5em;
   padding: 2px 12px;
   outline: none;
-  border: 1px solid #ddd;
-  /* 	   border-bottom: 1px solid #ccc; */
+  border: 0px solid #999;
   text-align: left;
   color: #666;
   min-width: 400px;
   font-size: .85em;
   border-radius: 4px; }
+  /* line 37, ../../scss/includes/pageHome.scss */
+  .titleHalf input:focus {
+    background: rgba(255, 255, 255, 0.85);
+    color: #2a2a2a;
+    outline: none; }
   @media only screen and (min-width: 0px) and (max-width: 887px) {
-    /* line 21, ../../scss/includes/pageHome.scss */
+    /* line 22, ../../scss/includes/pageHome.scss */
     .titleHalf input {
       width: 100%;
       min-width: inherit; } }
 
-/* line 43, ../../scss/includes/pageHome.scss */
-.titleHalf input:active {
-  background: rgba(255, 255, 255, 0.7);
-  color: #2a2a2a;
-  outline: none; }
-
-/* line 51, ../../scss/includes/pageHome.scss */
+/*
+   .titleHalf input:active{ 
+   		background: rgba(255,255,255,.7); 
+   		color: #2a2a2a; 
+	   outline: none;
+	   }
+*/
+/* line 59, ../../scss/includes/pageHome.scss */
 .titleSection {
   position: relative; }
-  /* line 53, ../../scss/includes/pageHome.scss */
+  /* line 61, ../../scss/includes/pageHome.scss */
   .titleSection .supportingInfo {
     position: absolute;
     right: 20px;
@@ -846,24 +974,24 @@ h2.homeTitle {
     padding-top: .5em;
     z-index: 20;
     color: #aaa;
-    padding-top: 1.4em;
+    padding-top: 6.5em;
     height: 100%; }
-    /* line 68, ../../scss/includes/pageHome.scss */
+    /* line 77, ../../scss/includes/pageHome.scss */
     .titleSection .supportingInfo .largeType {
       font-size: 3em;
       display: block;
       line-height: .9em;
       margin-top: .5em; }
-    /* line 75, ../../scss/includes/pageHome.scss */
+    /* line 84, ../../scss/includes/pageHome.scss */
     .titleSection .supportingInfo .smallType {
       font-size: .85em;
       display: block; }
   @media only screen and (min-width: 0px) and (max-width: 887px) {
-    /* line 51, ../../scss/includes/pageHome.scss */
+    /* line 59, ../../scss/includes/pageHome.scss */
     .titleSection {
       width: inherit;
       right: 0; }
-      /* line 85, ../../scss/includes/pageHome.scss */
+      /* line 94, ../../scss/includes/pageHome.scss */
       .titleSection .largeType {
         margin-top: 5px; } }
 
@@ -1047,18 +1175,28 @@ h2.homeTitle {
     background: #eee;
     border-radius: 2px;
     padding: .5em; }
+  /* line 128, ../../scss/includes/pageBook.scss */
+  .sideBarItem.sectionTags .aTag a {
+    background: #eee;
+    border-radius: 2px;
+    padding: 2px 4px;
+    text-decoration: none;
+    margin-right: 2px; }
 
-/* line 127, ../../scss/includes/pageBook.scss */
+/* line 140, ../../scss/includes/pageBook.scss */
 .sectionAddedBy {
+  border-top: 0px solid #ddd;
+  padding-top: 1em;
+  margin-top: 1em;
   font-size: .75em; }
   @media only screen and (max-width: 979px) {
-    /* line 127, ../../scss/includes/pageBook.scss */
+    /* line 140, ../../scss/includes/pageBook.scss */
     .sectionAddedBy {
       font-size: 1em; } }
-  /* line 134, ../../scss/includes/pageBook.scss */
+  /* line 150, ../../scss/includes/pageBook.scss */
   .sectionAddedBy .addedBy.user {
     color: #aaa; }
-  /* line 138, ../../scss/includes/pageBook.scss */
+  /* line 154, ../../scss/includes/pageBook.scss */
   .sectionAddedBy .userComment {
     background: #eee;
     color: #999;
@@ -1067,7 +1205,7 @@ h2.homeTitle {
     position: relative;
     margin-top: 8px;
     font-style: italic; }
-    /* line 147, ../../scss/includes/pageBook.scss */
+    /* line 163, ../../scss/includes/pageBook.scss */
     .sectionAddedBy .userComment:before {
       width: 0;
       height: 0;
@@ -1080,15 +1218,15 @@ h2.homeTitle {
       content: "";
       position: absolute; }
 
-/* line 164, ../../scss/includes/pageBook.scss */
+/* line 180, ../../scss/includes/pageBook.scss */
 .sectionNotifications .notification {
   border-bottom: 1px solid #eee;
   margin-bottom: 8px;
   padding: 0 0 10px 0; }
-  /* line 168, ../../scss/includes/pageBook.scss */
+  /* line 184, ../../scss/includes/pageBook.scss */
   .sectionNotifications .notification:first-child {
     border-top: 1px solid #eee; }
-  /* line 173, ../../scss/includes/pageBook.scss */
+  /* line 189, ../../scss/includes/pageBook.scss */
   .sectionNotifications .notification.msgSystem:before, .sectionNotifications .notification.msgUser:before, .sectionNotifications .notification.msgBook:before {
     background: #aaa;
     height: 30px;
@@ -1101,35 +1239,35 @@ h2.homeTitle {
     font-size: .75em;
     padding: 0 1em;
     margin-right: 1em; }
-  /* line 189, ../../scss/includes/pageBook.scss */
+  /* line 205, ../../scss/includes/pageBook.scss */
   .sectionNotifications .notification.msgSystem:before {
     content: "FS"; }
-  /* line 194, ../../scss/includes/pageBook.scss */
+  /* line 210, ../../scss/includes/pageBook.scss */
   .sectionNotifications .notification.msgBook:before {
     content: "Book"; }
-  /* line 199, ../../scss/includes/pageBook.scss */
+  /* line 215, ../../scss/includes/pageBook.scss */
   .sectionNotifications .notification.msgUser:before {
     content: "User"; }
-/* line 205, ../../scss/includes/pageBook.scss */
+/* line 221, ../../scss/includes/pageBook.scss */
 .sectionNotifications .msgContent {
   position: relative; }
-/* line 210, ../../scss/includes/pageBook.scss */
+/* line 226, ../../scss/includes/pageBook.scss */
 .sectionNotifications .msgMeta {
   color: #aaa;
   font-size: .85em; }
 
-/* line 217, ../../scss/includes/pageBook.scss */
+/* line 233, ../../scss/includes/pageBook.scss */
 .bookmarkSection {
   position: absolute;
   right: 60px;
   top: -19px;
   z-index: 9999; }
   @media only screen and (max-width: 979px) {
-    /* line 217, ../../scss/includes/pageBook.scss */
+    /* line 233, ../../scss/includes/pageBook.scss */
     .bookmarkSection {
       right: 0;
       top: -14px; } }
-  /* line 227, ../../scss/includes/pageBook.scss */
+  /* line 243, ../../scss/includes/pageBook.scss */
   .bookmarkSection .doingBookmarking {
     display: none;
     color: #aaa;
@@ -1141,28 +1279,28 @@ h2.homeTitle {
     display: block;
     margin-top: 14px; }
     @media only screen and (max-width: 979px) {
-      /* line 227, ../../scss/includes/pageBook.scss */
+      /* line 243, ../../scss/includes/pageBook.scss */
       .bookmarkSection .doingBookmarking {
         width: 50px; } }
 
-/* line 244, ../../scss/includes/pageBook.scss */
+/* line 260, ../../scss/includes/pageBook.scss */
 .relatedGroup {
   display: inline-block;
   vertical-align: top;
   margin-right: 1em; }
 
-/* line 250, ../../scss/includes/pageBook.scss */
+/* line 266, ../../scss/includes/pageBook.scss */
 .icon {
   text-transform: uppercase;
   font-size: .75em; }
-  /* line 255, ../../scss/includes/pageBook.scss */
+  /* line 271, ../../scss/includes/pageBook.scss */
   .icon.iconAdd {
     color: #2a2a2a;
     cursor: pointer; }
-    /* line 258, ../../scss/includes/pageBook.scss */
+    /* line 274, ../../scss/includes/pageBook.scss */
     .icon.iconAdd.inCollection {
       color: red; }
-    /* line 261, ../../scss/includes/pageBook.scss */
+    /* line 277, ../../scss/includes/pageBook.scss */
     .icon.iconAdd:before {
       display: inline-block;
       position: relative;
@@ -1179,13 +1317,13 @@ h2.homeTitle {
       font-weight: 800;
       line-height: 25px;
       text-align: center; }
-    /* line 280, ../../scss/includes/pageBook.scss */
+    /* line 296, ../../scss/includes/pageBook.scss */
     .icon.iconAdd:hover {
       color: red; }
-  /* line 289, ../../scss/includes/pageBook.scss */
+  /* line 305, ../../scss/includes/pageBook.scss */
   .icon .iconFill {
     fill: #ff00ff; }
-  /* line 293, ../../scss/includes/pageBook.scss */
+  /* line 309, ../../scss/includes/pageBook.scss */
   .icon.iconBookmark {
     color: #2a2a2a;
     cursor: pointer;
@@ -1193,13 +1331,13 @@ h2.homeTitle {
     width: 200px;
     display: block; }
     @media only screen and (max-width: 979px) {
-      /* line 293, ../../scss/includes/pageBook.scss */
+      /* line 309, ../../scss/includes/pageBook.scss */
       .icon.iconBookmark {
         width: 50px; }
-        /* line 301, ../../scss/includes/pageBook.scss */
+        /* line 317, ../../scss/includes/pageBook.scss */
         .icon.iconBookmark span {
           display: none; } }
-    /* line 304, ../../scss/includes/pageBook.scss */
+    /* line 320, ../../scss/includes/pageBook.scss */
     .icon.iconBookmark:before {
       display: inline-block;
       position: relative;
@@ -1215,52 +1353,52 @@ h2.homeTitle {
       font-size: 30px;
       padding-right: 11px;
       color: #f9f9f9; }
-    /* line 321, ../../scss/includes/pageBook.scss */
+    /* line 337, ../../scss/includes/pageBook.scss */
     .icon.iconBookmark.inCollection {
       color: red; }
-      /* line 323, ../../scss/includes/pageBook.scss */
+      /* line 339, ../../scss/includes/pageBook.scss */
       .icon.iconBookmark.inCollection:before {
         background: url(../imgs/icon_bookmark_longheart_red.svg) 0px 0px no-repeat;
         height: 100px;
         background-size: 50px;
         content: "-";
         color: #E50000; }
-      /* line 331, ../../scss/includes/pageBook.scss */
+      /* line 347, ../../scss/includes/pageBook.scss */
       .icon.iconBookmark.inCollection:hover:before {
         color: #fff; }
-    /* line 337, ../../scss/includes/pageBook.scss */
+    /* line 353, ../../scss/includes/pageBook.scss */
     .icon.iconBookmark:hover {
       color: red; }
-      /* line 339, ../../scss/includes/pageBook.scss */
+      /* line 355, ../../scss/includes/pageBook.scss */
       .icon.iconBookmark:hover:before {
         color: red; }
 
 @media only screen and (min-width: 980px) {
-  /* line 348, ../../scss/includes/pageBook.scss */
+  /* line 364, ../../scss/includes/pageBook.scss */
   .columnWrap {
     margin-top: 1em;
     display: table;
     width: 100%; }
-    /* line 353, ../../scss/includes/pageBook.scss */
+    /* line 369, ../../scss/includes/pageBook.scss */
     .columnWrap .column {
       display: table-cell;
       vertical-align: top; }
-    /* line 358, ../../scss/includes/pageBook.scss */
+    /* line 374, ../../scss/includes/pageBook.scss */
     .columnWrap .columnLeft {
       width: 38%;
       padding-right: 1em; }
-    /* line 361, ../../scss/includes/pageBook.scss */
+    /* line 377, ../../scss/includes/pageBook.scss */
     .columnWrap .columnRight {
       width: 60%;
       border-left: 1px solid #ddd;
       padding-left: 2em;
       margin-left: 2em; }
-      /* line 367, ../../scss/includes/pageBook.scss */
+      /* line 383, ../../scss/includes/pageBook.scss */
       .columnWrap .columnRight .columnRight {
         padding-left: 1em;
         margin-left: 1em; } }
 @media only screen and (max-width: 979px) {
-  /* line 378, ../../scss/includes/pageBook.scss */
+  /* line 394, ../../scss/includes/pageBook.scss */
   .columnLeft {
     border-bottom: 1px solid #ddd; } }
 /*
@@ -1532,17 +1670,25 @@ ul {
   background: #eee;
   border-radius: 4px;
   padding: .5em; }
-  /* line 6, ../../scss/includes/bookEdit.scss */
+  /* line 8, ../../scss/includes/bookEdit.scss */
   .searchWrap.searchPlaces {
     margin-top: 1em; }
-  /* line 10, ../../scss/includes/bookEdit.scss */
+  /* line 12, ../../scss/includes/bookEdit.scss */
+  .searchWrap.formField.group {
+    background: #f2f2f2; }
+    /* line 14, ../../scss/includes/bookEdit.scss */
+    .searchWrap.formField.group .form-control {
+      width: 100%;
+      box-shadow: none;
+      font-size: inherit; }
+  /* line 21, ../../scss/includes/bookEdit.scss */
   .searchWrap button {
     display: inline-block;
     outline: none;
     vertical-align: middle;
     font-size: 1em;
     line-height: 1.6em; }
-  /* line 17, ../../scss/includes/bookEdit.scss */
+  /* line 28, ../../scss/includes/bookEdit.scss */
   .searchWrap .form-control {
     vertical-align: middle;
     display: inline-block;
@@ -1553,7 +1699,7 @@ ul {
     line-height: 1.6em;
     padding: .2em; }
 
-/* line 31, ../../scss/includes/bookEdit.scss */
+/* line 42, ../../scss/includes/bookEdit.scss */
 .dataSection.additonalComment {
   border-top: 1px solid #ddd; }
 
@@ -2316,31 +2462,48 @@ width:3px;
       /* line 74, ../../scss/includes/signup.scss */
       .formGroup.loginForm button.btn.loginEmail {
         width: 90%; }
-    /* line 79, ../../scss/includes/signup.scss */
+    /* line 78, ../../scss/includes/signup.scss */
+    .formGroup.loginForm .loading {
+      font-style: italic; }
+    /* line 82, ../../scss/includes/signup.scss */
     .formGroup.loginForm .dialogHead {
       text-align: center;
       background: #323a45;
-      border-radius: 3px 3px 0 0; }
-      /* line 84, ../../scss/includes/signup.scss */
+      border-radius: 3px 3px 0 0;
+      margin: -9px -9px 0;
+      height: 50px; }
+      /* line 89, ../../scss/includes/signup.scss */
       .formGroup.loginForm .dialogHead .dialogLogo {
         margin: 0 auto;
         height: 50px;
-        position: relative;
-        top: -5px; }
-        /* line 90, ../../scss/includes/signup.scss */
+        border-radius: 80px;
+        background: #323a45;
+        width: 60px;
+        height: 65px;
+        top: -10px;
+        padding-top: 12px;
+        margin-top: 0px;
+        /* border: 5px solid white; */
+        /* box-shadow: 0px 0px 5px rgba(0,0,0,.4); */
+        /* background: #222; */
+        line-height: 70px;
+        /* border: 2px solid #23252F; */ }
+        /* line 105, ../../scss/includes/signup.scss */
         .formGroup.loginForm .dialogHead .dialogLogo img {
-          width: 50px;
-          height: auto; }
-    /* line 96, ../../scss/includes/signup.scss */
+          width: 30px;
+          height: auto;
+          top: 0;
+          line-height: 70px; }
+    /* line 113, ../../scss/includes/signup.scss */
     .formGroup.loginForm h3.groupHead {
       /* text-transform: uppercase; */
       /* color: #999; */
       font-size: 1em;
       text-align: center; }
-    /* line 102, ../../scss/includes/signup.scss */
+    /* line 119, ../../scss/includes/signup.scss */
     .formGroup.loginForm .socialLoginWrap {
       text-align: center; }
-    /* line 106, ../../scss/includes/signup.scss */
+    /* line 123, ../../scss/includes/signup.scss */
     .formGroup.loginForm .divider {
       height: 20px;
       margin-top: 40px;
@@ -2348,7 +2511,7 @@ width:3px;
       border-top: 1px solid #eee;
       width: 90%;
       margin: 40px 5% 0; }
-      /* line 113, ../../scss/includes/signup.scss */
+      /* line 130, ../../scss/includes/signup.scss */
       .formGroup.loginForm .divider .divideOr {
         background: #eee;
         width: 40px;
@@ -2362,48 +2525,65 @@ width:3px;
         position: relative;
         top: -20px;
         text-transform: uppercase;
-        color: #aaa;
+        color: #999;
         font-style: italic;
-        font-size: .75em; }
-    /* line 131, ../../scss/includes/signup.scss */
+        font-size: .75em;
+        font-weight: 500; }
+    /* line 149, ../../scss/includes/signup.scss */
     .formGroup.loginForm .emailLoginForm {
       border: 0px solid white;
       margin: 0;
       text-align: center; }
-      /* line 135, ../../scss/includes/signup.scss */
+      /* line 153, ../../scss/includes/signup.scss */
       .formGroup.loginForm .emailLoginForm fieldset {
         border: 0px solid white; }
-      /* line 138, ../../scss/includes/signup.scss */
+      /* line 156, ../../scss/includes/signup.scss */
       .formGroup.loginForm .emailLoginForm .formField.group {
         text-align: left;
         background: #fff;
         margin: 0;
         padding: .5em 1em; }
-        /* line 144, ../../scss/includes/signup.scss */
+        /* line 162, ../../scss/includes/signup.scss */
         .formGroup.loginForm .emailLoginForm .formField.group label {
           font-size: .75em;
           color: #aaa;
           font-style: italic; }
-        /* line 149, ../../scss/includes/signup.scss */
+        /* line 167, ../../scss/includes/signup.scss */
         .formGroup.loginForm .emailLoginForm .formField.group .inputStd {
           width: 100%;
-          border: 0px;
+          border: 1px solid #fff;
           box-shadow: 1px 1px 3px -1px rgba(0, 0, 0, 0.2) inset;
-          background: #f2f2f2; }
-        /* line 155, ../../scss/includes/signup.scss */
+          background: #f2f2f2;
+          outline: none; }
+          /* line 173, ../../scss/includes/signup.scss */
+          .formGroup.loginForm .emailLoginForm .formField.group .inputStd:focus {
+            border: 1px solid #bbb;
+            outline: none;
+            background: #fff; }
+        /* line 179, ../../scss/includes/signup.scss */
         .formGroup.loginForm .emailLoginForm .formField.group .roundedTwo label {
           float: right;
           margin-right: 4px; }
+  /* line 188, ../../scss/includes/signup.scss */
+  .formGroup.signupLink {
+    width: 500px;
+    background: transparent;
+    text-align: center;
+    color: #fff;
+    margin: 0 auto; }
+    /* line 194, ../../scss/includes/signup.scss */
+    .formGroup.signupLink a {
+      color: #52C4DF; }
 
-/* line 167, ../../scss/includes/signup.scss */
+/* line 202, ../../scss/includes/signup.scss */
 .pageViewContainer.loginPage {
-  background: url(http://api.tiles.mapbox.com/v3/thirdman.k07mfne9/-2.69531,54.75844,2/1200x900.png) no-repeat center center fixed;
+  background: url(/imgs/bg_world_dark.png) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover; }
-  /* line 175, ../../scss/includes/signup.scss */
-  .pageViewContainer.loginPagebody {
+  /* line 210, ../../scss/includes/signup.scss */
+  .pageViewContainer.loginPage body {
     background: transparent; }
 
 /* line 5, ../../scss/includes/mapbox.scss */

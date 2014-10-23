@@ -29,7 +29,8 @@ markers=icon:http://dev-nz.nomosone.com/i/themes/theme_23/images/mapMarker.png%7
 			<span ng-show="!inCollection">Save to Your Bookshelf</span>
 		</div>
 		<div class="doingBookmarking" ng-show="isBookmarking">Working...</div>
- 	</div>								
+ 	</div>		
+ 							
 <!--
 userColl is {{userColl}}<br>
 add <a href="#" ng-click="pushToColl()">add book</a>
@@ -59,23 +60,13 @@ add <a href="#" ng-click="pushToColl()">add book</a>
 					<div ng-repeat="place in book.places" class="aTag placeTag" >
  								<a ng-href="#/place/{{place.geonameId}}" ng-class="(place.name==place.countryName) ? 'countryName' : ''" class="placeName">{{place.name}}</a><span ng-if="place.name != place.countryName"> <a href="#/place/{{place.countryName}}" class="placeCountry"><span>{{place.countryCode}}<span></a></span>
  					</div>
+
 <!--
- 					<div ng-repeat="location in book.tags"  class="aTag" >
-					<a ng-href="#/setting/{{location}}"><mapimg caption="title" map-location="tag" map-zoom="8" map-size="100"   />     <tagcount tag-thetag="{{location}}"></tagcount></a>
-					</div>
+ 					
 -->
-			</div><!-- ends tags -->
-			
-<!--
-			<div class="buyWrap sideBarItem">
-				<h4>Bookshelves</h4>
-				<div class="collectionWrap">
-					<div class="icon collectionAdd iconAdd" ng-class="(inCollection) ? 'inCollection' : ''" ng-click="collectionsAdd(bookid)"><span ng-show="inCollection">Saved</span><span ng-show="!inCollection">Save to Your Bookshelf</span></div>
-				</div>
-			</div>
--->
-			
-			<div class="buyWrap sideBarItem">
+			</div><!-- ends places -->
+
+ 			<div class="buyWrap sideBarItem">
 				<div class="loading" ng-show="isLoadingAmazon">Finding Prices...</div>
 				<div class="noContent" ng-show"noAmazon"></div>
 				<div class="hasContent" ng-show="hasAmazon" >
@@ -98,63 +89,61 @@ add <a href="#" ng-click="pushToColl()">add book</a>
 				</div>
 			</div>
 
-			<div class="sideBarItem sectionAddedBy" ng-if="book.addedById">
-	 				<div class="user addedBy"><span class=" iconLabel icon-user"></span>Added by <span class="userGroup">{{book.addedByName}}</span></div>
-				<div class="userComment" ng-if="book.userComment">{{book.userComment}}</div>
-			</div>
 			
 		</div><!-- column -->
 
 
 		<div class="theContent column columnRight" >
 			<h4><span class="iconLabel icon-book-alt2">Description:</h4>
-<!-- 				<span class="descriptionWrap">{{  book.description | to_lines}}</span> -->
-<!-- 			<span class="descriptionWrap" ng-bind-html="book.description | to_lines"  ></span> -->
-<!-- 				<span ng-bind-html="book.description | to_trusted_lines"  ></span> -->
+			<!--<span class="descriptionWrap">{{  book.description | to_lines}}</span> -->
+			<!--<span class="descriptionWrap" ng-bind-html="book.description | to_lines"  ></span> -->
+			<!--<span ng-bind-html="book.description | to_trusted_lines"  ></span> -->
 			<p class="descriptionWrap" ng-bind="book.description | to_plain"  ></p>
  
 			<!-- <p>{{  book.description }}</p> -->
 
-
 			 <div class="bookImages" ng-if="book.locationimg">
 			    <img class="locationImg" ng-if="book.locationimg" src="{{book.locationimg}}" style="height: 200px;"/>
 			</div>
+			
+			<div class="sideBarItem sectionAddedBy" ng-if="book.addedById">
+	 				<div class="user addedBy"><span class=" iconLabel icon-user"></span>Added by <span class="userGroup">{{book.addedByName}}</span></div>
+				<div class="userComment" ng-if="book.userComment">{{book.userComment}}</div>
+			</div>
 
-		</div>
+		</div><!-- ends column -->
 
 
- 	    </div><!-- bookinfo -->
+	</div><!-- bookinfo -->
 
 			<div class="additionalSection columnWrap">
  					<div class="contentSection collectionWrap column column50"  >
 						<h4><span class="iconLabel icon-book"></span>Set in the same country/countries</h4>
-							<span ng-repeat="relatedCountry in relatedBooks" class="relatedGroup">Set in <a href="#/place/{{relatedCountry.countryId}}">{{relatedCountry.countryName}}</a>
-							<!-- now do the related books for each country ... -->
-									<ul>
-									 	<li ng-repeat="relatedBook in relatedCountry.countryBooks" class="collectionItem" >
-									 	<a href="#/book/{{relatedBook.$id}}" class="collectionImgLink"><img src="{{relatedBook.coverurl}}" class="collectionImg"></a>
-									 	<h5><a href="#/book/{{relatedBook.$id}}">{{relatedBook.title}}</a></h5>
-										 </li>
-									</ul>
-								<!-- ends the related book -->
-							</span>						
-							<!-- ends the loop of countries -->
+						<span ng-repeat="relatedCountry in relatedBooks" class="relatedGroup">Set in <a href="#/place/{{relatedCountry.countryId}}">{{relatedCountry.countryName}}</a>
+						<!-- now do the related books for each country ... -->
+								<ul>
+								 	<li ng-repeat="relatedBook in relatedCountry.countryBooks" class="collectionItem" >
+								 	<a href="#/book/{{relatedBook.$id}}" class="collectionImgLink"><img src="{{relatedBook.coverurl}}" class="collectionImg"></a>
+								 	<h5><a href="#/book/{{relatedBook.$id}}">{{relatedBook.title}}</a></h5>
+									 </li>
+								</ul>
+							<!-- ends the related book -->
+						</span><!-- ends the loop of countries -->
 					</div>
 
 
 					<div class="contentSection collectionWrap column column50"  >
 						<h4><span class="iconLabel icon-book"></span>Set in Neighbouring Countries</h4>
-							<span ng-repeat="bk in neighbourRelatedBooks" class="relatedGroup"><a href="#/place/{{bk.countryId}}">{{bk.name}}</a> <span>({{bk.countryBooks.length}})<br></span><!--   track by $index -->
-							<!-- now do the related books for each country ... -->
-									<ul ng-show="bk.countryBooks">
-									 	<li ng-repeat="relatedBook in bk.countryBooks" class="collectionItem" >
-									 	<a href="#/book/{{relatedBook.$id}}" class="collectionImgLink"><img src="{{relatedBook.coverurl}}" class="collectionImg"></a>
-									 	<h5><a href="#/book/{{relatedBook.$id}}">{{relatedBook.title}}</a></h5>
-										 </li>
-									</ul>
-								<!-- ends the related book -->
-							</span>						
-							<!-- ends the loop of countries -->
+						<span ng-repeat="bk in neighbourRelatedBooks" class="relatedGroup"><a href="#/place/{{bk.countryId}}">{{bk.name}}</a> <span>({{bk.countryBooks.length}})<br></span><!--   track by $index -->
+						<!-- now do the related books for each country ... -->
+								<ul ng-show="bk.countryBooks">
+								 	<li ng-repeat="relatedBook in bk.countryBooks" class="collectionItem" >
+								 	<a href="#/book/{{relatedBook.$id}}" class="collectionImgLink"><img src="{{relatedBook.coverurl}}" class="collectionImg"></a>
+								 	<h5><a href="#/book/{{relatedBook.$id}}">{{relatedBook.title}}</a></h5>
+									 </li>
+								</ul>
+							<!-- ends the related book -->
+						</span><!-- ends the loop of countries -->
 					</div>
  			</div><!-- ends additonal section -->
 
@@ -219,6 +208,11 @@ add <a href="#" ng-click="pushToColl()">add book</a>
 							</div>
 						</a>
 					</div>
+					<div class="column100">
+						<!-- <h4>Statistics</h4> -->
+						<span ><button class="btn fsBtn" ng-click="clickToOpen()" ng-if="!currentUser">+ Collections</a></span>
+
+					</div>
  			</div><!-- ./additonalsection --->
  			
  			
@@ -232,9 +226,6 @@ add <a href="#" ng-click="pushToColl()">add book</a>
 				</div>
 
 				<div class="column column50">
-					<h4>Statistics</h4>
-<!-- 					<span ng-if="userAaa"><a href="" ng-click="clickToOpen()">Add to collections</a></span> -->
-					<span ><button class="btn fsBtn" ng-click="clickToOpen()" ng-if="!currentUser">+ Collections</a></span>
 				</div>
  			</div><!-- ends additonal section -->
 			

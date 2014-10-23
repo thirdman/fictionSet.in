@@ -75,21 +75,38 @@
 					width: 90%;
 				}		
 		}
+		.loading{
+			font-style: italic;
+		}
 			
 		.dialogHead{
 			text-align: center;
 			background: #323a45;
 			//background: #0D1B2D;
 			border-radius: 3px 3px 0 0;
+			margin: -9px -9px 0;
+			height: 50px;
 			.dialogLogo{
 				//width: 50px;
 				margin: 0 auto;
 				height: 50px;
-				position: relative;
-				top: -5px;
+				border-radius: 80px;
+				background: #323a45;
+				width: 60px;
+				height: 65px;
+				top: -10px;
+				padding-top: 12px;
+ 				margin-top: 0px;
+				/* border: 5px solid white; */
+				/* box-shadow: 0px 0px 5px rgba(0,0,0,.4); */
+				/* background: #222; */
+				line-height: 70px;
+				/* border: 2px solid #23252F; */
 				img{
-					width: 50px;
+					width: 30px;
 					height: auto;
+					top: 0;
+					line-height: 70px;
 				}
 			}
 		}
@@ -123,9 +140,10 @@
 				position: relative;
 				top: -20px;
 				text-transform: uppercase;
-				color: $fsGrey;
+				color: #999;
 				font-style: italic;
 				font-size: .75em;
+				font-weight: 500;
 			}
 		}
 	.emailLoginForm{
@@ -148,9 +166,15 @@
 			}
 			.inputStd{
 				width: 100%;
-				border: 0px;
+				border: 1px solid #fff;
 				box-shadow: 1px 1px 3px -1px rgba(0,0,0,.2) inset;
 				background: #f2f2f2;
+				outline: none;
+				&:focus{
+					border: 1px solid #bbb;
+					outline: none;
+					background: #fff;
+				}
 			}
 			.roundedTwo label{
 				float: right;
@@ -160,20 +184,31 @@
 		
 	}
 	}
+	
+	&.signupLink{
+		width: 500px;
+		background: transparent;
+		text-align: center;
+		color: #fff;
+		margin: 0 auto;
+		a{
+			color: #52C4DF;
+		}
+	}
 }
 
 
 .pageViewContainer{  //on html.
 	&.loginPage{
-	background: url(http://api.tiles.mapbox.com/v3/thirdman.k07mfne9/-2.69531,54.75844,2/1200x900.png) no-repeat center center fixed;
-	//height: 100%;
+	//background: url(http://api.tiles.mapbox.com/v3/thirdman.k07mfne9/-2.69531,4.75844,2/1200x1000.png) no-repeat center top fixed;
+	background: url(/imgs/bg_world_dark.png) no-repeat center center fixed;
    -webkit-background-size: cover;
    -moz-background-size: cover;
    -o-background-size: cover;
    background-size: cover;
    
-   	&body{
-	   	background: transparent;
-   	}
+	   	body{
+		   	background: transparent;
+	   	}
 	}
 }

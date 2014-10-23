@@ -4,11 +4,12 @@
 
 
    h2.homeTitle{
- 	   margin-bottom: inherit !important;
-	   display: inline-block;
-	   vertical-align: top;
-   		line-height: 3em;
-   		margin: 0;
+ 	 margin-bottom: inherit !important;
+	display: inline-block;
+	vertical-align: top;
+	line-height: 7em;
+	margin: 0;
+	width: 80%;
     }
    .titleHalf{ 
    		display: inline-block; text-align: right;
@@ -22,17 +23,22 @@
    		width: 100%; 
    		margin-left: 10px;  
    		background: #fff;
-	   line-height: 1.5em;
- 	   padding: 2px 12px; 
-	   outline: none;
-	   border: 1px solid #ddd;
-/* 	   border-bottom: 1px solid #ccc; */
-	   text-align: left;
-	   color: #666;
-	   min-width: 400px;
-	   font-size: .85em;
-	   border-radius: 4px;
-	   
+   		background: rgba(206, 207, 208, 0.30);
+   		line-height: 1.5em;
+   		padding: 2px 12px; 
+   		outline: none;
+   		//border: 1px solid #ddd;
+   		border: 0px solid #999;
+   		text-align: left;
+   		color: #666;
+   		min-width: 400px;
+   		font-size: .85em;
+   		border-radius: 4px;
+	   &:focus{
+	   		background: rgba(255,255,255,.85); 
+	   		color: #2a2a2a; 
+	 	    outline: none;   
+	   }
 	   @media only screen and (min-width: 0px) and (max-width: 887px) {
 		   width: 100%;
 		   min-width: inherit;
@@ -40,11 +46,13 @@
 
 
    }
+/*
    .titleHalf input:active{ 
    		background: rgba(255,255,255,.7); 
    		color: #2a2a2a; 
 	   outline: none;
 	   }
+*/
 	   
 	   
 	   
@@ -63,7 +71,8 @@
 	   z-index: 20;
 //	   border-left: 1px solid $fsGrey; 
 	   color: $fsGrey;
-	   padding-top: 1.4em;
+//	   padding-top: 1.4em;
+padding-top: 6.5em;
 	   height: 100%;
 		   .largeType{
 		   font-size: 3em;

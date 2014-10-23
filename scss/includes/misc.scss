@@ -3,7 +3,7 @@
 
 
    ::-webkit-input-placeholder {
-   color: #f0f0f0;
+   color: #ccc;
    font-weight: normal;
    font-weight: 100;
 /*
@@ -15,7 +15,7 @@
   }
 
 :-moz-placeholder { /* Firefox 18- */
-   color: #f0f0f0;  
+   color: #ccc;  
    font-weight: 100;
 /*
    font-style: italic;
@@ -26,7 +26,7 @@
     }
 
 ::-moz-placeholder {  /* Firefox 19+ */
-   color: #f0f0f0;  
+   color: #ccc;  
    font-weight: 100;
 /*
    font-style: italic;
@@ -37,7 +37,7 @@
   }
 
 :-ms-input-placeholder {  
-   color: #f0f0f0;  
+   color: #ccc;  
    font-weight: 100;
 /*
    font-style: italic;
@@ -48,3 +48,61 @@
    }
    
    
+
+hr{	
+	border: 0px solid white;
+	border-top: 1px solid $fsLineGrey;
+	height: 1px;
+	background: transparent;
+}
+
+.infoBox{
+	background: rgb(255, 236, 107);
+	padding: 1em;
+	border-radius: 10px;
+}
+
+////////////////////////////////////////////////////////
+////////////// Border classes
+////////////////////////////////////////////////////////
+.borderTop{
+	border-top: 1px solid $fsLineGrey;
+}
+
+.borderBottom{
+	border-bottom: 1px solid $fsLineGrey;
+}
+
+
+////////////////////////////////////////////////////////
+/* OVERRIDES FOR TAGS*/
+tags-input .tags {
+ border: 1px solid $fsLineGrey !important;
+ border-radius: 4px !important; 
+ outline: none !important;
+ box-shadow: none !important;
+ -moz-appearance:inherit !important;
+ -webkit-appearance:inherit !important; 
+ -ms-appearance: inherit !important;
+
+ &.focused{
+	 box-shadow: inherit !important;
+ }
+}
+ 
+ .tag-item  {
+  background: $fsGrey !important;
+  border: 0px solid #949494 !important;
+  //padding: 0px 0px 20px 2px;
+  cursor: default;
+  
+  display: inline-block;
+  -webkit-border-radius: 2px 3px 3px 2px;
+  -moz-border-radius: 2px 3px 3px 2px;
+  border-radius: 2px 3px 3px 2px;
+  height: 22px;
+  
+  .remove-button{
+	  color: #ccc;
+  }
+}

@@ -122,9 +122,25 @@
 			border-radius: 2px;
 			padding: .5em;
 		}			
+	
+		&.sectionTags{
+			.aTag{
+				a{
+					background: $fsLightGrey;
+					border-radius: 2px;
+					padding: 2px 4px;
+					text-decoration: none;
+					margin-right: 2px;
+					
+				}
+			}
+		}
 	} 
 
-.sectionAddedBy{
+	.sectionAddedBy{
+			border-top: 0px solid $fsLineGrey;
+			padding-top: 1em;
+			margin-top: 1em; 
 			font-size: .75em;
 			@media only screen and (max-width: 979px) {
 				font-size: 1em;
