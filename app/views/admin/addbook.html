@@ -9,19 +9,22 @@
  
 <div class="theContent columnWrap contentText" >
 	<div class="columnLeft column">	
- 	<p>FictionSet.in depends on your contibutions!</p>
+	<p>FictionSet.in depends on your contibutions. We value thoughtful additions and accurate places - remember that not every book in the world needs to be on fictionset.in</p>
+	
 	<h3>What books should I add?</h3>
-	<p><em><strong>tl;dr:</strong> Books that you'd recommend to your friend, and books that have a place you could visit.</em></p>
-	<p>Add books that capture some of the 'something' of a place - Everyone will have a different idea of what that is, and that's ok. For some people a few lines is enough, and for others it's whole passages.</p>
+	<p><em><strong>tl;dr:</strong> Novels that you'd recommend to your friend, and that have a place or places you could visit.</em></p>
+	<p>We want books that capture some of the 'something' of a place For some people a few lines is enough, and for others it's whole passages - Everyone will have a different idea, and that's ok. </p>
  	
 	<h3>What places should I tag?</h3>
-	<p>Basically, can you visit it, or the remains of it? The system is smart enough to figure out the country of any location, so unless the setting is general then specific locations are better. 'Tuscany' is better than 'Italy', and 'Florence' is even better again. Also, local names ('Firenze') should also work.</p>
+	<p>1) Can you visit it, or the remains of it? <br>2) Specific locations are better unless the book is set in a general area. 'Tuscany' is better than 'Italy', and 'Florence' is even better again. Local names ('Firenze') should also work. NOTE: The system automatically determines the country of any location you enter (you don't need to enter 'Paris' AND 'France' - just 'Paris' is fine).</p>
+	<hr>
 	<ul class="list" style="margin-left:0;">
-	<li><strong>YES:</strong> Real places. Ideally as specific as possible. (It's ok to add multiple places)</li>
-	<li><strong>YES:</strong> Historical places that still exist, but under a different name (eg. Tokyo in Japan was known as Edo</li>
-	<li><strong>YES:</strong> If there's no specific location, but a book is set in a general area, that's ok too. </li>
-	<li><strong>YES:</strong> Fictional places based on real places. This means that if the name of a village was changed but it's clear what the real village is (or the author has said), then it's worthy of adding. (Common sense should win here - you shouldn't have to be a super sleuth to figure it out). </li>
-	<li><strong>NO:</strong> Made up places. Hogwarts is not a valid place, and you can't add it.</li>
+	<li><strong class="icon-smile iconLabel fsGreen">YES:</strong> Real places. Ideally as specific as possible. (It's ok to add multiple places)</li>
+	<li><strong class="icon-smile iconLabel fsGreen" >YES:</strong> Historical places that still exist, but under a different name (eg. Tokyo in Japan was known as Edo</li>
+	<li><strong class="icon-smile iconLabel fsGreen">YES:</strong> If there's no specific location, but a book is set in a general area, that's ok too. </li>
+	<li><strong class="icon-smile iconLabel fsGreen">YES:</strong> Fictional places based on real places. This means that if the name of a village was changed but it's clear what the real village is (or the author has said), then it's worthy of adding. (Common sense should win here - you shouldn't have to be a super sleuth to figure it out). </li>
+	<li><strong class="icon-smiley-frown iconLabel fsRed">NO:</strong> Made up places. Hogwarts is not a valid place, and you can't add it.</li>
+	<li><strong class="icon-smiley-meh iconLabel fsOrange">MAYBE:</strong> Non-fiction. Please consider before adding. The intent of the site is to collect *fictional* books as because there's heaps of other places out there for finding guide books etc. However, some books such as memoirs or travel narratives might be useful additions if they have a 'story like' quality.   </li>
 	</ul>
 
 	<br>
@@ -32,16 +35,16 @@
 	</div>
 	
 	<div class="columnRight column">	
-  		 <div class="infoBox">
+  		 <div class="infoBox" ng-show="false">
 	  		 <h3>Temporarily Unavailable</h3>
 	  		 <p>Adding books is temporarily disable while maintenance is in progress.<br><br> Come back later, y'all.</p>
   		 </div>
 
-		<span id="maintenanceDiv" ng-show="false">	
+		<span id="maintenanceDiv" ng-show="true">	
 		  <h3>Search for a book to add</h3>
 		  <p>NOTE: until I can automate the check, can you please check a book doesn't already exist before adding it? Thanks!</p>
   				<h4>Search by Name / Author / Isbn:</h4>
-		 <div class="searchWrap" ng-show="false">
+		 <div class="searchWrap" >
 		 	<form ng-submit="searchBooks()">
 		 		<input ng-model="searchString" class="form-control form-control-small" placeholder="Search for a book">
 		 		<button type="submit" class="btn" ng-click="searchBooks()">Search</button>

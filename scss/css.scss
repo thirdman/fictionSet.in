@@ -4,7 +4,19 @@ $fsGrey: #aaa;
 $fsLineGrey: #ddd;
 $fsLightGrey: #eee;
 $fsGreen: #a8d164; 
- 
+$fsRed: #ea3830; 
+$fsOrange: #ee7f21;
+.fsRed{
+	color: $fsRed;
+}
+
+.fsGreen{
+	color: $fsGreen;
+}
+
+.fsOrange{
+	color: $fsOrange;
+} 
    *, *:before, *:after{-moz-box-sizing: border-box; 
     -ms-box-sizing: border-box; 
     box-sizing: border-box !important; 

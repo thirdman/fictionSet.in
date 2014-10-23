@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)http://fictionset.in/#/addbook/1500426040 -->
+<html lang="en" ng-app="myApp" class="pageViewContainer  addPage"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide{display:none !important;}ng\:form{display:block;}.ng-animate-block-transitions{transition:0s all!important;-webkit-transition:0s all!important;}</style>
+  <meta charset="utf-8">
+  <title ng-bind="&#39;FictionSet.In — &#39; + pageTitle" class="ng-binding">FictionSet.In — Submit a Book</title>
+
+   <link rel="stylesheet" href="http://fictionset.in/css/css.css">
+  <link href="./FictionSet.In — Submit a Book_files/css" rel="stylesheet" type="text/css">
+  <link href="https://fontastic.s3.amazonaws.com/rBAnPva87Pe7293pcrcjdC/icons.css" rel="stylesheet">
+	
+
+<!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.17/angular.min.js"></script> -->
+	<script src="./FictionSet.In — Submit a Book_files/angular.js"></script><style type="text/css"></style>
+        
+    <script src="./FictionSet.In — Submit a Book_files/firebase.js"></script>
+	<script src="./FictionSet.In — Submit a Book_files/firebase-simple-login.js"></script>
+<!--<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-route.js"></script> -->
+	 <script src="./FictionSet.In — Submit a Book_files/angular-route.min.js"></script>
+     <script src="./FictionSet.In — Submit a Book_files/angularfire.min.js"></script>
+     <script src="./FictionSet.In — Submit a Book_files/angular-resource.min.js"></script>
+     <script src="./FictionSet.In — Submit a Book_files/underscore-min.js"></script>     
+    <script src="./FictionSet.In — Submit a Book_files/mapbox.js"></script>
+    <script src="./FictionSet.In — Submit a Book_files/angular-mapbox.min.js"></script>
+
+    <script src="./FictionSet.In — Submit a Book_files/angular-underscore.min.js"></script>
+    <script src="./FictionSet.In — Submit a Book_files/jsonpath.js"></script>
+    <script src="./FictionSet.In — Submit a Book_files/lodash.underscore.min.js"></script>
+    <script src="./FictionSet.In — Submit a Book_files/ng-lodash.min.js"></script>
+    <script src="./FictionSet.In — Submit a Book_files/angucomplete-alt.js"></script>
+    <script src="./FictionSet.In — Submit a Book_files/ngDialog.min.js"></script>
+    <script src="./FictionSet.In — Submit a Book_files/ng-tags-input.min.js"></script>
+	
+
+
+    <!--
+<script src="vendor/bloodhound.min.js"></script>
+    
+--><!--  -->
+<!--
+     <script src="vendor/angular-typeahead.min.js"></script>
+<script src="vendor/typeahead.bundle.js"></script>
+-->
+<!--     <script src="//cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.2/typeahead.bundle.min.js"></script> -->
+<!--
+
+    <script src="vendor/jsTag.min.js"></script>
+     	<link rel="stylesheet" href="vendor/jsTag.css"/>	
+
+-->
+ 		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/2.1.1-1/ng-tags-input.bootstrap.min.css">	
+     	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/2.1.1-1/ng-tags-input.min.css">	
+      	
+
+	<link rel="stylesheet" href="http://fictionset.in/vendor/angucomplete-alt.css">
+	<link rel="stylesheet" href="http://fictionset.in/vendor/mapbox.css">
+	<link rel="stylesheet" href="http://fictionset.in/vendor/css/ngDialog.min.css">	
+	<link rel="stylesheet" href="http://fictionset.in/vendor/css/ngDialog-theme-default.min.css">
+  
+	 
+    <script src="./FictionSet.In — Submit a Book_files/app.js"></script>
+	<script src="./FictionSet.In — Submit a Book_files/directives.js"></script>
+	<script src="./FictionSet.In — Submit a Book_files/ctrlRegister.js"></script>
+	<script src="./FictionSet.In — Submit a Book_files/ctrlLogin.js"></script>
+	<script src="./FictionSet.In — Submit a Book_files/ctrlBook.js"></script>
+	<script src="./FictionSet.In — Submit a Book_files/ctrlTags.js"></script>
+	
+  <meta name="viewport" content="initial-scale=1.0">
+  	<!-- facebook tags -->
+  	 <meta property="og:title" content="Fiction Set In ...">
+  	<meta property="og:description" content="Find books to read by the places they are set.">
+  	<meta property="og:image" content="http://fictionset.in/imgs/brand/coverimg.jpg">
+  	<meta property="og:image:type" content="image/jpeg">
+
+  
+  <!--<base href="/">--><base href=".">
+
+ <script type="text/javascript" src="chrome-extension://aadgmnobpdmgmigaicncghmmoeflnamj/ng-inspector.js"></script></head>
+<!-- <body ng-cloak> -->
+   <body ng-controller="AuthCtrl" class="ng-scope" data-feedly-mini="yes">
+
+<div id="header" class="header" style="display: inline-block;">
+     <div class="navicon-button x" snap-toggle="">
+	  <ul class="menu">
+	    <li><a href="http://fictionset.in/#/home">Books</a></li>
+	    <li><a href="http://fictionset.in/#/places">Places</a></li>
+	    <li><a href="http://fictionset.in/#/near">Near You</a></li>
+	    <li><a href="http://fictionset.in/#/about">About </a></li>
+	  </ul>
+	  <ul class="menu user">
+	    <li ng-hide="auth.user" class="ng-hide"><a href="http://fictionset.in/#/login">login</a></li>
+	    <li ng-show="auth.user" class=""><a href="http://fictionset.in/#/addbook">Submit a Book</a> | <a href="http://fictionset.in/#/profile" class="ng-binding">Gareth Bedford</a></li>
+ <!--
+ 	    <li ng-show ="['logout','error']"><a href="#/login">login</a></li>
+	    <li ng-show-auth="'login'"><a href="#/account">{{auth.user.displayName}}</a></li>
+-->
+ 	  </ul>
+ 	  
+ 	  <div class="logoWrap">
+		  	<img src="./FictionSet.In — Submit a Book_files/logo_line.svg" style="" class="logo">
+ 	    	<a href="http://fictionset.in/#" class="headerLogo"><span class="headerName">Fictionset.in</span><span class="alphaTag">alpha</span></a>
+	 		<form id="headerSearch" class="ng-pristine ng-valid">
+		 			<input class="search-text placeholder ng-isolate-scope" type="text" name="q" placeholder="Search " delayed-model="searchBar.places" data-delay="50" value="">
+		 	</form>
+		</div>
+
+    </div>
+</div>    
+ 	
+ 	
+
+  	  <!-- ngView --><div class="view-animate-container   ng-scope" ng-view=""><div class="fullWidth darkFeat">
+	<div class="theContainerHead">
+		<button ng-click="saveBook()" class="btn actionBtn" style="float: right;">Save Book</button>
+		<h3 class="pageTitle">Add Book</h3>
+	</div>
+</div>
+ 
+<div class="theContainer pageEdit">
+<div class=" contentWrap">
+	<div class="titleBlock group">
+		<div class="coverImg"><!-- ngIf: amazonData.LargeImage.URL --><img class="featImg ng-scope" ng-if="amazonData.LargeImage.URL" src="./FictionSet.In — Submit a Book_files/51c-zB0alxL.jpg"><!-- end ngIf: amazonData.LargeImage.URL --></div>
+		<h2 class="bookTitle ng-binding">Anne of Green Gables</h2>
+		<h5 class="bookSubtitle ng-binding">by L.M. Montgomery</h5>
+	</div>
+	
+	<div class="saving ng-hide" ng-show="isSaving" style="width: 100%; text-align: center; padding: 1em; background: #f5f5f5;border-radius: 4px; margin: 1em 0;">
+		Saving...
+	</div>
+ 
+<div class="theContent columnWrap">
+	<div class="columnLeft column column50">	
+		<div class="contentSection">
+ 			<h3>Places</h3>
+ 			<p class="subTitle">You must add at least one place. Please be specific unless the book is set in a general area or country. <a href="">View guidelines</a></p>
+ 			<h4>search a location to add:</h4>
+ 			<div class="searchWrap formField group">
+				<angucomplete-alt id="placesearch2" placeholder="Search Places..." pause="300" selected-object="autoObject" remote-url="http://api.geonames.org/searchJSON?maxRows=6&amp;username=thirdman&amp;q=" remote-url-data-field="geonames" title-field="name,countryName" description-field="fclName" clear-selected="yes" input-class="form-control form-control-small" class="ng-isolate-scope"><div class="angucomplete-holder">  <input id="placesearch2_value" ng-model="searchStr" type="text" placeholder="Search Places..." class="form-control form-control-small" ng-focus="resetHideResults()" ng-blur="hideResults()" autocapitalize="off" autocorrect="off" autocomplete="off">  <!-- ngIf: showDropdown --></div></angucomplete-alt>
+  			</div><!-- ends search wrap -->
+
+ 			  <!-- ngRepeat: place in tempPlaces -->
+		</div>
+
+		
+		<div class="bookInfo ng-hide" ng-hide="true">	
+ 		<p class="ng-binding"><label>Title</label>Anne of Green Gables</p>
+		<p class="ng-binding"><label>Author:</label>L.M. Montgomery</p>
+		<p class="ng-binding"><label>PublicationDate:</label>2014-07-06</p>
+		<p class="ng-binding"><label>Publisher: </label>CreateSpace Independent Publishing Platform</p>
+		<p class="ng-binding"><label>AMAZON ID: </label>1500426040</p>
+		<p class="ng-binding"><label>EAN: </label>9781500426040</p>
+		<p class="ng-binding"><label>ISBN: </label>1500426040</p>
+		<p class="subTitle">Description</p>
+  		<textarea ng-model="theDesc" class="inputLarge descriptionInput ng-pristine ng-valid"></textarea>
+		</div>
+	</div><!-- column left -->
+	
+	<div class="columnRight column column50">		
+		<div class="contentSection ">
+			<h3>Excerpts</h3>
+			<p class="subTitle">Optional related excerts from the book.</p>
+  			<div class="exceprtList listWide">
+ 			  	<!-- ngRepeat: tempExcerpt in tempExcerpts -->
+  			</div>
+  			<form ng-submit="addExcerpt()" class="ng-pristine ng-valid">
+  			  	<div class="formField group">
+  			  		<label>Excerpt:</label> 
+  			  		<textarea type="text" ng-model="newExcerpt.excerpt" placeholder="Text excerpt" class="inputLarge ng-pristine ng-valid"></textarea>
+  			  		<input type="text" ng-model="newExcerpt.reference" placeholder="referece (optional)" class="inputStd ng-pristine ng-valid">
+  			  		<button class="btn" type="submit" ng-click="addExcerpt()">Add Excerpt</button>
+  			  	</div>	      
+			</form>
+		</div>
+
+  		 <div class="contentSection">
+	  		 <h3>Tags</h3>
+	  		 <p class="subTitle">Use these to for additional non-location categories (eg. 'Historical', '1600s', 'Europe', 'World War 1') </p>
+				<div ng-controller="TagCtrl" class="formField group ng-scope">
+				<tags-input ng-model="tempTags" class="ng-isolate-scope ng-pristine ng-valid ng-valid-max-tags ng-valid-min-tags ng-valid-leftover-text"><div class="host" tabindex="-1" ti-transclude-append=""><div class="tags" ng-class="{focused: hasFocus}"><ul class="tag-list"><!-- ngRepeat: tag in tagList.items track by track(tag) --></ul><input class="input ng-pristine ng-valid" ng-model="newTag.text" ng-change="newTagChange()" ng-trim="false" ng-class="{&#39;invalid-tag&#39;: newTag.invalid}" ti-bind-attrs="{type: options.type, placeholder: options.placeholder, tabindex: options.tabindex}" ti-autosize="" type="text" placeholder="Add a tag" style="width: 69px;"><span class="input" style="visibility: hidden; width: auto; white-space: pre; display: none;">Add a tag</span></div>
+				  <auto-complete source="loadTags($query)" min-length="1" class="ng-scope ng-isolate-scope"><div class="autocomplete ng-hide" ng-show="suggestionList.visible"><ul class="suggestion-list"><!-- ngRepeat: item in suggestionList.items track by track(item) --></ul></div></auto-complete>
+				</div></tags-input>
+				</div>
+  		 </div>
+
+   		<div class="dataSection contentSection additonalComment">
+   		<h3>Additional Comment</h3>
+   		<p class="subTitle">An optional personal comment about this book. (Note: this will be displayed publicly)</p>
+		 <form name="userCommentForm" class="ng-valid ng-dirty">
+  			  <div class="formField group">
+			      <textarea type="text" ng-model="userComment" name="userCommentArea" placeholder="Your comment" class="inputLarge ng-valid ng-valid-maxlength ng-dirty" ng-maxlength="39" maxlength="39"></textarea>
+			      
+				 <p class="wordCount ng-binding wordCountOk" ng-class="(userComment.length &gt;= 20) ? &#39;wordCountWarning&#39; : &#39;wordCountOk&#39;">Remaining: 35 <span class="error ng-hide" ng-show="userCommentForm.userCommentArea.$error.maxlength">
+			         Max Limit reached!
+			     </span>
+			     </p>
+			 
+			  </div>	      
+  	      </form>
+  		  </div><!-- ends dataSection.additionalComment -->
+ 
+ 			  
+  			  
+  
+		  </div><!-- columnright -->
+</div><!-- the content -->
+<div class="theContent columnWrap borderTop paddingTop">
+	<div class="columnLeft column">	
+		<h4>Book info</h4>
+		<div class="bookInfo">	
+	 		<p class="ng-binding"><label>Title</label>Anne of Green Gables</p>
+			<p class="ng-binding"><label>Author:</label>L.M. Montgomery</p>
+			<p class="ng-binding"><label>PublicationDate:</label>2014-07-06</p>
+			<p class="ng-binding"><label>Publisher: </label>CreateSpace Independent Publishing Platform</p>
+			<p class="ng-binding"><label>AMAZON ID: </label>1500426040</p>
+			<p class="ng-binding"><label>EAN: </label>9781500426040</p>
+			<p class="ng-binding"><label>ISBN: </label>1500426040</p>
+ 	<!--
+			<p ng-if="amazonData.EditorialReviews.EditorialReview[0]" ng-bind-html-unsafe="amazonData.EditorialReviews.EditorialReview[0].Content"></p>
+	
+			<br><p>{{amazonData.EditorialReviews.EditorialReview[0].Source}}</p>
+	
+			<p  ng-if="amazonData.EditorialReviews" class="subTitle">Review</p>
+			<span  ng-if="amazonData.EditorialReviews.EditorialReview[1]" ng-bind-html="amazonData.EditorialReviews.EditorialReview[1].Content"></span>
+			<p  ng-if="amazonData.EditorialReviews.EditorialReview[1]"><br>{{amazonData.EditorialReviews.EditorialReview[1].Source}}</p>
+			<p>Description:</p>
+			<span ng-bind-html="amazonData.EditorialReviews.EditorialReview[0].Content | to_trusted "></span>
+			<textarea  ng-if="amazonData.EditorialReviews.EditorialReview[0]" class="inputStd" ></textarea>
+	
+	-->
+		</div>
+	</div>
+	<div class="columnRight column">
+		 <a href="" ng-click="editorEnabled=!editorEnabled" ng-hide="editorEnabled" class="btn fsBtn  editBtn inline floatRight">Edit</a>
+		 <a href="" ng-click="editorEnabled=!editorEnabled" ng-show="editorEnabled" class="btn fsBtn  editBtn inline floatRight ng-hide">Done</a>
+		<h4>Book Description </h4>
+		<hr>
+		<div class="bookDescription ng-binding" ng-hide="editorEnabled">
+				Anne is described as bright and quick, eager to please, talkative, and extremely imaginative. She has a pale face with freckles and usually braids her red hair. When asked her name, Anne asks Marilla to call her Cordelia, which Marilla refuses; Anne then insists that if she is to be called Anne, it must be spelled with an e, as that spelling is "so much more distinguished." Marilla at first says the girl must return to the orphanage, but after a few days she decides to let her stay. Marilla feels that she could be a good influence on the girl and had also overheard that another disagreeable woman in town might take Anne in instead. As a child of imagination, Anne takes much joy in life and adapts quickly, thriving in the close-knit farming village. Her talkativeness initially drives the prim, duty-driven Marilla to distraction, although Matthew falls for her charm immediately. Anne says that they are "kindred spirits." The book recounts Anne's adventures in making a home: the country school where she quickly excels in her studies; her friendship with Diana Barry (her best or "bosom friend" as Anne fondly calls her); her budding literary ambitions; and her rivalry with classmate Gilbert Blythe, who teases her about her red hair. For that he earns her instant hatred, although he apologizes many times. As time passes, Anne realizes she no longer hates Gilbert but cannot bring herself to admit it. However, by the end of the book they become friends. The book also follows Anne's adventures in quiet, old-fashioned Avonlea. Episodes include her play time with friends (Diana, Jane Andrews and Ruby Gillis), her run-ins with the unpleasant Pye sisters (Gertie and Josie), and domestic mishaps such as dyeing her hair green (while intending to dye it black) or accidentally getting Diana drunk (by giving her what she thinks is raspberry cordial but is currant wine).
+		</div>
+		<div class="formField group ng-hide" ng-show="editorEnabled">
+		 	<textarea ng-model="theDesc" class="inputLarge descriptionInput ng-pristine ng-valid" ng-show="true"></textarea>
+		</div>
+	</div>
+</div><!-- the content2 -->
+
+<div class="contentWrap columnWrap">
+	<div class="fullWidth darkFeat">
+		<div class="theContainerHead">
+	  		<button ng-click="saveBook()" class="btn actionBtn">Save Book</button>
+		</div>
+	</div>
+
+</div>	
+		
+
+</div><!-- ends theContent-->
+
+</div></div>
+ 
+
+
+
+</body></html>

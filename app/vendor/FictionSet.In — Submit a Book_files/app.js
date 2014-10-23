@@ -1125,14 +1125,12 @@ if(collectionobj.title){
  	 }]);
 	
 
-    app.controller("AddBookDetailCtrl", [ "$scope", "currentUser", "$firebase", "$routeParams", "$location", "filterFilter", "DataSource", "$q", "$http", 'ngDialog', "to_linesFilter", function($scope, currentUser, $firebase, $routeParams, $location, filterFilter, DataSource, $q, $http, ngDialog, $to_linesFilter) {
-	    var testMode = false;
+    app.controller("AddBookDetailCtrl", [ "$scope", "currentUser", "$firebase", "$routeParams", "$location", "filterFilter", "DataSource", "$q", "$http", "to_linesFilter", function($scope, currentUser, $firebase, $routeParams, $location, filterFilter, DataSource, $q, $http, $to_linesFilter) {
 		var tempBook = {};
 		var tempPlaces = [];
 		var tempExcerpts = [];
 		var tempTags = [];
 		var newSetting = null;
-		var ngDialog;
 		$scope.amazonDescHtml = "";
 		$scope.userComment = "";
 	    $scope.newSetting = null;
@@ -1145,8 +1143,7 @@ if(collectionobj.title){
  		$scope.hasData = false;
  		$scope.isLooking = true;
  		$scope.isSaving = false;
- 		$scope.errorPlaces = false;		
-		
+ 		
  		var ref = new Firebase('https://sweltering-fire-3219.firebaseio.com/');
  		 // get user
  		  		if(currentUser){
@@ -1155,7 +1152,7 @@ if(collectionobj.title){
 						    var exists = (snapshot.val() !== null);
 						    var profile = snapshot.val();
 							$scope.profile = profile;
-							var userName = profile.displayName;
+							var userName = profile.name;
 							$scope.userName = userName;
 					  		console.log(profile.name);					
 					  		console.log(profile);
@@ -1255,14 +1252,6 @@ if(collectionobj.title){
 
  			// NOW SAVE THE BOOK 									
 					$scope.saveBook = function(){
- 					if (tempPlaces.length){
-						console.log('has places: ');
-						console.log(tempPlaces);
-						$scope.errorPlaces = false;		
-					
-						if (testMode ==false){
-							console.log('testMode is' + testMode);
-						//carry on with saving///
 						$scope.isSaving = true;
 
 						$scope.tempBook.title = $scope.amazonData.ItemAttributes.Title;
@@ -1367,32 +1356,13 @@ if(collectionobj.title){
  					});
 
 			   	 	$location.path("#/book/:"+postID); 
-			   	 	}//ends edit mode check
-				}else{//contintues if else for hasplaces...
-					console.log('does not have places')
-					console.log(tempPlaces);
-					$scope.isSaving = false;
-					$scope.errorPlaces = true;		
-				}
+ 
 
 
  				}//ends addbook
 
 
-
- 	$scope.clickToOpenGuidelines = function () {
-        ngDialog.open({ 
-			//template: '<h4>Book Collections</h4><p>This feature is coming soong.</p><div class="ngdialog-buttons"><button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="closeThisDialog\(\)">Close</button></div>',
-			plain: false,
-        	//	controller: 'DialogCollectionsAdd'
-        	template: 'views/dialogs/dialogGuidelines.html',
-        	scope: $scope
-			});
-    }; //ends clicktoopen
-
-
-
-}]);
+ 	 }]);
  	 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
