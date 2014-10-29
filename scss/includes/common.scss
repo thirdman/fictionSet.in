@@ -285,8 +285,6 @@
 	   }
 	   
    }
-   
-   
    .contentSection{
 	   margin-bottom: 1em;
 	   h3{
@@ -295,15 +293,33 @@
 	   }
    }
    
+   .adminSection{
+	   margin-top: 1em;
+	   .theContainerHead{
+			background: #eee;
+			padding: 1em;
+			border-radius: 4px;
+			h3{
+				margin-top: 0;
+			}
+		}
+	
+		.formWrap{
+			background: transparent;
+			margin: 1em;
+		}
+	}
    
    .additionalSection{
-//	   border-top: 1px dotted #222;
 	   border-top: 1px solid $fsLineGrey;	
 	   margin-top: 1em;
    }
+
+
    
-   /////
-   
+////////////////////////////////////////////////////////////
+/////
+////////////////////////////////////////////////////////////
    
    .imgList{
 	   	background: #eee;

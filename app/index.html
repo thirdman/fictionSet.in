@@ -29,39 +29,34 @@
     <script src="vendor/angucomplete-alt.js"></script>
     <script src="vendor/ngDialog.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/ng-tags-input/2.1.1-1/ng-tags-input.min.js"></script>
-	
+    <script src="vendor/angulartics.min.js"></script>
+    <script src="vendor/angulartics-ga.min.js"></script>
+ 	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	  	  ga('create', 'UA-56123146-1', 'fictionset.in');
+	  	  //	  ga('send', 'pageview');  //commented out for angularanalytics
+ 	</script>
+ 
 
-
-    <!--
-<script src="vendor/bloodhound.min.js"></script>
-    
---><!--  -->
-<!--
-     <script src="vendor/angular-typeahead.min.js"></script>
-<script src="vendor/typeahead.bundle.js"></script>
--->
-<!--     <script src="//cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.2/typeahead.bundle.min.js"></script> -->
-<!--
-
-    <script src="vendor/jsTag.min.js"></script>
-     	<link rel="stylesheet" href="vendor/jsTag.css"/>	
-
--->
- 		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/ng-tags-input/2.1.1-1/ng-tags-input.bootstrap.min.css"/>	
-     	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/ng-tags-input/2.1.1-1/ng-tags-input.min.css"/>	
-      	
-
+ 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/ng-tags-input/2.1.1-1/ng-tags-input.bootstrap.min.css"/>	
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/ng-tags-input/2.1.1-1/ng-tags-input.min.css"/>	
 	<link rel="stylesheet" href="vendor/angucomplete-alt.css"/>
 	<link rel="stylesheet" href="vendor/mapbox.css"/>
 	<link rel="stylesheet" href="vendor/css/ngDialog.min.css"/>	
 	<link rel="stylesheet" href="vendor/css/ngDialog-theme-default.min.css"/>
   
+
 	 
     <script src="js/app.js"></script>
 	<script src="js/directives.js"></script>
 	<script src="js/ctrlRegister.js"></script>
 	<script src="js/ctrlLogin.js"></script>
 	<script src="js/ctrlBook.js"></script>
+	<script src="js/ctrlCollections.js"></script>
+	<script src="js/ctrlRequests.js"></script>
 	<script src="js/ctrlTags.js"></script>
 	
   <meta name="viewport" content="initial-scale=1.0">
@@ -74,6 +69,7 @@
   
   <base href="/">
 
+
  </head>
 <!-- <body ng-cloak> -->
    <body ng-controller="AuthCtrl">
@@ -84,11 +80,20 @@
 	    <li><a href="#/home">Books</a></li>
 	    <li><a href="#/places">Places</a></li>
 	    <li><a href="#/near">Near You</a></li>
-	    <li><a href="#/about">About </a></li>
+<!-- 	    <li><a href="#/about">About </a></li> -->
 	  </ul>
+	  <nav onmouseover="" >
+		<a href="" title="Menu" class="icon-three-bars"><span>More&hellip;</span></a>
+		<a href="#/requests" title="Requests">Requests</a>
+		<a href="#/collections" title="Collections">Collections</a>
+		<a href="#/about" title="About">About</a>
+	 </nav>
+	  
 	  <ul class="menu user">
 	    <li ng-hide="auth.user"><a href="#/login">login</a></li>
-	    <li ng-show="auth.user"><a href="#/addbook">Submit a Book</a> | <a href="#/profile">{{auth.user.displayName ? auth.user.displayName : 'Account'}}</a></li>
+	    <li ng-show="auth.user">
+	    	<a href="#/addbook">Submit a Book</a> | <span class="inlineUserIcon" fs-user-img user-id="auth.user.uid" fs-user-id="auth.user.uid" fs-icon-type="header" ></span><a href="#/profile">{{auth.user.displayName ? auth.user.displayName : 'Account'}}</a>
+	    </li>
  <!--
  	    <li ng-show ="['logout','error']"><a href="#/login">login</a></li>
 	    <li ng-show-auth="'login'"><a href="#/account">{{auth.user.displayName}}</a></li>
@@ -109,14 +114,11 @@
  	
 
   	  <div class="view-animate-container  " ng-view> 
-<!--
- 		  <div id="content" snap-content ng-view anim-class  class="view" snap-options="snapOpts" >
- 
-
-		  </div>
--->
-	</div>
- </body>
+ 	  </div>
+	
+  </body>
 </html>
+
+
 
 

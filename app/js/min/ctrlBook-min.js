@@ -11,6 +11,7 @@
    	$scope.userAaa = false;
    	$scope.userRole = 0;
    	$scope.relatedBooks = '';
+   	$scope.thereport = '';
    	var placesMarkers = '/';
    	var mapBoxKey = 'pk.eyJ1IjoidGhpcmRtYW4iLCJhIjoidjBOQ0lrYyJ9.8zzETVcyoBg2nlMquUR1TA';
    	var mapUrlStringStart =  'http://api.tiles.mapbox.com/v4/thirdman.j1o1gjim';
@@ -570,7 +571,7 @@
  		};
 
  	///////////////////////////////////////
- 	/////this section does the dialogs/////
+ 	/////this section does the dialogs for collections /////
  	///////////////////////////////////////
  	
 	var refCollections = new Firebase("https://sweltering-fire-3219.firebaseio.com/collections/");
@@ -864,25 +865,96 @@
 			$scope.collectionsArray = collectionsArray;
 		});
 
-/*
-		uCollectionList.once('value', function(snapshot) {
-		    	var hasList = (snapshot.val() !== null);
-				console.log('hascollcetioinsfkj and truthy is');
-				 var uCollectionListValue = {}
-				 uCollectionListValue = snapshot.val();
-				 $scope.uCollectionListValue = uCollectionListValue;
-				console.log(snapshot.val());
-				console.log(uCollectionListValue.length);
-				
-				});
-*/
-				
-		
-        ngDialog.open({ 
+         ngDialog.open({ 
 			//template: '<h4>Book Collections</h4><p>This feature is coming soong.</p><div class="ngdialog-buttons"><button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="closeThisDialog\(\)">Close</button></div>',
 			plain: false,
         	//	controller: 'DialogCollectionsAdd'
         	template: 'views/dialogs/dialogCollections.html',
+        	scope: $scope
+			});
+    }; //ends clicktoopen
+
+
+
+
+
+
+ 	///////////////////////////////////////
+ 	/////this section does the reporting dialogs/////
+ 	///////////////////////////////////////
+
+ 	$scope.submitReport = function(thereport){
+	 	var messageType, theTimestamp;
+	 	$scope.isError = false;		 
+	 	$scope.errorMessage = '';		 
+	 	$scope.reportProcessing = true;		 
+		var reportProcessing = true;
+		var reportDone = false;
+
+	 	console.log(thereport);
+		console.log($scope.thereport);	
+		 
+	 if(!thereport.content){
+	 	$scope.reportProcessing = false;		 
+	 	return;
+	 } else{
+		 if(profile){
+	 		 var messageType = 'Edit';
+		 	 var theTimestamp = new Date().valueOf();
+		 	 var ref = new Firebase('https://sweltering-fire-3219.firebaseio.com/');
+		 	 var messages = ref.child("system/messages");
+	  		 messages.push({
+				    title: 'Suggestion/Error report for '+obj.title,
+				    authorName: profile.displayName,
+				    authorId: profile.$id,
+				    messageType: messageType,
+				    messageLink: 'http://fictionset.in/#/book/'+bookid,
+				    timestamp: theTimestamp,
+				    messageContent: thereport.content
+				    
+				  },function(error){
+					  if(error){
+						  console.log(error);
+						  isError = true;
+						$scope.errorMessage.title = 'Error';
+						$scope.errorMessage.message = error;
+						reportProcessing = false;
+						reportDone = false;
+						$scope.reportDone = false;
+						$scope.reportProcessing = false;		 
+						return;
+					  } else {
+						reportProcessing = false;
+						reportDone = true;
+						$scope.reportProcessing = false;		 
+						$scope.reportDone = true;		   
+						$scope.$apply();
+ 					 }
+			 });//ends messagepush
+		 } else {
+			 isError = true;
+			$scope.isError = isError;
+			$scope.errorMessage.title = 'No User Defined';
+			$scope.errorMessage.message = 'User name and email must be defined (on your account page) before submitting content';
+			$scope.reportDone = false;
+			$scope.reportProcessing = false;		 
+		 }
+	 }//ends if report.content
+
+	 
+ 	};
+
+ 	$scope.dialogReport = function () {
+		var reportProcessing = false;
+		var reportDone = false;
+		$scope.reportProcessing = false;
+		$scope.reportDone = false;
+		$scope.isError = false;
+
+		
+        ngDialog.open({ 
+			plain: false,
+        	template: 'views/dialogs/dialogReport.html',
         	scope: $scope
 			});
     }; //ends clicktoopen

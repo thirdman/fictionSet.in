@@ -1,6 +1,23 @@
 /*///////////////////////////*/
 /*///////// Profile & account ////////*/
 /*///////////////////////////*/
+.userImgIconWrap{//this is the directive for all over the place
+				width: 30px;			
+				height: 30px;
+				border-radius: 15px;
+				overflow: hidden;
+				box-shadow: none;
+				float: inherit;
+				margin-right: inherit;
+				display: inline-block;
+				vertical-align: middle;
+				.userImgIcon{ 
+						box-shadow: none;
+						height: 100%;
+						width: auto;
+				}
+}
+
 .pageAccount{
 	.titleBlock{
 		width: 100%;

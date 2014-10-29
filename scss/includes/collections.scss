@@ -152,4 +152,24 @@
 			}
 		}
  	}
+	&.inPageContext{
+		.collectionItem{
+			width: inherit;
+			display: block;
+			vertical-align: top;
+			border-top: 0px solid transparent;
+			padding-top: 1em;
+			margin-top: 1em;
+			.collectionInfo{
+				h5{
+					color: $fsBlack;
+					font-size: 1.2em;
+				}
+				p, p.subTitle{
+					font-size: .85em;
+				}
+			}
+		}
+ 	}
+
 }

@@ -1,0 +1,62 @@
+<div class="theContainer">
+	<div class="titleBlock group">
+		<h2 class="bookTitle">Collections</h2>
+	</div>
+
+	<div class="loading" ng-show="isLoading">
+		<img src="/imgs/brand/logo_line.svg" style="" class="logo"> Loading&hellip;
+	</div>
+
+     
+    <div class="contentWrap columnWrap">
+		<div class="column columnLeft column50"  >
+			<div class="contentSection">
+ 			<span ng-hide="isLoading">
+ 				<div class="collectionsList inPageContext " ng-show="arrCollections">
+					<div ng-repeat="thiscollection in arrCollections | orderBy:'-timestamp'"  class="collectionItem" ng-if="thiscollection.isPublic">
+						<a href="#/collection/{{thiscollection.$id}}"   >
+							<div class="collectionImg">
+								<span ng-show="(thiscollection.books |filter:timestamp).length"><!-- thiscollection.bookCount -->
+									<div class="imgWrap">
+				 						<img ng-repeat="book in thiscollection.books | orderBy:'timestamp'" src="{{book.coverUrl}}" class="collectionCoverImg" ng-if="$first">				
+									</div>
+								</span>
+								<span ng-hide="(thiscollection.books|filter:timestamp).length" class="noBook"></span>
+							</div>
+
+						
+							<!--
+<div class="collectionImg">
+								<span>
+									<div class="imgWrap">
+										<img ng-repeat="book in thiscollection.books | orderBy:'timestamp'" src="{{book.coverUrl}}" class="collectionCoverImg coverImgSmall">				
+									</div>
+								</span>
+ 							</div>
+-->
+							<div class="collectionInfo">
+								<h5>{{(thiscollection.title) ? thiscollection.title : 'Bookshelf'}}
+								</h5>
+<!-- 								<p ng-if="thiscollection.createdByName">by {{thiscollection.createdByName}}.</p>  -->
+								<p ng-if="thiscollection.description">{{thiscollection.description }}</p>
+								<p ng-show="{{thiscollection.bookCount}}">{{thiscollection.bookCount}} books.</p> 
+								<p class="subTitle" ng-show="{{thiscollection.timestamp}}">By <span class="inlineUserIcon" fs-user-img user-id="thiscollection.createdBy" fs-user-id="thiscollection.createdBy" ></span>  Updated {{ thiscollection.timestamp | date : format : timezone}}.</p>
+							</div>
+						</a>
+					</div>
+				</div><!-- ./collectionsList --->
+			</span><!-- ends is loading books -->
+			</div><!-- ends contentSection -->
+		</div><!--ends column -->
+ 		
+		<div class="column columnRight column50"  >
+			<div class="contentSection">
+				<h3>Featured Collections</h3>
+				<p>Coming Soon</p>
+			</div><!-- ends contentSection -->
+		</div><!--ends column -->
+	</div><!-- ends contentWrap -->
+</div> <!-- ends the containser -->
+
+ 
+ 

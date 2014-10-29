@@ -1,8 +1,17 @@
+.formWrap{
+	//used in collection - see commmon
+}
+
 .formField{
 	background: #f2f2f2;
 	padding: .5em 1em;
 	margin: 4px 0;
 	border-radius: 4px;
+}
+.formFieldWrap{
+	background: transparent;
+	padding: .5em 0;
+	margin: 4px 0;
 }
 
 	input.text_field,
@@ -70,7 +79,7 @@
  	}
  	
  	.fsBtn{
- 	border: 0;
+	 	border: 0;
 		border-radius: 3px;
 		cursor: pointer;
 		 font-family: inherit;
@@ -80,7 +89,11 @@
 		margin: 0 0 0 .5em;
 		padding: .75em 2em;
 		text-transform: uppercase;
+		
+		&.fsRed{
+			background: $fsRed;
 		}
+	}
 
  	
  	.btnDelete{

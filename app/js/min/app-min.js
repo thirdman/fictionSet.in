@@ -1,8 +1,10 @@
 var app = angular.module("myApp", 
-	["firebase", 'ngRoute', 'myApp.directives', 'angular-underscore','ngLodash', 'angucomplete-alt', 'ngResource', 'angularMapbox', 'ngDialog', 'ngResource', 'ngTagsInput']
-		);
+	["firebase", 'ngRoute', 'myApp.directives', 'angular-underscore','ngLodash', 'angucomplete-alt', 'ngResource', 'angularMapbox', 'ngDialog', 'ngResource', 'ngTagsInput' ]
+ 		);
 
-app.config(["$routeProvider", '$locationProvider','ngDialogProvider', function($routeProvider, $locationProvider, ngDialogProvider) {
+app.config(["$routeProvider", '$locationProvider','ngDialogProvider' , function($routeProvider, $locationProvider, ngDialogProvider ) {
+ 
+ 
  
  ngDialogProvider.setDefaults({
         className: 'ngdialog-theme-default',
@@ -163,6 +165,17 @@ app.config(["$routeProvider", '$locationProvider','ngDialogProvider', function($
       }]
     }
   })
+  .when("/collections", {
+    controller: "CollectionsCtrl",
+    templateUrl: "views/collections.html",
+    pageTitle: 'Collections',
+    pageClass: 'collectionsPage',
+    resolve: {
+      "currentUser": ["simpleLogin", function(simpleLogin) {
+         return simpleLogin.$getCurrentUser();
+      }]
+    }
+  })
   .when("/collection/:collectionid", {
     controller: "CollectionCtrl",
     templateUrl: "views/collection.html",
@@ -170,6 +183,17 @@ app.config(["$routeProvider", '$locationProvider','ngDialogProvider', function($
     pageClass: 'collectionPage',
     resolve: {
       // controller will not be invoked until getCurrentUser resolves
+      "currentUser": ["simpleLogin", function(simpleLogin) {
+         return simpleLogin.$getCurrentUser();
+      }]
+    }
+  })
+  .when("/requests", {
+    controller: "RequestsCtrl",
+    templateUrl: "views/requests.html",
+    pageTitle: 'Requests',
+    pageClass: 'requestsPage',
+    resolve: {
       "currentUser": ["simpleLogin", function(simpleLogin) {
          return simpleLogin.$getCurrentUser();
       }]
@@ -287,8 +311,7 @@ app.config(["$routeProvider", '$locationProvider','ngDialogProvider', function($
   // $locationProvider.html5Mode(true);
  //  $locationProvider.hashPrefix('!');
 
-	
-  
+   
   
   
 }]); //ends config
@@ -299,7 +322,18 @@ app.run(['$location', '$rootScope','$route', function($location, $rootScope, $ro
         $rootScope.pageTitle = $route.current.pageTitle;
         //$rootScope.pageClass = $location.pageClass;
         $rootScope.pageClass =  $route.current.pageClass ? $route.current.pageClass : '';
-         console.log($rootScope);
+			if (typeof ga === "undefined") {
+          //if (!ga){
+	          	console.log('ga == undefined');
+		  		return;
+		  		}else{
+		  		ga('send', 'pageview', { 
+			  		page: $location.path(),
+			  		title:  $route.current.pageTitle
+			  		});
+		  		//console.log($location.path());
+		  		//console.log($route.current.pageTitle);
+		  		}
     });
 }]);
 
@@ -626,7 +660,7 @@ app.controller("AboutCtrl",  ["$scope", "$location", "currentUser", "Profile",'$
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//see BookCtrl.j
+//BookCtrl: see BookCtrl.js
 
 app.controller("SettingCtrl", [ "$scope", "currentUser", "$firebase", "$routeParams", "$location", "filterFilter", function($scope, currentUser, $firebase, $routeParams, $location, filterFilter) {
     console.log($scope);
@@ -1067,7 +1101,7 @@ app.controller("CollectionCtrl", [ "$scope", "currentUser", "$firebase", "$route
 	//var ref = new Firebase('https://sweltering-fire-3219.firebaseio.com/');
 	if(currentUser){
 		var refProfile = new Firebase('https://sweltering-fire-3219.firebaseio.com/users/').child(currentUser.uid);
-	}
+		}
 	var collectionobj = $firebase( new Firebase('https://sweltering-fire-3219.firebaseio.com/collections/'+collectionid)).$asObject();
 	var booksArray = $firebase( new Firebase('https://sweltering-fire-3219.firebaseio.com/collections/'+collectionid +'/books/')).$asArray();
    	booksArray.$loaded().then(function() {    
@@ -1079,13 +1113,78 @@ app.controller("CollectionCtrl", [ "$scope", "currentUser", "$firebase", "$route
     });
     collectionobj.$loaded().then(function() {
     	var theCollection = collectionobj;
-    	$scope.theCollection = collectionobj
-		/*
-if(collectionobj.title){
-		} else {
-		}
-*/
+    	$scope.theCollection = collectionobj;
 	});
+	
+	$scope.updateOtherCollection = function(theCollectionIdtoUpdate){
+		if(currentUser){
+			var fsCollection = new Firebase('https://sweltering-fire-3219.firebaseio.com/collections/').child(theCollectionIdtoUpdate);
+			var userCollection = new Firebase("https://sweltering-fire-3219.firebaseio.com/users").child(currentUser.uid).child('collections').child(theCollectionIdtoUpdate);
+			userCollection.once('value', function(snapshot) {
+				var userCollectionVal = snapshot.val();
+  				  		 	userCollection.update({
+							    description: $scope.theCollection.description,
+							    title: $scope.theCollection.title,
+							    isPublic: $scope.theCollection.isPublic
+							  });
+			});			
+
+			fsCollection.once('value', function(snapshot) {
+				var fsCollectionVal = snapshot.val();
+				  		 	fsCollection.update({
+							    description: $scope.theCollection.description,
+							    title: $scope.theCollection.title,
+							    isPublic: $scope.theCollection.isPublic
+							  });
+			});			
+		}	
+	}
+
+	$scope.dialogDelete = function () {
+		var dialogProcessing = false;
+		$scope.dialogProcessing = false;
+		$scope.dialogDone = false;
+		$scope.isError = false;
+	
+		
+	    ngDialog.open({ 
+			plain: true,
+			template: '<h4>Delete Collection</h4><p>Are You Sure? This cannot be undone</p><div class="ngdialog-buttons"><button type="button" class="ngdialog-button ngdialog-button-secondary" ng-click="closeThisDialog()">Cancel</button><button class="ngdialog-button ngdialog-button-primary" ng-click="doDelete(theCollection.$id);closeThisDialog();">Delete</button></div>',
+			//template: 'views/dialogs/dialogReport.html',
+	    	scope: $scope
+			});
+    }; //ends dialogDelete
+
+	$scope.doDelete = function (thecollectionid) {
+ 	 	var theTimestamp;
+		var dialogProcessing = true;
+		$scope.dialogProcessing = true;
+		$scope.dialogDone = false;
+		$scope.isError = false;
+		if(thecollectionid){
+			console.log(thecollectionid);
+			console.log(collectionobj);
+ 			var objToDelete = new Firebase('https://sweltering-fire-3219.firebaseio.com/collections/'+collectionid);
+ 			var userCollToDelete = new Firebase('https://sweltering-fire-3219.firebaseio.com/users/'+ currentUser.uid + '/collections/'+collectionid);
+			var onComplete = function(error) {
+			  if (error) {
+			    console.log('Delete failed');
+ 			  } else {
+				  userCollToDelete.remove();
+			  	  console.log('Delete succeeded');
+				  $location.path('/home').replace();
+				  $scope.$apply();
+			  }
+			};
+		objToDelete.remove(onComplete);
+
+		}else{
+		 console.log('no collection id');	
+		}//ends check for collectionid
+    }; //ends doDelete
+    
+    
+    
 }]);
 				
 				
@@ -1099,27 +1198,38 @@ if(collectionobj.title){
    app.controller("AddBookCtrl", [ "$scope", "currentUser", "$firebase", "$routeParams", "$location", "filterFilter", "DataSource", "$q", "$http", function($scope, currentUser, $firebase, $routeParams, $location, filterFilter, DataSource, $q, $http) {
  		$scope.hasData = false;
  		$scope.isLooking = false;
- 		   var ref = new Firebase('https://sweltering-fire-3219.firebaseio.com/Books/');
+ 		$scope.hasDataNominate = false;
+ 		$scope.isLookingNominate = false;
+ 		var ref = new Firebase('https://sweltering-fire-3219.firebaseio.com/Books/');
    
  	$scope.searchBooks = function() {
  		$scope.hasData = false;
  		$scope.isLooking = true;
- 				 //GET LODATION DATA 	
+  		//GET LODATION DATA 	
 		 var SEARCHURL = 'http://fictionset.in/admin/amazon/amazon_searchbooks.php?search='+$scope.searchString;
 			searchData = function(data) {
 				$scope.isLooking = false;
 				$scope.hasData = true;
 				$scope.dataSearch = data;
-	        	console.log(data);
-/*
-  				if (data.geonames.length){
-	    			$scope.hasBooks = true;
- 				};    
- 				
-*/
- 				};
+	        	//console.log(data);
+  				};
  			DataSource.get(SEARCHURL,searchData);  //this is the locations
- 			}//ends search funciton
+ 	}//ends search funciton
+
+
+ 	$scope.searchBooksNominate = function() {
+ 		$scope.hasDataNominate = false;
+ 		$scope.isLookingNominate = true;
+  		//GET LODATION DATA 	
+		 var SEARCHURL = 'http://fictionset.in/admin/amazon/amazon_searchbooks.php?search='+$scope.searchStringNominate;
+			searchDataNominate = function(data) {
+				$scope.isLookingNominate = false;
+				$scope.hasDataNominate = true;
+				$scope.dataSearchNominate = data;
+	        	//console.log(data);
+  				};
+ 			DataSource.get(SEARCHURL,searchDataNominate);  //this is the locations
+ 	}//ends search funciton
 
 
  	 }]);

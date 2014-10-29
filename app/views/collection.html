@@ -6,6 +6,45 @@
  	</div>
 </div>
 
+<div class="adminSection fullWidth"  >
+	<div class="theContainerHead">
+		<div class="column100">
+			<button ng-click="editorEnabled=!editorEnabled" ng-hide="editorEnabled" class="btn fsBtn  editBtn inline floatRight">Edit Collection</button>
+			<button ng-show="editorEnabled" ng-click="dialogDelete(theCollection.$id)" class="btn fsBtn fsRed editBtn inline floatRight">Delete Collection</button> <button ng-click="editorEnabled=!editorEnabled; ; updateOtherCollection(theCollection.$id)" ng-show="editorEnabled" class="btn fsBtn  editBtn inline floatRight">Done Editing</button>
+					<h3>Admin</h3>
+		</div>
+		<div class="columnWrap">
+				<div class="column column50">
+					<p>You are an owner of this collection.</p>
+					<div ng-show="editorEnabled" class="formWrap">
+ 						<div class="formFieldWrap group editModeItem" ng-show="editorEnabled">
+ 							<label>Title</label>
+ 							<input type="text" ng-model="theCollection.title" class="inputLarge" />
+						</div>
+ 						<div class="formFieldWrap group editModeItem" ng-show="editorEnabled">
+ 							<label>Description</label>
+						 	<textarea ng-model="theCollection.description"  class="inputLarge" ng-show="true" ></textarea>
+						</div>
+						<div class="formFieldWrap group " ng-show="editorEnabled">
+						 	<label for="isPublic">Public:</label> 
+							<div class="roundedTwo" id="isPublic">
+									<input type="checkbox" value="None" id="roundedTwo" name="check"  ng-model="theCollection.isPublic"  />
+									<label for="roundedTwo"></label>
+							</div>   
+							  <p class="subTitle">Can this collection be followed by other users</p>
+						 </div>			 
+					</div>
+
+				</div>
+				<div class="column column50">
+					 <p>
+					 </p>
+<!-- 					<p><button ng-show="editorEnabled" ng-click="dialogDelete(theCollection.$id)" class="btn fsBtn fsRed inline">Delete Collection</button></p> -->
+				</div>
+		</div>
+	</div>
+</div><!-- ends adminSection -->
+
  
 <div class="theContainer">
 	<div class="contentWrap" >
@@ -15,9 +54,9 @@
 		</div>
 		<div class="featBlock featInfo" ng-if="theCollection.description">
 			<p class="">{{  theCollection.description }}</p>
-			<p>{{ bookCount}} Books</p>
-			<p class="">Edited: {{ theCollection.timestamp | date : format : timezone}}</p>
-			<p class="">Public: {{theCollection.isPublic ? 'Yes' : 'No'}}</p>
+<!-- 			<p>{{ bookCount}} Books</p> -->
+<!-- 			<p class="">Edited: {{ theCollection.timestamp | date : format : timezone}}</p> -->
+<!-- 			<p class="">Public: {{theCollection.isPublic ? 'Yes' : 'No'}}</p> -->
 		</div>
 	
 	    <ul class="bookList">

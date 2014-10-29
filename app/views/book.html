@@ -65,7 +65,9 @@ add <a href="#" ng-click="pushToColl()">add book</a>
  					
 -->
 			</div><!-- ends places -->
-
+			<div class="sideBarItem" ng-if="profile">
+				<p class="subTitle icon-letter-mail iconLabel"><a href="" ng-click="dialogReport(book.$id)" >Suggest Additions/Report Errors</a></p>
+			</div>
  			<div class="buyWrap sideBarItem">
 				<div class="loading" ng-show="isLoadingAmazon">Finding Prices...</div>
 				<div class="noContent" ng-show"noAmazon"></div>

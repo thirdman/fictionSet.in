@@ -478,26 +478,42 @@ ul {
     right: 0;
     top: 0; }
 
-/* line 290, ../../scss/includes/common.scss */
+/* line 288, ../../scss/includes/common.scss */
 .contentSection {
   margin-bottom: 1em; }
-  /* line 292, ../../scss/includes/common.scss */
+  /* line 290, ../../scss/includes/common.scss */
   .contentSection h3 {
     margin-top: 0;
     margin-bottom: .66em; }
 
-/* line 299, ../../scss/includes/common.scss */
+/* line 296, ../../scss/includes/common.scss */
+.adminSection {
+  margin-top: 1em; }
+  /* line 298, ../../scss/includes/common.scss */
+  .adminSection .theContainerHead {
+    background: #eee;
+    padding: 1em;
+    border-radius: 4px; }
+    /* line 302, ../../scss/includes/common.scss */
+    .adminSection .theContainerHead h3 {
+      margin-top: 0; }
+  /* line 307, ../../scss/includes/common.scss */
+  .adminSection .formWrap {
+    background: transparent;
+    margin: 1em; }
+
+/* line 313, ../../scss/includes/common.scss */
 .additionalSection {
   border-top: 1px solid #ddd;
   margin-top: 1em; }
 
-/* line 308, ../../scss/includes/common.scss */
+/* line 324, ../../scss/includes/common.scss */
 .imgList {
   background: #eee;
   border-radius: 4px;
   padding: 1em;
   margin: 10px 0; }
-  /* line 316, ../../scss/includes/common.scss */
+  /* line 332, ../../scss/includes/common.scss */
   .imgList .imgWrap {
     display: inline-block;
     width: 90px;
@@ -505,58 +521,58 @@ ul {
     border-radius: 45px;
     background: #ccc;
     vertical-align: middle; }
-    /* line 323, ../../scss/includes/common.scss */
+    /* line 339, ../../scss/includes/common.scss */
     .imgList .imgWrap img {
       width: 90px;
       height: 90px;
       border-radius: 45px; }
-  /* line 329, ../../scss/includes/common.scss */
+  /* line 345, ../../scss/includes/common.scss */
   .imgList .imgInfo {
     display: inline-block; }
 
-/* line 339, ../../scss/includes/common.scss */
+/* line 355, ../../scss/includes/common.scss */
 .descriptionWrap {
   line-height: 1.6em; }
-  /* line 341, ../../scss/includes/common.scss */
+  /* line 357, ../../scss/includes/common.scss */
   .descriptionWrap b {
     font-weight: normal; }
 
-/* line 351, ../../scss/includes/common.scss */
+/* line 367, ../../scss/includes/common.scss */
 button.btn.actionBtn, a.btn.actionBtn {
   font-size: 1.5em; }
 
-/* line 359, ../../scss/includes/common.scss */
+/* line 375, ../../scss/includes/common.scss */
 .buyWrap {
   display: inline-block;
   vertical-align: top; }
 
-/* line 363, ../../scss/includes/common.scss */
+/* line 379, ../../scss/includes/common.scss */
 .buyLink {
   display: inline-block; }
-  /* line 365, ../../scss/includes/common.scss */
+  /* line 381, ../../scss/includes/common.scss */
   .buyLink.btn {
     margin: 0;
     padding: 0.5em 0.5em 0.25em; }
-  /* line 369, ../../scss/includes/common.scss */
+  /* line 385, ../../scss/includes/common.scss */
   .buyLink .buyPrice {
     font-size: 1.5em;
     line-height: 1.5em;
     font-weight: 300; }
-  /* line 374, ../../scss/includes/common.scss */
+  /* line 390, ../../scss/includes/common.scss */
   .buyLink .buyCurrency {
     font-size: .85em;
     color: #aaa; }
-  /* line 378, ../../scss/includes/common.scss */
+  /* line 394, ../../scss/includes/common.scss */
   .buyLink .buySave {
     font-size: .85em;
     color: yellow; }
-  /* line 383, ../../scss/includes/common.scss */
+  /* line 399, ../../scss/includes/common.scss */
   .buyLink .buyMerchant {
     font-size: .85em;
     line-height: .5em;
     padding: 0; }
 
-/* line 391, ../../scss/includes/common.scss */
+/* line 407, ../../scss/includes/common.scss */
 .buyMore {
   font-size: .85em;
   display: block;
@@ -564,7 +580,7 @@ button.btn.actionBtn, a.btn.actionBtn {
   font-style: italic;
   color: #aaa; }
 
-/* line 403, ../../scss/includes/common.scss */
+/* line 419, ../../scss/includes/common.scss */
 .appleIcon {
   height: 20px;
   vertical-align: top;
@@ -572,29 +588,29 @@ button.btn.actionBtn, a.btn.actionBtn {
   margin-top: -7px;
   margin-bottom: -6px; }
 
-/* line 416, ../../scss/includes/common.scss */
+/* line 432, ../../scss/includes/common.scss */
 .columnWrap .column50 {
   width: 49.5%; }
-  /* line 418, ../../scss/includes/common.scss */
+  /* line 434, ../../scss/includes/common.scss */
   .columnWrap .column50.columnLeft, .columnWrap .column50.columnRight {
     width: 49.5%; }
   @media only screen and (max-width: 979px) {
-    /* line 416, ../../scss/includes/common.scss */
+    /* line 432, ../../scss/includes/common.scss */
     .columnWrap .column50 {
       width: 100%; }
-      /* line 424, ../../scss/includes/common.scss */
+      /* line 440, ../../scss/includes/common.scss */
       .columnWrap .column50.columnLeft, .columnWrap .column50.columnRight {
         width: 100%; } }
-/* line 430, ../../scss/includes/common.scss */
+/* line 446, ../../scss/includes/common.scss */
 .columnWrap .column100 {
   width: 100%;
   display: block; }
 
-/* line 440, ../../scss/includes/common.scss */
+/* line 456, ../../scss/includes/common.scss */
 .contentImg.imgWrapCenter {
   text-align: center;
   margin: 1em auto; }
-  /* line 443, ../../scss/includes/common.scss */
+  /* line 459, ../../scss/includes/common.scss */
   .contentImg.imgWrapCenter img.contentImgCircle {
     width: 300px;
     height: 300px;
@@ -602,7 +618,7 @@ button.btn.actionBtn, a.btn.actionBtn {
     border-radius: 50%;
     position: relative; }
 
-/* line 458, ../../scss/includes/common.scss */
+/* line 474, ../../scss/includes/common.scss */
 .message.error {
   color: red;
   margin: 1em -1em;
@@ -611,31 +627,37 @@ button.btn.actionBtn, a.btn.actionBtn {
   color: #fff;
   /* border-radius: 3px; */
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3); }
-  /* line 467, ../../scss/includes/common.scss */
+  /* line 483, ../../scss/includes/common.scss */
   .message.error h3 {
     font-weight: normal;
     color: #fff;
     border-bottom: 1px solid white; }
 
-/* line 474, ../../scss/includes/common.scss */
+/* line 490, ../../scss/includes/common.scss */
 .emptyContent {
   text-align: center;
   margin: 2em auto; }
-  /* line 477, ../../scss/includes/common.scss */
+  /* line 493, ../../scss/includes/common.scss */
   .emptyContent:before {
     font-size: 2em;
     line-height: 2em;
     vertical-align: middle;
     margin-right: 10px; }
 
-/* line 1, ../../scss/includes/forms.scss */
+/* line 5, ../../scss/includes/forms.scss */
 .formField {
   background: #f2f2f2;
   padding: .5em 1em;
   margin: 4px 0;
   border-radius: 4px; }
 
-/* line 8, ../../scss/includes/forms.scss */
+/* line 11, ../../scss/includes/forms.scss */
+.formFieldWrap {
+  background: transparent;
+  padding: .5em 0;
+  margin: 4px 0; }
+
+/* line 17, ../../scss/includes/forms.scss */
 input.text_field,
 select.selectlist,
 input.password,
@@ -653,7 +675,7 @@ textarea {
   color: #333;
   background: #fafafa;
   font-size: .85em; }
-  /* line 26, ../../scss/includes/forms.scss */
+  /* line 35, ../../scss/includes/forms.scss */
   input.text_field:focus,
   select.selectlist:focus,
   input.password:focus,
@@ -663,7 +685,7 @@ textarea {
   textarea:focus {
     background-color: #FFF;
     border: 1px solid #2a2a2a; }
-  /* line 32, ../../scss/includes/forms.scss */
+  /* line 41, ../../scss/includes/forms.scss */
   input.text_field.inputStd,
   select.selectlist.inputStd,
   input.password.inputStd,
@@ -672,7 +694,7 @@ textarea {
   input[type="password"].inputStd,
   textarea.inputStd {
     width: 300px; }
-  /* line 36, ../../scss/includes/forms.scss */
+  /* line 45, ../../scss/includes/forms.scss */
   input.text_field.inputLarge,
   select.selectlist.inputLarge,
   input.password.inputLarge,
@@ -681,7 +703,7 @@ textarea {
   input[type="password"].inputLarge,
   textarea.inputLarge {
     width: 100%; }
-  /* line 39, ../../scss/includes/forms.scss */
+  /* line 48, ../../scss/includes/forms.scss */
   input.text_field.inputTall,
   select.selectlist.inputTall,
   input.password.inputTall,
@@ -690,7 +712,7 @@ textarea {
   input[type="password"].inputTall,
   textarea.inputTall {
     min-height: 200px; }
-  /* line 43, ../../scss/includes/forms.scss */
+  /* line 52, ../../scss/includes/forms.scss */
   input.text_field.inputSmall,
   select.selectlist.inputSmall,
   input.password.inputSmall,
@@ -700,12 +722,12 @@ textarea {
   textarea.inputSmall {
     width: 100px; }
 
-/* line 48, ../../scss/includes/forms.scss */
+/* line 57, ../../scss/includes/forms.scss */
 label {
   float: left;
   width: 200px; }
 
-/* line 54, ../../scss/includes/forms.scss */
+/* line 63, ../../scss/includes/forms.scss */
 button, .btn {
   outline: none;
   border-radius: 6px;
@@ -716,12 +738,12 @@ button, .btn {
   border: 1px solid #222;
   cursor: pointer;
   text-decoration: none; }
-  /* line 65, ../../scss/includes/forms.scss */
+  /* line 74, ../../scss/includes/forms.scss */
   button:hover, .btn:hover {
     background: #444444;
     color: #fff; }
 
-/* line 72, ../../scss/includes/forms.scss */
+/* line 81, ../../scss/includes/forms.scss */
 .fsBtn {
   border: 0;
   border-radius: 3px;
@@ -733,42 +755,45 @@ button, .btn {
   margin: 0 0 0 .5em;
   padding: .75em 2em;
   text-transform: uppercase; }
+  /* line 93, ../../scss/includes/forms.scss */
+  .fsBtn.fsRed {
+    background: #ea3830; }
 
-/* line 86, ../../scss/includes/forms.scss */
+/* line 99, ../../scss/includes/forms.scss */
 .btnDelete {
   float: right; }
 
-/* line 89, ../../scss/includes/forms.scss */
+/* line 102, ../../scss/includes/forms.scss */
 .removeLink {
   color: red;
   text-decoration: underline;
   font-size: .85em; }
 
-/* line 97, ../../scss/includes/forms.scss */
+/* line 110, ../../scss/includes/forms.scss */
 .descriptionInput {
   min-height: 470px;
   padding: 1em; }
 
-/* line 107, ../../scss/includes/forms.scss */
+/* line 120, ../../scss/includes/forms.scss */
 .editBtn.floatRight {
   float: right; }
 
-/* line 112, ../../scss/includes/forms.scss */
+/* line 125, ../../scss/includes/forms.scss */
 .wordCount {
   color: #aaa; }
-  /* line 114, ../../scss/includes/forms.scss */
+  /* line 127, ../../scss/includes/forms.scss */
   .wordCount.wordCountOk {
     color: #aaa; }
-  /* line 117, ../../scss/includes/forms.scss */
+  /* line 130, ../../scss/includes/forms.scss */
   .wordCount.wordCountWarning {
     color: #ea3830; }
 
-/* line 125, ../../scss/includes/forms.scss */
+/* line 138, ../../scss/includes/forms.scss */
 input[type=checkbox] {
   visibility: hidden; }
 
 /* .roundedTwo */
-/* line 130, ../../scss/includes/forms.scss */
+/* line 143, ../../scss/includes/forms.scss */
 .roundedTwo {
   display: inline-block;
   width: 30px;
@@ -777,7 +802,7 @@ input[type=checkbox] {
   background: #fcfff4;
   border-radius: 4px;
   box-shadow: inset 0px 1px 1px white, 0px 0px 3px rgba(0, 0, 0, 0.3); }
-  /* line 141, ../../scss/includes/forms.scss */
+  /* line 154, ../../scss/includes/forms.scss */
   .roundedTwo label {
     width: 22px;
     height: 22px;
@@ -789,7 +814,7 @@ input[type=checkbox] {
     background: rgba(0, 0, 0, 0.2);
     border-radius: 2px;
     box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.2), 0px 1px 0px rgba(255, 255, 255, 0.7); }
-    /* line 154, ../../scss/includes/forms.scss */
+    /* line 167, ../../scss/includes/forms.scss */
     .roundedTwo label:after {
       content: '';
       width: 12px;
@@ -803,16 +828,16 @@ input[type=checkbox] {
       background: transparent;
       opacity: 0;
       -webkit-transform: rotate(-45deg); }
-    /* line 170, ../../scss/includes/forms.scss */
+    /* line 183, ../../scss/includes/forms.scss */
     .roundedTwo label:hover::after {
       opacity: 0.5; }
-  /* line 175, ../../scss/includes/forms.scss */
+  /* line 188, ../../scss/includes/forms.scss */
   .roundedTwo input[type=checkbox] {
     visibility: hidden; }
-    /* line 177, ../../scss/includes/forms.scss */
+    /* line 190, ../../scss/includes/forms.scss */
     .roundedTwo input[type=checkbox]:checked + label {
       background: #a8d164; }
-    /* line 180, ../../scss/includes/forms.scss */
+    /* line 193, ../../scss/includes/forms.scss */
     .roundedTwo input[type=checkbox]:checked + label:after {
       opacity: 1;
       border-color: #fff; }
@@ -947,6 +972,195 @@ input[type=checkbox] {
     line-height: .9em;
     color: #fff; }
 
+/* line 160, ../../scss/includes/header.scss */
+a, a:visited, nav {
+  /*
+  -moz-transition: color 0.5s, background 0.7s, -moz-border-radius 0.7s, text-indent 0.2s;
+  -webkit-transition: color 0.5s, background 0.7s, -webkit-border-radius 0.7s, text-indent 0.2s;
+  -o-transition: color 0.5s, background 0.7s, border-radius 0.7s, text-indent 0.2s;
+  transition: color 0.5s, background 0.7s, border-radius 0.7s, text-indent 0.2s;
+  */
+  transition: color 0.3s, background 0.7s, border-radius 0.7s, text-indent 0.2s;
+  -webkit-tap-highlight-color: transparent; }
+
+/* line 193, ../../scss/includes/header.scss */
+nav {
+  height: 50px;
+  width: 170px;
+  display: inline-block;
+  position: absolute;
+  z-index: 10;
+  overflow-y: hidden;
+  text-align: center;
+  vertical-align: middle;
+  margin-left: 10px;
+  margin-top: -8px; }
+
+/* line 208, ../../scss/includes/header.scss */
+nav:hover {
+  width: 170px;
+  height: 210px;
+  cursor: pointer; }
+
+/* line 215, ../../scss/includes/header.scss */
+nav a {
+  display: none;
+  text-indent: 60px;
+  position: relative;
+  height: 43px;
+  padding: 10px 0;
+  color: #fff !important;
+  text-align: left;
+  /*
+  	text-indent: 0px;
+  	text-align: left;
+  	margin-left: 70px;
+  */ }
+
+/* line 240, ../../scss/includes/header.scss */
+nav:hover > a {
+  display: block; }
+
+/* line 244, ../../scss/includes/header.scss */
+nav:hover > a:first-child {
+  text-indent: 60px; }
+
+/* line 247, ../../scss/includes/header.scss */
+nav:hover > a:first-child:after {
+  background: #eee; }
+
+/* line 254, ../../scss/includes/header.scss */
+nav a:first-child {
+  display: block;
+  text-align: center;
+  margin-bottom: 16px;
+  cursor: default;
+  text-indent: 45px;
+  text-align: left;
+  color: #666 !important; }
+
+/* line 264, ../../scss/includes/header.scss */
+nav a:after {
+  position: absolute;
+  top: 0;
+  padding: 12px 0;
+  width: 50px;
+  color: #fff;
+  color: #999;
+  font-size: 17px;
+  display: block;
+  text-indent: 0;
+  background: #eee;
+  color: #666;
+  font-family: 'fsfont';
+  text-align: center; }
+
+/* line 284, ../../scss/includes/header.scss */
+nav a:hover {
+  text-indent: 65px;
+  text-align: left;
+  background: #fff !important;
+  color: #2a2a2a !important;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px; }
+
+/* line 302, ../../scss/includes/header.scss */
+nav a:hover:after {
+  color: #fff;
+  background: #fff !important;
+  color: #2a2a2a !important;
+  text-align: center; }
+
+/* line 311, ../../scss/includes/header.scss */
+nav a:first-child:before {
+  position: absolute;
+  text-indent: 0;
+  top: 52px;
+  left: 18px;
+  content: "";
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-bottom: 7px solid #eee; }
+
+/* line 330, ../../scss/includes/header.scss */
+nav a:first-child:after {
+  left: 0;
+  content: "u";
+  background: transparent;
+  color: #666;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px; }
+
+/* line 345, ../../scss/includes/header.scss */
+nav a:first-child:hover {
+  background: transparent !important;
+  text-indent: 60px;
+  color: #2a2a2a !important; }
+
+/* line 351, ../../scss/includes/header.scss */
+nav a:first-child:hover:after {
+  background: #2a2a2a;
+  background: #eee; }
+
+/* line 357, ../../scss/includes/header.scss */
+nav a:nth-child(2):after {
+  content: "m";
+  -webkit-border-top-left-radius: 5px;
+  -webkit-border-top-right-radius: 5px;
+  -moz-border-radius-topleft: 5px;
+  -moz-border-radius-topright: 5px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px; }
+
+/* line 367, ../../scss/includes/header.scss */
+nav a:nth-child(3):after {
+  content: "D"; }
+
+/* line 371, ../../scss/includes/header.scss */
+nav a:last-child:after {
+  content: "e";
+  -webkit-border-bottom-left-radius: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+  -moz-border-radius-bottomleft: 5px;
+  -moz-border-radius-bottomright: 5px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px; }
+
+/* line 382, ../../scss/includes/header.scss */
+p {
+  padding: 0.3em 0; }
+
+@media only screen and (max-width: 768px) {
+  /* line 388, ../../scss/includes/header.scss */
+  nav a:hover {
+    color: #6daeaf !important;
+    background: #fff;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    margin-left: 53px;
+    padding-left: 17px; }
+
+  /* line 398, ../../scss/includes/header.scss */
+  nav a:hover:after {
+    margin-left: -60px;
+    padding-left: 0 !important; }
+
+  /* line 403, ../../scss/includes/header.scss */
+  nav a:first-child:hover:after {
+    margin-left: -53px !important; }
+
+  /* line 407, ../../scss/includes/header.scss */
+  nav a:first-child:hover {
+    background: transparent; }
+
+  /* line 411, ../../scss/includes/header.scss */
+  nav a:first-child:hover:before {
+    margin-left: -53px; } }
 /*///////////////////////////*/
 /*///////// HOMEPAGE ////////*/
 /*///////////////////////////*/
@@ -1040,13 +1254,30 @@ h2.homeTitle {
 /*///////////////////////////*/
 /*///////// Profile & account ////////*/
 /*///////////////////////////*/
-/* line 5, ../../scss/includes/profile.scss */
+/* line 4, ../../scss/includes/profile.scss */
+.userImgIconWrap {
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: none;
+  float: inherit;
+  margin-right: inherit;
+  display: inline-block;
+  vertical-align: middle; }
+  /* line 14, ../../scss/includes/profile.scss */
+  .userImgIconWrap .userImgIcon {
+    box-shadow: none;
+    height: 100%;
+    width: auto; }
+
+/* line 22, ../../scss/includes/profile.scss */
 .pageAccount .titleBlock {
   width: 100%;
   padding: 1em 0;
   position: relative;
   text-align: center; }
-  /* line 10, ../../scss/includes/profile.scss */
+  /* line 27, ../../scss/includes/profile.scss */
   .pageAccount .titleBlock .coverImg.userImg {
     margin-top: .5em;
     margin-right: inherit;
@@ -1058,74 +1289,74 @@ h2.homeTitle {
     float: inherit;
     margin-right: inherit img;
       margin-right-box-shadow: none; }
-/* line 27, ../../scss/includes/profile.scss */
+/* line 44, ../../scss/includes/profile.scss */
 .pageAccount .contentSection {
   border-bottom: 1px solid #ddd;
   padding-bottom: 1em; }
 
-/* line 36, ../../scss/includes/profile.scss */
+/* line 53, ../../scss/includes/profile.scss */
 .subMenu a {
   text-decoration: none;
   text-transform: capitalize;
   font-size: .8em;
   margin: 0 10px; }
-  /* line 41, ../../scss/includes/profile.scss */
+  /* line 58, ../../scss/includes/profile.scss */
   .subMenu a.active {
     border-bottom: 3px solid #ccc; }
 
-/* line 47, ../../scss/includes/profile.scss */
+/* line 64, ../../scss/includes/profile.scss */
 .infoLabel {
   min-width: 50%;
   display: inline-block;
   vertical-align: top; }
-  /* line 51, ../../scss/includes/profile.scss */
+  /* line 68, ../../scss/includes/profile.scss */
   .infoLabel[class^="icon-"]:before, .infoLabel[class*=" icon-"]:before {
     margin-right: 8px; }
 
-/* line 57, ../../scss/includes/profile.scss */
+/* line 74, ../../scss/includes/profile.scss */
 .iconLabel[class^="icon-"]:before, .iconLabel[class*=" icon-"]:before {
   margin-right: 8px; }
 
 /*///////////////////////////*/
 /*///////// badges ////////*/
-/* line 69, ../../scss/includes/profile.scss */
+/* line 86, ../../scss/includes/profile.scss */
 .aBadge {
   width: 160px;
   height: 180px;
   display: inline-block; }
-  /* line 74, ../../scss/includes/profile.scss */
+  /* line 91, ../../scss/includes/profile.scss */
   .aBadge .badgeLink .badgeImg {
     width: 160px;
     height: 160px; }
-  /* line 79, ../../scss/includes/profile.scss */
+  /* line 96, ../../scss/includes/profile.scss */
   .aBadge .badgeText {
     text-align: center;
     width: 100%;
     text-transform: uppercase;
     display: block;
     display: none; }
-  /* line 89, ../../scss/includes/profile.scss */
+  /* line 106, ../../scss/includes/profile.scss */
   .adminBadges .aBadge {
     width: 100%;
     height: 80px; }
-    /* line 92, ../../scss/includes/profile.scss */
+    /* line 109, ../../scss/includes/profile.scss */
     .adminBadges .aBadge .badgeLink {
       display: inline-block;
       vertical-align: middle; }
-      /* line 96, ../../scss/includes/profile.scss */
+      /* line 113, ../../scss/includes/profile.scss */
       .adminBadges .aBadge .badgeLink .badgeImg {
         width: 50px;
         height: 50px; }
-        /* line 100, ../../scss/includes/profile.scss */
+        /* line 117, ../../scss/includes/profile.scss */
         .unassigned .adminBadges .aBadge .badgeLink .badgeImg {
           background: #ccc; }
-    /* line 105, ../../scss/includes/profile.scss */
+    /* line 122, ../../scss/includes/profile.scss */
     .adminBadges .aBadge .badgeText {
       display: inline-block;
       vertical-align: middle;
       width: auto;
       text-transform: capitalize; }
-    /* line 111, ../../scss/includes/profile.scss */
+    /* line 128, ../../scss/includes/profile.scss */
     .adminBadges .aBadge .badgeButton {
       display: inline-block;
       vertical-align: middle;
@@ -2038,6 +2269,21 @@ ul {
   /* line 149, ../../scss/includes/collections.scss */
   .collectionsList.inProfileContext .collectionItem .collectionInfo h5 {
     color: #2a2a2a; }
+/* line 156, ../../scss/includes/collections.scss */
+.collectionsList.inPageContext .collectionItem {
+  width: inherit;
+  display: block;
+  vertical-align: top;
+  border-top: 0px solid transparent;
+  padding-top: 1em;
+  margin-top: 1em; }
+  /* line 164, ../../scss/includes/collections.scss */
+  .collectionsList.inPageContext .collectionItem .collectionInfo h5 {
+    color: #2a2a2a;
+    font-size: 1.2em; }
+  /* line 168, ../../scss/includes/collections.scss */
+  .collectionsList.inPageContext .collectionItem .collectionInfo p, .collectionsList.inPageContext .collectionItem .collectionInfo p.subTitle {
+    font-size: .85em; }
 
 /* ///////// Dialogs   /////////*/
 /* line 3, ../../scss/includes/dialogs.scss */

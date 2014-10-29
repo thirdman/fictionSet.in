@@ -1,0 +1,48 @@
+ <!-- for when sent -->
+<span ng-show="(reportDone) && (!reportProcessing)">
+  	<h4>Suggest Additions/Report Errors</h4>
+	<p>Boom! Thanks for your contribution.</p>
+	<div class="ngdialog-buttons">
+ 		<button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="closeThisDialog()">Close</button>
+	</div>
+</span>
+
+ <!-- for when sending -->
+<span ng-show="(reportProcessing) && (!reportDone)" class="loading">
+  	<h4>Suggest Additions/Report Errors</h4>
+	<p>Working...</p>
+</span>
+
+ <!-- for when Error -->
+<span ng-show="(isError)">
+  	<h4>Suggest Additions/Report Errors</h4>
+	<h3>{{errorMessage.title}}</h3>
+	<p>{{errorMessage.message}}</p>
+</span>
+
+
+<!-- for when initial state - show form -->
+<span ng-hide="reportDone">
+  	<h4>Suggest Additions/Report Errors</h4>
+  	<p class="info">BETA: if you think there's additional places that could be added to a book, or there are errors, note them here.</p>
+ 		 <form  class="borderTop">
+<!--  		 	  <div class="coverImg coverImgSmall"><img class="featImg" ng-if="book.coverurl" src="{{book.coverurl}}"/></div> -->
+ 		 	 <h3>{{ book.title }}</h3>
+		     <div class="  group">
+		      	<p class="subTitle">Suggestions/Errors:</p> 
+		      	<textarea  type="text" ng-model="thereport.content"  class="inputLarge inputTall" /></textarea>
+			  </div>
+ <!-- 	      <button type="submit" ng-click="updateMessages()">Insert Message</button> -->
+
+		 </form> 
+ 
+  	
+	<div class="ngdialog-buttons">
+		<button type="button" class="ngdialog-button ngdialog-button-secondary" ng-click="closeThisDialog('button')">Cancel</button>
+		<button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="submitReport(thereport)">Submit</button>
+	</div>
+</span>
+
+
+
+ 
