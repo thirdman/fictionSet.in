@@ -55,20 +55,26 @@ add <a href="#" ng-click="pushToColl()">add book</a>
 
 		<div class="bookInfo columnWrap">
 		<div class="column columnLeft column50" id="bookMeta">
+
 			<div class="tagWrap bookPlaces sideBarItem">
  					<h4><span class="iconLabel icon-marker"></span>Set In:</h4>
 					<div ng-repeat="place in book.places" class="aTag placeTag" >
  								<a ng-href="#/place/{{place.geonameId}}" ng-class="(place.name==place.countryName) ? 'countryName' : ''" class="placeName">{{place.name}}</a><span ng-if="place.name != place.countryName"> <a href="#/place/{{place.countryName}}" class="placeCountry"><span>{{place.countryCode}}<span></a></span>
  					</div>
-
-<!--
- 					
--->
 			</div><!-- ends places -->
+
+			<div class="tagWrap bookTags sideBarItem" ng-if="book.tags">
+ 					<h4><span class="iconLabel icon-tag-1"></span>Tags:</h4>
+					<span ng-repeat="tag in book.tags" class="aTag tagTag" >
+						<a ng-href="#/tags/{{tag.tagId ? tag.tagId :tag.tagName}}" class="tagName">{{tag.tagId ? tag.tagId :tag.tagName}}</a> 
+ 					</span>
+			</div><!-- ends tags -->
+
 			<div class="sideBarItem" ng-if="profile">
 				<p class="subTitle icon-letter-mail iconLabel"><a href="" ng-click="dialogReport(book.$id)" >Suggest Additions/Report Errors</a></p>
 			</div>
- 			<div class="buyWrap sideBarItem">
+
+ 			<div class="buyWrap sideBarItem borderTop marginTop paddingTop">
 				<div class="loading" ng-show="isLoadingAmazon">Finding Prices...</div>
 				<div class="noContent" ng-show"noAmazon"></div>
 				<div class="hasContent" ng-show="hasAmazon" >

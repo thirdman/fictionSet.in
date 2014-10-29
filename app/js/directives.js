@@ -135,5 +135,3 @@ angular.module('myApp.directives', [])
 
 
 
-
-

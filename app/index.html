@@ -92,7 +92,7 @@
 	  <ul class="menu user">
 	    <li ng-hide="auth.user"><a href="#/login">login</a></li>
 	    <li ng-show="auth.user">
-	    	<a href="#/addbook">Submit a Book</a> | <span class="inlineUserIcon" fs-user-img user-id="auth.user.uid" fs-user-id="auth.user.uid" fs-icon-type="header" ></span><a href="#/profile">{{auth.user.displayName ? auth.user.displayName : 'Account'}}</a>
+	    	<a href="#/addbook" class="dividerRight">Submit a Book</a><a href="#/profile"><span class="inlineUserIcon" fs-user-img user-id="auth.user.uid" fs-user-id="auth.user.uid" fs-icon-type="header" ></span> {{auth.user.displayName ? auth.user.displayName : 'Account'}}</a>
 	    </li>
  <!--
  	    <li ng-show ="['logout','error']"><a href="#/login">login</a></li>

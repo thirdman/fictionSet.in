@@ -89,6 +89,18 @@ hr{
 	margin-bottom: 1em;	
 }
 
+.dividerRight{
+	border-right: 1px solid $fsLineGrey;
+	margin-right: .5em;
+	padding-right: .5em;
+}
+.dividerLeft{
+	border-left: 1px solid $fsLineGrey;
+	margin-left: .5em;
+	padding-left: .5em;
+}
+.floatRight{float: right;}
+.floatLeft{float: left;}
 ////////////////////////////////////////////////////////
 /* OVERRIDES FOR TAGS*/
 tags-input .tags {

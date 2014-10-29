@@ -23,24 +23,13 @@
 								</span>
 								<span ng-hide="(thiscollection.books|filter:timestamp).length" class="noBook"></span>
 							</div>
-
-						
-							<!--
-<div class="collectionImg">
-								<span>
-									<div class="imgWrap">
-										<img ng-repeat="book in thiscollection.books | orderBy:'timestamp'" src="{{book.coverUrl}}" class="collectionCoverImg coverImgSmall">				
-									</div>
-								</span>
- 							</div>
--->
 							<div class="collectionInfo">
 								<h5>{{(thiscollection.title) ? thiscollection.title : 'Bookshelf'}}
 								</h5>
 <!-- 								<p ng-if="thiscollection.createdByName">by {{thiscollection.createdByName}}.</p>  -->
 								<p ng-if="thiscollection.description">{{thiscollection.description }}</p>
 								<p ng-show="{{thiscollection.bookCount}}">{{thiscollection.bookCount}} books.</p> 
-								<p class="subTitle" ng-show="{{thiscollection.timestamp}}">By <span class="inlineUserIcon" fs-user-img user-id="thiscollection.createdBy" fs-user-id="thiscollection.createdBy" ></span>  Updated {{ thiscollection.timestamp | date : format : timezone}}.</p>
+								<p class="subTitle" ng-show="{{thiscollection.timestamp}}">By <span class="inlineUserIcon" fs-user-img user-id="thiscollection.createdBy" fs-user-id="thiscollection.createdBy" fs-icon-type="general" ></span>  Updated {{ thiscollection.timestamp | date : format : timezone}}.</p>
 							</div>
 						</a>
 					</div>

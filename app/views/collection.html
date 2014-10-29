@@ -1,21 +1,28 @@
 <div class="fullWidth homeFeat featCollection">
 	<div class="theContainerHead">
+		<div class="titleBlock group">
+ 			<h2 class="bookTitle">{{ theCollection.title }}</h2>
+			<h5 class="bookSubtitle floatRight dividerleft">Collection by {{  theCollection.createdByName }}</h5>
+			<h5 class="bookSubtitle">{{  theCollection.description }}</h5>
+		</div>
+
 		<span ng-repeat="book in theCollection.books " class="headerBookItem">
  			<img ng-src="{{book.coverUrl}}" class="bookImg" >
  		</span>
  	</div>
 </div>
 
-<div class="adminSection fullWidth"  >
+<div class="adminSection fullWidth" ng-if="(auth.user.uid == theCollection.createdBy)">
 	<div class="theContainerHead">
 		<div class="column100">
 			<button ng-click="editorEnabled=!editorEnabled" ng-hide="editorEnabled" class="btn fsBtn  editBtn inline floatRight">Edit Collection</button>
-			<button ng-show="editorEnabled" ng-click="dialogDelete(theCollection.$id)" class="btn fsBtn fsRed editBtn inline floatRight">Delete Collection</button> <button ng-click="editorEnabled=!editorEnabled; ; updateOtherCollection(theCollection.$id)" ng-show="editorEnabled" class="btn fsBtn  editBtn inline floatRight">Done Editing</button>
-					<h3>Admin</h3>
-		</div>
+			<button ng-click="editorEnabled=!editorEnabled; ; updateOtherCollection(theCollection.$id)" ng-show="editorEnabled" class="btn fsBtn  editBtn inline floatRight">Done Editing</button>
+			<button ng-show="editorEnabled" ng-click="dialogDelete(theCollection.$id)" class="btn fsBtn fsRed editBtn inline floatRight">Delete Collection</button>
+			<h3>Admin</h3>
+ 		</div>
 		<div class="columnWrap">
 				<div class="column column50">
-					<p>You are an owner of this collection.</p>
+<!-- 					<p>You are an owner of this collection.</p> -->
 					<div ng-show="editorEnabled" class="formWrap">
  						<div class="formFieldWrap group editModeItem" ng-show="editorEnabled">
  							<label>Title</label>
@@ -39,7 +46,6 @@
 				<div class="column column50">
 					 <p>
 					 </p>
-<!-- 					<p><button ng-show="editorEnabled" ng-click="dialogDelete(theCollection.$id)" class="btn fsBtn fsRed inline">Delete Collection</button></p> -->
 				</div>
 		</div>
 	</div>
@@ -48,25 +54,22 @@
  
 <div class="theContainer">
 	<div class="contentWrap" >
-		<div class="titleBlock group">
- 			<h2 class="bookTitle">{{ theCollection.title }}</h2>
-			<h5 class="bookSubtitle">Collection by {{  theCollection.createdByName }}</h5>
-		</div>
 		<div class="featBlock featInfo" ng-if="theCollection.description">
-			<p class="">{{  theCollection.description }}</p>
+			<h5 class="bookSubtitle"><span class="dividerRight">Created by {{  theCollection.createdByName }}</span> Updated: {{ theCollection.timestamp | date : format : timezone}}</h5>
+<!-- 			<p class="">{{  theCollection.description }}</p> -->
 <!-- 			<p>{{ bookCount}} Books</p> -->
 <!-- 			<p class="">Edited: {{ theCollection.timestamp | date : format : timezone}}</p> -->
 <!-- 			<p class="">Public: {{theCollection.isPublic ? 'Yes' : 'No'}}</p> -->
 		</div>
 	
 	    <ul class="bookList">
-				 <li ng-repeat="item in theCollection.books  |   filter:filters | orderBy: '-timestamp' " class="listItem">
+				 <li ng-repeat="item in theCollection.books   | filter:filters  | orderBy: '-addedToCollectionDate'" class="listItem">
 				        <div class="imgWrap">
 				    		<a ng-href="#/book/{{item.bookid}}"><img ng-src="{{item.coverUrl}}" class="bookImg bookImgSmall" ></a>
 						</div>
  						<div class="theContent">
 		 					<h3 class="bookTitle"><a ng-href="#/book/{{item.bookid}}">{{ item.title  | cut:true:50:' ...' }}</a></h3>
- 		 					<p>Added:  {{ item.addedToCollectionDate | date : format : timezone}}</p>
+ 		 					<p class="subTitle">Added:  {{ item.addedToCollectionDate | date : format : timezone}}</p>
 <!-- 		 					<p ng-show="item.description">{{  item.description | to_plain |cut:true:180:' ...' }}</p> -->
 				            <div class="bookInfo ">
 							<!--

@@ -124,8 +124,28 @@ hr {
 .marginBottom {
   margin-bottom: 1em; }
 
+/* line 92, ../../scss/includes/misc.scss */
+.dividerRight {
+  border-right: 1px solid #ddd;
+  margin-right: .5em;
+  padding-right: .5em; }
+
+/* line 97, ../../scss/includes/misc.scss */
+.dividerLeft {
+  border-left: 1px solid #ddd;
+  margin-left: .5em;
+  padding-left: .5em; }
+
+/* line 102, ../../scss/includes/misc.scss */
+.floatRight {
+  float: right; }
+
+/* line 103, ../../scss/includes/misc.scss */
+.floatLeft {
+  float: left; }
+
 /* OVERRIDES FOR TAGS*/
-/* line 94, ../../scss/includes/misc.scss */
+/* line 106, ../../scss/includes/misc.scss */
 tags-input .tags {
   border: 1px solid #ddd !important;
   border-radius: 4px !important;
@@ -134,11 +154,11 @@ tags-input .tags {
   -moz-appearance: inherit !important;
   -webkit-appearance: inherit !important;
   -ms-appearance: inherit !important; }
-  /* line 103, ../../scss/includes/misc.scss */
+  /* line 115, ../../scss/includes/misc.scss */
   tags-input .tags.focused {
     box-shadow: inherit !important; }
 
-/* line 108, ../../scss/includes/misc.scss */
+/* line 120, ../../scss/includes/misc.scss */
 .tag-item {
   background: #aaa !important;
   border: 0px solid #949494 !important;
@@ -148,7 +168,7 @@ tags-input .tags {
   -moz-border-radius: 2px 3px 3px 2px;
   border-radius: 2px 3px 3px 2px;
   height: 22px; }
-  /* line 120, ../../scss/includes/misc.scss */
+  /* line 132, ../../scss/includes/misc.scss */
   .tag-item .remove-button {
     color: #ccc; }
 
@@ -464,56 +484,72 @@ ul {
     /* line 263, ../../scss/includes/common.scss */
     .theContainerHead {
       margin: 0 10px; } }
+  /* line 273, ../../scss/includes/common.scss */
+  .theContainerHead .featCollection {
+    margin-bottom: 1em; }
 
-/* line 275, ../../scss/includes/common.scss */
+/* line 278, ../../scss/includes/common.scss */
 .contentWrap {
   position: relative; }
 
-/* line 279, ../../scss/includes/common.scss */
+/* line 282, ../../scss/includes/common.scss */
 .titleBlock {
   border-bottom: 1px solid #ddd; }
-  /* line 281, ../../scss/includes/common.scss */
+  /* line 284, ../../scss/includes/common.scss */
   .titleBlock .btnLogout {
     position: absolute;
     right: 0;
     top: 0; }
+  /* line 289, ../../scss/includes/common.scss */
+  .featCollection .titleBlock {
+    margin-bottom: 1em;
+    border-bottom: 1px solid #aaa; }
+    /* line 292, ../../scss/includes/common.scss */
+    .featCollection .titleBlock h2 {
+      color: #eee;
+      font-weight: 100; }
+    /* line 296, ../../scss/includes/common.scss */
+    .featCollection .titleBlock h5.bookSubtitle {
+      color: #ccc;
+      display: inline-block;
+      font-size: 1em; }
 
-/* line 288, ../../scss/includes/common.scss */
+/* line 303, ../../scss/includes/common.scss */
 .contentSection {
   margin-bottom: 1em; }
-  /* line 290, ../../scss/includes/common.scss */
+  /* line 305, ../../scss/includes/common.scss */
   .contentSection h3 {
     margin-top: 0;
     margin-bottom: .66em; }
 
-/* line 296, ../../scss/includes/common.scss */
+/* line 311, ../../scss/includes/common.scss */
 .adminSection {
   margin-top: 1em; }
-  /* line 298, ../../scss/includes/common.scss */
+  /* line 313, ../../scss/includes/common.scss */
   .adminSection .theContainerHead {
     background: #eee;
     padding: 1em;
     border-radius: 4px; }
-    /* line 302, ../../scss/includes/common.scss */
+    /* line 317, ../../scss/includes/common.scss */
     .adminSection .theContainerHead h3 {
       margin-top: 0; }
-  /* line 307, ../../scss/includes/common.scss */
+  /* line 322, ../../scss/includes/common.scss */
   .adminSection .formWrap {
     background: transparent;
     margin: 1em; }
 
-/* line 313, ../../scss/includes/common.scss */
+/* line 328, ../../scss/includes/common.scss */
 .additionalSection {
   border-top: 1px solid #ddd;
   margin-top: 1em; }
 
-/* line 324, ../../scss/includes/common.scss */
+/* line 339, ../../scss/includes/common.scss */
 .imgList {
   background: #eee;
   border-radius: 4px;
   padding: 1em;
   margin: 10px 0; }
-  /* line 332, ../../scss/includes/common.scss */
+  /* line 347, ../../scss/includes/common.scss */
   .imgList .imgWrap {
     display: inline-block;
     width: 90px;
@@ -521,58 +557,111 @@ ul {
     border-radius: 45px;
     background: #ccc;
     vertical-align: middle; }
-    /* line 339, ../../scss/includes/common.scss */
+    /* line 354, ../../scss/includes/common.scss */
     .imgList .imgWrap img {
       width: 90px;
       height: 90px;
       border-radius: 45px; }
-  /* line 345, ../../scss/includes/common.scss */
+  /* line 360, ../../scss/includes/common.scss */
   .imgList .imgInfo {
     display: inline-block; }
 
-/* line 355, ../../scss/includes/common.scss */
+/* line 370, ../../scss/includes/common.scss */
 .descriptionWrap {
   line-height: 1.6em; }
-  /* line 357, ../../scss/includes/common.scss */
+  /* line 372, ../../scss/includes/common.scss */
   .descriptionWrap b {
     font-weight: normal; }
 
-/* line 367, ../../scss/includes/common.scss */
+/* line 385, ../../scss/includes/common.scss */
+.tagTag a.tagName {
+  height: 22px;
+  line-height: 22px;
+  position: relative;
+  font-size: .85em;
+  text-align: center;
+  margin: .25em auto;
+  display: inline-block;
+  margin-left: 20px;
+  padding: 0 10px 0 14px;
+  background: #ddd;
+  color: #777;
+  text-decoration: none;
+  -moz-border-radius-bottomright: 4px;
+  -webkit-border-bottom-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  -moz-border-radius-topright: 4px;
+  -webkit-border-top-right-radius: 4px;
+  border-top-right-radius: 4px;
+  border-radius: 4px; }
+  /* line 405, ../../scss/includes/common.scss */
+  .tagTag a.tagName:before {
+    content: "";
+    float: left;
+    position: absolute;
+    top: 0;
+    left: -8px;
+    width: 0;
+    height: 0;
+    border-color: transparent #ddd transparent transparent;
+    border-style: solid;
+    border-width: 11px 10px 11px 0; }
+  /* line 417, ../../scss/includes/common.scss */
+  .tagTag a.tagName:after {
+    content: "";
+    position: absolute;
+    top: 8px;
+    left: 0px;
+    float: left;
+    width: 6px;
+    height: 6px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    background: #fff; }
+  /* line 434, ../../scss/includes/common.scss */
+  .tagTag a.tagName:hover {
+    background: #aaa; }
+  /* line 437, ../../scss/includes/common.scss */
+  .tagTag a.tagName:hover:before {
+    border-color: transparent #aaa transparent transparent; }
+
+/* line 448, ../../scss/includes/common.scss */
 button.btn.actionBtn, a.btn.actionBtn {
   font-size: 1.5em; }
 
-/* line 375, ../../scss/includes/common.scss */
+/* line 456, ../../scss/includes/common.scss */
 .buyWrap {
   display: inline-block;
   vertical-align: top; }
 
-/* line 379, ../../scss/includes/common.scss */
+/* line 460, ../../scss/includes/common.scss */
 .buyLink {
   display: inline-block; }
-  /* line 381, ../../scss/includes/common.scss */
+  /* line 462, ../../scss/includes/common.scss */
   .buyLink.btn {
     margin: 0;
     padding: 0.5em 0.5em 0.25em; }
-  /* line 385, ../../scss/includes/common.scss */
+  /* line 466, ../../scss/includes/common.scss */
   .buyLink .buyPrice {
     font-size: 1.5em;
     line-height: 1.5em;
     font-weight: 300; }
-  /* line 390, ../../scss/includes/common.scss */
+  /* line 471, ../../scss/includes/common.scss */
   .buyLink .buyCurrency {
     font-size: .85em;
     color: #aaa; }
-  /* line 394, ../../scss/includes/common.scss */
+  /* line 475, ../../scss/includes/common.scss */
   .buyLink .buySave {
     font-size: .85em;
     color: yellow; }
-  /* line 399, ../../scss/includes/common.scss */
+  /* line 480, ../../scss/includes/common.scss */
   .buyLink .buyMerchant {
     font-size: .85em;
     line-height: .5em;
     padding: 0; }
 
-/* line 407, ../../scss/includes/common.scss */
+/* line 488, ../../scss/includes/common.scss */
 .buyMore {
   font-size: .85em;
   display: block;
@@ -580,7 +669,7 @@ button.btn.actionBtn, a.btn.actionBtn {
   font-style: italic;
   color: #aaa; }
 
-/* line 419, ../../scss/includes/common.scss */
+/* line 500, ../../scss/includes/common.scss */
 .appleIcon {
   height: 20px;
   vertical-align: top;
@@ -588,29 +677,29 @@ button.btn.actionBtn, a.btn.actionBtn {
   margin-top: -7px;
   margin-bottom: -6px; }
 
-/* line 432, ../../scss/includes/common.scss */
+/* line 513, ../../scss/includes/common.scss */
 .columnWrap .column50 {
   width: 49.5%; }
-  /* line 434, ../../scss/includes/common.scss */
+  /* line 515, ../../scss/includes/common.scss */
   .columnWrap .column50.columnLeft, .columnWrap .column50.columnRight {
     width: 49.5%; }
   @media only screen and (max-width: 979px) {
-    /* line 432, ../../scss/includes/common.scss */
+    /* line 513, ../../scss/includes/common.scss */
     .columnWrap .column50 {
       width: 100%; }
-      /* line 440, ../../scss/includes/common.scss */
+      /* line 521, ../../scss/includes/common.scss */
       .columnWrap .column50.columnLeft, .columnWrap .column50.columnRight {
         width: 100%; } }
-/* line 446, ../../scss/includes/common.scss */
+/* line 527, ../../scss/includes/common.scss */
 .columnWrap .column100 {
   width: 100%;
   display: block; }
 
-/* line 456, ../../scss/includes/common.scss */
+/* line 537, ../../scss/includes/common.scss */
 .contentImg.imgWrapCenter {
   text-align: center;
   margin: 1em auto; }
-  /* line 459, ../../scss/includes/common.scss */
+  /* line 540, ../../scss/includes/common.scss */
   .contentImg.imgWrapCenter img.contentImgCircle {
     width: 300px;
     height: 300px;
@@ -618,7 +707,7 @@ button.btn.actionBtn, a.btn.actionBtn {
     border-radius: 50%;
     position: relative; }
 
-/* line 474, ../../scss/includes/common.scss */
+/* line 555, ../../scss/includes/common.scss */
 .message.error {
   color: red;
   margin: 1em -1em;
@@ -627,17 +716,17 @@ button.btn.actionBtn, a.btn.actionBtn {
   color: #fff;
   /* border-radius: 3px; */
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3); }
-  /* line 483, ../../scss/includes/common.scss */
+  /* line 564, ../../scss/includes/common.scss */
   .message.error h3 {
     font-weight: normal;
     color: #fff;
     border-bottom: 1px solid white; }
 
-/* line 490, ../../scss/includes/common.scss */
+/* line 571, ../../scss/includes/common.scss */
 .emptyContent {
   text-align: center;
   margin: 2em auto; }
-  /* line 493, ../../scss/includes/common.scss */
+  /* line 574, ../../scss/includes/common.scss */
   .emptyContent:before {
     font-size: 2em;
     line-height: 2em;
@@ -888,7 +977,10 @@ input[type=checkbox] {
     /* line 46, ../../scss/includes/header.scss */
     #header .logo:hover {
       transform: rotateY(180deg); }
-  /* line 52, ../../scss/includes/header.scss */
+  /* line 50, ../../scss/includes/header.scss */
+  #header .dividerRight {
+    border-right: 1px solid #aaa; }
+  /* line 57, ../../scss/includes/header.scss */
   #header .logoWrap {
     width: 230px;
     display: block;
@@ -899,13 +991,13 @@ input[type=checkbox] {
     height: 60px;
     line-height: 60px;
     text-align: center; }
-    /* line 62, ../../scss/includes/header.scss */
+    /* line 67, ../../scss/includes/header.scss */
     #header .logoWrap .headerLogo {
       display: inline-block;
       vertical-align: middle;
       margin-right: 8px;
       position: relative; }
-      /* line 70, ../../scss/includes/header.scss */
+      /* line 75, ../../scss/includes/header.scss */
       #header .logoWrap .headerLogo .alphaTag {
         position: absolute;
         left: 0;
@@ -914,11 +1006,11 @@ input[type=checkbox] {
         font-size: 10px;
         font-style: italic;
         display: none; }
-    /* line 85, ../../scss/includes/header.scss */
+    /* line 90, ../../scss/includes/header.scss */
     #header .logoWrap form#headerSearch {
       display: inline-block;
       display: none; }
-      /* line 88, ../../scss/includes/header.scss */
+      /* line 93, ../../scss/includes/header.scss */
       #header .logoWrap form#headerSearch input.search-text {
         width: 90px;
         padding: 5px 5px 5px 25px;
@@ -936,19 +1028,19 @@ input[type=checkbox] {
         border-radius: 4px;
         outline: none;
         box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.4) inset; }
-  /* line 110, ../../scss/includes/header.scss */
+  /* line 115, ../../scss/includes/header.scss */
   #header input.search-text::-webkit-input-placeholder {
     color: #ccc; }
-  /* line 111, ../../scss/includes/header.scss */
+  /* line 116, ../../scss/includes/header.scss */
   #header input.search-text:-moz-placeholder {
     color: #ccc; }
-  /* line 112, ../../scss/includes/header.scss */
+  /* line 117, ../../scss/includes/header.scss */
   #header input.search-text::-moz-placeholder {
     color: #ccc; }
-  /* line 113, ../../scss/includes/header.scss */
+  /* line 118, ../../scss/includes/header.scss */
   #header input.search-text:-ms-input-placeholder {
     color: #ccc; }
-  /* line 120, ../../scss/includes/header.scss */
+  /* line 125, ../../scss/includes/header.scss */
   #header .supportingInfo {
     position: fixed;
     right: 20px;
@@ -960,19 +1052,19 @@ input[type=checkbox] {
     border-radius: 50%;
     padding-top: .5em;
     z-index: 20; }
-  /* line 132, ../../scss/includes/header.scss */
+  /* line 137, ../../scss/includes/header.scss */
   #header .supportingInfo .smallType {
     font-size: .85em;
     display: block;
     color: #fff; }
-  /* line 137, ../../scss/includes/header.scss */
+  /* line 142, ../../scss/includes/header.scss */
   #header .supportingInfo .largeType {
     font-size: 3em;
     display: block;
     line-height: .9em;
     color: #fff; }
 
-/* line 160, ../../scss/includes/header.scss */
+/* line 165, ../../scss/includes/header.scss */
 a, a:visited, nav {
   /*
   -moz-transition: color 0.5s, background 0.7s, -moz-border-radius 0.7s, text-indent 0.2s;
@@ -983,7 +1075,7 @@ a, a:visited, nav {
   transition: color 0.3s, background 0.7s, border-radius 0.7s, text-indent 0.2s;
   -webkit-tap-highlight-color: transparent; }
 
-/* line 193, ../../scss/includes/header.scss */
+/* line 198, ../../scss/includes/header.scss */
 nav {
   height: 50px;
   width: 170px;
@@ -996,13 +1088,13 @@ nav {
   margin-left: 10px;
   margin-top: -8px; }
 
-/* line 208, ../../scss/includes/header.scss */
+/* line 213, ../../scss/includes/header.scss */
 nav:hover {
   width: 170px;
   height: 210px;
   cursor: pointer; }
 
-/* line 215, ../../scss/includes/header.scss */
+/* line 220, ../../scss/includes/header.scss */
 nav a {
   display: none;
   text-indent: 60px;
@@ -1017,19 +1109,19 @@ nav a {
   	margin-left: 70px;
   */ }
 
-/* line 240, ../../scss/includes/header.scss */
+/* line 245, ../../scss/includes/header.scss */
 nav:hover > a {
   display: block; }
 
-/* line 244, ../../scss/includes/header.scss */
+/* line 249, ../../scss/includes/header.scss */
 nav:hover > a:first-child {
   text-indent: 60px; }
 
-/* line 247, ../../scss/includes/header.scss */
+/* line 252, ../../scss/includes/header.scss */
 nav:hover > a:first-child:after {
   background: #eee; }
 
-/* line 254, ../../scss/includes/header.scss */
+/* line 259, ../../scss/includes/header.scss */
 nav a:first-child {
   display: block;
   text-align: center;
@@ -1039,7 +1131,7 @@ nav a:first-child {
   text-align: left;
   color: #666 !important; }
 
-/* line 264, ../../scss/includes/header.scss */
+/* line 269, ../../scss/includes/header.scss */
 nav a:after {
   position: absolute;
   top: 0;
@@ -1055,7 +1147,7 @@ nav a:after {
   font-family: 'fsfont';
   text-align: center; }
 
-/* line 284, ../../scss/includes/header.scss */
+/* line 289, ../../scss/includes/header.scss */
 nav a:hover {
   text-indent: 65px;
   text-align: left;
@@ -1065,14 +1157,14 @@ nav a:hover {
   -moz-border-radius: 5px;
   border-radius: 5px; }
 
-/* line 302, ../../scss/includes/header.scss */
+/* line 307, ../../scss/includes/header.scss */
 nav a:hover:after {
   color: #fff;
   background: #fff !important;
   color: #2a2a2a !important;
   text-align: center; }
 
-/* line 311, ../../scss/includes/header.scss */
+/* line 316, ../../scss/includes/header.scss */
 nav a:first-child:before {
   position: absolute;
   text-indent: 0;
@@ -1085,7 +1177,7 @@ nav a:first-child:before {
   border-right: 7px solid transparent;
   border-bottom: 7px solid #eee; }
 
-/* line 330, ../../scss/includes/header.scss */
+/* line 335, ../../scss/includes/header.scss */
 nav a:first-child:after {
   left: 0;
   content: "u";
@@ -1095,18 +1187,18 @@ nav a:first-child:after {
   -moz-border-radius: 5px;
   border-radius: 5px; }
 
-/* line 345, ../../scss/includes/header.scss */
+/* line 349, ../../scss/includes/header.scss */
 nav a:first-child:hover {
   background: transparent !important;
   text-indent: 60px;
   color: #2a2a2a !important; }
 
-/* line 351, ../../scss/includes/header.scss */
+/* line 355, ../../scss/includes/header.scss */
 nav a:first-child:hover:after {
   background: #2a2a2a;
   background: #eee; }
 
-/* line 357, ../../scss/includes/header.scss */
+/* line 361, ../../scss/includes/header.scss */
 nav a:nth-child(2):after {
   content: "m";
   -webkit-border-top-left-radius: 5px;
@@ -1116,11 +1208,11 @@ nav a:nth-child(2):after {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px; }
 
-/* line 367, ../../scss/includes/header.scss */
+/* line 371, ../../scss/includes/header.scss */
 nav a:nth-child(3):after {
   content: "D"; }
 
-/* line 371, ../../scss/includes/header.scss */
+/* line 375, ../../scss/includes/header.scss */
 nav a:last-child:after {
   content: "e";
   -webkit-border-bottom-left-radius: 5px;
@@ -1130,12 +1222,12 @@ nav a:last-child:after {
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px; }
 
-/* line 382, ../../scss/includes/header.scss */
+/* line 386, ../../scss/includes/header.scss */
 p {
   padding: 0.3em 0; }
 
 @media only screen and (max-width: 768px) {
-  /* line 388, ../../scss/includes/header.scss */
+  /* line 392, ../../scss/includes/header.scss */
   nav a:hover {
     color: #6daeaf !important;
     background: #fff;
@@ -1145,20 +1237,20 @@ p {
     margin-left: 53px;
     padding-left: 17px; }
 
-  /* line 398, ../../scss/includes/header.scss */
+  /* line 402, ../../scss/includes/header.scss */
   nav a:hover:after {
     margin-left: -60px;
     padding-left: 0 !important; }
 
-  /* line 403, ../../scss/includes/header.scss */
+  /* line 407, ../../scss/includes/header.scss */
   nav a:first-child:hover:after {
     margin-left: -53px !important; }
 
-  /* line 407, ../../scss/includes/header.scss */
+  /* line 411, ../../scss/includes/header.scss */
   nav a:first-child:hover {
     background: transparent; }
 
-  /* line 411, ../../scss/includes/header.scss */
+  /* line 415, ../../scss/includes/header.scss */
   nav a:first-child:hover:before {
     margin-left: -53px; } }
 /*///////////////////////////*/
@@ -2209,16 +2301,21 @@ ul {
   .featCollection .headerBookItem {
     display: inline-block;
     height: 100px;
-    margin: 0; }
-    /* line 86, ../../scss/includes/collections.scss */
+    margin: 0;
+    display: inline-block;
+    height: 100px;
+    margin: 0;
+    margin-right: 4px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4); }
+    /* line 92, ../../scss/includes/collections.scss */
     .featCollection .headerBookItem img.bookImg {
       height: 100px;
       width: auto; }
 
-/* line 95, ../../scss/includes/collections.scss */
+/* line 101, ../../scss/includes/collections.scss */
 .collectionsList a {
   text-decoration: none; }
-/* line 97, ../../scss/includes/collections.scss */
+/* line 103, ../../scss/includes/collections.scss */
 .collectionsList.inBookContext .collectionItem {
   width: 32.6%;
   border: 1px solid #ccc;
@@ -2228,11 +2325,11 @@ ul {
   margin-left: 10px;
   height: 91px;
   display: inline-block; }
-  /* line 106, ../../scss/includes/collections.scss */
+  /* line 112, ../../scss/includes/collections.scss */
   .collectionsList.inBookContext .collectionItem:first-child {
     margin-left: 0;
     border-top: 1px solid #ccc; }
-  /* line 110, ../../scss/includes/collections.scss */
+  /* line 116, ../../scss/includes/collections.scss */
   .collectionsList.inBookContext .collectionItem .collectionImg {
     border-radius: 4px 0 0 4px;
     overflow: hidden;
@@ -2242,13 +2339,13 @@ ul {
     background: #f3f3f3;
     border-right: 1px solid #eee;
     border-radius: 4px 0 0 4px; }
-    /* line 119, ../../scss/includes/collections.scss */
+    /* line 125, ../../scss/includes/collections.scss */
     .collectionsList.inBookContext .collectionItem .collectionImg .imgWrap {
       width: 82px;
       overflow: hidden;
       height: 90px;
       border: 0px solid white; }
-      /* line 124, ../../scss/includes/collections.scss */
+      /* line 130, ../../scss/includes/collections.scss */
       .collectionsList.inBookContext .collectionItem .collectionImg .imgWrap .collectionCoverImg.coverImgSmall {
         box-shadow: none;
         width: 20px;
@@ -2257,19 +2354,19 @@ ul {
         display: inline;
         float: left;
         height: 30px; }
-      /* line 133, ../../scss/includes/collections.scss */
+      /* line 139, ../../scss/includes/collections.scss */
       .collectionsList.inBookContext .collectionItem .collectionImg .imgWrap:before, .collectionsList.inBookContext .collectionItem .collectionImg .imgWrap:after {
         display: none; }
-/* line 143, ../../scss/includes/collections.scss */
+/* line 149, ../../scss/includes/collections.scss */
 .collectionsList.inProfileContext .collectionItem {
   width: 48%;
   display: inline-block;
   vertical-align: top;
   border-top: 1px solid white; }
-  /* line 149, ../../scss/includes/collections.scss */
+  /* line 155, ../../scss/includes/collections.scss */
   .collectionsList.inProfileContext .collectionItem .collectionInfo h5 {
     color: #2a2a2a; }
-/* line 156, ../../scss/includes/collections.scss */
+/* line 162, ../../scss/includes/collections.scss */
 .collectionsList.inPageContext .collectionItem {
   width: inherit;
   display: block;
@@ -2277,11 +2374,11 @@ ul {
   border-top: 0px solid transparent;
   padding-top: 1em;
   margin-top: 1em; }
-  /* line 164, ../../scss/includes/collections.scss */
+  /* line 170, ../../scss/includes/collections.scss */
   .collectionsList.inPageContext .collectionItem .collectionInfo h5 {
     color: #2a2a2a;
     font-size: 1.2em; }
-  /* line 168, ../../scss/includes/collections.scss */
+  /* line 174, ../../scss/includes/collections.scss */
   .collectionsList.inPageContext .collectionItem .collectionInfo p, .collectionsList.inPageContext .collectionItem .collectionInfo p.subTitle {
     font-size: .85em; }
 

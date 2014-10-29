@@ -270,6 +270,9 @@
 	   @media only screen and (min-width: 888px) and (max-width: 1200px) {
 		   	margin: 0 10px;
 			} 
+		.featCollection{
+			margin-bottom: 1em;
+		}
    }
    
    .contentWrap{
@@ -277,13 +280,25 @@
    }
    
    .titleBlock{
-   		border-bottom: 1px solid $fsLineGrey;
-	   .btnLogout{
-	   		position: absolute;
-	   		right: 0;
-	   		top: 0;
+		border-bottom: 1px solid $fsLineGrey;
+		.btnLogout{
+			position: absolute;
+			right: 0;
+			top: 0;
 	   }
-	   
+	   .featCollection &{
+			margin-bottom: 1em;
+			border-bottom: 1px solid $fsGrey;
+			h2{
+				color: #eee;
+				font-weight: 100;
+			}
+			h5.bookSubtitle{
+				color: #ccc;
+				display: inline-block;
+				font-size: 1em;
+			}
+	   }
    }
    .contentSection{
 	   margin-bottom: 1em;
@@ -359,6 +374,72 @@
 	   }
 	   
    }
+   
+   
+//////////////////////////////////////////
+//////////////TAGS
+//////////////////////////////////////////
+.tagTag{
+	//float:left;
+		
+	a.tagName	{
+		height:22px;
+		line-height:22px;
+		position:relative;
+		font-size:.85em;
+		text-align: center;
+		margin: .25em auto;
+		display: inline-block;
+		margin-left:20px;
+		padding:0 10px 0 14px;
+		background:#ddd;
+		color:#777;
+		text-decoration:none;
+		-moz-border-radius-bottomright:4px;
+		-webkit-border-bottom-right-radius:4px;	
+		border-bottom-right-radius:4px;
+		-moz-border-radius-topright:4px;
+		-webkit-border-top-right-radius:4px;	
+		border-top-right-radius:4px;
+		border-radius: 4px;	
+		&:before{
+			content:"";
+			float:left;
+			position:absolute;
+			top:0;
+			left:-8px;
+			width:0;
+			height:0;
+			border-color:transparent #ddd transparent transparent;
+			border-style:solid;
+			border-width:11px 10px 11px 0;		
+			}
+		&:after{
+			content:"";
+			position:absolute;
+			top:8px;
+			left:0px;
+			float:left;
+			width:6px;
+			height:6px;
+			-moz-border-radius:4px;
+			-webkit-border-radius:4px;
+			border-radius:4px;
+			background:#fff;
+			//-moz-box-shadow:0px -1px 2px rgba(0,0,0,.4);
+			//-webkit-box-shadow:0px -1px 2px rgba(0,0,0,.4);
+			//box-shadow:0px -1px 2px rgba(0,0,0,.4);
+			
+		}
+		&:hover{
+			background: $fsGrey;
+		}
+		&:hover:before{
+			border-color:transparent $fsGrey transparent transparent;
+		}
+	}
+} 
+
    
 //////////////////////////////////////////////////////
 //////////  BUTTONS              /////////////////////
