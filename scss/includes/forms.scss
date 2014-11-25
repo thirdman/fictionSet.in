@@ -60,25 +60,29 @@
  	}
  	
  	
- 	button, .btn{
- 		outline: none;
-	 	border-radius: 6px;
-			margin: 1em;
-			background: $fsBlack;
-			color: #f9f9f9;
-			padding: .5em;
-			border: 1px solid #222;
-			cursor: pointer;
-			text-decoration: none;
+	button, .btn{
+		outline: none;
+		border-radius: 6px;
+		margin: 1em;
+		background: $fsBlack;
+		color: #f9f9f9;
+		padding: .5em;
+		border: 1px solid #222;
+		cursor: pointer;
+		text-decoration: none;
 
-		   &:hover{
-			   background: lighten($fsBlack, 10%);
-			   color: #fff;
-		   }
-
- 	}
+	   &:hover{
+		   background: lighten($fsBlack, 10%);
+		   color: #fff;
+	   }
+		&.hollow{
+			color: $fsBlack;
+			background: transparent;
+			border:1px solid $fsBlack;
+		}
+	}
  	
- 	.fsBtn{
+	.fsBtn{
 	 	border: 0;
 		border-radius: 3px;
 		cursor: pointer;
@@ -93,11 +97,14 @@
 		&.fsRed{
 			background: $fsRed;
 		}
+	
 	}
 
  	
  	.btnDelete{
 	 	float: right;
+	 	position: absolute;
+	 	right: 0;
  	}
  	.removeLink{
 	 	color: red;
@@ -131,6 +138,74 @@
 		color: $fsRed;		
 	}
 } 	 
+ 	
+ 	
+ 	
+//////////////////////////////////////////////////////////////////////
+///////// LARGE SEARCH BOXES 
+////////////////////////////////////////////////////////////////////
+	
+ 	
+.featSearch{
+	display: inline-block;
+	width: 100%;
+	text-align: center;
+	
+	form{
+		//width: 100%;
+	}
+	input, input.largesearch{ 
+		width: 100%; 
+		margin-left: 10px;  
+		background: #fff;
+		background: rgba(206, 207, 208, 0.30);
+		line-height: 1.5em;
+		padding: .5em .5em; 
+		outline: none;
+		border: 0px solid #999;
+		text-align: left;
+		color: #666;
+		min-width: 400px;
+		font-size: .85em;
+		border-radius: 4px;
+		font-size: 1.4em;
+		vertical-align: middle;
+		
+		&.withButton{
+		width: 80%;
+		}
+   		
+		&:focus{
+			background: rgba(255,255,255,.85); 
+			color: #2a2a2a; 
+		    outline: none;   
+	   }
+	   .hasText &{
+			background: rgba(255,255,255,.85); 
+			color: #2a2a2a; 
+		    outline: none;   
+	   }
+	   
+	   @media only screen and (min-width: 0px) and (max-width: 887px) {
+		   width: 100%;
+		   min-width: inherit;
+		} 
+   }
+   
+	btn, .fsBtn{
+		margin-left: 10px;
+		display: inline-block;
+		outline: none;
+		vertical-align: middle;
+		font-size: 1em;
+		line-height: 1.6em;
+		border-radius: 4px;
+		padding: 1em 2em;
+		width: 15%;
+	}   
+}
+	
+
  	
 ///////////////////
 /////////CHECKBOX

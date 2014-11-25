@@ -61,7 +61,7 @@ app.controller("RegisterCtrl",  ["$firebaseSimpleLogin", "$scope", "$location", 
 			//THEN NOTIFY US
 			//add a notificiation
 			var theTimestamp = new Date().valueOf();					
-			ref.child('/system/messages').push({
+			ref.child('/system/adminmessages').push({
 				title:"User Added (manual)",
 				messageContent:  newName + ' ('+ newEmail + ") registered.",
 				messageType: "User",

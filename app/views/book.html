@@ -228,12 +228,13 @@ add <a href="#" ng-click="pushToColl()">add book</a>
 
 			<div class="additionalSection columnWrap">
 				<div class="column column50">
-					<h4>Details</h4>
 					<span>Isbn: {{  book.isbn }}</span><br>
 					<span>Isbn13: {{  book.isbn13 }}</span>
 				</div>
 
 				<div class="column column50">
+					<h4>Stats</h4>
+					<span><span class="iconName iconLabel icon-eye"></span>Views: {{book.viewCount}}</span>
 				</div>
  			</div><!-- ends additonal section -->
 			

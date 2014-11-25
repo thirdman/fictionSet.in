@@ -1,0 +1,129 @@
+	<div class="fullWidth pageFeat">
+		<div class="theContainerHead">
+			<h2 class="pageTitle">Admin User Notification</h2>
+		</div>
+	</div>
+<div class="theContainer">
+	<div class=" contentWrap" >
+
+<div class="loading" ng-show="isLoading"  style="">
+	Saving...
+</div>
+ 
+<div class="theContent columnWrap" >
+	<div class="columnLeft column column50">	
+	
+	<div class="contentSection">
+		 <form  >
+		     <div class="formField group">
+		     	 <label>Recipient Userid:</label>
+			 	 <input type="text" ng-model="message.recipientid" class="inputStd" ng-init="message.recipientid = recipientid" />
+		      </div>
+
+		     <div class="formField group"  >
+		     	 <label>Activator user Id:</label>
+			 	 <input type="text" ng-model="message.theUser.$id" class="inputStd"  ng-init="message.activatorid = currentUser.uid" />
+		      </div>
+ 	 	     <div class="formField group"   >
+		      	<label>Activator user:</label> 
+		      	<select ng-model="message.theUser" ng-options="theUser as theUser.displayName for theUser in theUsers"></select>
+ 			  </div> 
+ 			  
+<!--
+	 	     <div class="formField group">
+		      	<label>Author:</label> 
+		      	<input type="text" ng-model="messageAuthor" class="inputStd"  />
+			  </div> 
+-->
+	 	     <div class="formField group">
+		      	<label>Type:</label> 
+		      	<select ng-model="messageType" ng-options="type.id for type in notificationTypes"></select>
+ 			  </div> 
+
+
+ 			  <br>
+
+
+ 	 	     <div class="formField group"  ng-show="(messageType.id == 'bookAdd' || messageType.id == 'bookSuggest') ? true : false">
+		      	<label>Book:</label> 
+		      	<select ng-model="message.theBook" ng-options="theBook as theBook.title for theBook in theBooks | orderBy: 'title'"></select>
+ 			  </div> 
+		     <div class="formField group" ng-show="(messageType.id == 'bookAdd' || messageType.id == 'bookSuggest') ? true : false">
+		     	 <label>book Id:</label>
+			 	 <input type="text" ng-model="message.theBook.$id" class="inputStd" />
+		      </div>
+
+ 			  <br>
+
+ 	 	     <div class="formField group"  ng-show="(messageType.id == 'locationFollow' || messageType.id == 'bookAdd' || messageType.id == 'bookSuggest') ? true : false">
+		      	<label>Location Id:</label> 
+		      	<select ng-model="message.theLocation" ng-options="theLocation as theLocation.name for theLocation in theLocations | orderBy:'name' "></select>
+ 			  </div> 
+		     <div class="formField group" ng-show="(messageType.id == 'locationFollow'|| messageType.id == 'bookAdd' || messageType.id == 'bookSuggest') ? true : false">
+		     	 <label>Location:</label>
+			 	 <input type="text" ng-model="message.theLocation.name" class="inputStd" />
+		      </div>
+
+ 			  <br>
+
+		     <div class="formField group" ng-show="(messageType.id == 'collectionFollow') ? true : false">
+		     	 <label>Collection id:</label>
+			 	 <input type="text" ng-model="message.theCollection.$id" class="inputStd" />
+		      </div>
+ 	 	     <div class="formField group"  ng-show="(messageType.id == 'collectionFollow') ? true : false">
+		      	<label>Collection:</label> 
+		      	<select ng-model="message.theCollection" ng-options="theCollection as theCollection.title for theCollection in theCollections"></select>
+ 			  </div> 
+
+ 			  <br>
+
+		     <div class="formField group">
+		     	 <label>Title:</label>
+			 	 <input type="text" ng-model="message.title" class="inputStd" />
+		      </div>
+		     <div class="formField group">
+		      	<label>Content:</label> 
+		      	<textarea  type="text" ng-model="message.content"  class="inputLarge inputTall" />
+		      	{{message.bookid}} was added by {{message.activatorid}}
+		      	</textarea>
+			  </div>
+			  <div class="formField group">
+		      	<label>Link:</label> 
+			  	<input type="text" ng-model="message.link" class="inputStd" />
+			  </div> 
+ 
+	      <button type="submit" ng-click="addNotification()" class="btn fsBtn">Add Notification</button>
+
+		 </form> 
+	</div><!-- contentsection -->
+	
+ 		      	<hr>
+		      	<span ng-show="(messageType.id == 'bookAdd') ? true : false">
+		      	<h4>{{messageType.textContent}}</h4>
+		      	<a ng-href="#/book/{{message.theBook.$id}}">{{message.theBook.title}}</a> was added by {{message.theUser.displayName}} (set in <a ng-href="#/place/{{message.theLocation.$id}}">{{message.theLocation.name}}</a>)  
+		      	</span>
+
+		      	<span ng-show="(messageType.id == 'bookSuggest') ? true : false">
+		      	<h4>{{messageType.textContent}}</h4>
+		      	{{message.theBook.title}} was suggested by {{message.theUser.displayName}} (set in {{message.theLocation.name}})  
+		      	</span>
+
+		      	<span ng-show="(messageType.id == 'locationFollow') ? true : false">
+		      	<h4>{{messageType.textContent}}</h4>
+		      	{{message.theLocation.name}} was followed by {{message.theUser.displayName}} 
+		      	</span>
+
+		      	<span ng-show="(messageType.id == 'collectionFollow') ? true : false">
+		      	<h4>{{messageType.textContent}}</h4>
+		      	{{message.theCollection.title}} was followed by {{message.theUser.displayName}} 
+		      	</span>
+		      	
+		      	
+  	</div>
+	
+	<div class="columnRight column">		
+	</div><!-- columnright -->
+</div><!-- the content -->
+ 		  
+  </div>
+ </div>

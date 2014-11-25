@@ -1,336 +1,370 @@
-   body{
-	   background: #308383;
-	   background: #f9f9f9;
-	   height: 100%;
-	   font-size: 18px;
-	   font-family: 'Roboto', sans-serif;
-	   font-weight: 300;	
-	   color: $fsBlack;
-	   padding: 0;
-	   margin: 0;
-   		@media only screen and (min-width: 0px) and (max-width: 887px) {
-	   		font-size: 14px;
-			} 
-		@media only screen and (min-width: 1200px) {
-			font-size: 18px;
+body{
+   background: #308383;
+   background: #f9f9f9;
+   height: 100%;
+   font-size: 18px;
+   font-family: 'Roboto', sans-serif;
+   font-weight: 300;	
+   color: $fsBlack;
+   padding: 0;
+   margin: 0;
+		@media only screen and (min-width: 0px) and (max-width: 887px) {
+   		font-size: 14px;
 		} 
-   }
-  
-   
-   h2{
-	  font-size: 2.8em;
-	  font-weight: 300;
-	  @media only screen and (min-width: 0px) and (max-width: 887px) {
-		   font-size: 1.8em;
-	   } 
-	   &.bookTitle{
-					padding: 0;
-					margin: 0;
-		}
-   }
+	@media only screen and (min-width: 1200px) {
+		font-size: 18px;
+	} 
+}
 
-   h3{
-    font-size: 1.4em;
+
+h2{
+  font-size: 2.8em;
+  font-weight: 300;
+  @media only screen and (min-width: 0px) and (max-width: 887px) {
+	   font-size: 1.8em;
+   } 
+   &.bookTitle{
+				padding: 0;
+				margin: 0;
+	}
+}
+
+h3{
+font-size: 1.4em;
+font-weight: 300;
+color: $fsBlack;
+    &.bookTitle{
+				padding: 0;
+				margin: 0;
+    }
+    a{
+	    text-decoration: none;
+	    color: $fsBlack;
+    }
+}
+
+h4{
+   	font-size: 1em;
+    padding: .5em 0;
+    margin: 0;
     font-weight: 300;
-    color: $fsBlack;
-	    &.bookTitle{
-					padding: 0;
-					margin: 0;
-	    }
-	    a{
-		    text-decoration: none;
-		    color: $fsBlack;
-	    }
-   }
+    font-size: .85em;
+    color: $fsGrey;
+    text-transform: uppercase;
+}
 
-   h4{
-	   	font-size: 1em;
-	    padding: .5em 0;
-	    margin: 0;
-	    font-weight: 300;
-	    font-size: .85em;
-	    color: $fsGrey;
-	    text-transform: uppercase;
-   }
-
-   h5{ 
+h5{ 
 /*    font-size: 1em; */
-	   padding: .5em 0;
-	   font-weight: 300;
-	   color: lighten( $fsBlack, 30%);
-	   
-		   &.bookSubtitle{
-			   		padding: 0;
-					margin: 0;
-					font-style: italic;
-		
-		   }
+   padding: .5em 0;
+   font-weight: 300;
+   color: lighten( $fsBlack, 30%);
+   
+	   &.bookSubtitle{
+		   		padding: 0;
+				margin: 0;
+				font-style: italic;
+	
+	   }
 
-   }
-   p{
-	   white-space: pre-line;
-	   line-height: 1.8em;
-	   margin: 0 0 .5em;
+}
+p{
+   white-space: pre-line;
+   line-height: 1.8em;
+   margin: 0 0 .5em;
 /* 	   font-size: 16px; */
-   }
+}
 /*
-   p+p{
-	   margin-bottom: .5em;
-   }
+p+p{
+   margin-bottom: .5em;
+}
 */
 
-    .subTitle{
-	   font-size: .85em;
-	   margin: 0;
-	   padding: 0;
-	   color: $fsGrey;
-   }
+.subTitle{
+   font-size: .85em;
+   margin: 0;
+   padding: 0;
+   color: $fsGrey;
+}
 
-	q { quotes: '\201c' '\201d'; 
-		font-size: 1em;
-		line-height: 1.3em;
-	}
-	q:before { content: open-quote; 
-				font-size: 2em;
-				line-height: 1em;
-				font-family: georgia;
-				position: relative;
-				top: 7px;
-				}
-	q:after  { content: close-quote; 
-				font-size: 2em;
-				line-height: 1em;
-				position: relative;
-				top: 7px;
-				font-family: georgia;
-	}
-	   
-   a{
-	   color: $fsBlack;
-   }
+q { quotes: '\201c' '\201d'; 
+	font-size: 1em;
+	line-height: 1.3em;
+}
+q:before { content: open-quote; 
+			font-size: 2em;
+			line-height: 1em;
+			font-family: georgia;
+			position: relative;
+			top: 7px;
+			}
+q:after  { content: close-quote; 
+			font-size: 2em;
+			line-height: 1em;
+			position: relative;
+			top: 7px;
+			font-family: georgia;
+}
    
-   ul{
-	   padding: 0;
-   
-	   &.list{
-	   	margin: .5em 1em;
-		   li{
-		   	margin-bottom: .5em;
-				&.uncompleted, &.completed{
-				margin-left: 30px;
-					&:before{
-						color: $fsBlack;
-						text-decoration: inherit;
-						display: inline-block;
-						min-width: 30px;
-						margin-left: -30px;
-					}
-				}
-				&.completed{
-					text-decoration: line-through; 
-					color: $fsGrey;
-					font-style: italic;
+a{
+   color: $fsBlack;
+}
+
+ul{
+   padding: 0;
+
+   &.list{
+   	margin: .5em 1em;
+	   li{
+	   	margin-bottom: .5em;
+			&.uncompleted, &.completed{
+			margin-left: 30px;
+				&:before{
+					color: $fsBlack;
+					text-decoration: inherit;
+					display: inline-block;
+					min-width: 30px;
+					margin-left: -30px;
 				}
 			}
-	   }
-
-	   			
-   }
-   
-   
-   .loading{
-	   width: 100%; text-align: center; padding: 1em; 
-	   //background: #f5f5f5;
-	   border-radius: 4px; margin: 1em 0;
-	   	 	.logo{
-		 		height: 50px; width: auto; 
-		 		display:inline-block;
-		 		vertical-align: middle;
-		 		position: relative;
- 		 		margin-right: 5px;
-		 		-webkit-transition: all infinite ease;
-			    transition: all infinite ease;
-			    -webkit-transform-style: preserve-3d;
-			    transform-style: preserve-3d;
-				//transform: rotateY(180deg); 	
-				-webkit-animation: rotateanti .9s ease-in infinite 0s;
-				-moz-animation: rotateanti .9s ease-in infinite 0s;
-				 -o-animation: rotateanti .9s ease-in infinite 0s;
-				 -ms-animation: rotateanti .9s ease-in infinite 0s;
-				 animation: rotateanti .9s ease-in infinite 0s;
-
-	 	}
-
-   }
-   
-   
-		@-webkit-keyframes rotateanti {
-		 to {
-		    -webkit-transform: rotateY(0deg);
-		  }
-		  from {
-		    -webkit-transform: rotateY(360deg);
-		  }
-		
-		}
-		
-		@-moz-keyframes rotateanti {
-		 to {
-		     -moz-transform: rotateY(0deg);
-		  }
-		  from {
-		     -moz-transform: rotateY(360deg);
-		  }
-		
-		}
-		@-o-keyframes rotateanti {
-		 to {
-		    -o-transform: rotateY(0deg);
-		  }
-		  from {
-		    -o-transform: rotateY(360deg);
-		  }
-		
-		}
-		@-ms-keyframes rotateanti {
-		 to {
-		    -ms-transform: rotateY(0deg);
-		  }
-		  from {
-		    -ms-transform: rotateY(360deg);
-		  }
-		
-		}
-
-
-
-   
-   .fullWidth{
-	   width: 100%;
-	   &.homeFeat{
-		   background: #eee;
-		   background: url(/imgs/bg_world_dark.png) no-repeat center center scroll;
-			-webkit-background-size: cover;
-			-moz-background-size: cover;
-			-o-background-size: cover;
-			background-size: cover;
-			.titleSection{
-				text-align: center;
-				.homeTitle{
-					color: #eee;
-				}
-			}
-	   }
-	   &.pageFeat{
-		   background: transparent;
-		   .titleSection{
-			border-bottom: 1px solid $fsLineGrey;
-			}
-	   }
-	   &.darkFeat{
-		   background: url(/imgs/bg_world_dark.png) no-repeat center center scroll;
-			-webkit-background-size: cover;
-			-moz-background-size: cover;
-			-o-background-size: cover;
-			background-size: cover;
-			.theContainerHead{
-				padding: 2em;
-				h3{
-					color: #eee;
-				}
-			}
-	   }
-
-   }
-   
-   .theContainer{
-	   margin: 0 5%;
-	   padding-bottom: 100px;
-	   //temporary test of a max width:
-	   margin: 0 auto;
-	   padding-bottom: 100px;
-	   max-width: 1200px;
-	   @media only screen and (min-width: 0px) and (max-width: 887px) {
-		   	margin: 0 10px;
-			} 
-	   @media only screen and (min-width: 888px) and (max-width: 1200px) {
-		   	margin: 0 10px;
-			} 
-
-	   
-   }
-   
-   .theContainerHead{
-	   margin: 0 5%;
-	   margin: 0 auto;
- 	   max-width: 1200px;
-	   @media only screen and (min-width: 0px) and (max-width: 887px) {
-		   margin: 0 10px;
-			} 
-	   @media only screen and (min-width: 888px) and (max-width: 1200px) {
-		   	margin: 0 10px;
-			} 
-		.featCollection{
-			margin-bottom: 1em;
-		}
-   }
-   
-   .contentWrap{
-	  position: relative;
-   }
-   
-   .titleBlock{
-		border-bottom: 1px solid $fsLineGrey;
-		.btnLogout{
-			position: absolute;
-			right: 0;
-			top: 0;
-	   }
-	   .featCollection &{
-			margin-bottom: 1em;
-			border-bottom: 1px solid $fsGrey;
-			h2{
-				color: #eee;
-				font-weight: 100;
-			}
-			h5.bookSubtitle{
-				color: #ccc;
-				display: inline-block;
-				font-size: 1em;
-			}
-	   }
-   }
-   .contentSection{
-	   margin-bottom: 1em;
-	   h3{
-		   margin-top: 0;
-		   margin-bottom: .66em;
-	   }
-   }
-   
-   .adminSection{
-	   margin-top: 1em;
-	   .theContainerHead{
-			background: #eee;
-			padding: 1em;
-			border-radius: 4px;
-			h3{
-				margin-top: 0;
+			&.completed{
+				text-decoration: line-through; 
+				color: $fsGrey;
+				font-style: italic;
 			}
 		}
+   }
+
+   			
+}
+
+
+.loading{
+   width: 100%; text-align: center; padding: 1em; 
+   //background: #f5f5f5;
+   border-radius: 4px; margin: 1em 0;
+   	 	.logo{
+	 		height: 50px; width: auto; 
+	 		display:inline-block;
+	 		vertical-align: middle;
+	 		position: relative;
+		 		margin-right: 5px;
+	 		-webkit-transition: all infinite ease;
+		    transition: all infinite ease;
+		    -webkit-transform-style: preserve-3d;
+		    transform-style: preserve-3d;
+			//transform: rotateY(180deg); 	
+			-webkit-animation: rotateanti .9s ease-in infinite 0s;
+			-moz-animation: rotateanti .9s ease-in infinite 0s;
+			 -o-animation: rotateanti .9s ease-in infinite 0s;
+			 -ms-animation: rotateanti .9s ease-in infinite 0s;
+			 animation: rotateanti .9s ease-in infinite 0s;
+
+ 	}
+
+}
+
+
+	@-webkit-keyframes rotateanti {
+	 to {
+	    -webkit-transform: rotateY(0deg);
+	  }
+	  from {
+	    -webkit-transform: rotateY(360deg);
+	  }
 	
-		.formWrap{
-			background: transparent;
-			margin: 1em;
-		}
 	}
-   
-   .additionalSection{
-	   border-top: 1px solid $fsLineGrey;	
-	   margin-top: 1em;
+	
+	@-moz-keyframes rotateanti {
+	 to {
+	     -moz-transform: rotateY(0deg);
+	  }
+	  from {
+	     -moz-transform: rotateY(360deg);
+	  }
+	
+	}
+	@-o-keyframes rotateanti {
+	 to {
+	    -o-transform: rotateY(0deg);
+	  }
+	  from {
+	    -o-transform: rotateY(360deg);
+	  }
+	
+	}
+	@-ms-keyframes rotateanti {
+	 to {
+	    -ms-transform: rotateY(0deg);
+	  }
+	  from {
+	    -ms-transform: rotateY(360deg);
+	  }
+	
+	}
+
+
+
+
+.fullWidth{
+   width: 100%;
+   &.homeFeat{
+	   background: #eee;
+	   background: url(/imgs/bg_world_dark.png) no-repeat center center scroll;
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+		.titleSection{
+			text-align: center;
+			.homeTitle{
+				color: #eee;
+			}
+		}
+   }
+   &.pageFeat{
+	   background: transparent;
+	   .titleSection{
+		border-bottom: 1px solid $fsLineGrey;
+		}
+   }
+   &.darkFeat{
+	   background: url(/imgs/bg_world_dark.png) no-repeat center center scroll;
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+		.theContainerHead{
+			padding: 2em;
+			h3{
+				color: #eee;
+			}
+		}
    }
 
+}
 
+
+.view-animate-container{
+   .requestsPage &{
+	   background: #eee;
+		background: #656A6D url(/imgs/bg_world_dark.png) no-repeat center center scroll;
+		background-position-y: -20px;
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+		background-attachment: fixed; 
+   }
+}
+
+.theContainer{
+   margin: 0 5%;
+   padding-bottom: 100px;
+   //temporary test of a max width:
+   margin: 0 auto;
+   padding-bottom: 100px;
+   max-width: 1200px;
+   @media only screen and (min-width: 0px) and (max-width: 887px) {
+	   	margin: 0 10px;
+		} 
+   @media only screen and (min-width: 888px) and (max-width: 1200px) {
+	   	margin: 0 10px;
+		} 
+
+   
+}
+
+.theContainerHead{
+   margin: 0 5%;
+   margin: 0 auto;
+	   max-width: 1200px;
+   @media only screen and (min-width: 0px) and (max-width: 887px) {
+	   margin: 0 10px;
+		} 
+   @media only screen and (min-width: 888px) and (max-width: 1200px) {
+	   	margin: 0 10px;
+		} 
+	.featCollection{
+		margin-bottom: 1em;
+	}
+}
+
+.contentWrap{
+  position: relative;
+}
+
+.titleBlock{
+	border-bottom: 1px solid $fsLineGrey;
+	.btnLogout{
+		position: absolute;
+		right: 0;
+		top: 0;
+   }
+   .featCollection &{
+		margin-bottom: 1em;
+		border-bottom: 1px solid $fsGrey;
+		h2{
+			color: #eee;
+			font-weight: 100;
+		}
+		h5.bookSubtitle{
+			color: #ccc;
+			display: inline-block;
+			font-size: 1em;
+		}
+   }
+}
+.contentSection{
+   margin-bottom: 1em;
+   h3{
+	   margin-top: 0;
+	   margin-bottom: .66em;
+   }
+}
+
+.adminSection{
+   margin-top: 1em;
+   .theContainerHead{
+		background: #eee;
+		padding: 1em;
+		border-radius: 4px;
+		h3{
+			margin-top: 0;
+		}
+	}
+
+	.formWrap{
+		background: transparent;
+		margin: 1em;
+	}
+}
+
+.additionalSection{
+   border-top: 1px solid $fsLineGrey;	
+   margin-top: 1em;
+}
+
+.infoSection{
+	&.reverseOut{
+		color: #ccc;
+		h2.bookTitle{
+			color: #eee;
+		}
+		h2, h5, a{
+			color: #eee;
+		}
+	}
+}
+
+.reverseOut{
+	color: #ccc;
+	h2.bookTitle{
+		color: #eee;
+	}
+	h2, h5, a{
+		color: #eee;
+	}
+}
    
 ////////////////////////////////////////////////////////////
 /////

@@ -119,6 +119,18 @@ input.search-text:-ms-input-placeholder {     color: #ccc;       }
 
 
 
+////////////////
+// CUSTOM LOGIN BUTTON
+///////////////
+button{
+	&.btn.btnSignUp{
+	padding: .5em 1em;
+	font-size: 16px;
+	line-height: .85em;
+	border: 0px solid white;
+	margin: 0;
+	}
+}
 // SUPPORTING INFO
 // Black circle containing the number of books. Potentially delete
 

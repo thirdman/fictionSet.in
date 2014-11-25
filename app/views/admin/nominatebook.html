@@ -1,0 +1,67 @@
+<div class="fullWidth homeFeat featCollection">
+	<div class="theContainerHead">
+		<div class="titleBlock group">
+			<h2 class="bookTitle">Nominate A Book</h2>
+			<h5 class="bookSubtitle">Request a book be added by user who have read it.</h5>
+		</div>
+		<form ng-submit="searchBooksNominate()" class="featSearch marginBottom" ng-class="(searchStringNominate.length) ? 'hasText' : ''">
+			<input delayed-model="searchStringNominate" data-delay="300"    class="largesearch withButton form-control form-control-small" placeholder="Search for Book Title / Author / ISBN">
+			<button type="submit" class="btn fsBtn" ng-click="searchBooksNominate()">Search</button>
+		</form>
+	</div>
+</div>
+
+<div class="theContainer pageEdit">
+	<div class="contentWrap">
+	<span id="maintenanceDiv" ng-show="true">	
+		<p ng-hide="hasDataNominate || searchStringNominate.length" class="marginTop">If you haven't read a book, you can request it be added by other users.</p>
+
+		<div ng-show="isLookingNominate" class="loading"><img src="/imgs/brand/logo_line.svg" style="" class="logo"> Searching...</div>
+
+		 <div class="currentBooks bookList inSearchContext" ng-show="searchStringNominate && ((currentBooks | currentBooksFilter:searchStringNominate ).length > 0)" class="marginTop" style="margin-top: 1em;"> <!--hasDataNominate -->
+			<h4>Books already existing in FictionSet.in</h4> 
+			<div ng-repeat="existingBook in currentBooks | currentBooksFilter:searchStringNominate  | limitTo: limitCurrent" class="listItem existingBookItem" >
+				<div class="imgWrap">
+					<a ng-href="#/book/{{existingBook.$id}}"><img ng-src="{{existingBook.coverurl}}" class="bookImg bookImgSmall" ></a>
+				</div>
+					<div class="theContent">
+						<a ng-href="#/book/{{existingBook.$id}}" class="btn fsBtn  editBtn inline floatRight hollow">View</a>
+						<h5>{{existingBook.title}}</h5>
+				</div>
+		 	</div>
+		 	<p><a href="" ng-click="showAllCurrent()" ng-show="((currentBooks | currentBooksFilter:searchStringNominate ).length > 3)">Show {{(currentBooks | currentBooksFilter:searchStringNominate).length - 3}} more</a></p>
+		 </div>
+	
+		<div class="resultWrap" ng-show="hasDataNominate">
+		<h3>Books Found</h3>
+			 <div ng-repeat="book in dataSearchNominate | limitTo:6" ng-show="hasDataNominate"  style="width: 100%;  padding: 1em; background: #f5f5f5; border-radius: 4px; margin: 1em 0;">
+				<div class="bookRpt group" style="  border-bottom: 1px solid #eee; margin-bottom:4px;">
+					<div style="min-width: 100px;float: left; margin-right: 10px; width: 14%;vertical-align: top;">
+						<img src = "{{book.SmallImage.URL}}" style="width: 75px;">
+					</div>
+					<div style="display:inline-block; width: 65%; vertical-align: top;">
+						<h3 style="margin: 4px 0;">{{book.ItemAttributes.Title}}</h3>
+						<h5 class="bookSubtitle">by {{book.ItemAttributes.Author}}</h5>
+					</div>
+					<div style="display: inline-block; width: 15%; vertical-align: middle;">
+			  			<a href="/#/nominate/{{book.ASIN.0}}" class="btn">Select</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</span>
+	</div>
+
+	<div class="contentWrap borderTop paddingTop marginTop" ng-show="false" >
+		<div class="theContent columnWrap contentText" >
+			<div class="columnLeft column">	
+		<p>If you haven't read a book, you can request it be added by other users.</p>
+		 	</div>
+	
+	<div class="columnRight column">	
+	</div><!-- columnright -->
+</div><!-- the content -->
+	
+	
+	</div><!-- ends contentWrap -->
+</div>

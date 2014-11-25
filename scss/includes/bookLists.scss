@@ -2,26 +2,15 @@
 ul{
 	list-style: none;
 	list-style-type: none;
-	
-	&.bookList{
-		padding: 0;
-		margin: 0;	
-	
-		li{
+}	
+
+.bookList{
+	padding: 0;
+	margin: 0;	
+
+	li{
 			list-style-type: none;
 			position: relative;
-/* 			padding: 1em; */
-			
-/*
-			display: table-cell;
-			width: 33.3%;
-			float: left;
-			height: 0;
- 			padding-bottom:33.3%;
-			height: 0;
-
-*/
-
 			width: 31.3%;
 			margin: 1%;
 			float: left;
@@ -58,22 +47,9 @@ ul{
 
 			}
 
-/*
- 			background: #f2f2f2;
- 			&:nth-child(2n+2){
-	 			background: #e0e0e0;
- 			}
-*/
-/*
-      -webkit-perspective: 1000;
-  -moz-perspective: 1000;
-  -o-perspective: 1000;
-  perspective: 1000;
-*/
-		}
-		
-		
-		.imgWrap{
+ 		}
+	
+	.imgWrap{
 			display: table-cell;
 			display: inline-block;
  			width: 29%;
@@ -152,36 +128,131 @@ transition: all .5s ease;
 			}
 			
 		}
-		
-		.theContent{
-			display: table-cell;
+	
+	.theContent{
+		display: table-cell;
+		display: inline-block;
+		width: 70%;			
+		vertical-align: top;
+		padding: 0 1em;
+		position: absolute;
+		left: 30%;
+		height: 100%;
+
+					@media only screen and (min-width: 0px) and (max-width: 887px) {
+					position: inherit;
+					overflow: visible;
+					height: auto;
+					width: 87%;					 
+					}
+		h3{}
+		h5{}
+	}
+	
+	&.currentBooks, &.requestedBooks{//for the addbook search interface
+		padding: 2px 10px 10px;
+		background: $fsLightGrey;
+		border-radius: 4px;
+		margin: -2px 0 1em 0;
+		.listItem{
+			position: relative;
+		}
+		.imgWrap{
 			display: inline-block;
-			width: 70%;			
+ 			width: 40px;
+			height: inherit;
 			vertical-align: top;
-/* 			background: #fff; */
-			padding: 0 1em;
-			position: absolute;
-			left: 30%;
-			height: 100%;
+ 			overflow: hidden;
+ 			position: inherit;
+		}
+		.theContent{
+			display: inline-block;
+			width: 90%; 
+			vertical-align: top;
+			padding: inherit;
+			//position: inherit;
+			left: 50px;
+			height: inherit;
 
-			
-						@media only screen and (min-width: 0px) and (max-width: 887px) {
-						position: inherit;
-						overflow: visible;
-						height: auto;
-						width: 87%;
-						 h3{
-							 
-						 }
-						 
-						}
-
-			h3{}
-			h5{}
+			h5{font-size: 1em;
+				margin: 0;
+				color: $fsBlack;
+			}
 		}
 		
 	}
 	
-	
-	
+	&.requestedBooks{
+		background: transparent;
+		padding: 0;
+		border-radius: inherit;
+		margin: 0;
+		.bookItem{
+			/* border-top: 1px solid #ddd; */
+			padding-top: .5em;
+			font-size: 16px;
+			background: #eee;
+			margin: 2em 0;
+			border-radius: 4px;
+			box-shadow: 0px 0px 5px rgba(0,0,0,.2);
+		}
+		.imgWrap{
+			width: 15%;
+			//float: left;
+			margin-top: -12px;
+			margin-bottom: -8px;
+		}
+		.theContent{
+			width: 52%;
+			position: relative;
+			display: inline-block;
+			vertical-align: top;
+			margin-left: 1em;
+			left: inherit;
+			.bookInfo{
+				margin-top: .5em;
+			}
+			.sectionAddedBy{
+				margin-top: .5em;;
+				padding-top: 0;
+			}
+			h3{}
+			h5.bookSubTitle{ color: $fsGrey;
+				padding-bottom: 1em;
+				border-bottom: 1px dotted #aaa;
+			}
+		}
+		.socialContent{
+			width: 30%;
+			display: inline-block;
+			height: 100%;
+			//background: #f3f3f3;
+			padding: 10px;
+			padding-top: 5em;
+			margin-top: -.5em;
+			position: absolute;
+			.userComment{
+				display: inline-block;
+			}
+			.sectionAddedBy{
+				margin-top: 0;
+				padding-top: 0;
+			}
+			btn.hollow{
+				position: absolute;
+				bottom: 0;
+				border-bottom-width: 0px;
+				border-right-width: 0px;
+				border-radius: 0px 0 4px 0;
+				right: -16px;
+				
+			//color: #eee;
+			//background: transparent;
+			//border: 1px solid #999;
+			///background: #222;
+
+			}
+			
+		}
+	}
 }

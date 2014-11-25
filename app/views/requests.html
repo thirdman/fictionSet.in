@@ -1,18 +1,78 @@
+<!--
+<div class="fullWidth featCollection">
+	<div class="theContainerHead">
+		<div class="titleBlock group">
+				<a ng-href="#/nominate/" class="btn fsBtn  editBtn" style="float: right; margin-top: 1em; margin-left: 2em;">Suggest A Book</a>
+			<h2 class="bookTitle">Book Suggestions</h2>
+			<h5 class="bookSubtitle">nating a book enables you to suggest a book to users if you haven't read it yet. It's also a nice way for people to find something new to read.</h5>
+		</div>
+ 	</div>
+</div>
+-->
+
 <div class="theContainer">
-	<div class="titleBlock group">
-		<h2 class="bookTitle">Book Requests (coming soon)</h2>
+	<div class="titleBlock group reverseOut">
+		<h2 class="bookTitle">Book Suggestions</h2>
 	</div>
 
 	<div class="loading" ng-show="isLoading">
 		<img src="/imgs/brand/logo_line.svg" style="" class="logo"> Loading&hellip;
 	</div>
 	
-    <div class="contentWrap columnWrap" ng-hide="isLoading">
-		<div class="theContent contentText" >
+		<div class="theContent">
+			<div class="infoSection reverseOut  paddingBottom">
+				<a ng-href="#/nominate/" class="btn fsBtn  editBtn" style="float: right; margin-top: 1em; margin-left: 2em;">Suggest A Book</a>
+				<p>Nominating a book enables you to suggest a book to users if you haven't read it yet. It's also a nice way for people to find something new to read.</p>
+			</div>
+			
+			<div ng-show="isLooking" class="loading"><img src="/imgs/brand/logo_line.svg" style="" class="logo"> Searching...</div>
+			
+			
+			<div class="requestedBooks bookList inPageContext" ng-show="((nominatedBooks | currentBooksFilter:searchString ).length > 0)"   > 
+				<div ng-repeat="book in nominatedBooks | orderBy: '-timestamp' " class="listItem bookItem" >
+					<div class="imgWrap">
+						<a ng-href="#/book/{{book.$id}}"><img ng-src="{{book.coverurl}}" class="bookImg bookImgSmall" ></a>
+					</div>
+						<div class="theContent">
+							<h3 class="bookTitle">{{book.title}}</h3>
+							<h5 class="bookSubtitle">by {{book.author}}</h5>
+				            <div class="bookInfo ">
+								<div class="placeList">
+				 					<h4><span class="iconLabel icon-marker"></span>Locatons:</h4>
+										<span ng-repeat="place in book.places" class="aTag"  >
+										<a ng-href="#/place/{{place.geonameId}}" ng-class="(place.name==place.countryName) ? 'countryName' : ''" class="placeName">{{place.name}}</a><span ng-if="place.name != place.countryName"> <a href="#/place/{{place.countryName}}" class="placeCountry"><span>{{place.countryCode}}<span></a></span>
+									</span>
+								</div>
+								<div class="tagWrap bookTags sideBarItem" ng-if="book.tags">
+				 					<h4><span class="iconLabel icon-tag-1"></span>Tags:</h4>
+									<span ng-repeat="tag in book.tags" class="aTag tagTag" >
+										<a ng-href="#/tags/{{tag.tagId ? tag.tagId :tag.tagName}}" class="tagName">{{tag.tagId ? tag.tagId :tag.tagName}}</a> 
+				 					</span>
+							</div><!-- ends tags -->
+				          </div>
+						</div>
+						<div class="socialContent">
+							<div class="commentWrap" ng-if="book.userComment">
+								<h4><span class="iconLabel icon-comment"></span>Comment:</h4>
+	 							<div class="sideBarItem sectionAddedBy" >
+	<!-- 					 				<div class="user addedBy"><span class=" iconLabel icon-comment"></span>Suggested by <span class="userGroup">{{book.addedByName}}</span></div> -->
+									<div class="userComment" ng-if="book.userComment">{{book.userComment}}</div>
+								</div>
+							</div>
+							<a ng-href="{{book.bookLink}}" ng-if="book.bookLink" target="_blank" class="btn fsBtn hollow" ><span class="iconLabel icon-external-link"></span>External Link</a>
+							
+						</div>
+				</div>
+ 			 </div><!-- ends booklist-->
+		</div>
+
+
+		<div class="theContent contentText" ng-show="false" >
 				<p>Requests enable you to suggest a book for other users to review. This is useful if you think a book would fit in fictionset.in but you haven't read it yet.</p>
 				<p>It's also a nice way for people to find something new to read.</p>
 			<div class="contentImg imgWrapCenter"><img src="https://c1.staticflickr.com/1/12/96724309_985b8acd3f.jpg" class="contentImgCircle"></div>
 		</div>
+		
 	</div>
      
 </div> <!-- ends the containser -->

@@ -375,7 +375,7 @@ app.factory("simpleLogin", ["$firebaseSimpleLogin", "Profile", "$rootScope", fun
 					createdAt: theTimestamp
 			      });
 				  //and notify us
-				  ref.child('/system/messages').push({
+				  ref.child('/system/adminmessages').push({
 						title:"User Added (simplelogin)",
 						messageContent:  user.displayName + ' ('+ provider + ") was added.",
 						messageType: "User",
@@ -1317,7 +1317,7 @@ if(collectionobj.title){
  					//SAVE BOOK
 					//var newPostRef = refBook.push($scope.tempBook);
 					var newPostRef = refBook.push(cleanedTempBook);
-					var postID = newPostRef.name();
+					var postID = newPostRef.key();
 						$scope.tempBook.places = tempPlaces;
 						$scope.tempBook.excerpts = tempExcerpts;						
 						$scope.tempBook.tags = tempTags;
@@ -1346,16 +1346,16 @@ if(collectionobj.title){
 					refBook.child(postID).child('excerpts').set(cleanedExcerpts);
 					//refExcerpts.update(cleanedExcerpts);
 					
-					//add a notificiation
+					//ADD NOTIFICATIONS
 					var theTimestamp = new Date().valueOf();					
 					ref.child('/system/messages').push({
 						title:"Book Added",
 						messageContent:  $scope.tempBook.title + " was added",
 						messageType: "Book",
 						timestamp: theTimestamp	
- 					});
+					});
 
-			   	 	$location.path("#/book/:"+postID); 
+					$location.path("#/book/:"+postID); 
  
 
 
@@ -1656,7 +1656,7 @@ app.controller("FollowingCtrl", ["$scope", "Profile", "currentUser", "$firebase"
     if(currentUser){
       	 $scope.profile = Profile(currentUser.uid);
 	  	 var userId = currentUser.uid;
-	  	 var refMessages = new Firebase('https://sweltering-fire-3219.firebaseio.com/system/messages/');
+	  	 var refMessages = new Firebase('https://sweltering-fire-3219.firebaseio.com/messages/');
 			refMessages.once('value', function(snapshot) {
 			var exists = (snapshot.val() !== null);
 			unreadMessages = snapshot.val();

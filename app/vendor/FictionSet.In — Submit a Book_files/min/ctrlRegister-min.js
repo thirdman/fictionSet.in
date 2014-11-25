@@ -132,3 +132,5 @@ app.controller("RegisterCtrl",  ["$firebaseSimpleLogin", "$scope", "$location", 
 */
     
  }]);
+
+

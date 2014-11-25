@@ -1,53 +1,51 @@
 /* ///////// MISC   /////////*/
 
 
-
    ::-webkit-input-placeholder {
    color: #ccc;
    font-weight: normal;
+   font-weight: lighter;
    font-weight: 100;
-/*
-   font-style: italic;
-   font-family: monospace;
-   font-size: 40px;
-   line-height: 2em;
-*/
+   font-family: 'Roboto', 'Helvetica Neue', 'Helvetica', Arial;
   }
 
 :-moz-placeholder { /* Firefox 18- */
    color: #ccc;  
    font-weight: 100;
-/*
-   font-style: italic;
-   font-family: monospace;
-   font-size: 40px;
-   line-height: 2em;
-*/
+   font-family: 'Roboto', 'Helvetica Neue', 'Helvetica', Arial;
     }
 
 ::-moz-placeholder {  /* Firefox 19+ */
    color: #ccc;  
    font-weight: 100;
-/*
-   font-style: italic;
-      font-family: monospace;
-   font-size: 40px;
-    line-height: 2em;
-*/
+   font-family: 'Roboto', 'Helvetica Neue', 'Helvetica', Arial;
   }
 
 :-ms-input-placeholder {  
    color: #ccc;  
    font-weight: 100;
-/*
-   font-style: italic;
-      font-family: monospace;
-   font-size: 40px;
-   line-height: 2em;
-*/
+   font-family: 'Roboto', 'Helvetica Neue', 'Helvetica', Arial;
    }
    
+
+.featSearch input::-webkit-input-placeholder {
+   color: #aaa;
+   }
+
+.featSearch input:-moz-placeholder {  
+   color: #aaa;  
+     }
+
+.featSearch input::-moz-placeholder {  
+   color: #aaa;  
+   }
+
+.featSearch input:-ms-input-placeholder {  
+	color: #aaa;  
+	}
    
+   
+      
 
 hr{	
 	border: 0px solid white;

@@ -1,5 +1,5 @@
 'use strict';
- app.controller("BookCtrl", [ "$scope", "$rootScope", "currentUser", "$firebase", "$routeParams", "$location", "$timeout", "DataSource", "iTunesData", "Profile", "filterFilter", 'ngDialog', "$log", function($scope, $rootScope, currentUser, $firebase, $routeParams, $location, $timeout, DataSource, iTunesData, Profile, filterFilter, ngDialog, $log, lodash ) { 
+ app.controller("BookCtrl", [ "$scope", "$rootScope", "currentUser", "$firebase", "$routeParams", "$location", "$timeout", "DataSource", "iTunesData", "Profile", "filterFilter", 'FsAdmin', 'ngDialog', "$log", function($scope, $rootScope, currentUser, $firebase, $routeParams, $location, $timeout, DataSource, iTunesData, Profile, filterFilter, FsAdmin, ngDialog, $log, lodash ) { 
    	$scope.isLoading = true;
    	var isBookmarking = false;
    	$scope.isBookmarking = isBookmarking;
@@ -44,10 +44,19 @@
 	var collectionsArray = [];
 	$scope.collectionsArray = collectionsArray;
 	var ngDialog;
+	//FIRST DO ADMIN
+/*	if(currentUser){
+		FsAdmin.bookView(bookid, currentUser.uid);
+	} else {
+		FsAdmin.bookView(bookid, 'anonymous');
+ 	}
+*/	
 
+	//now everything else
     var ref = new Firebase('https://sweltering-fire-3219.firebaseio.com/Books/' + bookid);
 	var sync = $firebase(ref);
 	$scope.book = sync.$asObject();
+
 	
  	var obj = $firebase(new Firebase('https://sweltering-fire-3219.firebaseio.com/Books/' + bookid)).$asObject();  //.$asObject();
  	var booksArray = $firebase(new Firebase('https://sweltering-fire-3219.firebaseio.com/Books/')).$asArray();
@@ -64,6 +73,16 @@
   		$rootScope.pageTitle = 'Book: '+ obj.title;
   		console.log('Book Obj is:');
   		console.log(obj);
+  		
+  		// DO VIEW COUNT SAVE
+  		var viewCountRef = obj.viewCount;
+  		if(!viewCountRef){
+	  		viewCountRef = 0;
+  		}
+   		obj.viewCount = viewCountRef +1;
+  		obj.$save();
+  		
+  		//SET UP DATA RETRIEVAL
 		if(obj.amazon_id.length){
      		var amazonUrl = 'http://fictionset.in/admin/amazon/amazon_getBook.php?search=' + obj.amazon_id;
 	 		getAmazonData(amazonUrl);
@@ -902,7 +921,7 @@
 	 		 var messageType = 'Edit';
 		 	 var theTimestamp = new Date().valueOf();
 		 	 var ref = new Firebase('https://sweltering-fire-3219.firebaseio.com/');
-		 	 var messages = ref.child("system/messages");
+		 	 var messages = ref.child("system/adminmessages");
 	  		 messages.push({
 				    title: 'Suggestion/Error report for '+obj.title,
 				    authorName: profile.displayName,

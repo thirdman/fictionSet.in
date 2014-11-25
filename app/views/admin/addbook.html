@@ -1,19 +1,93 @@
-	<div class="fullWidth pageFeat">
-		<div class="theContainerHead">
-		<h2 class="pageTitle">Add A Book</h2>
+<div class="fullWidth homeFeat featCollection">
+	<div class="theContainerHead">
+		<div class="titleBlock group">
+			<h2 class="bookTitle">Submit A Book</h2>
+			<h5 class="bookSubtitle">Add a book to fictionset.in for others to enjoy.</h5>
 		</div>
+		<form ng-submit="searchBooks()" class="featSearch marginBottom" ng-class="(searchString.length) ? 'hasText' : ''">
+			<input delayed-model="searchString" data-delay="300"    class="largesearch withButton form-control form-control-small" placeholder="Search for Book Title / Author / ISBN">
+			<button type="submit" class="btn fsBtn" ng-click="searchBooks()">Search</button>
+		</form>
 	</div>
+</div>
+
 <div class="theContainer pageEdit">
-<div class="contentWrap" >
- 
- 
+	<div class="contentWrap">
+	<span id="maintenanceDiv" ng-show="true">	
+<div ng-hide="hasData || searchString.length" class="infoSection marginTop">	
+	
+	<h3>What books should I add?</h3>
+	<p><em><strong>tl;dr:</strong> Novels that you'd recommend to your friend, and that are set somewhere you could possibly visit.</em></p>
+
+	<p>We value thoughtful additions and accurate places. We want books that capture some of the 'something' of a place- for some people a few lines is enough, and for others it's whole passages. Everyone will have a different idea, and that's ok. Remember that not every book in the world needs to be on fictionset.in</p>
+ 	
+	<h3>What places should I tag?</h3>
+	<p>1) Can you visit it, or the remains of it? <br>2) More specific is better. The system will automatically add country tags for you, so unless the book is set in a general area or country, go ahead and add the city/town/village/footpath... For example, 'Tuscany' is better than 'Italy', and 'Florence' is even better again. Local names ('Firenze') should also work. Because country tags are automatically added, you wouldn't need to enter 'Firenze' AND 'Italy' - just 'Firenze' is fine.</p>
+	<hr>
+	<ul class="list" style="margin-left:0;">
+	<li><strong class="icon-smile iconLabel fsGreen">YES:</strong> Real places. Ideally as specific as possible. (It's ok to add multiple places)</li>
+	<li><strong class="icon-smile iconLabel fsGreen" >YES:</strong> Historical places that still exist, but under a different name (eg. Tokyo was called Edo once apon a time)</li>
+	<li><strong class="icon-smile iconLabel fsGreen">YES:</strong> If there's no specific location, but a book is set in a general area, that's ok too. </li>
+	<li><strong class="icon-smile iconLabel fsGreen">YES:</strong> Fictional places based on real places (add the 'real' place). This means that if the name of a village was changed but it's clear what the real village is (or the author has said), then it's worthy of adding. (Common sense should win here - you shouldn't have to be a super sleuth to figure it out). </li>
+	<li><strong class="icon-smiley-meh iconLabel fsOrange">MAYBE:</strong> Non-fiction. Please consider before adding. The intent of the site is to collect *fictional* books as because there's heaps of other places out there for finding guide books etc. However, some books such as memoirs or travel narratives are useful additions as they have a 'story like' quality.   </li>
+	<li><strong class="icon-smiley-frown iconLabel fsRed">NO:</strong> Made up places. Hogwarts is not a valid place, and you can't add it.</li>
+	</ul>
+
+	<br>
+	<hr>
+	<div class="divider"></div>
+	<br>
+	<p>Note: Adding books is a bit hit and miss at the moment. You *should* be able to do it, but if you have problems email me and let me know what you were trying to do. <br>- Gareth</p>	
+</div>
+
+		
+		<div ng-show="isLooking" class="loading"><img src="/imgs/brand/logo_line.svg" style="" class="logo"> Searching...</div>
+		
+		<div class="currentBooks bookList inSearchContext" ng-show="searchString && ((currentBooks | currentBooksFilter:searchString ).length > 0)"  style="margin-top: 1em;"> 
+			<h4>Books already existing in FictionSet.in</h4> 
+			<div ng-repeat="existingBook in currentBooks | currentBooksFilter:searchString | limitTo: limitCurrent" class="listItem existingBookItem" >
+				<div class="imgWrap">
+					<a ng-href="#/book/{{existingBook.$id}}"><img ng-src="{{existingBook.coverurl}}" class="bookImg bookImgSmall" ></a>
+				</div>
+					<div class="theContent">
+						<a ng-href="#/book/{{existingBook.$id}}" class="btn fsBtn  editBtn inline floatRight hollow">View</a>
+						<h5>{{existingBook.title}}</h5>
+				</div>
+			</div>
+			<p><a href="" ng-click="showAllCurrent()" ng-show="((currentBooks | currentBooksFilter:searchString ).length > 3)">Show {{(currentBooks | currentBooksFilter:searchString).length - 3}} more</a></p>
+		 </div>
+		 
+		<div class="resultWrap" ng-show="hasData">
+		<h3>Results</h3>
+			 <div ng-repeat="book in dataSearch | limitTo:6" ng-show="hasData"  style="border-bottom: 1px solid #eee; width: 100%;  padding: 1em; background: #f5f5f5; border-radius: 4px; margin: 1em 0;">
+				<div class="bookRpt group" style=" margin-bottom:4px;">
+					<div style="min-width: 100px;float: left; margin-right: 10px; width: 14%;vertical-align: top;">
+						<img src = "{{book.SmallImage.URL}}" style="width: 75px;">
+					</div>
+					<div style="display:inline-block; width: 65%; vertical-align: top;">
+						<h3 style="margin: 4px 0;">{{book.ItemAttributes.Title}}</h3>
+						<h5 class="bookSubtitle">by {{book.ItemAttributes.Author}}</h5>
+					</div>
+					<div style="display: inline-block; width: 15%; vertical-align: middle;">
+			  			<a href="/#/addbook/{{book.ASIN.0}}" class="btn">Select</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</span>
+	</div>
+
+
+<div class="contentWrap" ng-hide="true" >
 <div class="theContent columnWrap contentText" >
 	<div class="columnLeft column">	
-	<p>FictionSet.in depends on your contibutions. We value thoughtful additions and accurate places - remember that not every book in the world needs to be on fictionset.in</p>
+	<p>FictionSet.in depends on your contibutions. We value thoughtful additions and accurate places - remembering that not every book in the world needs to be on fictionset.in</p>
 	
 	<h3>What books should I add?</h3>
 	<p><em><strong>tl;dr:</strong> Novels that you'd recommend to your friend, and that have a place or places you could visit.</em></p>
-	<p>We want books that capture some of the 'something' of a place For some people a few lines is enough, and for others it's whole passages - Everyone will have a different idea, and that's ok. </p>
+	<p>We want books that capture some of the 'something' of a place. For some people a few lines is enough, and for others it's whole passages - Everyone will have a different idea, and that's ok. </p>
  	
 	<h3>What places should I tag?</h3>
 	<p>1) Can you visit it, or the remains of it? <br>2) Specific locations are better unless the book is set in a general area. 'Tuscany' is better than 'Italy', and 'Florence' is even better again. Local names ('Firenze') should also work. NOTE: The system automatically determines the country of any location you enter (you don't need to enter 'Paris' AND 'France' - just 'Paris' is fine).</p>
@@ -22,7 +96,7 @@
 	<li><strong class="icon-smile iconLabel fsGreen">YES:</strong> Real places. Ideally as specific as possible. (It's ok to add multiple places)</li>
 	<li><strong class="icon-smile iconLabel fsGreen" >YES:</strong> Historical places that still exist, but under a different name (eg. Tokyo in Japan was known as Edo</li>
 	<li><strong class="icon-smile iconLabel fsGreen">YES:</strong> If there's no specific location, but a book is set in a general area, that's ok too. </li>
-	<li><strong class="icon-smile iconLabel fsGreen">YES:</strong> Fictional places based on real places. This means that if the name of a village was changed but it's clear what the real village is (or the author has said), then it's worthy of adding. (Common sense should win here - you shouldn't have to be a super sleuth to figure it out). </li>
+	<li><strong class="icon-smile iconLabel fsGreen">YES:</strong> Fictional places based on real places (add the 'real' place). This means that if the name of a village was changed but it's clear what the real village is (or the author has said), then it's worthy of adding. (Common sense should win here - you shouldn't have to be a super sleuth to figure it out). </li>
 	<li><strong class="icon-smiley-frown iconLabel fsRed">NO:</strong> Made up places. Hogwarts is not a valid place, and you can't add it.</li>
 	<li><strong class="icon-smiley-meh iconLabel fsOrange">MAYBE:</strong> Non-fiction. Please consider before adding. The intent of the site is to collect *fictional* books as because there's heaps of other places out there for finding guide books etc. However, some books such as memoirs or travel narratives might be useful additions if they have a 'story like' quality.   </li>
 	</ul>
@@ -41,17 +115,30 @@
   		 </div>
 
 		<span id="maintenanceDiv" ng-show="true">	
-		  <h3>Search for a book to add</h3>
-		  <p>NOTE: until I can automate the check, can you please check a book doesn't already exist before adding it? Thanks!</p>
-  		<h4>Search by Name / Author / Isbn:</h4>
-		 <div class="searchWrap" >
-		 	<form ng-submit="searchBooks()">
-		 		<input ng-model="searchString" class="form-control form-control-small" placeholder="Search for a book">
-		 		<button type="submit" class="btn" ng-click="searchBooks()">Search</button>
-		 	</form>
+			<h3>Search for a book to add</h3>
+			<h4>Search by Name / Author / Isbn:</h4>
+		<div class="searchWrap" >
+			<form ng-submit="searchBooks()">
+				<input delayed-model="searchString" data-delay="300"  class="form-control form-control-small" placeholder="Search for a book"><!--  ng-model="searchString"  -->
+				<button type="submit" class="btn" ng-click="searchBooks()">Search</button>
+			</form>
+		</div>
+		
+		<div ng-show="isLooking" class="loading"><img src="/imgs/brand/logo_line.svg" style="" class="logo"> Searching...</div>
+		 
+		 <div class="currentBooks bookList inSearchContext" ng-show="searchString && ((currentBooks | filter:searchString ).length > 0) ">
+			<h4>Similar books already existing in FictionSet.in</h4> 
+			<div ng-repeat="existingBook in currentBooks | filter:searchString  | limitTo: limitCurrent" class="listItem existingBookItem" >
+				<div class="imgWrap">
+					<a ng-href="#/book/{{existingBook.$id}}"><img ng-src="{{existingBook.coverurl}}" class="bookImg bookImgSmall" ></a>
+				</div>
+ 				<div class="theContent">
+ 					<a ng-href="#/book/{{existingBook.$id}}" class="btn fsBtn  editBtn inline floatRight">View</a>
+ 					<h5>{{existingBook.title}}</h5>
+				</div>
+		 	</div>
+		 	<p><a href="" ng-click="showAllCurrent()" ng-show="((currentBooks | filter:searchString ).length > 3)">Show {{(currentBooks | filter:searchString ).length - 3}} more</a></p>
 		 </div>
-		 <div ng-show="isLooking" class="loading"><img src="/imgs/brand/logo_line.svg" style="" class="logo"> Searching...</div>
- 
  
 		 <div ng-repeat="book in dataSearch" ng-show="hasData"  style="width: 100%;  padding: 1em; background: #f5f5f5; border-radius: 4px; margin: 1em 0;">
 			<div class="bookRpt group" style="  border-bottom: 1px solid #eee; margin-bottom:4px;">
@@ -69,6 +156,7 @@
 		</div>
 		</span>
 		
+		<!-- hidden until a tabbed is option -->
 		<div class="contentSection" ng-show="false">
 			<h3>Nominate a Book</h3>
 			<p>If you know of a book but haven't read it, you can request it be added by other users.</p>

@@ -66,7 +66,6 @@ angular.module('myApp.directives', [])
 		//IF IT"S A HEADER LOGO OR STANDARD PROFILE
 	   	if($scope.fsIconType == 'header'){
 			simpleLogin.$getCurrentUser().then( function(currentUser) {
-				console.log(currentUser);
 				var refUser = $firebase(new Firebase('https://sweltering-fire-3219.firebaseio.com/users/').child(currentUser.uid)).$asObject();
 				refUser.$loaded().then(function() {
 					console.log(refUser);
@@ -130,7 +129,66 @@ angular.module('myApp.directives', [])
     };
   }])
 
+.directive('fsMessageCount', ['$firebase', 'simpleLogin', 'filterFilter', function($firebase, simpleLogin, filterFilter){
+	return {
+		restrict: 'AE',
+		scope: {
+	        fsUserId: '=fsUserId',
+	        user: '@'
+		},
+	    template: '<a ng-href="#/following"><span  class="userMessageIcon" title="{{userMessageCountDetail}}" ng-show="showIcon">{{newMsgCount}}</span></a>',
+		controller: ['$scope',  function ($scope) {
+			
+			var showIcon = false;
+			var newMsgCount;
+			$scope.showIcon = showIcon;
+			$scope.newMsgCount = newMsgCount;
+ 			//LETS GET THE COUNT
+			simpleLogin.$getCurrentUser().then(function(currentUser) {
+			$scope.userMessageCount = ''; 
+			var fbMsg = new Firebase('https://sweltering-fire-3219.firebaseio.com/messages/').child(currentUser.uid);
+ 			fbMsg.on('value', function(snapshot) {
+	 			var fbMessages = (snapshot.val());
+	// 			var theNewMsgs1 = filterFilter(fbMessages, {bookTitle:'Death of a River Guide: A Novel'});
+	 			var theNewMsgs = filterFilter(fbMessages, {isSeen:'!true'});
+	 //			var theNewMsgsLength = theNewMsgs.length;
+	 			if(theNewMsgs.length){
+			 		showIcon = true;	
+	 			}else{
+		 			showIcon = false;
+	 			};
+	 			newMsgCount = theNewMsgs.length;
+	 			$scope.userMessageCountDetail = theNewMsgs.length + 'New notifications';
+	 			$scope.showIcon = showIcon;
+	 			$scope.newMsgCount = theNewMsgs.length;
+	 			console.log('showicon is :' + $scope.showIcon);
+			});
+ 			
+
+/*
+			var refMsgs = $firebase(new Firebase('https://sweltering-fire-3219.firebaseio.com/system/messages/').child(currentUser.uid)).$asArray();
+				refMsgs.$loaded().then(function() {
+					//console.log(refMsgs);
+					$scope.userMsgs = refMsgs;
+					$scope.userMessageCount = '12'; 
+					$scope.userMessageCount = refMsgs.length; 
+					$scope.userMessageCountDetail = refMsgs.length + ' Notifications'; 
+					$scope.newMsgs = filterFilter(refMsgs, {bookTitle:'Death of a River Guide: A Novel'});
+					$scope.newMsgs2 = filterFilter(refMsgs, {isSeen:!true});
+	 	      	});
+
+*/
+				    
+		    });	
+		}]//ends controller
+	    
+	 
+	   
+    };
+  }])
+
 ;
+
 
 
 
