@@ -80,19 +80,32 @@
    <body ng-controller="AuthCtrl">
 
 <div id="header" class="header" style="display: inline-block;">
-     <div class="navicon-button x" snap-toggle>
-	  <ul class="menu">
+     <div class="navicon-button x">
+      <nav onmouseover="" class="hidden-large mobilenav" >
+		<a href="" title="Menu" class="icon-three-bars icon-menu trigger"><span>Menu</span></a>
+	    <span class="navGroup">
+	    <a href="#/home" title="Requests" class="icon-books">Books</a>
+	    <a href="#/places" title="Requests" class="icon-places">Places</a>
+	    <a href="#/near" title="Requests" class="icon-near">Near You</a>
+		<a href="#/requests" title="Requests" class="icon-requests">Requests</a> 
+		<a href="#/collections" title="Collections" class="icon-collections">Collections</a>
+		<a href="#/about" title="About" class="icon-about">About</a>
+	    </span>
+	 </nav>
+	 
+	  <ul class="menu hidden-small">
 	    <li><a href="#/home">Books</a></li>
 	    <li><a href="#/places">Places</a></li>
 	    <li><a href="#/near">Near You</a></li>
-<!-- 	    <li><a href="#/about">About </a></li> -->
-	  </ul>
-	  <nav onmouseover="" >
-		<a href="" title="Menu" class="icon-three-bars"><span>More&hellip;</span></a>
-		<a href="#/requests" title="Requests">Requests</a>
-		<a href="#/collections" title="Collections">Collections</a>
-		<a href="#/about" title="About">About</a>
-	 </nav>
+		<li class="dropdownWrap">
+		  <nav onmouseover="" >
+			<a href="" title="Menu" class="icon-three-bars"><span>More&hellip;</span></a>
+			<a href="#/requests" title="Requests">Requests</a> 
+			<a href="#/collections" title="Collections">Collections</a>
+			<a href="#/about" title="About">About</a>
+		 </nav>
+		</li>
+	</ul>
 	  
 	  <ul class="menu user">
 	    <li ng-hide="auth.user"><a href="#/login">login</a></li>
@@ -110,7 +123,7 @@
  	  
  	  <div class="logoWrap">
 		  	<img src="/imgs/brand/logo_line.svg" style="" class="logo">
- 	    	<a href="#" class="headerLogo" ><span class="headerName">Fictionset.in</span><span class="alphaTag">alpha</span></a>
+ 	    	<a href="#" class="headerLogo hidden-small" ><span class="headerName">Fictionset.in</span><span class="alphaTag">alpha</span></a>
 	 		<form id="headerSearch">
 		 			<input class="search-text placeholder" type="text" name="q" placeholder="Search " delayed-model="searchBar.places" data-delay="50" value="">
 		 	</form>

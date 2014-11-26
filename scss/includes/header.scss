@@ -11,13 +11,12 @@
  	    	} 
 
 
- 	   a, .navicon-button{
-	 	//   display: inline-block; 
-	 	   vertical-align: middle;
-	 	  // color: #ccc;
-	 	  color: #666;
+ 	   a, .navicon-button{ 
+		   vertical-align: middle;
+	 	   color: #666;
 	 	   text-decoration: none;
 	 	   font-weight: 300; 
+	 	   white-space: nowrap;
 	 	   &:hover{
 		 	   color: #fff;
 		 	   color: $fsBlack;
@@ -28,7 +27,9 @@
 		 	display: inline-block;
 		 	vertical-align: middle;
 		 	margin: 0;
-		 	
+		 	>li {
+			 	display: inherit;
+		 	}
 		 	&.user{
 			 	float: right;
 		 	}
@@ -119,9 +120,9 @@ input.search-text:-ms-input-placeholder {     color: #ccc;       }
 
 
 
-////////////////
+////////////////////////////////////////////////
 // CUSTOM LOGIN BUTTON
-///////////////
+///////////////////////////////////////////////
 button{
 	&.btn.btnSignUp{
 	padding: .5em 1em;
@@ -131,8 +132,12 @@ button{
 	margin: 0;
 	}
 }
+
+////////////////////////////////////////////////////////////////
 // SUPPORTING INFO
 // Black circle containing the number of books. Potentially delete
+////////////////////////////////////////////////////////////////
+
 
 .supportingInfo{
 	   position: fixed; 
@@ -144,21 +149,22 @@ button{
 	   height: 5em;
 	   border-radius: 50%; 
 	   padding-top: .5em;
-	   z-index: 20;
-   }
-    .supportingInfo .smallType{
+	   z-index: 5;
+	   
+	   .smallType{
 	   font-size: .85em;
 	   display: block;
 	   color: #fff;
-    }
-   .supportingInfo .largeType{
+    	}
+		.largeType{
 	   font-size: 3em;
 	   display: block;
 	   line-height: .9em;
 	   color: #fff;
-	      }
-//ends supporting info
-   }
+		}
+   }//ends supporting info
+
+}
    //ends header
    
 
@@ -168,50 +174,40 @@ button{
 
 
 
-///////////////
-/// nav drop down stuff
-//////////////////////
+////////////////////////////////////////////////////////////
+/// NAV DROP DOWNS
+///////////////////////////////////////////////////////////////////
 
 
 
 a, a:visited, nav {
-/*
--moz-transition: color 0.5s, background 0.7s, -moz-border-radius 0.7s, text-indent 0.2s;
--webkit-transition: color 0.5s, background 0.7s, -webkit-border-radius 0.7s, text-indent 0.2s;
--o-transition: color 0.5s, background 0.7s, border-radius 0.7s, text-indent 0.2s;
-transition: color 0.5s, background 0.7s, border-radius 0.7s, text-indent 0.2s;
-*/
-transition: color 0.3s, background 0.7s, border-radius 0.7s, text-indent 0.2s;
-
--webkit-tap-highlight-color: rgba(0,0,0,0);
+	/*
+	-moz-transition: color 0.5s, background 0.7s, -moz-border-radius 0.7s, text-indent 0.2s;
+	-webkit-transition: color 0.5s, background 0.7s, -webkit-border-radius 0.7s, text-indent 0.2s;
+	-o-transition: color 0.5s, background 0.7s, border-radius 0.7s, text-indent 0.2s;
+	transition: color 0.5s, background 0.7s, border-radius 0.7s, text-indent 0.2s;
+	*/
+	transition: color 0.3s, background 0.7s, border-radius 0.7s, text-indent 0.2s;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
-body {
-//-webkit-font-smoothing: antialiased;
-//background: #7a8499;
-//font-family: "PT Sans", sans-serif;
-//font-size: 16px;
-//color: #fff;
-//margin: 15% auto 5%;
-//width: 70%;
-//max-width: 620px;
-//position: relative;
-}
-
-a, a:visited {
-//color: #5aedef;
-//text-decoration: none;
-}
 
 a:hover {
-//color: #95f1f2;
+	//color: #95f1f2;
+}
+ul.menu{
+	li.dropdownWrap{
+	//	position: relative;
+	//	display: inherit;
+		&:before{
+			padding-right: 0;
+		}
+	}
 }
 
 nav {
 	height: 50px;
-	//width: 60px;
 	width: 170px;
-	//display: block;
 	display: inline-block;
 	position: absolute;
 	z-index: 10;
@@ -219,14 +215,81 @@ nav {
 	text-align: center;
 	vertical-align: middle;
 	margin-left: 10px;
-	margin-top: -8px;
-}
+	//margin-top: 8px;
+	top: .5em;
+	z-index: 21;
+	&:hover{
+		width: 170px;
+		height: 210px;
+		cursor: pointer;
+	}
+	&.mobilenav{
+		position: absolute;
+		left: 0;
+		top: 0;
+		padding-top: .5em;
+		margin-left: 0;
+		a {
+			color: $fsBlack !important;
+			
+		}
+		a.trigger{
+			color: $fsBlack;
+		}
+		a{
+			&:hover{
+				background: #fff;
+				&:after{
+					background: transparent;
+				}
+			}
+		}
 
-nav:hover {
-//	width: 140px;
-	width: 170px;
-	height: 210px;
-	cursor: pointer;
+		
+		.navGroup{
+			//background: #fff;
+			display: block;
+			-webkit-border-radius: 5px;
+			-moz-border-radius:  5px;
+			border-radius:  5px;
+			box-shadow: 0 1px 2px rgba(0,0,0,.15);
+			margin-bottom: 2px;
+			margin-left: .5em;
+			margin-right: .5em;
+			
+
+		}
+		//sets up the STYLS OF THE VISIBLE ELEMENTS ONCE MENU IS HOVERED:
+		&:hover{
+				width: 100%;
+				height: inherit;
+				cursor: pointer;
+				//background: #eee;
+			& a {
+				background: #eee;
+				color: $fsBlack;
+				-webkit-border-radius: 0;
+				-moz-border-radius: 0;
+				border-radius: 0;
+				&:first-child{
+					-webkit-border-radius: 5px 5px 0 0;
+					-moz-border-radius:  5px 5px 0 0;
+					border-radius:  5px 5px 0 0;
+				}
+				&:last-child{
+					-webkit-border-radius: 0 0 5px 5px ;
+					-moz-border-radius:  0 0 5px 5px ;
+					border-radius:   0 0 5px 5px ;
+				}
+					 
+ 				&:after{
+					color: $fsBlack;
+					background: transparent;
+				}
+				
+			}
+		}
+	}
 }
 
 nav a {
@@ -254,28 +317,34 @@ nav a:first-child:hover {
 
 }
 
-nav:hover>a {
+//nav:hover>a {
+nav:hover a {
  display: block;
 }
 
-nav:hover>a:first-child {
+//nav:hover>a:first-child {
+nav:hover>a.trigger {
 	text-indent: 60px;
 }
-nav:hover>a:first-child:after {
+//nav:hover>a:first-child:after {
+	nav:hover>a.trigger:after {
 //	color: #6daeaf;
 //	background: #505664;
 //	background: $fsBlack;
 	background: #eee;
 }
 
-nav a:first-child {
+//nav a:first-child {
+nav a.trigger{
 	display: block;
 	text-align: center;
 	margin-bottom: 16px;
 	cursor: default;
 	text-indent: 45px;
 	text-align: left;
-	color: #666 !important;
+	color: #666;
+	margin-left: .5em;
+	
 }
 
 nav a:after {
@@ -308,24 +377,24 @@ nav a:hover {
 	 // background: $fsBlack !important;
 
 	  background: #fff !important;
-	  color: $fsBlack !important;
+	  color: $fsBlack ;
 
 	  -webkit-border-radius: 5px;
 	  -moz-border-radius: 5px;
 	  border-radius: 5px;
+	  cursor: pointer;
  
 }
 
 nav a:hover:after {
 	color: #fff;
-	background: #fff !important;
-	//background: $fsBlack !important;
-	color: $fsBlack !important;
+	background: #fff;
+	color: $fsBlack ;
 	text-align: center;
-	//margin-left: -70px;
 }
 
-nav a:first-child:before {
+//nav a:first-child:before {
+nav a.trigger:before {
 	position: absolute;
 	text-indent: 0;
 	top: 52px;
@@ -344,34 +413,37 @@ nav a:first-child:hover:before {
 }
 
 
-nav a:first-child:after {
+//nav a:first-child:after {
+nav a.trigger:after {
 	left: 0;
 	//top: 3px;
 	//content: "m";
 	//content: "3";
-	content: "u";	
+	content: "3";	
 //	background: #656d7e;
-//	background: #656A6D;
+//	background: #656A6D; 
 	background: transparent;
 	color: #666;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
 }
-nav a:first-child:hover {
+//nav a:first-child:hover {
+nav a.trigger:hover {
 	background: transparent !important;
 	text-indent: 60px;
 	color: $fsBlack !important;
 }
 
-nav a:first-child:hover:after {
+//nav a:first-child:hover:after {
+nav a.trigger:hover:after {
 	background: $fsBlack;
 	background: #eee;
 }
 
 
 nav a:nth-child(2):after {
-content: "m";
+//content: "m";
 -webkit-border-top-left-radius: 5px;
 -webkit-border-top-right-radius: 5px;
 -moz-border-radius-topleft: 5px;
@@ -381,11 +453,11 @@ border-top-right-radius: 5px;
 }
 
 nav a:nth-child(3):after {
-content: "D";
+//content: "D";
 }
 
 nav a:last-child:after {
-content: "e";
+//content: "e";
 -webkit-border-bottom-left-radius: 5px;
 -webkit-border-bottom-right-radius: 5px;
 -moz-border-radius-bottomleft: 5px;
@@ -399,9 +471,37 @@ p {
 padding: 0.3em 0;
 }
 
+
+
+//////////// ICONS ///////////
+nav a.icon-books:after{
+	content: "e";
+}
+nav a.icon-places:after{
+	content: "E";
+}
+nav a.icon-near:after{
+	content: "H";
+}
+nav a.icon-requests:after{
+	content: "m";
+}
+nav a.icon-collections:after{
+	content: "D";
+}
+nav a.icon-about:after{
+	content: "e";
+}
+
+
+
+
  
 @media only screen and (max-width : 768px) {
+
+	//handled elsewhere
  	nav a:hover {
+/*
 	  color: #6daeaf !important;
 	  background: #fff;
 	  -webkit-border-radius: 5px;
@@ -409,8 +509,10 @@ padding: 0.3em 0;
 	  border-radius: 5px;
 	  margin-left: 53px;
 	  padding-left: 17px;
+*/
 	}
 	
+/*
 	nav a:hover:after {
 	  margin-left: -60px;
 	  padding-left: 0 !important;
@@ -427,5 +529,6 @@ padding: 0.3em 0;
 	nav a:first-child:hover:before {
 	  margin-left: -53px;
 	}
+*/
 
 }

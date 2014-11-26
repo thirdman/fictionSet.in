@@ -9,29 +9,7 @@
 	.factory('FsAdmin', ['$rootScope', '$location', function($rootScope, $location) {
 	    return {
 	        bookView: function(userId, pageId) {
-		     //   alert(userId, pageId);
-	          
-/*
-	          auth.createUser(email, password, function(error, user) {
-	            if (!error) {
-	              $rootScope.user = user;
-	            }
-	          });
-*/
 	        },
-/*
-	        login: function(email, password, auth) {
-	            auth.logout();
-	          auth.login('password', {
-	            email: email,
-	            password: password,
-	            rememberMe: false
-	          });
-	        },
-	        logout: function(auth) {
-	            auth.logout();
-	        }
-*/
 	      }
 	  }])
 	  
@@ -49,9 +27,6 @@
 		},
 		getUser: function (theUserId) {
 			var refProfile = ref.child('users').child(theUserId);		
-			//refProfile.once('value', function(snapshot) {
-			//var thisProfile = snapshot.val();
-			//});
 			return refProfile;
 		},
 		getSuggested: function (theBookId) {
@@ -107,8 +82,6 @@
 		},
 		systemMessage: function(theUserId, theMessageId){
 			var theUser, theMessage;			
-			//console.log(theUserId);		
-			//console.log(theMessageId);
 			FsGet.getUser(theUserId).on("value", function(user){
 				theUser = user.val();
 				console.log(theUser);
@@ -533,9 +506,6 @@
 									console.log(error);
 								} else{
 									console.log('notified.');
-									// $scope.isSent = true;
-									//$location.path('/admin/users').replace();
-									//$scope.$apply();
 								}
 							});
 

@@ -35,12 +35,19 @@
 					<div ng-repeat="note in unreadMessages | toArray | orderBy: '-timestamp' " class="notification msg{{note.messageType}}"  ng-class="(note.isRead) ? 'read' : 'unread'">
 					<h4 ng-if="note.messageType == 'bookAdded'" >New Book:</h4>
 					<h4 ng-if="note.messageType == 'bookSuggested'" >New Suggestion:</h4>
+					<h4 ng-if="note.messageType == 'system'" >System Message:</h4>
+
 					<div class="msgImg floatRight" ng-if="note.coverurl" style="width: 45px; display: inline-block;"><a ng-href="#/book/{{note.bookId}}"><img src={{note.coverurl}} style="width: 100%;"></a></div>
+					
  	 				<div class="msgContent" ng-if="note.messageType == 'bookSuggested'"  style=" display: inlinesssblock; vertical-align: tsop;" ><p><a ng-href="#/book/{{note.bookId}}">{{note.bookTitle}}</a>, set in <span class="icon-marker"></span><a ng-href="#/place/{{note.locationId}}" >{{(note.locationId == note.countryId) ? note.countryName : (note.locationName + ', '+ note.countryName)}}</a>?</p></div>
 
  	 				<div class="msgContent" ng-if="note.messageType == 'bookAdded'"  style="" ><a ng-href="#/book/{{note.bookId}}"><p>&lsquo;{{note.bookTitle}}</a>&rsquo; was added, set in <span class="icon-marker"></span><a ng-href="#/place/{{note.locationId}}" >{{(note.locationId == note.countryId) ? note.countryName : (note.locationName + ', '+ note.countryName)}}</a></p></div>
 
- 	 				<div class="msgContent"   ng-if="note.messageType != 'bookAdded' && note.messageType != 'bookSuggested' " >{{note.messageContent}}</div>
+ 	 				<div class="msgContent" ng-if="note.messageType == 'system'"  style="" ><p>{{note.messageContent}}</p></div>
+ 	 				
+ 	 				
+ 	 				<div class="msgContent"   ng-if="note.messageType != 'bookAdded' && note.messageType != 'bookSuggested'  && note.messageType != 'system' " >{{note.messageContent}}</div>
+ 	 				
 	 				<div class="msgMeta clearfix "><span class="iconBooks icon-email-envelope activityIcon" ng-class="(note.isRead) ? 'isRead' : 'isUnread'" title="{{(note.isRead) ? 'Previously seen notification' : 'New notification'}}"></span> {{note.timestamp | date:'d MMMM, h:m:s '}} (You follow  <a ng-href="#/place/{{note.followsId}}">{{note.followsName}}</a>) </div>
 				</div>
   			</span>

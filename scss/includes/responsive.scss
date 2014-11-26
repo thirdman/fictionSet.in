@@ -1,0 +1,26 @@
+////////////////////////////////////////////////
+//////// RESPONSIVE ////////////////////////////
+////////////////////////////////////////////////
+
+.hidden-small{
+		@media only screen and (max-width: 887px) { //and (max-width: 887px) 
+		display:none !important;
+		}
+}
+
+.show-small{
+		@media only screen and (max-width: 887px) { //and (max-width: 887px) 
+		display:inherit;
+		}
+}
+
+.hidden-large{
+	@media only screen and (min-width: 888px) {
+		display:none !important;
+	}
+}   
+.show-large{
+	@media only screen and (min-width: 888px) {
+		display:inherit ;
+	}
+}  
