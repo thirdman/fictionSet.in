@@ -19,11 +19,13 @@
 			} 
 
    }
-   .titleHalf input{ 
+   .titleHalf input{  
    		width: 100%; 
    		margin-left: 10px;  
    		background: #fff;
-   		background: rgba(206, 207, 208, 0.30);
+ 		//background: rgba(206, 207, 208, 0.30);
+   		background: rgba(206, 207, 208, 0.3) url(../imgs/icon_search.svg) center right no-repeat;
+   		background-size: 40px;
    		line-height: 1.5em;
    		padding: 2px 12px; 
    		outline: none;
@@ -39,9 +41,19 @@
 	   		color: #2a2a2a; 
 	 	    outline: none;   
 	   }
+/*
+	   &:before{
+		   content: "9";
+		   font-family: 'fsfont';
+		   position: absolute;
+		   
+	   }
+*/
+	   
 	   @media only screen and (min-width: 0px) and (max-width: 887px) {
 		   width: 100%;
 		   min-width: inherit;
+		   background-size: 20px;
 			} 
 
 
@@ -100,5 +112,115 @@ padding-top: 6.5em;
 }
 	   
 
+
+
+
+/*///////////////////////////*/
+/*///////// ALTERNATE ////////*/
+/*///////////////////////////*/
+.titleSection{
+	.secondaryInfo{
+		color: #ccc;
+		font-weight: 100;
+		width: 100%;
+		
+		border-top: 1px solid #ccc;
+		border-top: 1px solid rgba(255,255,255,.2);
+		.silo{
+			display: inline-block;
+			vertical-align: top;
+			&.introText{
+				width: 40%;
+				margin-right: .5em;
+				padding-right: .5em;
+				border-right: 1px solid #ccc;
+				border-right: 1px solid rgba(255,255,255,.2);
+			}
+			&.introBookCount{
+				width: 20%;
+				margin-right: .5em;
+				padding-right: .5em;
+				border-right: 1px solid #ccc;
+				border-right: 1px solid rgba(255,255,255,.2);
+				p{
+					white-space: inherit; //fix for intro stuff
+				}
+			}
+			&.introUser{
+				width: 20%;
+			}
+			
+			a{
+				color: #ccc;
+			}
+		}
+	}
+}
+
+html.booksPage{
+	min-height: 100%;
+	background: url(/imgs/bg_world_dark.png) no-repeat center center fixed;
+	background-size: cover;
+	body{
+		background: transparent;
+	}
+	
+	.fullWidth.homeFeat {
+		background: transparent;
+	}
+	.titleSection .secondaryInfo{
+		border-bottom: 1px solid rgba(255,255,255,.2);
+	}
+	
+	.booksWrap .loading{
+		color: #fff;
+	}
+	
+	.bookList .imgWrap{
+		z-index: 2;
+	}
+	.bookList .theContent{
+		left: 28%;
+		height: 68%;
+		background: #eee;
+		z-index: 1;
+		top: 5px;
+		border-radius: 5px;
+		box-shadow: 1px 1px 3px rgba(0,0,0,.2);
+		font-size: 16px;
+		padding-top: 10px;
+	}
+
+}
+
+.loading .bookList.placeholder{
+	li.listItem{
+		text-align: left;
+		.imgWrap{
+			a{
+				height: 70%; background: #ddd; left: 0; text-align: center;
+				span{
+					margin-top: 50%; display: inline-block; text-align: center;
+					img.logo{
+						width: inherit; box-shadow: none; opacity: .65;
+					}
+				}
+			}
+			
+		}
+		.theContent{
+			background: rgba(255,255,255,.3);
+			.placeholderLines{
+				margin: 20px;
+				.placeholderLine{
+					height: .8em; margin: .5em 0; display: block; background: #ccc;
+					&:nth-child(3){
+						margin-right: 50%;
+					}
+				}
+			}
+		}
+	}
+}
 
 	  

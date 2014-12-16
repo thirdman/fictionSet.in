@@ -1,6 +1,7 @@
 <h4>Follow {{placeInfo.name}}</h4>
 <span ng-hide="(followProcessing) || (isFollowing)">
 	<p>Follow this place to be notified when new books are added.</p>
+ 	<p ng-hide="auth.user"> You must be logged in to follow a Place</p>
 	<div class="ngdialog-buttons">
 		<button type="button" class="ngdialog-button ngdialog-button-secondary" ng-click="closeThisDialog('button')">Cancel</button>
 		<button class="btn ngdialog-button ngdialog-button-primary" ng-click="followPlace(placeid) ">Follow</button> <!-- && closeThisDialog('addedvalue') -->

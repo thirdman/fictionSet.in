@@ -1,0 +1,53 @@
+	<div class="fullWidth homeFeat">
+		<div class="theContainerHead titleSection">
+			<div class="featureItem">
+				<div class="imgWrap">
+					<a ng-href="#/book/{{refItem.$id}}" class="front">
+						<img ng-src="{{refItem.coverurl}}" class="bookImg bookImgSmall" >
+					</a>
+				</div>
+				<div class="responseTitle ribbon"><div class="ribbon-content">Book Added</div></div>
+			</div>
+		</div>
+	</div>
+
+<div class="theContainer">
+	<div class=" contentWrap " >
+		<div class="loading" ng-show="isLoading"><img src="/imgs/brand/logo_line_white.svg" style="" class="logo"> loading...</div>
+		
+		<div class="theContent contentBox">
+			<h2>Great Job!</h2>
+			<p class="subTitle">It's beautiful people like you who make FictionSet.in awesome.</p>
+			<div class="callOut">
+				<div class="badgeImgWrap">
+					<img src="/imgs/badges/01_earlybird.svg" class="badgeImg" >
+				</div>
+				<div class="badgeContent">
+				<h3 class="award">New Badge: Travel Guide</h3>
+				<p>You added your first book. Here's a badge to remember the occasion.</p>
+				<p>A travel guide leads others to something of note. That's what you just did!</p>
+				</div>
+			</div>
+			<h3>What Next?</h3>
+			<p>Other books set in 
+				<span ng-repeat="place in refItem.places">
+					<a ng-href="/book/{{place.geonameId}}">{{place.name}}</a>&nbsp;
+				</span>
+			</p>
+			<p>Visit <a ng-href="/profile">your profile</a></p>
+			<p>Return <a ng-href="/home">home</a></p>
+		</div>
+	
+	   
+	   <span ng-show="hasData" class="noResults">
+	   </span>
+		<div class="homeSection">
+	 	</div>
+	 	
+	</div><!-- ends contentWrap -->
+
+</div> <!-- ends the containser -->
+ 
+<!-- debug $asObject data -->
+<!-- {{rec|json}} -->
+

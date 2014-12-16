@@ -4,58 +4,85 @@
 .headerFeature{
 	position: relative;
 	&.headerPlace{
-	.mapImg{
-		background-color: #eee;
- 	   background: url()  center center / cover no-repeat; 
- 	   overflow: hidden;
- 	   padding-top: 400px;
- 	// height: 400px;
- 	 
- 	   
- 	   			@media only screen and (min-width: 0px) and (max-width: 887px) {
-  	   			padding-top: 140px;
-	//		height: 140px;
+		.mapImg{
+			background-color: #eee;
+			background: url()  center center / cover no-repeat; 
+			overflow: hidden;
+			padding-top: 400px;
+			@media only screen and (min-width: 0px) and (max-width: 887px) {
+				padding-top: 140px;
 			} 
-
-	}
-	}
-
-	.headImgWrap{
-		position: absolute;
-		left: 0;
-		top: 0;
-		height: 400px;
-		height: 100%;
-		
-		.headImg{
-			float: left;
-			height: 100%;
 		}
-		
 	}
+
 }
 
 .featTitle{
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    z-index: 2000;
-    overflow: hidden;
+   // position: absolute;
+   // bottom: 0;
+   // right: 0;
+  //  z-index: 20;
+//    overflow: hidden;
+	position: absolute;
+	top: 0;
+	text-align: center;
+	margin: 2em auto;
+	display: inline-block;
+	width: 100%;
+
 	h1{
+		text-transform: uppercase;
+		color: #eee;
+		font-weight: lighter;
+		font-weight: 100;
+		line-height: 1.2em;
+		
+		.mainText{
 		margin: 0;
-		padding: 0 .1em 0 0;
+		//padding: 0 .1em 0 0;
 		font-style: italic;
-	    color: #eee;
-	    font-size: 290px;
+	    //color: #eee;
+	    //font-size: 290px;
 	    font-size: 16vw;
 	    font-weight: 100;
 	    letter-spacing: -.05em;
 	    white-space: nowrap;
 	    margin-bottom: -4.6vw;
-	    text-shadow: 1px 1px 25px rgba(0,0,0,.1);
+	    text-shadow: 1px 1px 25px rgba(0,0,0,.2);
+		
+		margin: 0 5%;	    
+		font-size: 4em;
+		font-weight: 100;
+		color: #fff;
+		letter-spacing: 0.1em;
+		line-height: 1.2em;
+	    font-family: times;
+	    
+	    border-top: 1px solid #eee;
+	    border-bottom: 1px solid #eee;	    
+	    }
+	    .preText{
+		    font-size: .5em;
+			font-weight: normal;
+			font-weight: 300;
+	    }
+	    .postText{
+			font-size: .5em;
+			background: #fff;
+			padding: 0px 1.5em;
+			border-radius: 20px;
+			top: -1.75em;
+			position: relative;
+			display: inline-block;
+			color: #000;
+			line-height: 1.5em;
+			font-weight: normal;
+			font-weight: 300;
+	    }
 	}
 }
 
+/*
 .featSubTitle{
 	position: absolute;
     bottom: -2.5em;
@@ -70,7 +97,69 @@
 	    color: #bbb;
 	}
 }
+*/
+.fullWidth.placeSubInfo{
+	.theContainerHead{
+		height: 100px;
+		border-bottom: 1px solid $fsLineGrey;
+		text-align: center;
+		margin-bottom: 1em;
+		
+		.titleSection{
+			display: inline-block;
+			vertical-align: top;
+			height: 100%;
+		}
+		.bookCount{
+			font-size: 1.25em;
+			//color: $fsGrey;
+			padding-right: 2em; 
+			line-height: 100px;
+		}
+		.headImgWrap{
+			border-left: 1px solid $fsLineGrey;
+			padding-left: 1em;
+			padding-right: 1em;
+			height: 100px;
+			text-align: center;
+			.headImg{
+				//float: right;
+				height: 85px;
+				border-radius: 70px;
+				margin: 5px -3px;
+			}	
+		}
+		.followWrap{
+			border-left: 1px solid $fsLineGrey;
+			padding-left: 1em;
+			line-height: 100px;
+			p{white-space: inherit;
+				padding: inherit;
+				line-height: inherit;
+			}
+			.followIcon{
+			 		&:before{
+					content: "";
+						display: inline-block;
+						vertical-align: middle;
+						background: url(../imgs/icon_markerempty.svg) 0px 0px no-repeat;
+						background-size: 20px auto;
+						margin-right: 4px;
+						width: 20px;
+						height: 22px;
+						}
+					&.active{
+			 			&:before{
+							vertical-align: middle;	
+						}
+					}
+			}
+		
+		}
+		
+	}
 
+}
 
 .placesFeat{
 	.searchPlaces{
@@ -79,20 +168,3 @@
 }
 
 
-.followIcon{
- 		&:before{
-		content: "";
-			display: inline-block;
-			vertical-align: 	bottom;
-			background: url(../imgs/icon_markerempty.svg) 0px 0px no-repeat;
-			background-size: 20px auto;
-			margin-right: 4px;
-			width: 20px;
-			height: 22px;
-			}
-		&.active{
- 			&:before{
-				vertical-align: middle;	
-			}
-		}
-}

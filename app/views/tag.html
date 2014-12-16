@@ -1,0 +1,47 @@
+<div class="fullWidth homeFeat featCollection">
+	<div class="theContainerHead">
+		<div class="titleBlock group">
+ 			<h2 class="bookTitle"><a href="#/tags">Tags</a> / {{ theTag.$id }}</h2>
+			<h5 class="bookSubtitle">{{  tagBooks.length }} books</h5>
+		</div>
+ 	</div>
+</div>
+
+ 
+<div class="theContainer">
+	<div class="contentWrap" >
+		<div class="featBlock featInfo" ng-if="tagBooks.length">
+			<h5 class="bookSubtitle"><span class="dividerRight">{{  tagBooks.length }} books</span></h5>
+		</div>
+	
+	    <ul class="bookList">
+				 <li ng-repeat="item in tagBooks   | filter:filters " class="listItem">
+				        <div class="imgWrap">
+				    		<a ng-href="#/book/{{item.$id}}"><img ng-src="{{item.coverurl}}" class="bookImg bookImgSmall" ></a>
+						</div>
+ 						<div class="theContent">
+		 					<h3 class="bookTitle"><a ng-href="#/book/{{item.$id}}">{{ item.title  | cut:true:50:' ...' }}</a></h3>
+ 		 					<p class="subTitle">Added:  {{ item.addedToCollectionDate | date : format : timezone}}</p>
+		 					<p ng-show="item.description">{{  item.description | to_plain |cut:true:180:' ...' }}</p>
+				            <div class="bookInfo ">
+								<div class="placeList">
+								Places:
+										<span ng-repeat="place in item.places" class="aTag"  >
+										<a ng-href="#/place/{{place.geonameId}}" ng-class="(place.name==place.countryName) ? 'countryName' : ''" class="placeName">{{place.name}}</a><span ng-if="place.name != place.countryName"> <a href="#/place/{{place.countryName}}" class="placeCountry"><span>{{place.countryCode}}<span></a></span>
+									</span>
+									
+								</div>
+ 			 	          </div>
+
+				</li>
+			</ul>
+
+   <span ng-show="showData">
+	   <div ng-hide="(list|filter:searchBar).length" class="emptyContent"><p>No items found</p></div>
+   </span>
+   
+ </div><!-- ends contentWrap -->
+
+ </div> <!-- ends the containser -->
+
+ 

@@ -422,7 +422,7 @@ ul{
 		position:relative;
 		font-size:.85em;
 		text-align: center;
-		margin: .25em auto;
+		//margin: .25em auto;
 		display: inline-block;
 		margin-left:20px;
 		padding:0 10px 0 14px;
@@ -472,9 +472,30 @@ ul{
 			border-color:transparent $fsGrey transparent transparent;
 		}
 	}
+
 } 
 
+	.tagCount{
+		background: $fsGrey;
+		color: $fsLightGrey;
+		border-radius: 2px;
+		display: inline-block;
+		//margin: .25em 0;
+		padding: 0 .5em;
+		font-size: .85em;
+		text-align: center;
+		min-width: 30px;
+	}
+
    
+   .tagItem{
+	   margin: .25em 0;
+	   font-size: 1.2em;
+	   .tagCount{
+		   float: right;
+		   
+	   }
+   }
 //////////////////////////////////////////////////////
 //////////  BUTTONS              /////////////////////
 //////////////////////////////////////////////////////

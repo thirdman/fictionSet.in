@@ -22,7 +22,7 @@
 		<div class="theContent">
 			<div class="infoSection reverseOut  paddingBottom">
 				<a ng-href="#/nominate/" class="btn fsBtn  editBtn" style="float: right; margin-top: 1em; margin-left: 2em;">Suggest A Book</a>
-				<p>Nominating a book enables you to suggest a book to users if you haven't read it yet. It's also a nice way for people to find something new to read.</p>
+				<p>Suggest a book if you haven't read it yet, for others to confirm. Alternatively, use this to find something new to read.</p>
 			</div>
 			
 			<div ng-show="isLooking" class="loading"><img src="/imgs/brand/logo_line.svg" style="" class="logo"> Searching...</div>
@@ -31,27 +31,35 @@
 			<div class="requestedBooks bookList inPageContext" ng-show="((nominatedBooks | currentBooksFilter:searchString ).length > 0)"   > 
 				<div ng-repeat="book in nominatedBooks | orderBy: '-timestamp' " class="listItem bookItem" >
 					<div class="imgWrap">
-						<a ng-href="#/book/{{book.$id}}"><img ng-src="{{book.coverurl}}" class="bookImg bookImgSmall" ></a>
+						<a ng-href="#/request/{{book.$id}}"><img ng-src="{{book.coverurl}}" class="bookImg bookImgSmall" ></a>
 					</div>
 						<div class="theContent">
 							<h3 class="bookTitle">{{book.title}}</h3>
 							<h5 class="bookSubtitle">by {{book.author}}</h5>
 				            <div class="bookInfo ">
 								<div class="placeList">
-				 					<h4><span class="iconLabel icon-marker"></span>Locatons:</h4>
+				 					<h4><span class="iconLabel icon-marker"></span>Suggested Locatons:</h4>
 										<span ng-repeat="place in book.places" class="aTag"  >
-										<a ng-href="#/place/{{place.geonameId}}" ng-class="(place.name==place.countryName) ? 'countryName' : ''" class="placeName">{{place.name}}</a><span ng-if="place.name != place.countryName"> <a href="#/place/{{place.countryName}}" class="placeCountry"><span>{{place.countryCode}}<span></a></span>
+										<a ng-href="#/suggestedplace/{{place.geonameId}}" ng-class="(place.name==place.countryName) ? 'countryName' : ''" class="placeName">{{place.name}}</a><span ng-if="place.name != place.countryName"> <a href="#/suggestedplace/{{place.countryName}}" class="placeCountry"><span>{{place.countryCode}}<span></a></span>
 									</span>
 								</div>
 								<div class="tagWrap bookTags sideBarItem" ng-if="book.tags">
 				 					<h4><span class="iconLabel icon-tag-1"></span>Tags:</h4>
 									<span ng-repeat="tag in book.tags" class="aTag tagTag" >
-										<a ng-href="#/tags/{{tag.tagId ? tag.tagId :tag.tagName}}" class="tagName">{{tag.tagId ? tag.tagId :tag.tagName}}</a> 
+										<a ng-href="#/tag/{{tag.tagId ? tag.tagId :tag.tagName}}" class="tagName">{{tag.tagId ? tag.tagId :tag.tagName}}</a> 
 				 					</span>
 							</div><!-- ends tags -->
 				          </div>
 						</div>
 						<div class="socialContent">
+							<div class="btnWrap">
+							<a ng-href="" ng-click="upgradeBookDialog(book.$id, book.amazon_id, book)"  target="_blank" class="btn fsBtn hollow btnAdd" >
+								<span class="iconLabel icon-book-sans-add"></span>Add to FictionSet.in
+							</a>
+							<a ng-href="{{book.bookLink}}" ng-if="book.bookLink" target="_blank" class="btn fsBtn hollow" >
+								<span class="iconLabel icon-external-link"></span>View External Info
+							</a>
+							</div>
 							<div class="commentWrap" ng-if="book.userComment">
 								<h4><span class="iconLabel icon-comment"></span>Comment:</h4>
 	 							<div class="sideBarItem sectionAddedBy" >
@@ -59,7 +67,7 @@
 									<div class="userComment" ng-if="book.userComment">{{book.userComment}}</div>
 								</div>
 							</div>
-							<a ng-href="{{book.bookLink}}" ng-if="book.bookLink" target="_blank" class="btn fsBtn hollow" ><span class="iconLabel icon-external-link"></span>External Link</a>
+							
 							
 						</div>
 				</div>

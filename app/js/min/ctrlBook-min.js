@@ -12,6 +12,8 @@
    	$scope.userRole = 0;
    	$scope.relatedBooks = '';
    	$scope.thereport = '';
+   	var placesCount;
+   	$scope.placesCount = placesCount;
    	var placesMarkers = '/';
    	var mapBoxKey = 'pk.eyJ1IjoidGhpcmRtYW4iLCJhIjoidjBOQ0lrYyJ9.8zzETVcyoBg2nlMquUR1TA';
    	var mapUrlStringStart =  'http://api.tiles.mapbox.com/v4/thirdman.j1o1gjim';
@@ -98,8 +100,6 @@
 		 	  var bookPlaces = [];
 		 	   bookPlaces = obj.places;
 		 	   $scope.bookPlaces = bookPlaces;
-		 	  // console.log(obj.places);
-		 	   
 		 	   var keepGoing = true;
 		 	   var theCount = 0;
 		 	   var lastCountry = "";
@@ -160,6 +160,10 @@
 				  theCount = theCount +1;
 				}); //ends forEach
 					
+				console.log('theCount length: ');
+				console.log(theCount);
+				placesCount = theCount;
+				$scope.placesCount = theCount;
 					/////////////// this is the hack way of making th emarkers on the image. Needs a map version
 					
 					//console.log(placesMarkers);
@@ -921,7 +925,7 @@
 	 		 var messageType = 'Edit';
 		 	 var theTimestamp = new Date().valueOf();
 		 	 var ref = new Firebase('https://sweltering-fire-3219.firebaseio.com/');
-		 	 var messages = ref.child("system/messages");
+		 	 var messages = ref.child("system/adminmessages");
 	  		 messages.push({
 				    title: 'Suggestion/Error report for '+obj.title,
 				    authorName: profile.displayName,

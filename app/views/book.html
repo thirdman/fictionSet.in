@@ -1,6 +1,28 @@
- <div ng-if="bkLat.length">
-<div class="mapImg fullWidth"  style=""><img src="{{mapUrlString}}" class="theBookMapImg"> </div>
+ <div ng-if="bkLat.length" class="headerFeature headerBookAlt">
+		<div class="mapImg fullWidth"  style="">
+<!-- 			<img src="{{mapUrlString}}" class="theBookMapImg"> -->
+		</div>
+		<ul class="placesWrap childPlaces-{{placesCount}}">
+			<li ng-repeat="place in bookPlaces" class="place.id placeItem" style="background-image: url(http://api.tiles.mapbox.com/v3/thirdman.j1o1gjim/{{place.lng}},{{place.lat}},{{(place.fcl == 'A') ? '5' : '9' }}/{{(placesCount == 1) ? '1200' : '700'}}x380.png)">
+				<span class="placeTitle">{{place.name}}</span><br>
+				<span class="iconLocation " ng-class="(place.fcl == 'A') ? 'no-marker' : 'icon-marker' "></span>
+			</li>
+		</ul>
+<!--
+		<div class="placeMeta">
+			{{placesCount}}
+		</div>
+-->
+<!-- 	 <div class="mapImg fullWidth"  style="background-image: url({{mapUrlString}})"></div> -->
+ </div>
+ 
+ 
+ <div ng-if="bkLat.length" style="display: none;">
+	<div class="mapImg fullWidth"  style=""><img src="{{mapUrlString}}" class="theBookMapImg"> </div>
 </div>
+
+
+
 
 <!--
 older versionx
@@ -66,7 +88,7 @@ add <a href="#" ng-click="pushToColl()">add book</a>
 			<div class="tagWrap bookTags sideBarItem" ng-if="book.tags">
  					<h4><span class="iconLabel icon-tag-1"></span>Tags:</h4>
 					<span ng-repeat="tag in book.tags" class="aTag tagTag" >
-						<a ng-href="#/tags/{{tag.tagId ? tag.tagId :tag.tagName}}" class="tagName">{{tag.tagId ? tag.tagId :tag.tagName}}</a> 
+						<a ng-href="#/tag/{{tag.tagId ? tag.tagId :tag.tagName}}" class="tagName">{{tag.tagId ? tag.tagId :tag.tagName}}</a> 
  					</span>
 			</div><!-- ends tags -->
 

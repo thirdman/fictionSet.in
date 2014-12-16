@@ -1,0 +1,38 @@
+<div class="theContainer">
+	<div class="titleBlock group">
+		<h2 class="bookTitle">Tags</h2>
+	</div>
+
+	<div class="loading" ng-show="isLoading">
+		<img src="/imgs/brand/logo_line.svg" style="" class="logo"> Loading&hellip;
+	</div>
+
+     
+    <div class="contentWrap columnWrap">
+		<div class="column columnLeft column50"  >
+			<div class="contentSection">
+ 			<span ng-hide="isLoading">
+ 				<div class="collectionsList inPageContext " ng-show="arrTags">
+					<div ng-repeat="tag in arrTags | orderBy:'$id'"  class="tagItem" >
+						<span class="aTag tagTag">
+							<a href="#/tag/{{tag.$id}}" class="tagName" ><span>{{tag.$id}}</span></a>
+							<span class="tagCount" ng-if="tag.books">{{countBooks(tag.books) ? countBooks(tag.books) : '0'}}</span>
+						</span>
+
+					</div>
+				</div><!-- .tagList --->
+			</span><!-- ends is loading books -->
+			</div><!-- ends contentSection -->
+		</div><!--ends column -->
+ 		
+		<div class="column columnRight column50"  >
+			<div class="contentSection">
+				<h3>Tag Content</h3>
+				<p>Coming Soon</p>
+			</div><!-- ends contentSection -->
+		</div><!--ends column -->
+	</div><!-- ends contentWrap -->
+</div> <!-- ends the containser -->
+
+ 
+ 

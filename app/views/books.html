@@ -3,18 +3,100 @@
 		<h2 class="homeTitle">
 			<span class="titleHalf">Fiction set in</span><span class="titleHalf"><input class="largesearch" delayed-model="searchBar.places" data-delay="50" placeholder="any location"></span>
 		</h2>
-				<div class="supportingInfo hidden-small" ng-show="hasData" >
-			 		<span class="largeType">{{(list|filter:searchBar).length}}</span>
-			 		<span class="smallType">
+		<div class="secondaryInfo hidden-small" ng-show="hasData" >
+			<div class="silo introText">
+				<p>Find books by where they are set.</p>
+			</div>
+			<div class="silo introBookCount">
+				<p>
+				<span class="largeType">{{(list|filter:searchBar).length}}</span>
+				<span class="smallType">
 					<span   ng-hide="(list|filter:searchBar).length == list.length">of {{list.length}} </span>Books
-					</span>
-				</div>
+				</span>
+				</p>
+			</div>
+			<div class="silo introUser">
+				<p ng-if="!currentUser"><spa><a href="#/register">Sign Up</a> / <a href="#/login">Login</a></span></p>
+				<p ng-if="currentUser"><spa><a href="#/addbook">Submit a book</a></span></p>
+			</div>
+
+		</div>
 		</div>
 	</div>
 
 <div class="theContainer">
 <div class="homeBook booksWrap contentWrap" ><!--    ng-repeat="randombook in collection  |  limitTo: 100 | filter:searchBar | orderBy: '-timestamp' "   -->
-	<div class="loading" ng-hide="hasData"><img src="/imgs/brand/logo_line.svg" style="" class="logo"> loading...</div>
+	<div class="loading" ng-hide="hasData">
+<!-- 		<img src="/imgs/brand/logo_line_white.svg" style="" class="logo"> loading... -->
+		<ul class="bookList placeholder">
+			<li class="listItem">
+				<div class="imgWrap">
+					<a ng-href="" class="front">
+						<span>
+							<img src="/imgs/brand/logo_line.svg" class="logo">
+						</span>
+					</a>
+				</div>
+				<div class="theContent">
+					<div class="placeholderLines">
+						<div class="placeholderLine"></div>
+						<div class="placeholderLine"></div>
+						<div class="placeholderLine"></div>
+					</div>
+				</div>
+			</li>
+			<li class="listItem">
+				<div class="imgWrap">
+					<a ng-href="" class="front">
+						<span>
+							<img src="/imgs/brand/logo_line.svg" class="logo">
+						</span>
+					</a>
+				</div>
+				<div class="theContent">
+					<div class="placeholderLines">
+						<div class="placeholderLine"></div>
+						<div class="placeholderLine"></div>
+						<div class="placeholderLine"></div>
+					</div>
+				</div>
+			</li>
+			<li class="listItem">
+				<div class="imgWrap">
+					<a ng-href="" class="front">
+						<span>
+							<img src="/imgs/brand/logo_line.svg" class="logo">
+						</span>
+					</a>
+				</div>
+				<div class="theContent">
+					<div class="placeholderLines">
+						<div class="placeholderLine"></div>
+						<div class="placeholderLine"></div>
+						<div class="placeholderLine"></div>
+					</div>
+				</div>
+			</li>
+			<li class="listItem">
+				<div class="imgWrap">
+					<a ng-href="" class="front">
+						<span>
+							<img src="/imgs/brand/logo_line.svg" class="logo">
+						</span>
+					</a>
+				</div>
+				<div class="theContent">
+					<div class="placeholderLines">
+						<div class="placeholderLine"></div>
+						<div class="placeholderLine"></div>
+						<div class="placeholderLine"></div>
+					</div>
+				</div>
+			</li>
+
+		</ul>	
+	</div>
+	
 	<ul class="bookList">
 		<li ng-repeat="item in list | orderBy: '-timestamp' |  limitTo: 100 | filter:searchBar  " class="listItem" >
 				        <div class="imgWrap">

@@ -7,6 +7,8 @@
    		margin: 0 auto;
 
 	}
+	
+	
 	.theBookMapImg{
 		width: 100%;
 	}
@@ -26,6 +28,110 @@
 
 	}
 	
+	.headerFeature.headerBookAlt{
+			height: 390px;
+		.mapImg{
+			padding-top: inherit !important;
+			}
+		ul.placesWrap{
+			position: absolute;
+			width: 100%;
+			top: 0;
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+			display: table;
+
+			li{
+				list-style-type: none;
+				margin: 0;
+				padding: 0;				
+			}
+			
+			.placeItem{
+				 display: inline-block;	
+				 height: 383px;
+				 background: rgba(255,255,255,.2);
+				 vertical-align: top;
+				 background-position: center center;
+				 background-size: cover;
+				 display: table-cell; 
+				 vertical-align: middle; 
+				 text-align: center; 
+				 color: #eee;
+				 text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);
+				span.placeTitle{
+					text-transform: uppercase;
+					font-size: 1em;
+					position: relative;
+					top:-.75em;
+					font-style: italic;
+					border-top: 1px solid #eee;
+					border-bottom: 1px solid #eee;
+				}
+				span.iconLocation{
+					font-size: 1.5em;
+					position: relative;
+					top:-.5em;
+					
+					&.no-marker{ //transparent spacer
+						display: block;
+						height: 1.5em;
+						width: 1em;
+					}
+				}
+			 &:hover{
+				// background: #fff;
+			 }
+			}
+			
+			/*
+
+			&.childPlaces-1{
+				.placeItem{
+					width: 100%;
+				}	
+			}
+			&.childPlaces-2{
+				.placeItem{
+					width: 50%;
+				}	
+			}
+*/
+		}
+						//THIS BIT CHANGES DEPENDING ON CHILDREN;
+				/* one item */
+				li:first-child:nth-last-child(1) {
+				    width: 100%;
+				}
+				
+				/* two items */
+				li:first-child:nth-last-child(2),
+				li:first-child:nth-last-child(2) ~ li {
+				    width: 50%;
+				}
+				
+				/* three items */
+				li:first-child:nth-last-child(3),
+				li:first-child:nth-last-child(3) ~ li {
+				    width: 33.3333%;
+				}
+				
+				/* four items */
+				li:first-child:nth-last-child(4),
+				li:first-child:nth-last-child(4) ~ li {
+				    width: 25%;
+				}
+
+				/* five items */
+				li:first-child:nth-last-child(5),
+				li:first-child:nth-last-child(5) ~ li {
+				    width: 20%;
+				}
+		
+	}
+	
+	//////// TITLE SECTION
 	h2{}
 	.titleBlock{
 		width: 100%;

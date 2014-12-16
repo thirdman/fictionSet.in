@@ -228,30 +228,80 @@ transition: all .5s ease;
 			height: 100%;
 			//background: #f3f3f3;
 			padding: 10px;
-			padding-top: 5em;
+			//padding-top: 5em;
 			margin-top: -.5em;
 			position: absolute;
+			background: $fsLineGrey;
+			right: -1em;
+			border-radius: 0 5px 5px 0;
+
 			.userComment{
 				display: inline-block;
 			}
-			.sectionAddedBy{
-				margin-top: 0;
-				padding-top: 0;
-			}
-			btn.hollow{
-				position: absolute;
-				bottom: 0;
-				border-bottom-width: 0px;
-				border-right-width: 0px;
-				border-radius: 0px 0 4px 0;
-				right: -16px;
-				
-			//color: #eee;
-			//background: transparent;
-			//border: 1px solid #999;
-			///background: #222;
 
+			.commentWrap{
+				padding-top: .5em;
+				.sectionAddedBy{
+					margin-top: 0;
+					padding-top: 0;
+					font-size: inherit;
+				}
 			}
+			.btnWrap{
+				background: #d5d5d5;
+				//border-bottom: 1px solid #eee;
+				margin: -10px;
+				//padding: 1em;
+				border-top-right-radius: 5px;
+				
+				.btn.hollow{
+					padding: 1.5em;	
+					border: 0px solid white;
+					border-bottom: 1px solid #eee;
+					margin: 0;
+					border-radius: 0px;
+					font-size: 1em;
+					&:first-child{
+						border-top-right-radius: 5px;
+					}
+				
+					&.btnAdd{
+						color: $fsLightGrey;
+						background: lighten($fsBlack, 7%);
+						&:hover{
+							background: $fsBlack;
+						}
+					}
+				}
+			}
+			.btn.hollow{
+				//THESE BITS ALIGN IT TO THE BOTTOM
+				//position: absolute;
+				//bottom: 0;
+				//border-bottom-width: 0px;
+				//border-right-width: 0px;
+				//border-radius: 0px 0 4px 0;
+				//right: -16px;
+
+				display: block;
+				margin: .5em;
+				&:hover{
+					background: $fsBlack;
+					color: $fsLightGrey;
+				}
+			}
+			
+			//SMALL VERSION
+			@media only screen and (min-width: 0px) and (max-width: 887px) {
+			position: relative;
+			width: 100%;
+			display: block;
+			border-top: 1px solid $fsLineGrey;
+			padding-top: .5em;
+			margin-top: .5em;
+			padding-bottom: 1em;
+			}
+
 			
 		}
 	}

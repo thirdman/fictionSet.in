@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" ng-app="myApp" class="pageViewContainer {{pageClass}}" >
+<html lang="en" ng-app="myApp" class="pageViewContainer {{pageClass}}">
 <head>
   <meta charset="utf-8">
   <title ng-bind="'FictionSet.In &mdash; ' + pageTitle">FictionSet.In </title>
@@ -79,17 +79,18 @@
 <!-- <body ng-cloak> -->
    <body ng-controller="AuthCtrl">
 
-<div id="header" class="header" style="display: inline-block;">
+<div id="header" class="header" style="">
      <div class="navicon-button x">
-      <nav onmouseover="" class="hidden-large mobilenav" >
+      <nav onmouseover="" class="hidden-large mobileNav" >
 		<a href="" title="Menu" class="icon-three-bars icon-menu trigger"><span>Menu</span></a>
 	    <span class="navGroup">
-	    <a href="#/home" title="Requests" class="icon-books">Books</a>
-	    <a href="#/places" title="Requests" class="icon-places">Places</a>
-	    <a href="#/near" title="Requests" class="icon-near">Near You</a>
-		<a href="#/requests" title="Requests" class="icon-requests">Requests</a> 
-		<a href="#/collections" title="Collections" class="icon-collections">Collections</a>
-		<a href="#/about" title="About" class="icon-about">About</a>
+	    <a href="#/home" title="Requests" class="icon-books"  >Books</a>
+	    <a href="#/places" title="Requests" class="icon-places"  >Places</a>
+	    <a href="#/near" title="Requests" class="icon-near"  >Near You</a>
+		<a href="#/requests" title="Requests" class="icon-requests" >Suggestions</a> 
+		<a href="#/collections" title="Collections" class="icon-collections" >Collections</a>
+		<a href="#/tags" title="Tags" class="icon-tags" >Tags</a>
+		<a href="#/about" title="About" class="icon-about" >About</a>
 	    </span>
 	 </nav>
 	 
@@ -98,22 +99,30 @@
 	    <li><a href="#/places">Places</a></li>
 	    <li><a href="#/near">Near You</a></li>
 		<li class="dropdownWrap">
-		  <nav onmouseover="" >
-			<a href="" title="Menu" class="icon-three-bars"><span>More&hellip;</span></a>
-			<a href="#/requests" title="Requests">Requests</a> 
-			<a href="#/collections" title="Collections">Collections</a>
-			<a href="#/about" title="About">About</a>
+		  <nav class="additionalNav" >
+			<a href="" title="Menu" class="icon-three-bars trigger"><span>More&hellip;</span></a>
+	    <span class="navGroup">
+			<a href="#/requests" title="Requests" class="icon-requests" >Suggestions</a> 
+			<a href="#/collections" title="Collections" class="icon-collections">Collections</a>
+			<a href="#/tags" title="Tags" class="icon-tags">Tags</a>
+			<a href="#/about" title="About" class="icon-about">About</a>
+	    </span>
 		 </nav>
 		</li>
 	</ul>
 	  
 	  <ul class="menu user">
-	    <li ng-hide="auth.user"><a href="#/login">login</a></li>
-		<li ng-hide="auth.user"><a href="#/register"><button  class="btn btnSignUp">Sign Up</button></a></li>
+	    <li ng-hide="auth.user"><a href="#/login">login</a> / <a href="#/register"><button  class="btn btnSignUp">Sign Up</button></a></li>
 		
 
 	    <li ng-show="auth.user">
-	    	<a href="#/addbook" class="dividerRight">Submit a Book</a><a href="#/profile"><span class="inlineUserIcon" fs-user-img user-id="auth.user.uid" fs-user-id="auth.user.uid" fs-icon-type="header" ></span><span fs-message-count  fs-user-id="auth.user.uid" ></span> {{auth.user.displayName ? auth.user.displayName : 'Account'}}</a>
+	    	<a href="#/addbook" class="dividerRight"><span class="icon icon-book-sans-add"></span>
+		    	<span class="hidden-small">Submit a Book</span>
+		    </a>
+	    	<a href="#/profile" class="profileLink"><span class="inlineUserIcon" fs-user-img user-id="auth.user.uid" fs-user-id="auth.user.uid" fs-icon-type="header" ></span>
+		    	<span fs-message-count  fs-user-id="auth.user.uid" ></span>
+				<span class="hidden-small"> {{auth.user.displayName ? auth.user.displayName : 'Account'}}</span>
+			</a>
 	    </li>
  <!--
  	    <li ng-show ="['logout','error']"><a href="#/login">login</a></li>

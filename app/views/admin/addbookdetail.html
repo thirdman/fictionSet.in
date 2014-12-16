@@ -25,12 +25,23 @@
 <div class="theContent columnWrap" >
 	<div class="columnLeft column column50">	
 		<div class="contentSection">
- 			<h3 >Places</h3>
- 			<p class="subTitle">Add at least one place. Be specific, unless the setting is a region or country. <br><span class="icon-eye" style="text-decoration: none; color: #222222; margin-right: 2px;"></span><a href=""  ng-click="clickToOpenGuidelines()">View guidelines</a></p>
- 			<h4>search a location to add:</h4>
+			<h3 class="iconLabel icon-marker">Places</h3>
+			<div class="placeNoContent placeList listWide" ng-show="!tempPlaces.length">
+  				<div class="group aPlace">
+ 			  		<div class="mapThumb placeThumb" style="background: #eee url(../imgs/blankPlaceMap.jpg) 0px 0px no-repeat;"></div>
+ 			  		<div class="placeContent">
+ 			  			<div class="placeTitle">Add one or more places</div>
+ 			  			<span class="subTitle">Be specific, unless the setting is a region or country.
+ 			  			<br><a href=""  ng-click="clickToOpenGuidelines()"><span class="icon-eye" style="text-decoration: none;  margin-right: 2px;"></span> View guidelines</a></span>
+					</div>
+ 				</div>
+ 			</div><!-- ends no content -->
+
+<!--  			<p class="subTitle">Add at least one place.  <br><span class="icon-eye" style="text-decoration: none; color: #222222; margin-right: 2px;"></span></p> -->
+<!--  			<h4>Search a location to add:</h4> -->
  			<div class="searchWrap formField group">
 				<angucomplete-alt id="placesearch2"
-	              placeholder="Search Places..."
+	              placeholder="Search for places to add..."
 	              pause="300"
 	              selected-object="autoObject"
 	              remote-url="http://api.geonames.org/searchJSON?maxRows=6&username=thirdman&q="
@@ -42,42 +53,30 @@
 				 </angucomplete-alt>
   			</div><!-- ends search wrap -->
 
- 			  <div ng-repeat="place in tempPlaces" class="placeList listWide" >
+ 			<div ng-repeat="place in tempPlaces" class="placeList listWide" >
  			  		<div class="group aPlace">
  			  			<div class="mapThumb placeThumb" style="background-image: url(http://api.tiles.mapbox.com/v3/thirdman.j1o1gjim/{{place.lng}},{{place.lat}},4/90x90.png)"></div>
- 			  		<div class="placeContent">
- 			  		<div ng-if="place.name" class="placeTitle">
-		 			  	<a ng-href="#/place/{{place.geonameId}}">{{place.name}}<span ng-if="(place.name != place.toponymName) &&( place.name != place.countryName)"> ({{place.toponymName}})</span></a>
-		 			  </div>
-		 			  <span ng-if="place.adminName1" class="subTitle">{{place.adminName1}}</span>
-		 			  <span class="subTitle" ng-if="(place.adminName1) && (place.name != place.countryName)">, </span>
-		 			  <span class="subTitle" ng-if="place.name != place.countryName"><a ng-href="#/place/{{place.countryId}}">{{place.countryName}}</a></span>
-	 			  </div><!-- ends place content -->
+ 			  			<div class="placeContent">
+	 			  			<div ng-if="place.name" class="placeTitle">
+			 			  		<a ng-href="#/place/{{place.geonameId}}">{{place.name}}<span ng-if="(place.name != place.toponymName) &&( place.name != place.countryName)"> ({{place.toponymName}})</span></a>
+			 				</div>
+			 			  <span ng-if="place.adminName1" class="subTitle">{{place.adminName1}}</span>
+			 			  <span class="subTitle" ng-if="(place.adminName1) && (place.name != place.countryName)">, </span>
+			 			  <span class="subTitle" ng-if="place.name != place.countryName"><a ng-href="#/place/{{place.countryId}}">{{place.countryName}}</a></span>
+						</div><!-- ends place content -->
 	 			  
 	 			  		<!-- <label ng-if="place.name"><a href="#/place/{{place.geonameId}}">{{place.name}}<span ng-if="place.name != place.toponymName"> ({{place.toponymName}})</span></a></label><label ng-if="place.adminName1">, <a href="#/place/{{place.adminName1}}">{{place.adminName1}}</a></label><label ng-if="place.name != place.countryName">, <a href="#/place/{{place.countryName}}">{{place.countryName}}</a></label> -->
  	 			<button ng-click="removePlace(place)" class="btnDelete">Delete</button>
 
- 				 	 </div>
+ 				 	</div>
 				</div>
-		</div>
-
-		
-		<div class="bookInfo" ng-hide="true">	
- 		<p><label>Title</label>{{amazonData.ItemAttributes.Title}}</p>
-		<p><label>Author:</label>{{amazonData.ItemAttributes.Author}}</p>
-		<p><label>PublicationDate:</label>{{amazonData.ItemAttributes.PublicationDate}}</p>
-		<p><label>Publisher: </label>{{amazonData.ItemAttributes.Publisher}}</p>
-		<p><label>AMAZON ID: </label>{{amazonid}}</p>
-		<p><label>EAN: </label>{{amazonData.ItemAttributes.EAN}}</p>
-		<p><label>ISBN: </label>{{amazonData.ItemAttributes.ISBN}}</p>
-		<p class="subTitle">Description</p>
-  		<textarea ng-model="theDesc"  class="inputLarge descriptionInput" ></textarea>
+ 			
 		</div>
 	</div><!-- column left -->
 	
 	<div class="columnRight column column50">		
   		 <div class="contentSection">
-	  		 <h3>Tags</h3>
+	  		 <h3 class="iconLabel icon-tag-1">Tags</h3>
 	  		 <p  class="subTitle">Optional additional categories (eg. 'Historical', '1600s', 'Europe', 'World War 1') </p>
 				<div ng-controller="TagCtrl" class="formField group">
 				<tags-input ng-model="tempTags">
@@ -87,7 +86,7 @@
   		 </div>
 
 		<div class="contentSection ">
-			<h3>Excerpts</h3>
+			<h3 class="iconLabel icon-book-open">Excerpts</h3>
 			<p class="subTitle">Optional related excerts from the book.</p>
   			<div class="exceprtList listWide">
  			  	<div ng-repeat="tempExcerpt in tempExcerpts" class="group aPlace" >
@@ -107,7 +106,7 @@
 		</div>
 
    		<div class="dataSection contentSection additonalComment">
-   		<h3>Additional Comment</h3>
+   		<h3 class="iconLabel icon-bubble">Additional Comment</h3>
    		<p class="subTitle">Optional personal comment about this book. (This will be displayed publicly)</p>
 		 <form name="userCommentForm" >
   			  <div class="formField group">
@@ -129,7 +128,7 @@
 </div><!-- the content -->
 <div class="theContent columnWrap borderTop paddingTop">
 	<div class="columnLeft column">	
-		<h4>Book info</h4>
+		<h4 class="iconLabel icon-book-alt2">Book info</h4>
 		<div class="bookInfo">	
 	 		<p><label>Title</label>{{amazonData.ItemAttributes.Title}}</p>
 			<p><label>Author:</label>{{amazonData.ItemAttributes.Author}}</p>
@@ -156,7 +155,7 @@
 	<div class="columnRight column">
 		 <a href="" ng-click="editorEnabled=!editorEnabled" ng-hide="editorEnabled" class="btn fsBtn  editBtn inline floatRight">Edit</a>
 		 <a href="" ng-click="editorEnabled=!editorEnabled" ng-show="editorEnabled" class="btn fsBtn  editBtn inline floatRight">Done</a>
-		<h4>Book Description </h4>
+		<h4 class="iconLabel icon-book-alt2">Book Description </h4>
 		<hr>
 		<div class="bookDescription" ng-hide="editorEnabled">
 				{{theDesc}}

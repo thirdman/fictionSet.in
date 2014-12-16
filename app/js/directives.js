@@ -144,26 +144,39 @@ angular.module('myApp.directives', [])
 			$scope.showIcon = showIcon;
 			$scope.newMsgCount = newMsgCount;
  			//LETS GET THE COUNT
-			simpleLogin.$getCurrentUser().then(function(currentUser) {
-			$scope.userMessageCount = ''; 
-			var fbMsg = new Firebase('https://sweltering-fire-3219.firebaseio.com/messages/').child(currentUser.uid);
- 			fbMsg.on('value', function(snapshot) {
-	 			var fbMessages = (snapshot.val());
-	// 			var theNewMsgs1 = filterFilter(fbMessages, {bookTitle:'Death of a River Guide: A Novel'});
-	 			var theNewMsgs = filterFilter(fbMessages, {isSeen:'!true'});
-	 //			var theNewMsgsLength = theNewMsgs.length;
-	 			if(theNewMsgs.length){
-			 		showIcon = true;	
-	 			}else{
-		 			showIcon = false;
-	 			};
-	 			newMsgCount = theNewMsgs.length;
-	 			$scope.userMessageCountDetail = theNewMsgs.length + 'New notifications';
-	 			$scope.showIcon = showIcon;
-	 			$scope.newMsgCount = theNewMsgs.length;
-	 			console.log('showicon is :' + $scope.showIcon);
-			});
- 			
+ 			simpleLogin.$getCurrentUser().then(function(currentUser) {
+				if(currentUser){
+					$scope.userMessageCount = ''; 
+					var fbMsg = new Firebase('https://sweltering-fire-3219.firebaseio.com/messages/').child(currentUser.uid);
+		 			fbMsg.on('value', function(snapshot) {
+			 			var fbMessages = (snapshot.val());
+			 			var theNewMsgs = filterFilter(fbMessages, {isSeen:'!true'});
+			 			if(theNewMsgs.length){
+					 		showIcon = true;	
+			 			}else{
+				 			showIcon = false;
+			 			};
+			 			newMsgCount = theNewMsgs.length;
+			 			$scope.userMessageCountDetail = theNewMsgs.length + 'New notifications';
+			 			$scope.showIcon = showIcon;
+			 			$scope.newMsgCount = theNewMsgs.length;
+			 			console.log('showicon is :' + $scope.showIcon);
+					});
+	 			}//ends if current user check
+				    
+		    });	
+		}]//ends controller
+	    
+	 
+	   
+    };
+  }])
+  
+
+;
+
+
+
 
 /*
 			var refMsgs = $firebase(new Firebase('https://sweltering-fire-3219.firebaseio.com/system/messages/').child(currentUser.uid)).$asArray();
@@ -178,18 +191,6 @@ angular.module('myApp.directives', [])
 	 	      	});
 
 */
-				    
-		    });	
-		}]//ends controller
-	    
-	 
-	   
-    };
-  }])
-
-;
-
-
 
 
 

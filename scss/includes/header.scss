@@ -4,10 +4,15 @@
 	   background: #fafafa;
 	   background: #f4f4f4;
 	   box-shadow: 0px 1px 0px rgba(0,0,0,0.1);
-	   
+	   display: inline-block;
  	   width: 100%;
  	    	@media only screen and (min-width: 980px) { 
  	    	padding: 1em;
+ 	    	} 
+ 	    	@media only screen and (max-width: 979px) { 
+ 	    	padding: 1em;
+ 	    	display: block;
+ 	    	min-height: 50px;
  	    	} 
 
 
@@ -50,6 +55,30 @@
 	 	}
 	 	.dividerRight{
 		 	border-right: 1px solid $fsGrey;
+		 	.icon{
+			 	color: $fsBlack;
+			 	font-size: 1.5em;
+			 	line-height: 1em;
+			 	vertical-align: middle;
+	 	    	@media only screen and (max-width: 979px) { 
+				 	color: #fff;
+					background: #2a2a2a;
+					width: 30px;
+					height: 30px;
+					display: inline-block;
+					border-radius: 20px;
+					text-align: center;
+					vertical-align: top;
+					line-height: 32px;
+					font-size: 1.2em;
+					padding-left: .25em;
+		 		}
+	 		}
+	 	}
+	 	.profileLink{
+ 	    	@media only screen and (max-width: 979px) { 
+			 	margin-right: .5em;
+ 	    	} 
 	 	}
 	 	
 	 	
@@ -88,6 +117,12 @@
 			//backface-visibility: hidden;
 		}
 	}
+	@media only screen and (max-width: 979px) { 
+		width: 60px;
+		margin-left: -30px;
+	}
+
+
 	form#headerSearch{
 		display: inline-block;
 		display: none;
@@ -223,7 +258,7 @@ nav {
 		height: 210px;
 		cursor: pointer;
 	}
-	&.mobilenav{
+	&.mobileNav{
 		position: absolute;
 		left: 0;
 		top: 0;
@@ -290,52 +325,90 @@ nav {
 			}
 		}
 	}
+	
+	&.additionalNav{
+		margin-left: 0;
+		&:hover{
+					height: 230px;
+		}
+		.trigger{
+			margin-left: 0;
+		}
+	}
+
+	&:hover{ //WHEN THE MENU IS ACTIVE
+		background: #eee;
+		z-index: 9999;
+		> a:first-child{
+			&.trigger{
+				text-indent: 60px;
+				&:after{
+						background: #eee;
+				}
+			}
+		}
+		a{
+			display: block;
+			&:after{
+				
+			}
+		}
+	}	
+
 }
 
-nav a {
+nav a{ //STANDARD LINKS WITHIN A NAV - INITIALLY HIDDEN
 	display: none;
-	//text-indent: -9999px;
 	text-indent: 60px;
-//	text-indent: -70px;
 	position: relative;
-//	height: 20px;
-//	height: 46px;
 	height: 43px;
 	padding: 10px 0;
-	color: #fff !important;
+	color: $fsBlack;
 	text-align: left;
 	
-/*
-	text-indent: 0px;
+	&:after{
+		position: absolute;
+		top: 0;
+		padding: 12px 0;
+		width: 50px;
+		font-size: 17px;
+		display: block;
+		text-indent: 0;
+		background: #eee;
+		color: #666;
+		font-family: 'fsfont';
+		text-align:center;
+	}
+	
+	&:hover {
+	text-indent: 65px;
 	text-align: left;
-	margin-left: 70px;
-*/
-}
+	//margin-left: 70px;
+	 // color: #6daeaf !important;
+	 // background: #fff;
+	 // background: $fsBlack !important;
+	  background: #fff !important;
+	  color: $fsBlack ;
 
-nav a:first-child:hover {
-//text-indent: -9999px;
+	  -webkit-border-radius: 5px;
+	  -moz-border-radius: 5px;
+	  border-radius: 5px;
+	  cursor: pointer;
+		&:after {
+			color: #fff;
+			background: #fff;
+			color: $fsBlack ;
+			text-align: center;
+		}
+	}
 
-}
 
-//nav:hover>a {
-nav:hover a {
- display: block;
-}
-
-//nav:hover>a:first-child {
-nav:hover>a.trigger {
-	text-indent: 60px;
-}
-//nav:hover>a:first-child:after {
-	nav:hover>a.trigger:after {
-//	color: #6daeaf;
-//	background: #505664;
-//	background: $fsBlack;
-	background: #eee;
-}
-
-//nav a:first-child {
-nav a.trigger{
+	&:first-child{
+		&:hover{
+		}
+	}
+	
+	&.trigger{
 	display: block;
 	text-align: center;
 	margin-bottom: 16px;
@@ -344,90 +417,43 @@ nav a.trigger{
 	text-align: left;
 	color: #666;
 	margin-left: .5em;
-	
+	line-height: 1.6em;
+		&:before {
+			position: absolute;
+			text-indent: 0;
+			top: 52px;
+			left: 18px;
+			content: "";
+			width: 0;
+			height: 0;
+			border-left: 7px solid transparent;
+			border-right: 7px solid transparent;
+			border-bottom: 7px solid #eee;
+		}
+	}
+	&:after {
+		left: 0;
+		//top: 3px;
+		//content: "m";
+		//content: "3";
+		content: "3";	
+		background: transparent;
+		color: #666;
+		//-webkit-border-radius: 5px;
+		//-moz-border-radius: 5px;
+		//border-radius: 5px;
+	}	
+
+
 }
 
-nav a:after {
-	position: absolute;
-	top: 0;
-	padding: 12px 0;
-	width: 50px;
-	color: #fff;
-	color: #999;
 
-//	font-family: 'icons';
-//	font-size: 24px;
-	font-size: 17px;
-	display: block;
-	text-indent: 0;
-//	background: #6daeaf;
-	background: #eee;
-	color: #666;
-	font-family: 'fsfont';
-	text-align:center;
-}
-
-nav a:hover {
-	text-indent: 65px;
-	text-align: left;
-	//margin-left: 70px;
-	
-	 // color: #6daeaf !important;
-	 // background: #fff;
-	 // background: $fsBlack !important;
-
-	  background: #fff !important;
-	  color: $fsBlack ;
-
-	  -webkit-border-radius: 5px;
-	  -moz-border-radius: 5px;
-	  border-radius: 5px;
-	  cursor: pointer;
- 
-}
-
-nav a:hover:after {
-	color: #fff;
-	background: #fff;
-	color: $fsBlack ;
-	text-align: center;
-}
-
-//nav a:first-child:before {
-nav a.trigger:before {
-	position: absolute;
-	text-indent: 0;
-	top: 52px;
-	left: 18px;
-	content: "";
-	width: 0;
-	height: 0;
-	border-left: 7px solid transparent;
-	border-right: 7px solid transparent;
-	//border-bottom: 7px solid $fsBlack;
-	border-bottom: 7px solid #eee;
-}
 
 nav a:first-child:hover:before {
 	//margin-left: -70px;
 }
 
 
-//nav a:first-child:after {
-nav a.trigger:after {
-	left: 0;
-	//top: 3px;
-	//content: "m";
-	//content: "3";
-	content: "3";	
-//	background: #656d7e;
-//	background: #656A6D; 
-	background: transparent;
-	color: #666;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
-}
 //nav a:first-child:hover {
 nav a.trigger:hover {
 	background: transparent !important;
@@ -442,14 +468,14 @@ nav a.trigger:hover:after {
 }
 
 
-nav a:nth-child(2):after {
+nav.additionalNav a:nth-child(2):after {
 //content: "m";
--webkit-border-top-left-radius: 5px;
--webkit-border-top-right-radius: 5px;
--moz-border-radius-topleft: 5px;
--moz-border-radius-topright: 5px;
-border-top-left-radius: 5px;
-border-top-right-radius: 5px;
+//-webkit-border-top-left-radius: 5px;
+//-webkit-border-top-right-radius: 5px;
+//-moz-border-radius-topleft: 5px;
+//-moz-border-radius-topright: 5px;
+//border-top-left-radius: 5px;
+//border-top-right-radius: 5px;
 }
 
 nav a:nth-child(3):after {
@@ -488,6 +514,9 @@ nav a.icon-requests:after{
 }
 nav a.icon-collections:after{
 	content: "D";
+}
+nav a.icon-tags:after{
+	content: "K";
 }
 nav a.icon-about:after{
 	content: "e";

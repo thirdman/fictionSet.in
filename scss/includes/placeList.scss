@@ -73,6 +73,26 @@
 		}
 		
 	}
+
+	&.placeNoContent{ //when there's no placed added (eg. adding books)
+		margin-top:1em;
+		.aPlace{
+			border: 1px dotted #ccc;
+			box-shadow: none;
+			background: rgba(255,255,255,.5);
+			font-style: italic;
+			.mapThumb{
+				background: rgba(0,0,0,.05);
+			}
+			.placeContent{
+				//padding-top: 12px;
+			}
+			.placeTitle{
+				//color: $fsGrey;
+			}
+			
+		}
+	}
 }
 
 

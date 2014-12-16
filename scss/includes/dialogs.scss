@@ -1,7 +1,7 @@
 /* ///////// Dialogs   /////////*/
 
 .ngdialog.ngdialog-theme-default .ngdialog-button{
-	float: left; //overrides the default one;
+	float: left !important; //overrides the default one;
 	}
 .dialogScrollWrap{
 	width: 100%;
@@ -9,6 +9,11 @@
 //	max-height: 330px;
 }
 
+.ngdialog{
+	.ngdialog-content > h4:first-child{
+			margin-top: -1em;
+	}
+}
 
 .collectionsList{
 	padding: 4px;
