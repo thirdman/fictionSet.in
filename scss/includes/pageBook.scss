@@ -187,9 +187,16 @@
 		border-bottom: 1px solid $fsLineGrey;	
 		//border-top: 1px solid $fsLineGrey;	
 		padding: 1em 4%;
+			  @media only screen and (min-width: 0px) and (max-width: 887px) {
+			  padding: 1em 0;
+			  } 
 		.excerpt{
 			font-size: 1.7em;
 			font-style: italic;
+			  @media only screen and (min-width: 0px) and (max-width: 887px) {
+			  font-size: 1.1em;
+			  } 
+ 
 		}
 		&.featInfo{
 			padding: 1em 0;

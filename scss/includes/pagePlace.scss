@@ -10,7 +10,7 @@
 			overflow: hidden;
 			padding-top: 400px;
 			@media only screen and (min-width: 0px) and (max-width: 887px) {
-				padding-top: 140px;
+				padding-top: 260px;
 			} 
 		}
 	}
@@ -60,6 +60,11 @@
 	    
 	    border-top: 1px solid #eee;
 	    border-bottom: 1px solid #eee;	    
+	    
+			@media only screen and (min-width: 0px) and (max-width: 887px) {
+			font-size: 2em;
+			} 
+
 	    }
 	    .preText{
 		    font-size: .5em;
@@ -71,13 +76,18 @@
 			background: #fff;
 			padding: 0px 1.5em;
 			border-radius: 20px;
-			top: -1.75em;
+			//top: -1.75em;
+			top: -2.25em;
 			position: relative;
 			display: inline-block;
 			color: #000;
 			line-height: 1.5em;
 			font-weight: normal;
 			font-weight: 300;
+			@media only screen and (min-width: 0px) and (max-width: 887px) {
+			top: -1.75em;
+			} 
+
 	    }
 	}
 }

@@ -10,13 +10,21 @@
 	line-height: 7em;
 	margin: 0;
 	width: 80%;
+		   @media only screen and (min-width: 0px) and (max-width: 887px) {
+		   width: inherit;
+		   min-width: inherit;
+		   max-width: inherit;
+		   line-height: 2em;
+			} 
+
     }
    .titleHalf{ 
    		display: inline-block; text-align: right;
    		@media only screen and (min-width: 0px) and (max-width: 887px) {
 		   max-width: 60%;
 		   min-width: inherit;
-			} 
+		   max-width: inherit;
+		} 
 
    }
    .titleHalf input{  
@@ -53,6 +61,7 @@
 	   @media only screen and (min-width: 0px) and (max-width: 887px) {
 		   width: 100%;
 		   min-width: inherit;
+		   max-width: inherit;
 		   background-size: 20px;
 			} 
 
@@ -102,7 +111,8 @@ padding-top: 6.5em;
 
 	   @media only screen and (min-width: 0px) and (max-width: 887px) {
 		   width: inherit;
-		   right: 0;
+		   right: inherit;
+		   margin-left: inherit;
 		   .largeType{
 			   margin-top: 5px;
 		   }
@@ -161,6 +171,17 @@ html.booksPage{
 	min-height: 100%;
 	background: url(/imgs/bg_world_dark.png) no-repeat center center fixed;
 	background-size: cover;
+		@media only screen and (min-width: 0px) and (max-width: 887px) {
+		  // background: #656A6D;
+		  //background-image: inherit;
+		 background-color: #656A6D;
+		-webkit-background-size: 300% auto ;
+		-moz-background-size: 300% auto;
+		-o-background-size: 300% auto;
+		background-size: 300% auto;			
+			} 
+
+
 	body{
 		background: transparent;
 	}
@@ -189,6 +210,14 @@ html.booksPage{
 		box-shadow: 1px 1px 3px rgba(0,0,0,.2);
 		font-size: 16px;
 		padding-top: 10px;
+		
+		@media only screen and (min-width: 980px) { 
+			
+		} 
+    	@media only screen and (max-width: 979px) { 
+			height: inherit;
+    	} 
+
 	}
 
 }

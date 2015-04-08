@@ -33,6 +33,10 @@ h3{
 font-size: 1.4em;
 font-weight: 300;
 color: $fsBlack;
+  @media only screen and (min-width: 0px) and (max-width: 887px) {
+	   font-size: 1.1em;
+   } 
+
     &.bookTitle{
 				padding: 0;
 				margin: 0;
@@ -71,7 +75,15 @@ p{
    white-space: pre-line;
    line-height: 1.8em;
    margin: 0 0 .5em;
-/* 	   font-size: 16px; */
+   font-size: 16px;
+	   	@media only screen and (min-width: 980px) { 
+	   	font-size: 16px;
+		} 
+    	@media only screen and (max-width: 979px) { 
+			font-size: 14px;
+    	} 
+
+   
 }
 /*
 p+p{
@@ -233,6 +245,9 @@ ul{
 		-moz-background-size: cover;
 		-o-background-size: cover;
 		background-size: cover;
+		//	@media only screen and (min-width: 0px) and (max-width: 887px) {
+		 //  background: #656A6D;
+			//} 
 		.theContainerHead{
 			padding: 2em;
 			h3{

@@ -1,6 +1,6 @@
 'use strict';
  
-app.controller("LoginCtrl",  ["$scope", "$location", "currentUser", "simpleLogin", "simpleLogin1", '$http', function($scope, $location, currentUser, simpleLogin, simpleLogin1, $http) {
+app.controller("LoginCtrl",  ["fsConfig", "$scope", "$location", "currentUser", "simpleLogin", "simpleLogin1", '$http', function(fsConfig, $scope, $location, currentUser, simpleLogin, simpleLogin1, $http) {
   $scope.loginInfo = {}
   $scope.pageClass = "loginPage"; 
   $scope.theerror = '';
@@ -8,7 +8,7 @@ app.controller("LoginCtrl",  ["$scope", "$location", "currentUser", "simpleLogin
   $scope.loading = false;
 
   //$scope.auth = simpleLogin1;
-  var ref = new Firebase("https://sweltering-fire-3219.firebaseio.com/");
+  var ref = new Firebase(fsConfig.FIREBASE_URL);
 
    var auth = new FirebaseSimpleLogin(ref, function(error, user) {
 	   $scope.iserror = false;
@@ -73,7 +73,7 @@ app.controller("LoginCtrl",  ["$scope", "$location", "currentUser", "simpleLogin
 
 
   
-  //var ref = new Firebase("https://sweltering-fire-3219.firebaseio.com/");
+  //var ref = new Firebase("https://....firebaseio.com/");
   //var authClient = $firebaseSimpleLogin(ref);
 /*
   try {

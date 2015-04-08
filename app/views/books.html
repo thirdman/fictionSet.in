@@ -5,7 +5,7 @@
 		</h2>
 		<div class="secondaryInfo hidden-small" ng-show="hasData" >
 			<div class="silo introText">
-				<p>Find books by where they are set.</p>
+				<p>Find fiction by where it is set.</p>
 			</div>
 			<div class="silo introBookCount">
 				<p>
@@ -107,9 +107,9 @@
 						</div>
 						
 						<div class="theContent">
-		 					<h3 class="bookTitle"><a ng-href="#/book/{{item.$id}}">{{ item.title  | cut:true:50:' ...' }}</a></h3>
+		 					<h3 class="bookTitle"><a ng-href="#/book/{{item.$id}}">{{ item.title  | cut:true:36:' ...' }}</a></h3>
 		 					<!--<h5 class="bookSubtitle">by {{  item.author }}</h5> -->
-		 					<p ng-show="item.description" class="bookListDescription">{{  item.description |  to_plain  | cut:true:160:' ...' }}</p>
+		 					<p ng-show="item.description" class="bookListDescription">{{  item.description |  to_plain  | cut:true:150:' ...' }}</p>
  				            <div class="bookInfo">
 								<div class="placeList">
 									<span ng-repeat="place in item.places" class="aTag"  >

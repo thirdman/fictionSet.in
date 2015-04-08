@@ -152,9 +152,11 @@
 .bookList .placeList, .bookPlaces{
 	.aTag{
 		height: 30px;
+		line-height: 30px;
 		display: inline-block;
 		margin-bottom: 4px;
 		margin-right: 4px;
+
 		a{
 			&.placeName{
 			display: inline-block;

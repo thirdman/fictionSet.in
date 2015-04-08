@@ -2,7 +2,14 @@ var app = angular.module("myApp",
 	["firebase", 'ngRoute', 'myApp.directives', 'myApp.services', 'angular-underscore','ngLodash', 'angucomplete-alt', 'angularMapbox', 'ngDialog', 'ngResource', 'ngTagsInput']
  		);
 
-app.config(["$routeProvider", '$locationProvider','ngDialogProvider' , function($routeProvider, $locationProvider, ngDialogProvider ) {
+app.constant("fsConfig", {
+ 	"FIREBASE_URL": "https://sweltering-fire-3219.firebaseio.com/",	//PRODUCTION VERSION
+//	"FIREBASE_URL": "https://fictionset-dev.firebaseio.com/",	//DEV VERSION
+	"DEV_STATUS": false
+	
+	});
+
+app.config(["$routeProvider", '$locationProvider','ngDialogProvider', function($routeProvider, $locationProvider, ngDialogProvider) {
  
  	ngDialogProvider.setDefaults({
         className: 'ngdialog-theme-default',
@@ -310,7 +317,8 @@ app.config(["$routeProvider", '$locationProvider','ngDialogProvider' , function(
       }]
     }
   })  
-  .when("/response/:type/:id?", { ///item/:itemid
+  
+  .when("/response/:type/:id?/:badgetype?", { ///:Sdsd/:"+postID+"/travelguide/"); 
     controller: "ResponseCtrl",
     templateUrl: "views/admin/response.html",
     pageTitle: 'Success! Thank You',
@@ -392,7 +400,7 @@ app.config(["$routeProvider", '$locationProvider','ngDialogProvider' , function(
 }]); //ends config
 
 
-app.run(['$location', '$rootScope','$route', function($location, $rootScope, $route) {
+app.run(['fsConfig', '$location', '$rootScope','$route', function(fsConfig, $location, $rootScope, $route) {
     $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
         $rootScope.pageTitle = $route.current.pageTitle;
         //$rootScope.pageClass = $location.pageClass;
@@ -409,6 +417,7 @@ app.run(['$location', '$rootScope','$route', function($location, $rootScope, $ro
 		  		//console.log($location.path());
 		  		//console.log($route.current.pageTitle);
 		  		}
+		$rootScope.dev_status =  fsConfig.DEV_STATUS;
     });
 }]);
 
@@ -424,8 +433,8 @@ app.factory("simpleLogin1", ["$firebaseSimpleLogin", function($firebaseSimpleLog
 }]);
 
 
-app.factory("simpleLogin", ["$firebaseSimpleLogin", "Profile", "$rootScope", function($firebaseSimpleLogin, Profile, $rootScope) {
-  var ref = new Firebase("https://sweltering-fire-3219.firebaseio.com/"); //sets the location we're authenticating for
+app.factory("simpleLogin", ["fsConfig", "$firebaseSimpleLogin", "Profile", "$rootScope", function(fsConfig, $firebaseSimpleLogin, Profile, $rootScope) {
+  var ref = new Firebase(fsConfig.FIREBASE_URL); //sets the location we're authenticating for
   var isaNewUser = true;
   var userexists = false;
   var currentUserImg;
@@ -503,8 +512,8 @@ app.factory("simpleLogin", ["$firebaseSimpleLogin", "Profile", "$rootScope", fun
 	return $firebaseSimpleLogin(ref);
   }]);
 
-app.factory("getFirebase", ["$scope", "$location", function($scope, $Location) {
-   var getResults = new firebase('https://sweltering-fire-3219.firebaseio.com/books').once('value', function(snap) {
+app.factory("getFirebase", ["fsConfig", "$scope", "$location", function(fsConfig, $scope, $Location) {
+   var getResults = new firebase(fsConfig.FIREBASE_URL+'/books').once('value', function(snap) {
     var listOfRecordIds = snap.val();
     console.log(snap.val());
 	
@@ -665,10 +674,10 @@ app.factory('iTunesData', function($http) {
    }
 });
 
- app.factory("Profile", ["$firebase", function($firebase) {
+ app.factory("Profile", ["fsConfig", "$firebase", function(fsConfig, $firebase) {
   return function(username) {
      // create a reference to the user's profile
-    var ref = new Firebase("https://sweltering-fire-3219.firebaseio.com/users/").child(username);
+    var ref = new Firebase(fsConfig.FIREBASE_URL+"/users/").child(username);
     // return it as a synchronized object
     return $firebase(ref).$asObject();
 
@@ -697,11 +706,11 @@ function checkIfUserExists(userId) {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-app.controller("HomeCtrl", ["$scope", "currentUser", "$firebase", "$location", function($scope, currentUser, $firebase, $location) {
+app.controller("HomeCtrl", ["fsConfig", "$scope", "currentUser", "$firebase", "$location", function(fsConfig, $scope, currentUser, $firebase, $location) {
   // currentUser (provided by resolve) will contain the 
   // authenticated user or null if not logged in
    $scope.hasData = false;
-	 var ref = new Firebase('https://sweltering-fire-3219.firebaseio.com/Books');
+	 var ref = new Firebase(fsConfig.FIREBASE_URL + '/Books');
 	 var sync = $firebase(ref);
  	
 	   // if ref points to a data collection
@@ -713,7 +722,7 @@ app.controller("HomeCtrl", ["$scope", "currentUser", "$firebase", "$location", f
 
   }]);
 
-app.controller("AboutCtrl",  ["$scope", "$location", "currentUser", "Profile",'$routeParams', function($scope, $location, currentUser, Profile, $routeParams) {
+app.controller("AboutCtrl",  ["fsConfig","$scope", "$location", "currentUser", "Profile",'$routeParams', function(fsConfig, $scope, $location, currentUser, Profile, $routeParams) {
 	    try {
 	  	if (currentUser) {
 	   	 console.log("logged in");
@@ -737,10 +746,9 @@ app.controller("AboutCtrl",  ["$scope", "$location", "currentUser", "Profile",'$
 
 //BookCtrl: see BookCtrl.js
 
-
-app.controller("BooksCtrl", ["$scope", "currentUser", "$firebase", "$location", function($scope, currentUser, $firebase, $location) {
+app.controller("BooksCtrl", ["fsConfig", "$scope", "currentUser", "$firebase", "$location", function(fsConfig, $scope, currentUser, $firebase, $location) {
 	$scope.hasData = false;
-	var ref = new Firebase('https://sweltering-fire-3219.firebaseio.com');
+	var ref = new Firebase(fsConfig.FIREBASE_URL);
 	var list = $firebase(ref.child('Books')).$asArray();
 	
 	$scope.currentUser = currentUser;
@@ -751,29 +759,27 @@ app.controller("BooksCtrl", ["$scope", "currentUser", "$firebase", "$location", 
 
   }]);
 
-
-app.controller("SettingCtrl", [ "$scope", "currentUser", "$firebase", "$routeParams", "$location", "filterFilter", function($scope, currentUser, $firebase, $routeParams, $location, filterFilter) {
-    console.log($scope);
-    var settingtag = $routeParams.setting;
-   	$scope.settingtag = settingtag;
- 	 var ref = new Firebase('https://sweltering-fire-3219.firebaseio.com/Books/');
-	var setting = null;
-	 var obj = $firebase(new Firebase('https://sweltering-fire-3219.firebaseio.com/Books/')).$asArray();  //.$asObject();
-     obj.$loaded().then(function() {
+app.controller("SettingCtrl", [ "fsConfig", "$scope", "currentUser", "$firebase", "$routeParams", "$location", "filterFilter", function(fsConfig, $scope, currentUser, $firebase, $routeParams, $location, filterFilter) {
+   console.log($scope);
+   var settingtag = $routeParams.setting;
+   $scope.settingtag = settingtag;
+   var ref = new Firebase(fsConfig.FIREBASE_URL+'/Books/');
+   var setting = null;
+	var obj = $firebase(new Firebase(fsConfig.FIREBASE_URL+'/Books/')).$asArray();  //.$asObject();
+    obj.$loaded().then(function() {
           console.log( obj );
-  		$scope.setting = filterFilter(obj, { tags: settingtag });
- 		console.log( $scope.setting );
-
+		$scope.setting = filterFilter(obj, { tags: settingtag });
+		console.log( $scope.setting );
      });
 	 $scope.setting = setting;
    }]);
 
 
-app.controller("PlacesCtrl", [ "$scope", "currentUser", "$firebase", "$routeParams", "$location", "filterFilter", "$filter", "DataSource", function($scope, currentUser, $firebase, $routeParams, $location,  filterFilter, $filter, DataSource) {
+app.controller("PlacesCtrl", [ "fsConfig", "$scope", "currentUser", "$firebase", "$routeParams", "$location", "filterFilter", "$filter", "DataSource", function(fsConfig, $scope, currentUser, $firebase, $routeParams, $location,  filterFilter, $filter, DataSource) {
 	 $scope.isLoading = true;
  	 var placeList = null;
- 	 var refBooks = $firebase(new Firebase('https://sweltering-fire-3219.firebaseio.com/Books/')).$asArray();
- 	 var placesref = $firebase(new Firebase('https://sweltering-fire-3219.firebaseio.com/places/')).$asArray(); 
+ 	 var refBooks = $firebase(new Firebase(fsConfig.FIREBASE_URL+'/Books/')).$asArray();
+ 	 var placesref = $firebase(new Firebase(fsConfig.FIREBASE_URL+'/places/')).$asArray(); 
  	 var placesArray = [];
       placesref.$loaded().then(function() {
    	  $scope.placeList = placesref;
@@ -827,7 +833,7 @@ app.controller("PlacesCtrl", [ "$scope", "currentUser", "$firebase", "$routePara
    }]);
    
    
-   app.controller("PlaceCtrl", [ "$scope", "currentUser", "$firebase", "$routeParams", "$location", "filterFilter", "DataSource", "FlickrPlacePics", "FlickrPlace", "$timeout", 'ngDialog', 'Profile', function($scope, currentUser, $firebase, $routeParams, $location, filterFilter, DataSource, FlickrPlacePics, FlickrPlace, $timeout, ngDialog, Profile) {
+   app.controller("PlaceCtrl", [ "fsConfig", "$scope", "currentUser", "$firebase", "$routeParams", "$location", "filterFilter", "DataSource", "FlickrPlacePics", "FlickrPlace", "$timeout", 'ngDialog', 'Profile', function(fsConfig, $scope, currentUser, $firebase, $routeParams, $location, filterFilter, DataSource, FlickrPlacePics, FlickrPlace, $timeout, ngDialog, Profile) {
     var placeid = $routeParams.placeid;
     $scope.placeid = placeid;
     $scope.isLoading = true;
@@ -843,17 +849,17 @@ app.controller("PlacesCtrl", [ "$scope", "currentUser", "$firebase", "$routePara
   	$scope.userfollowingList = null;
   	
   	if(currentUser){
-		var refProfile = new Firebase('https://sweltering-fire-3219.firebaseio.com/users/').child(currentUser.uid);
+		var refProfile = new Firebase(fsConfig.FIREBASE_URL+'/users/').child(currentUser.uid);
 	}
-	var ref = new Firebase('https://sweltering-fire-3219.firebaseio.com/Books/');
-	var placeref = new Firebase('https://sweltering-fire-3219.firebaseio.com/places/'+placeid);
+	var ref = new Firebase(fsConfig.FIREBASE_URL+'/Books/');
+	var placeref = new Firebase(fsConfig.FIREBASE_URL+'/places/'+placeid);
 	var thePlace = null;
-   	var placeImages = $firebase( new Firebase('https://sweltering-fire-3219.firebaseio.com/places/'+placeid +'/images/')).$asArray(); 
+   	var placeImages = $firebase( new Firebase(fsConfig.FIREBASE_URL+'/places/'+placeid +'/images/')).$asArray(); 
   	placeImages.$loaded().then(function(){
 		console.log(placeImages);
 	 	$scope.placeImages = placeImages;
  	 });
- 	var placeobj = $firebase( new Firebase('https://sweltering-fire-3219.firebaseio.com/places/'+placeid)).$asObject();  //.$asObject();
+ 	var placeobj = $firebase( new Firebase(fsConfig.FIREBASE_URL+'/places/'+placeid)).$asObject();  //.$asObject();
     placeobj.$loaded().then(function() {
 			console.log('placeobj.geonameId is...');
 			console.log(placeobj.geonameId);
@@ -900,7 +906,7 @@ app.controller("PlacesCtrl", [ "$scope", "currentUser", "$firebase", "$routePara
 	  }
         
 	  $scope.stopFollowing = function(){
-  			 var removeItemRef =  new Firebase('https://sweltering-fire-3219.firebaseio.com/users/').child(currentUser.uid).child('/following/');
+  			 var removeItemRef =  new Firebase(fsConfig.FIREBASE_URL+'/users/').child(currentUser.uid).child('/following/');
 		  	 $scope.removeItemList = $firebase(removeItemRef);
 		  	 removeItemList = $scope.removeItemList;
  		  	 removeItemList.$remove(placeid);
@@ -951,7 +957,7 @@ app.controller("PlacesCtrl", [ "$scope", "currentUser", "$firebase", "$routePara
   
 
      });// ends if loaded
-	 var obj = $firebase(new Firebase('https://sweltering-fire-3219.firebaseio.com/Books/')).$asArray();  //.$asObject();
+	 var obj = $firebase(new Firebase(fsConfig.FIREBASE_URL+'/Books/')).$asArray();  //.$asObject();
      // to take an action after the data loads, use $loaded() promise
 
      obj.$loaded().then(function() {
@@ -1019,7 +1025,7 @@ app.controller("PlacesCtrl", [ "$scope", "currentUser", "$firebase", "$routePara
       
       
       function checkIfUserExists(userId) {
-		  var USERS_LOCATION = 'https://sweltering-fire-3219.firebaseio.com/users';
+		  var USERS_LOCATION = fsConfig.FIREBASE_URL+'/users';
 		  var userAccess = new Firebase(USERS_LOCATION);
 		  console.log(userAccess);
 		  userAccess.child(userId).once('value', function(snapshot) {
@@ -1040,15 +1046,13 @@ app.controller("PlacesCtrl", [ "$scope", "currentUser", "$firebase", "$routePara
  
  
 
-
-
-app.controller("NearCtrl", [ "$scope", "currentUser", "$firebase", "$routeParams", "$location", "filterFilter",   "DataSource", function($scope, currentUser, $firebase, $routeParams, $location,  filterFilter,  DataSource) {
+app.controller("NearCtrl", [ "fsConfig", "$scope", "currentUser", "$firebase", "$routeParams", "$location", "filterFilter",   "DataSource", function(fsConfig, $scope, currentUser, $firebase, $routeParams, $location,  filterFilter,  DataSource) {
  	$scope.isLoading = true;
  	$scope.isLoadingPlaces = true;
  	$scope.isLoadingBooks = true;
  	var placeList = null;
- 	 var ref = new Firebase('https://sweltering-fire-3219.firebaseio.com/Books/');
- 	 var placesref = $firebase(new Firebase('https://sweltering-fire-3219.firebaseio.com/places/')).$asArray(); 
+ 	 var ref = new Firebase(fsConfig.FIREBASE_URL+'/Books/');
+ 	 var placesref = $firebase(new Firebase(fsConfig.FIREBASE_URL+'/places/')).$asArray(); 
       placesref.$loaded().then(function() {
    		$scope.placeList = placesref;
       });
@@ -1140,7 +1144,7 @@ app.controller("NearCtrl", [ "$scope", "currentUser", "$firebase", "$routeParams
 	  	
 	  	$scope.booksMsg = 'Hunting books.';
 	 	 var theBooks = null;
-		 var obj = $firebase(new Firebase('https://sweltering-fire-3219.firebaseio.com/Books/')).$asArray();  //.$asObject();
+		 var obj = $firebase(new Firebase(fsConfig.FIREBASE_URL+ '/Books/')).$asArray();  //.$asObject();
 	     obj.$loaded().then(function() {
 			$scope.booksMsg = 'Books found. Calculating....';
  	 		var theBooks = obj;
@@ -1193,16 +1197,15 @@ app.controller("NearCtrl", [ "$scope", "currentUser", "$firebase", "$routeParams
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-app.controller("CollectionCtrl", [ "$scope", "currentUser", "$firebase", "$routeParams", "$location", "filterFilter", 'ngDialog', 'Profile', function($scope, currentUser, $firebase, $routeParams, $location, filterFilter,  ngDialog, Profile) {
+app.controller("CollectionCtrl", [ "fsConfig", "$scope", "currentUser", "$firebase", "$routeParams", "$location", "filterFilter", 'ngDialog', 'Profile', function(fsConfig, $scope, currentUser, $firebase, $routeParams, $location, filterFilter,  ngDialog, Profile) {
 	var collectionid, theCollection;
 	var collectionid = $routeParams.collectionid;
 	$scope.placeid = collectionid;
-	//var ref = new Firebase('https://sweltering-fire-3219.firebaseio.com/');
 	if(currentUser){
-		var refProfile = new Firebase('https://sweltering-fire-3219.firebaseio.com/users/').child(currentUser.uid);
+		var refProfile = new Firebase(fsConfig.FIREBASE_URL+'/users/').child(currentUser.uid);
 		}
-	var collectionobj = $firebase( new Firebase('https://sweltering-fire-3219.firebaseio.com/collections/'+collectionid)).$asObject();
-	var booksArray = $firebase( new Firebase('https://sweltering-fire-3219.firebaseio.com/collections/'+collectionid +'/books/')).$asArray();
+	var collectionobj = $firebase( new Firebase(fsConfig.FIREBASE_URL+'/collections/'+collectionid)).$asObject();
+	var booksArray = $firebase( new Firebase(fsConfig.FIREBASE_URL+'/collections/'+collectionid +'/books/')).$asArray();
    	booksArray.$loaded().then(function() {    
     	var count = 0;
 		booksArray.forEach(function() {
@@ -1226,8 +1229,8 @@ app.controller("CollectionCtrl", [ "$scope", "currentUser", "$firebase", "$route
 	
 	$scope.updateOtherCollection = function(theCollectionIdtoUpdate){
 		if(currentUser){
-			var fsCollection = new Firebase('https://sweltering-fire-3219.firebaseio.com/collections/').child(theCollectionIdtoUpdate);
-			var userCollection = new Firebase("https://sweltering-fire-3219.firebaseio.com/users").child(currentUser.uid).child('collections').child(theCollectionIdtoUpdate);
+			var fsCollection = new Firebase(fsConfig.FIREBASE_URL+'/collections/').child(theCollectionIdtoUpdate);
+			var userCollection = new Firebase(fsConfig.FIREBASE_URL+"/users").child(currentUser.uid).child('collections').child(theCollectionIdtoUpdate);
 			userCollection.once('value', function(snapshot) {
 				var userCollectionVal = snapshot.val();
   				  		 	userCollection.update({
@@ -1272,8 +1275,8 @@ app.controller("CollectionCtrl", [ "$scope", "currentUser", "$firebase", "$route
 		if(thecollectionid){
 			console.log(thecollectionid);
 			console.log(collectionobj);
- 			var objToDelete = new Firebase('https://sweltering-fire-3219.firebaseio.com/collections/'+collectionid);
- 			var userCollToDelete = new Firebase('https://sweltering-fire-3219.firebaseio.com/users/'+ currentUser.uid + '/collections/'+collectionid);
+ 			var objToDelete = new Firebase(fsConfig.FIREBASE_URL+'/collections/'+collectionid);
+ 			var userCollToDelete = new Firebase(fsConfig.FIREBASE_URL+'/users/'+ currentUser.uid + '/collections/'+collectionid);
 			var onComplete = function(error) {
 			  if (error) {
 			    console.log('Delete failed');
@@ -1297,11 +1300,11 @@ app.controller("CollectionCtrl", [ "$scope", "currentUser", "$firebase", "$route
 				
 
 
-app.controller("TagsCtrl", [ "$scope", "$firebase", "$routeParams", "$location", "filterFilter", function($scope, $firebase, $routeParams, $location, filterFilter) {
+app.controller("TagsCtrl", ["fsConfig", "$scope", "$firebase", "$routeParams", "$location", "filterFilter", function(fsConfig, $scope, $firebase, $routeParams, $location, filterFilter) {
 	var arrTags;
 	$scope.isLoading = true;
 	$scope.hasData = false;
-	var ref = new Firebase('https://sweltering-fire-3219.firebaseio.com/');
+	var ref = new Firebase(fsConfig.FIREBASE_URL);
 	
 	var refTags = $firebase( ref.child('tags')).$asArray();
    	refTags.$loaded().then(function() {   
@@ -1322,7 +1325,7 @@ app.controller("TagsCtrl", [ "$scope", "$firebase", "$routeParams", "$location",
 
 
 
-app.controller("ViewTagCtrl", [ "$scope",  "$firebase", "$routeParams", "$location", "filterFilter",  function($scope, $firebase, $routeParams, $location, filterFilter) {
+app.controller("ViewTagCtrl", [ "fsConfig", "$scope",  "$firebase", "$routeParams", "$location", "filterFilter",  function(fsConfig, $scope, $firebase, $routeParams, $location, filterFilter) {
 	var tagId, theTag, theTagBooks;
 	var tagBooks = [];
 	var tagId = $routeParams.tagId;
@@ -1330,7 +1333,7 @@ app.controller("ViewTagCtrl", [ "$scope",  "$firebase", "$routeParams", "$locati
 	$scope.hasData = false;
 		console.log('tagId is' + tagId);
 
-	var ref = new Firebase('https://sweltering-fire-3219.firebaseio.com/');
+	var ref = new Firebase(fsConfig.FIREBASE_URL);
 	var theTag = $firebase(ref.child('tags').child(tagId)).$asObject();
 	var theTagBooks = $firebase(ref.child('tags').child(tagId).child('books')).$asArray();
 	var refBooks = $firebase(ref.child('Books')).$asArray();
@@ -1370,8 +1373,7 @@ app.controller("ViewTagCtrl", [ "$scope",  "$firebase", "$routeParams", "$locati
 
 
 
-//	var booksArray = $firebase( new Firebase('https://sweltering-fire-3219.firebaseio.com/collections/'+collectionid +'/books/')).$asArray();
-/*
+ /*
 
     collectionobj.$loaded().then(function() {
     	var theCollection = collectionobj;
@@ -1402,7 +1404,7 @@ app.controller("ViewTagCtrl", [ "$scope",  "$firebase", "$routeParams", "$locati
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-   app.controller("AddBookCtrl", [ "$scope", "currentUser", "$firebase", "$routeParams", "$location", "filterFilter", "DataSource", "$q", "$http", function($scope, currentUser, $firebase, $routeParams, $location, filterFilter, DataSource, $q, $http) {
+   app.controller("AddBookCtrl", [ "fsConfig", "$scope", "currentUser", "$firebase", "$routeParams", "$location", "filterFilter", "DataSource", "$q", "$http", function(fsConfig, $scope, currentUser, $firebase, $routeParams, $location, filterFilter, DataSource, $q, $http) {
 	$scope.hasData = false;
 	$scope.isLooking = false;
 	$scope.hasDataNominate = false;
@@ -1410,7 +1412,7 @@ app.controller("ViewTagCtrl", [ "$scope",  "$firebase", "$routeParams", "$locati
 	var currentBooks;
 	$scope.limitCurrent = 4;
 	
- 	var ref = new Firebase('https://sweltering-fire-3219.firebaseio.com/');
+ 	var ref = new Firebase(fsConfig.FIREBASE_URL);
  	var refCurrent = $firebase(ref.child('Books')).$asArray();
 
 
@@ -1456,7 +1458,7 @@ app.controller("ViewTagCtrl", [ "$scope",  "$firebase", "$routeParams", "$locati
  	 }]);
 	
 
-    app.controller("AddBookDetailCtrl", [ "$scope", "currentUser", "$firebase", "$routeParams", "$location", "filterFilter", "DataSource", "$q", "$http", 'ngDialog', "to_linesFilter", "FsNotify", "FsGet", "FsNotifyWithId", function($scope, currentUser, $firebase, $routeParams, $location, filterFilter, DataSource, $q, $http, ngDialog, $to_linesFilter, FsNotify, FsGet, FsNotifyWithId ) {
+    app.controller("AddBookDetailCtrl", [ "fsConfig", "$scope", "currentUser", "$firebase", "$routeParams", "$location", "filterFilter", "DataSource", "$q", "$http", 'ngDialog', "to_linesFilter", "FsNotify", "FsGet", "FsNotifyWithId", function(fsConfig, $scope, currentUser, $firebase, $routeParams, $location, filterFilter, DataSource, $q, $http, ngDialog, $to_linesFilter, FsNotify, FsGet, FsNotifyWithId ) {
 	    var testMode = false;
 		var tempBook = {};
 		var tempPlaces = [];
@@ -1478,10 +1480,10 @@ app.controller("ViewTagCtrl", [ "$scope",  "$firebase", "$routeParams", "$locati
  		$scope.isSaving = false;
  		$scope.errorPlaces = false;		
 		
- 		var ref = new Firebase('https://sweltering-fire-3219.firebaseio.com/');
+ 		var ref = new Firebase(fsConfig.FIREBASE_URL);
  		 // get user
  		  		if(currentUser){
-	 		  		var refProfile = new Firebase('https://sweltering-fire-3219.firebaseio.com/users/').child(currentUser.uid); 			
+	 		  		var refProfile = new Firebase(fsConfig.FIREBASE_URL).child('users').child(currentUser.uid); 			
 			 			refProfile.once('value', function(snapshot) {
 						    var exists = (snapshot.val() !== null);
 						    var profile = snapshot.val();
@@ -1534,15 +1536,9 @@ app.controller("ViewTagCtrl", [ "$scope",  "$firebase", "$routeParams", "$locati
 		 			 $scope.autoObject = function(selectedObject) {
 		 				newSetting = selectedObject.originalObject;
 		 				var bookplaceref = tempPlaces;
-		                  
-		                  //var placesref = new Firebase('https://sweltering-fire-3219.firebaseio.com/places/');
-		                  //bookplaceref.child(newSetting.geonameId).set(newSetting);
-		                  //placesref.child(newSetting.geonameId).set(newSetting);
-
 		                tempPlaces.push(newSetting);
 		 				$scope.newSetting = newSetting; 
 		                };
-		                
 		                $scope.newSetting = newSetting;
 
 
@@ -1724,7 +1720,12 @@ app.controller("ViewTagCtrl", [ "$scope",  "$firebase", "$routeParams", "$locati
 
 
 			   	 	//$location.path("#/book/:"+postID); 
-			   	 	$location.path("#/response/bookSuccess/:"+postID+"/travelguide/"); 
+			   	 	//alert('current user book count is' + currentUserBookCount);
+			   	 	if(currentUserBookCount == 0){
+				   	 	$location.path("/response/bookSuccess/"+postID+"/travelguide"); 
+				   	 	}else{
+				   	 	$location.path("/response/bookSuccess/"+postID); 
+				   	 	}
 			   	 	}//ends edit mode check
 				}else{//contintues if else for hasplaces...
 					console.log('does not have places')
@@ -1753,7 +1754,7 @@ app.controller("ViewTagCtrl", [ "$scope",  "$firebase", "$routeParams", "$locati
 }]);
  	 
  	 
-app.controller("NominateBookCtrl", [ "$scope", "currentUser", "$firebase", "$routeParams", "$location", "filterFilter", "DataSource", "$q", "$http", function($scope, currentUser, $firebase, $routeParams, $location, filterFilter, DataSource, $q, $http) {
+app.controller("NominateBookCtrl", [ "fsConfig", "$scope", "currentUser", "$firebase", "$routeParams", "$location", "filterFilter", "DataSource", "$q", "$http", function(fsConfig, $scope, currentUser, $firebase, $routeParams, $location, filterFilter, DataSource, $q, $http) {
 	$scope.hasData = false;
 	$scope.isLooking = false;
 	$scope.hasDataNominate = false;
@@ -1761,7 +1762,7 @@ app.controller("NominateBookCtrl", [ "$scope", "currentUser", "$firebase", "$rou
 	var currentBooks;
 	$scope.limitCurrent = 3;
 	
-	var ref = new Firebase('https://sweltering-fire-3219.firebaseio.com/');
+	var ref = new Firebase(fsConfig.FIREBASE_URL);
 	var refCurrent = $firebase(ref.child('Books')).$asArray();
 
 
@@ -1772,22 +1773,6 @@ app.controller("NominateBookCtrl", [ "$scope", "currentUser", "$firebase", "$rou
 	$scope.showAllCurrent = function(){
 		$scope.limitCurrent = 100;
 	};
-/*
- 	$scope.searchBooks = function() {
- 		$scope.hasData = false;
- 		$scope.isLooking = true;
-  		//GET LODATION DATA 	
-		 var SEARCHURL = 'http://fictionset.in/admin/amazon/amazon_searchbooks.php?search='+$scope.searchString;
-			searchData = function(data) {
-				$scope.isLooking = false;
-				$scope.hasData = true;
-				$scope.dataSearch = data;
-	        	//console.log(data);
-  				};
- 			DataSource.get(SEARCHURL,searchData);  //this is the locations
- 	}//ends search funciton
-*/
-
 
  	$scope.searchBooksNominate = function() {
  		$scope.hasDataNominate = false;
@@ -1806,7 +1791,7 @@ app.controller("NominateBookCtrl", [ "$scope", "currentUser", "$firebase", "$rou
  	
 }]);
  	 
-app.controller("NominateBookDetailCtrl", [ "$scope", "currentUser", "$firebase", "$routeParams", "$location", "filterFilter", "DataSource", "$q", "$http", 'ngDialog', "to_linesFilter", "FsNotify", "FsNotifyWithId", function($scope, currentUser, $firebase, $routeParams, $location, filterFilter, DataSource, $q, $http, ngDialog, $to_linesFilter, FsNotify, FsNotifyWithId) {
+app.controller("NominateBookDetailCtrl", [ "fsConfig", "$scope", "currentUser", "$firebase", "$routeParams", "$location", "filterFilter", "DataSource", "$q", "$http", 'ngDialog', "to_linesFilter", "FsNotify", "FsNotifyWithId", function(fsConfig, $scope, currentUser, $firebase, $routeParams, $location, filterFilter, DataSource, $q, $http, ngDialog, $to_linesFilter, FsNotify, FsNotifyWithId) {
 	    var testMode = false;
 		var tempBook = {};
 		var tempPlaces = [];
@@ -1828,10 +1813,10 @@ app.controller("NominateBookDetailCtrl", [ "$scope", "currentUser", "$firebase",
  		$scope.isSaving = false;
  		$scope.errorPlaces = false;		
 		
- 		var ref = new Firebase('https://sweltering-fire-3219.firebaseio.com/');
+ 		var ref = new Firebase(fsConfig.FIREBASE_URL);
  		 // get user
   		if(currentUser){
-	  		var refProfile = new Firebase('https://sweltering-fire-3219.firebaseio.com/users/').child(currentUser.uid); 			
+	  		var refProfile = new Firebase(fsConfig.FIREBASE_URL+ '/users/').child(currentUser.uid); 			
  			refProfile.once('value', function(snapshot) {
 			    var exists = (snapshot.val() !== null);
 			    var profile = snapshot.val();
@@ -2060,17 +2045,23 @@ app.controller("NominateBookDetailCtrl", [ "$scope", "currentUser", "$firebase",
  	 
  	 
  	 
-app.controller("ResponseCtrl", ["$scope", "currentUser", "$firebase", "$location", "$routeParams", function($scope, currentUser, $firebase, $location, $routeParams) {
+app.controller("ResponseCtrl", ["fsConfig", "$scope", "currentUser", "$firebase", "$location", "$routeParams", function(fsConfig, $scope, currentUser, $firebase, $location, $routeParams) {
 	$scope.isLoading = true;
 	$scope.hasData = false;		 
 	$scope.currentUser = currentUser;
+	
 	console.log($routeParams);
     var responseType = $routeParams.type;
     var itemId = $routeParams.id;
-	
-	var ref = new Firebase('https://sweltering-fire-3219.firebaseio.com');
-	//var list = $firebase(ref.child('Books')).$asArray();
-//	var refProfile = new Firebase('https://sweltering-fire-3219.firebaseio.com/users/').child(currentUser.uid);
+    var hasBadge = false;
+	var badgeType = $routeParams.badgetype;
+	if(badgeType){
+		hasBadge = true;
+	}
+    
+    $scope.hasBadge = hasBadge;
+    	
+	var ref = new Firebase(fsConfig.FIREBASE_URL);
 	var refProfile = $firebase(ref.child('users').child(currentUser.uid)).$asObject();
 	if (responseType == 'bookSuccess' || responseType == 'success' ){
 		var refItem = $firebase(ref.child('Books').child(itemId)).$asObject();
@@ -2095,7 +2086,7 @@ app.controller("ResponseCtrl", ["$scope", "currentUser", "$firebase", "$location
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-app.controller("DialogFollowPlaceCtrl",  ["$scope", "$location", "ngDialog", function($scope, $location,  ngDialog) {
+app.controller("DialogFollowPlaceCtrl",  ["fsConfig", "$scope", "$location", "ngDialog", function(fsConfig, $scope, $location,  ngDialog) {
 	console.log('loaded controller');
 	console.log($scope.$parent);
 /*
@@ -2106,7 +2097,7 @@ app.controller("DialogFollowPlaceCtrl",  ["$scope", "$location", "ngDialog", fun
 }]);
 
 
-app.controller("DialogCollectionsAdd",  ["$scope", "$location", "ngDialog", "simpleLogin", function($scope, $location,  ngDialog, simpleLogin) {
+app.controller("DialogCollectionsAdd",  ["fsConfig", "$scope", "$location", "ngDialog", "simpleLogin", function(fsConfig, $scope, $location,  ngDialog, simpleLogin) {
 	var currentUser = simpleLogin.$getCurrentUser();
 	$scope.testContent = currentUser.uid;
 	console.log('loaded controller');
@@ -2130,8 +2121,8 @@ app.controller("DialogCollectionsAdd",  ["$scope", "$location", "ngDialog", "sim
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
  
-app.controller("AccountCtrl", ["$scope", "Profile", "currentUser", "$firebase","$location","filterFilter",
-  function($scope, Profile, currentUser, $firebase, $location, filterFilter) {
+app.controller("AccountCtrl", ["fsConfig", "$scope", "Profile", "currentUser", "$firebase","$location","filterFilter",
+  function(fsConfig, $scope, Profile, currentUser, $firebase, $location, filterFilter) {
   	var unreadMessages, userProfile, profileUserImg, currentUserImg, locationObject;
   	$scope.unreadMessages = unreadMessages;
 	$scope.aaa = false;
@@ -2153,7 +2144,7 @@ app.controller("AccountCtrl", ["$scope", "Profile", "currentUser", "$firebase","
 		 
  		 if( (currentUserImg)  && profileUserImg !== currentUserImg){
 			console.log('profile images are different, so change them');
-			new Firebase('https://sweltering-fire-3219.firebaseio.com/users').child(currentUser.uid).update({
+			new Firebase(fsConfig.FIREBASE_URL+'/users').child(currentUser.uid).update({
 				picture_url: currentUserImg
  			});
   		 } else {
@@ -2171,7 +2162,7 @@ app.controller("AccountCtrl", ["$scope", "Profile", "currentUser", "$firebase","
 
 
  /*
- 	 var refMessages = new Firebase('https://sweltering-fire-3219.firebaseio.com/messages/');
+ 	 var refMessages = new Firebase('https:// .... .firebaseio.com/messages/');
  			 			refMessages.once('value', function(snapshot) {
 						    var exists = (snapshot.val() !== null);
 							unreadMessages = snapshot.val();
@@ -2213,7 +2204,7 @@ app.controller("AccountCtrl", ["$scope", "Profile", "currentUser", "$firebase","
          });
          
  		 //// set the current read timestamp 
- 		 var refUsers = new Firebase('https://sweltering-fire-3219.firebaseio.com/users/');
+ 		 var refUsers = new Firebase('https://....firebaseio.com/users/');
  		 var theTimestamp = new Date().valueOf();					
  		 refUsers.child(currentUser.uid).update({
 	 		 messagesViewed: theTimestamp
@@ -2233,7 +2224,7 @@ app.controller("AccountCtrl", ["$scope", "Profile", "currentUser", "$firebase","
 
 
 		function checkIfUserExists(userId) {
-		  var USERS_LOCATION = 'https://sweltering-fire-3219.firebaseio.com/users';
+		  var USERS_LOCATION = fsConfig.FIREBASE_URL+'/users';
 		  var userAccess = new Firebase(USERS_LOCATION);
 		  console.log(userAccess);
 		  userAccess.child(userId).once('value', function(snapshot) {
@@ -2255,7 +2246,7 @@ app.controller("AccountCtrl", ["$scope", "Profile", "currentUser", "$firebase","
 /*
  
  // THE TEST WAY OF DOING ADMIN
-  	 var objAccess = $firebase( new Firebase('https://sweltering-fire-3219.firebaseio.com').child('users').child(currentUser.uid).child('role')).$asObject();     
+  	 var objAccess = $firebase( new Firebase('https://.....firebaseio.com').child('users').child(currentUser.uid).child('role')).$asObject();     
  	 	 objAccess.$loaded().then(function() {
  	    	if(objAccess.$value > 50){
 		    	$scope.aaa =true;
@@ -2269,8 +2260,8 @@ app.controller("AccountCtrl", ["$scope", "Profile", "currentUser", "$firebase","
   }
 ]);
 
-app.controller("ProfileCtrl", ["$scope", "Profile", "currentUser", "$firebase","$location","filterFilter",
-  function($scope, Profile, currentUser, $firebase, $location, filterFilter) {
+app.controller("ProfileCtrl", ["fsConfig", "$scope", "Profile", "currentUser", "$firebase","$location","filterFilter",
+  function(fsConfig, $scope, Profile, currentUser, $firebase, $location, filterFilter) {
   	var unreadMessages, allBooks;
   	$scope.unreadMessages = unreadMessages;
  	$scope.aaa = false;
@@ -2278,7 +2269,7 @@ app.controller("ProfileCtrl", ["$scope", "Profile", "currentUser", "$firebase","
 	$scope.allBooks = allBooks;
     if(currentUser){
       	 $scope.profile = Profile(currentUser.uid);
-	  	 var refBooks = new Firebase('https://sweltering-fire-3219.firebaseio.com/Books/');
+	  	 var refBooks = new Firebase(fsConfig.FIREBASE_URL+'/Books/');
 		  	 refBooks.once('value', function(snapshot) {
 			  	 var exists = (snapshot.val() !== null);
 			  	 allBooks = snapshot.val();
@@ -2287,7 +2278,7 @@ app.controller("ProfileCtrl", ["$scope", "Profile", "currentUser", "$firebase","
 	        
       	 
 	  	 var userId = currentUser.uid;
-	  	 var refMessages = new Firebase('https://sweltering-fire-3219.firebaseio.com/oldmessages/');
+	  	 var refMessages = new Firebase(fsConfig.FIREBASE_URL+'/oldmessages/');
 			refMessages.once('value', function(snapshot) {
 			var exists = (snapshot.val() !== null);
 			unreadMessages = snapshot.val();
@@ -2324,7 +2315,7 @@ app.controller("ProfileCtrl", ["$scope", "Profile", "currentUser", "$firebase","
 			}
 		});
  		//// set the current read timestamp
- 		var refUsers = new Firebase('https://sweltering-fire-3219.firebaseio.com/users/');
+ 		var refUsers = new Firebase('https://.....firebaseio.com/users/');
  		var theTimestamp = new Date().valueOf();					
  		refUsers.child(currentUser.uid).update({
 	 		messagesViewed: theTimestamp
@@ -2341,7 +2332,7 @@ app.controller("ProfileCtrl", ["$scope", "Profile", "currentUser", "$firebase","
 
 
 		function checkIfUserExists(userId) {
-		  var USERS_LOCATION = 'https://sweltering-fire-3219.firebaseio.com/users';
+		  var USERS_LOCATION = fsConfig.FIREBASE_URL+'/users';
 		  var userAccess = new Firebase(USERS_LOCATION);
 		  console.log(userAccess);
 		  userAccess.child(userId).once('value', function(snapshot) {
@@ -2364,8 +2355,8 @@ app.controller("ProfileCtrl", ["$scope", "Profile", "currentUser", "$firebase","
   }
 ]);
 
-app.controller("FollowingCtrl", ["$scope", "Profile", "currentUser", "$firebase","$location","filterFilter",
-  function($scope, Profile, currentUser, $firebase, $location, filterFilter) {
+app.controller("FollowingCtrl", ["fsConfig", "$scope", "Profile", "currentUser", "$firebase","$location","filterFilter",
+  function(fsConfig, $scope, Profile, currentUser, $firebase, $location, filterFilter) {
   	var unreadMessages;
   	$scope.unreadMessages = unreadMessages;
  	$scope.aaa = false;
@@ -2373,7 +2364,7 @@ app.controller("FollowingCtrl", ["$scope", "Profile", "currentUser", "$firebase"
     if(currentUser){
       	 $scope.profile = Profile(currentUser.uid);
 	  	 var userId = currentUser.uid;
-	  	 var refMessages = new Firebase('https://sweltering-fire-3219.firebaseio.com/messages/').child(currentUser.uid);
+	  	 var refMessages = new Firebase(fsConfig.FIREBASE_URL+'/messages/').child(currentUser.uid);
 			refMessages.orderByKey().limitToLast(8).on('value', function(snapshot) { 
 			var exists = (snapshot.val() !== null);
 			unreadMessages = snapshot.val();
@@ -2417,7 +2408,7 @@ app.controller("FollowingCtrl", ["$scope", "Profile", "currentUser", "$firebase"
 				}
 			});
 	 		//// set the current read timestamp
-	 		var refUsers = new Firebase('https://sweltering-fire-3219.firebaseio.com/users/');
+	 		var refUsers = new Firebase(fsConfig.FIREBASE_URL+'/users/');
 	 		var theTimestamp = new Date().valueOf();					
 	 		refUsers.child(currentUser.uid).update({
 		 		messagesViewed: theTimestamp
@@ -2439,11 +2430,11 @@ app.controller("FollowingCtrl", ["$scope", "Profile", "currentUser", "$firebase"
 // MANAGING STUFF
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-app.controller("ManagePlacesCtrl", ["$scope", "currentUser", "$firebase", 
-  function($scope,  currentUser, $firebase) {
-   var ref = new Firebase('https://sweltering-fire-3219.firebaseio.com/places/');
+app.controller("ManagePlacesCtrl", ["fsConfig", "$scope", "currentUser", "$firebase", 
+  function(fsConfig, $scope,  currentUser, $firebase) {
+   var ref = new Firebase(fsConfig.FIREBASE_URL+'/places/');
    var placelist = null;
- 	 var obj = $firebase(new Firebase('https://sweltering-fire-3219.firebaseio.com/places/')).$asArray();  //.$asObject();
+ 	 var obj = $firebase(new Firebase(fsConfig.FIREBASE_URL+'/places/')).$asArray();  //.$asObject();
      obj.$loaded().then(function() {
 //  		place = filterFilter(obj, ('unique')(tags));
  		//var placelist = obj;
@@ -2456,11 +2447,11 @@ app.controller("ManagePlacesCtrl", ["$scope", "currentUser", "$firebase",
   }
 ]);
 
-app.controller("ManageUsersCtrl", ["$scope", "currentUser", "$firebase", "ngDialog", "filterFilter",
-  function($scope, currentUser, $firebase, ngDialog, filterFilter) {
+app.controller("ManageUsersCtrl", ["fsConfig", "$scope", "currentUser", "$firebase", "ngDialog", "filterFilter",
+  function(fsConfig, $scope, currentUser, $firebase, ngDialog, filterFilter) {
    var usersList;
    $scope.usersList;
-   var objUsers = $firebase(new Firebase('https://sweltering-fire-3219.firebaseio.com/users/')).$asArray();  //.$asObject();
+   var objUsers = $firebase(new Firebase(fsConfig.FIREBASE_URL+'/users/')).$asArray();  //.$asObject();
      objUsers.$loaded().then(function() {
      	console.log(objUsers);
 		 // utilizing Angular's helpers
@@ -2487,8 +2478,8 @@ app.controller("ManageUsersCtrl", ["$scope", "currentUser", "$firebase", "ngDial
  	$scope.theUserId = theUserId;
  	//var allBadges;
  	//$scope.allBadges = allBadges; 
- 	var allBadges = $firebase(new Firebase('https://sweltering-fire-3219.firebaseio.com/badges/')).$asArray();
- 	var userBadges = $firebase(new Firebase('https://sweltering-fire-3219.firebaseio.com/users/').child(theUserId).child('badges')).$asArray();  //.$asObject();
+ 	var allBadges = $firebase(new Firebase(fsConfig.FIREBASE_URL+'/badges/')).$asArray();
+ 	var userBadges = $firebase(new Firebase(fsConfig.FIREBASE_URL+'/users/').child(theUserId).child('badges')).$asArray();  //.$asObject();
  	allBadges.$loaded().then(function() {
  		//$scope.userBadges = userBadges;
  		$scope.allBadges = allBadges;
@@ -2512,8 +2503,8 @@ app.controller("ManageUsersCtrl", ["$scope", "currentUser", "$firebase", "ngDial
 	// var thisBadge = filterFilter($scope.allBadges, {badgeId: badgeId});
 
 	 if (theUserId) {
- 	 var userProfile = new Firebase('https://sweltering-fire-3219.firebaseio.com/users/').child(theUserId);  //.$asObject();
- 	 var theBadgeSource = new Firebase('https://sweltering-fire-3219.firebaseio.com/badges/').child(badgeId);  //.$asObject();
+ 	 var userProfile = new Firebase(fsConfig.FIREBASE_URL+'/users/').child(theUserId);  //.$asObject();
+ 	 var theBadgeSource = new Firebase(fsConfig.FIREBASE_URL+'/badges/').child(badgeId);  //.$asObject();
  	 theBadgeSource.once('value', function(snapshot) {
     	var exists = (snapshot.val() !== null);
 	    var theBadgeInfo = snapshot.val();
@@ -2556,7 +2547,7 @@ app.controller("ManageUsersCtrl", ["$scope", "currentUser", "$firebase", "ngDial
 	 	console.log(childUserId)
 	 	var addTimestamp = bookObj.timestamp;
   			if (bookid) {
-  			  	var userCollections = new Firebase('https://sweltering-fire-3219.firebaseio.com').child('users').child(childUserId).child('collections');
+  			  	var userCollections = new Firebase('https://.....firebaseio.com').child('users').child(childUserId).child('collections');
  		  		userCollections.child('bookshelf').child('books').child(bookid).update({
 					    bookid: bookid,
  					    coverUrl: bookObj.coverurl,
@@ -2580,13 +2571,13 @@ app.controller("ManageUsersCtrl", ["$scope", "currentUser", "$firebase", "ngDial
  }]);
 
 
-app.controller("EditPlaceCtrl", [ "$scope", "currentUser", "$firebase", "$routeParams", "$location", "filterFilter", "DataSource", function($scope, currentUser, $firebase, $routeParams, $location, filterFilter, DataSource) {
+app.controller("EditPlaceCtrl", [ "fsConfig", "$scope", "currentUser", "$firebase", "$routeParams", "$location", "filterFilter", "DataSource", function(fsConfig, $scope, currentUser, $firebase, $routeParams, $location, filterFilter, DataSource) {
   console.log($routeParams);
     var placename = $routeParams.place;
     var placeid = $routeParams.placeid;
    	$scope.placename = placename;
    	$scope.placeid = placeid;
- 	 var ref = new Firebase('https://sweltering-fire-3219.firebaseio.com/places/').child(placeid);
+ 	 var ref = new Firebase(fsConfig.FIREBASE_URL+'/places/').child(placeid);
  	 ref.setPriority(1000);
  	 var sync = $firebase(ref);
  	 var setting = null;
@@ -2598,7 +2589,6 @@ app.controller("EditPlaceCtrl", [ "$scope", "currentUser", "$firebase", "$routeP
   	 });
 	 $scope.place = rec;
 
-//	 console.log($scope.geoplace);
      console.log($scope.sync);
      console.log($scope.place);
 
@@ -2652,13 +2642,13 @@ app.controller("EditPlaceCtrl", [ "$scope", "currentUser", "$firebase", "$routeP
     }]);
     
     
-app.controller("ManagePlaceCtrl", [ "$scope", "currentUser", "$firebase", "$routeParams", "$location", "filterFilter", "DataSource", function($scope, currentUser, $firebase, $routeParams, $location, filterFilter, DataSource) {
+app.controller("ManagePlaceCtrl", [ "fsConfig", "$scope", "currentUser", "$firebase", "$routeParams", "$location", "filterFilter", "DataSource", function(fsConfig, $scope, currentUser, $firebase, $routeParams, $location, filterFilter, DataSource) {
     var placename = $routeParams.place;
     var placeid = $routeParams.placeid;
    	$scope.placename = placename;
    	$scope.placeid = placeid;
     console.log(placename);
- 	 var ref = new Firebase('https://sweltering-fire-3219.firebaseio.com/places/').child(placeid);
+ 	 var ref = new Firebase(fsConfig.FIREBASE_URL+'/places/').child(placeid);
  	 ref.setPriority(1000);
  	 var sync = $firebase(ref);
  	 var setting = null;
@@ -2714,14 +2704,14 @@ app.controller("ManagePlaceCtrl", [ "$scope", "currentUser", "$firebase", "$rout
     }]);
    
   
-app.controller("EditBookCtrl", [ "$scope", "currentUser", "$firebase", "$routeParams", "$location", "filterFilter", "DataSource", "$q", "$http", "$filter", function($scope, currentUser, $firebase, $routeParams, $location, filterFilter, DataSource, $q, $http, $filter) {
+app.controller("EditBookCtrl", [ "fsConfig", "$scope", "currentUser", "$firebase", "$routeParams", "$location", "filterFilter", "DataSource", "$q", "$http", "$filter", function(fsConfig, $scope, currentUser, $firebase, $routeParams, $location, filterFilter, DataSource, $q, $http, $filter) {
     var bookid = $routeParams.id;
      var newSetting = null;
      $scope.newSetting = null;
      console.log($routeParams.id);
 
 
-      var ref = new Firebase('https://sweltering-fire-3219.firebaseio.com/Books/' + bookid);
+      var ref = new Firebase(fsConfig.FIREBASE_URL+'/Books/' + bookid);
   	var sync = $firebase(ref);
  	 	 console.log(sync);
  	$scope.bookobj = sync.$asObject();
@@ -2732,8 +2722,8 @@ app.controller("EditBookCtrl", [ "$scope", "currentUser", "$firebase", "$routePa
  				console.log(selectedObject);
  				newSetting = selectedObject.originalObject;
                   //  loadRemoteData();
-                  var bookplaceref = new Firebase('https://sweltering-fire-3219.firebaseio.com/Books/' + bookid + '/places/');
-                  var placesref = new Firebase('https://sweltering-fire-3219.firebaseio.com/places/');
+                  var bookplaceref = new Firebase(fsConfig.FIREBASE_URL+'/Books/' + bookid + '/places/');
+                  var placesref = new Firebase(fsConfig.FIREBASE_URL+'/places/');
                   bookplaceref.child(newSetting.geonameId).set(newSetting);
                   placesref.child(newSetting.geonameId).set(newSetting);
  				console.log(newSetting);
@@ -2744,7 +2734,7 @@ app.controller("EditBookCtrl", [ "$scope", "currentUser", "$firebase", "$routePa
  
   	  // THIS SECTION ITERATES TAGS
 	 	// $scope.bookplaces = {};
- 	 	 var bookLocations = $firebase(new Firebase('https://sweltering-fire-3219.firebaseio.com/Books/' + bookid + '/tags/')).$asArray();  //.$asObject();
+ 	 	 var bookLocations = $firebase(new Firebase(fsConfig.FIREBASE_URL+'/Books/' + bookid + '/tags/')).$asArray();  //.$asObject();
  	 	 //console.log(locationref2);
  	 	 console.log(bookLocations);
  	 	 $scope.bookLocations = bookLocations;
@@ -2754,7 +2744,7 @@ app.controller("EditBookCtrl", [ "$scope", "currentUser", "$firebase", "$routePa
  
 	$scope.removePlace = function(place){
 		  	 console.log(place);
-		  	 var removeItemRef =  new Firebase('https://sweltering-fire-3219.firebaseio.com/Books/').child(bookid).child('/places/');
+		  	 var removeItemRef =  new Firebase(fsConfig.FIREBASE_URL+'/Books/').child(bookid).child('/places/');
 		  	 $scope.removeItemList = $firebase(removeItemRef);
 		  	 var removeItemList = $scope.removeItemList;
 		  	 console.log(removeItemRef);
@@ -2785,15 +2775,15 @@ app.controller("EditBookCtrl", [ "$scope", "currentUser", "$firebase", "$routePa
  	 }]);
 	
 
-app.controller("AddMessageCtrl", [ "$scope", "currentUser", "$firebase", "$routeParams", "$location", "filterFilter", "DataSource", "Profile", "FsNotifyWithId", function($scope, currentUser, $firebase, $routeParams, $location, filterFilter, DataSource, Profile, FsNotifyWithId) {
+app.controller("AddMessageCtrl", [ "fsConfig", "$scope", "currentUser", "$firebase", "$routeParams", "$location", "filterFilter", "DataSource", "Profile", "FsNotifyWithId", function(fsConfig, $scope, currentUser, $firebase, $routeParams, $location, filterFilter, DataSource, Profile, FsNotifyWithId) {
  		$scope.isLoading = false;
  		$scope.messageAuthor = "";
- 		var ref = new Firebase('https://sweltering-fire-3219.firebaseio.com/');
+ 		var ref = new Firebase(fsConfig.FIREBASE_URL);
 
 
 
  		if(currentUser){
- 		var refProfile = new Firebase('https://sweltering-fire-3219.firebaseio.com/users/').child(currentUser.uid);
+ 		var refProfile = new Firebase(fsConfig.FIREBASE_URL+'/users/').child(currentUser.uid);
  			
  			refProfile.once('value', function(snapshot) {
 			    var exists = (snapshot.val() !== null);
@@ -2851,13 +2841,13 @@ app.controller("AddMessageCtrl", [ "$scope", "currentUser", "$firebase", "$route
  	 }]);
 
 
-app.controller("UserMessageCtrl", [ "$scope", "currentUser", "$firebase", "$routeParams", "$location", "filterFilter", "DataSource", "Profile", "FsNotify", function($scope, currentUser, $firebase, $routeParams, $location, filterFilter, DataSource, Profile, FsNotify) {
+app.controller("UserMessageCtrl", [ "fsConfig", "$scope", "currentUser", "$firebase", "$routeParams", "$location", "filterFilter", "DataSource", "Profile", "FsNotify", function(fsConfig, $scope, currentUser, $firebase, $routeParams, $location, filterFilter, DataSource, Profile, FsNotify) {
  		$scope.isLoading = false;
  		$scope.isSent = false;
  		$scope.messageAuthor = "";
  		$scope.recipientid = $routeParams.userid;
   		
- 		var ref = new Firebase('https://sweltering-fire-3219.firebaseio.com/');
+ 		var ref = new Firebase(fsConfig.FIREBASE_URL);
 
  		 $scope.notificationTypes = [
 		     { id: 'bookAdd', title: 'bookAdd', textContent: "A new book was added!", textContent1: " was added by ", textContent2: ", set in " },
@@ -2878,7 +2868,7 @@ app.controller("UserMessageCtrl", [ "$scope", "currentUser", "$firebase", "$rout
  	 	 console.log(refLocations);
 
  		if(currentUser){
-	 		var refProfile = new Firebase('https://sweltering-fire-3219.firebaseio.com/users/').child(currentUser.uid);		
+	 		var refProfile = new Firebase(fsConfig.FIREBASE_URL+'/users/').child(currentUser.uid);		
 			refProfile.once('value', function(snapshot) {
 			    var exists = (snapshot.val() !== null);
 			    var profile = snapshot.val();
@@ -2926,7 +2916,7 @@ app.controller("UserMessageCtrl", [ "$scope", "currentUser", "$firebase", "$rout
 			console.log(FsNotify.bookAdded($scope.message.theUser, $scope.message.theBook));
 			var theTitle = "New Book Added";
 			var theContent = activatorUserName + " added a new book: " + theBookTitle;
-			var refBook = new Firebase('https://sweltering-fire-3219.firebaseio.com/Books/').child(theBookId);		
+			var refBook = new Firebase(fsConfig.FIREBASE_URL+'/Books/').child(theBookId);		
 /*
 			refUsers.$loaded().then(function() {
 	        console.log( refUsers );
@@ -2997,7 +2987,7 @@ app.controller("UserMessageCtrl", [ "$scope", "currentUser", "$firebase", "$rout
 /*
  			var theTitle = "New Suggestion";
 			var theContent = activatorUserName + " suggested a new book: " + theBookTitle;
-			var refBook = new Firebase('https://sweltering-fire-3219.firebaseio.com/Books/').child(theBookId);		
+			var refBook = new Firebase('https://.....firebaseio.com/Books/').child(theBookId);		
 			
 			refUsers.$loaded().then(function() {
 			refBook.once('value', function(snapshot) {
@@ -3185,7 +3175,7 @@ app.service('tags', function($q, filterFilter) {
 /*
  
 function getAccessLevel(userid){ 
-   	 var objAccess = $firebase( new Firebase('https://sweltering-fire-3219.firebaseio.com').child('users').child(}).child('role')).$asObject();     
+   	 var objAccess = $firebase( new Firebase('https://.....firebaseio.com').child('users').child(}).child('role')).$asObject();     
  	 	 objAccess.$loaded().then(function() {
  	    	if(objAccess.$value > 50){
 		    	$scope.aaa =true;

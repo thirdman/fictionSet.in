@@ -204,7 +204,26 @@ button{
    
 
 
+////////////////////////////////////////////////////////////
+/// DEV MODE
+///////////////////////////////////////////////////////////////////
 
+#header.devMode{
+	border-top: 30px solid red;
+	background: red;
+	position: relative;
+	&:before{
+		position: absolute;
+		top: -30px;
+		z-index: 99999;
+		content: 'DEV MODE';
+		height: 30px;
+		width: 100%;
+		text-align: center;
+		font-weight: bold;
+		font-size: 30px;
+	}
+}
 
 
 
@@ -224,6 +243,8 @@ a, a:visited, nav {
 	*/
 	transition: color 0.3s, background 0.7s, border-radius 0.7s, text-indent 0.2s;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
+
+	
 }
 
 
@@ -253,7 +274,7 @@ nav {
 	//margin-top: 8px;
 	top: .5em;
 	z-index: 21;
-	&:hover{
+	&.uncollapsed{//&:hover2, 
 		width: 170px;
 		height: 210px;
 		cursor: pointer;
@@ -264,6 +285,10 @@ nav {
 		top: 0;
 		padding-top: .5em;
 		margin-left: 0;
+		transition: color inherit, background inherit, border-radius inherit, text-indent inherit;
+		-webkit-tap-highlight-color: rgba(0,0,0,0);
+		box-shadow: none;
+
 		a {
 			color: $fsBlack !important;
 			
@@ -272,7 +297,7 @@ nav {
 			color: $fsBlack;
 		}
 		a{
-			&:hover{
+			&:hover{ 
 				background: #fff;
 				&:after{
 					background: transparent;
@@ -283,7 +308,7 @@ nav {
 		
 		.navGroup{
 			//background: #fff;
-			display: block;
+			display: none;
 			-webkit-border-radius: 5px;
 			-moz-border-radius:  5px;
 			border-radius:  5px;
@@ -291,11 +316,16 @@ nav {
 			margin-bottom: 2px;
 			margin-left: .5em;
 			margin-right: .5em;
-			
+			&.uncollapsed{
+				display: block;
+				a{
+					display: block;
+				}
+			}
 
 		}
 		//sets up the STYLS OF THE VISIBLE ELEMENTS ONCE MENU IS HOVERED:
-		&:hover{
+		&.uncollapsed{ //&:hover
 				width: 100%;
 				height: inherit;
 				cursor: pointer;
@@ -328,16 +358,17 @@ nav {
 	
 	&.additionalNav{
 		margin-left: 0;
-		&:hover{
-					height: 230px;
+		&.uncollapsed{ //&:hover
+			background: #eee;
+			height: 230px;
 		}
 		.trigger{
 			margin-left: 0;
 		}
 	}
 
-	&:hover{ //WHEN THE MENU IS ACTIVE
-		background: #eee;
+	&.uncollapsed{ //WHEN THE MENU IS ACTIVE  //&:hover
+		//background: #eee;
 		z-index: 9999;
 		> a:first-child{
 			&.trigger{
@@ -369,7 +400,7 @@ nav a{ //STANDARD LINKS WITHIN A NAV - INITIALLY HIDDEN
 	&:after{
 		position: absolute;
 		top: 0;
-		padding: 12px 0;
+		padding: 10px 0;
 		width: 50px;
 		font-size: 17px;
 		display: block;

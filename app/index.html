@@ -79,18 +79,19 @@
 <!-- <body ng-cloak> -->
    <body ng-controller="AuthCtrl">
 
-<div id="header" class="header" style="">
+<div id="header" class="header" style="" ng-class="(dev_status == true) ? 'devMode' : ''" >
      <div class="navicon-button x">
-      <nav onmouseover="" class="hidden-large mobileNav" >
-		<a href="" title="Menu" class="icon-three-bars icon-menu trigger"><span>Menu</span></a>
-	    <span class="navGroup">
-	    <a href="#/home" title="Requests" class="icon-books"  >Books</a>
-	    <a href="#/places" title="Requests" class="icon-places"  >Places</a>
-	    <a href="#/near" title="Requests" class="icon-near"  >Near You</a>
-		<a href="#/requests" title="Requests" class="icon-requests" >Suggestions</a> 
-		<a href="#/collections" title="Collections" class="icon-collections" >Collections</a>
-		<a href="#/tags" title="Tags" class="icon-tags" >Tags</a>
-		<a href="#/about" title="About" class="icon-about" >About</a>
+      <nav onmouseover="" class="hidden-large mobileNav" ng-class="(showMenu == true) ? 'uncollapsed' : 'collapsed'"  ng-init="showMenu = false">
+		<a href="" title="Menu" class="icon-three-bars icon-menu trigger" ng-click="showMenu=!showMenu"><span>Menu</span></a>
+		
+	    <span class="navGroup"   ng-class="(showMenu == true) ? 'uncollapsed' : 'collapsed'"> <!-- ng-show="!showMenu"-->
+	    <a href="#/home" title="Requests" class="icon-books"  ng-click="showMenu=!showMenu" >Books</a>
+	    <a href="#/places" title="Requests" class="icon-places" ng-click="showMenu=!showMenu" >Places</a>
+	    <a href="#/near" title="Requests" class="icon-near" ng-click="showMenu=!showMenu" >Near You</a>
+		<a href="#/requests" title="Requests" class="icon-requests" ng-click="showMenu=!showMenu">Suggestions</a> 
+		<a href="#/collections" title="Collections" class="icon-collections" ng-click="showMenu=!showMenu">Collections</a>
+		<a href="#/tags" title="Tags" class="icon-tags" ng-click="showMenu=!showMenu">Tags</a>
+		<a href="#/about" title="About" class="icon-about" ng-click="showMenu=!showMenu" >About</a>
 	    </span>
 	 </nav>
 	 
@@ -99,13 +100,13 @@
 	    <li><a href="#/places">Places</a></li>
 	    <li><a href="#/near">Near You</a></li>
 		<li class="dropdownWrap">
-		  <nav class="additionalNav" >
-			<a href="" title="Menu" class="icon-three-bars trigger"><span>More&hellip;</span></a>
-	    <span class="navGroup">
-			<a href="#/requests" title="Requests" class="icon-requests" >Suggestions</a> 
-			<a href="#/collections" title="Collections" class="icon-collections">Collections</a>
-			<a href="#/tags" title="Tags" class="icon-tags">Tags</a>
-			<a href="#/about" title="About" class="icon-about">About</a>
+		  <nav class="additionalNav" ng-class="(showAdditional == true) ? 'uncollapsed' : 'collapsed'"  ng-init="showAdditional = false">
+			<a href="" title="Menu" class="icon-three-bars trigger" ng-click="showAdditional=!showAdditional"><span>More&hellip;</span></a>
+	    <span class="navGroup" ng-class="(showAdditional == true) ? 'uncollapsed' : 'collapsed'">
+			<a href="#/requests" title="Requests" class="icon-requests" ng-click="showAdditional=!showAdditional">Suggestions</a> 
+			<a href="#/collections" title="Collections" class="icon-collections" ng-click="showAdditional=!showAdditional">Collections</a>
+			<a href="#/tags" title="Tags" class="icon-tags" ng-click="showAdditional=!showAdditional">Tags</a>
+			<a href="#/about" title="About" class="icon-about" ng-click="showAdditional=!showAdditional">About</a>
 	    </span>
 		 </nav>
 		</li>

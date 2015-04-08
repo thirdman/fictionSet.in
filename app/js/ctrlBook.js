@@ -1,5 +1,5 @@
 'use strict';
- app.controller("BookCtrl", [ "$scope", "$rootScope", "currentUser", "$firebase", "$routeParams", "$location", "$timeout", "DataSource", "iTunesData", "Profile", "filterFilter", 'FsAdmin', 'ngDialog', "$log", function($scope, $rootScope, currentUser, $firebase, $routeParams, $location, $timeout, DataSource, iTunesData, Profile, filterFilter, FsAdmin, ngDialog, $log, lodash ) { 
+ app.controller("BookCtrl", ["fsConfig", "$scope", "$rootScope", "currentUser", "$firebase", "$routeParams", "$location", "$timeout", "DataSource", "iTunesData", "Profile", "filterFilter", 'FsAdmin', 'ngDialog', "$log", function(fsConfig, $scope, $rootScope, currentUser, $firebase, $routeParams, $location, $timeout, DataSource, iTunesData, Profile, filterFilter, FsAdmin, ngDialog, $log, lodash ) { 
    	$scope.isLoading = true;
    	var isBookmarking = false;
    	$scope.isBookmarking = isBookmarking;
@@ -55,19 +55,19 @@
 */	
 
 	//now everything else
-    var ref = new Firebase('https://sweltering-fire-3219.firebaseio.com/Books/' + bookid);
+    var ref = new Firebase(fsConfig.FIREBASE_URL+'/Books/' + bookid);
 	var sync = $firebase(ref);
 	$scope.book = sync.$asObject();
 
 	
- 	var obj = $firebase(new Firebase('https://sweltering-fire-3219.firebaseio.com/Books/' + bookid)).$asObject();  //.$asObject();
- 	var booksArray = $firebase(new Firebase('https://sweltering-fire-3219.firebaseio.com/Books/')).$asArray();
+ 	var obj = $firebase(new Firebase(fsConfig.FIREBASE_URL+'/Books/' + bookid)).$asObject();  //.$asObject();
+ 	var booksArray = $firebase(new Firebase(fsConfig.FIREBASE_URL+'/Books/')).$asArray();
 
 
  	 $scope.bookplaces = {};
-     var placesRef =  new Firebase('https://sweltering-fire-3219.firebaseio.com/places/');
+     var placesRef =  new Firebase(fsConfig.FIREBASE_URL+'/places/');
 
- 	 var locationref2 = $firebase(new Firebase('https://sweltering-fire-3219.firebaseio.com/Books/' + bookid + '/tags/0')).$asArray();  //.$asObject();
+ 	 var locationref2 = $firebase(new Firebase(fsConfig.FIREBASE_URL+'/Books/' + bookid + '/tags/0')).$asArray();  //.$asObject();
  	 
      obj.$loaded().then(function() {
 		$scope.hasData = true;
@@ -95,7 +95,6 @@
  		});
 
  	 	if(obj.places){
- 	  	  //var bookPlaces = $firebase( new Firebase('https://sweltering-fire-3219.firebaseio.com/Books/'+bookid +'/places')).$asArray(); 
  	  	 // bookPlaces.$loaded().then(function(){
 		 	  var bookPlaces = [];
 		 	   bookPlaces = obj.places;
@@ -255,32 +254,6 @@
 		$scope.bkLat = "0";	 		 	
 	}
 
-/*
- 	 		 if(obj.tags){
- 	 		 var locationtag = obj.tags[0];
- 	 		 $scope.locationtag = obj.tags[0];
- 	 		 console.log(locationtag);
- 
- 	 		 var objLoc = $firebase(new Firebase('https://sweltering-fire-3219.firebaseio.com/places/')).$asArray();  //.$asObject();
- 	 		 	objLoc.$loaded().then(function() {
- 	 		 		
-
-  		 		 	var thelocationtag = $scope.locationtag;		 		 	
-  		 		 	var bookloc2 = _.find(objLoc,  { displayName: locationtag});
-  		 		 	console.log(bookloc2)
-					var bkLat = bookloc2.gps.lat;
-					var bkLng = bookloc2.gps.lng;
-					$scope.bkLng = bkLng;
-			 		  $scope.bkLat = bkLat;	 		 	
-
-	 		 	});
-	 		 } else {
-		 		 $scope.bkLng = "100";
-		 		 $scope.bkLat = "0";	 		 	
-
-	 		 }
-*/
- 	     
 	 		 if(obj.apple_id){
  	 		 	console.log('Yo, apple id already here');
      		 	var sQuery = obj.apple_id;
@@ -298,7 +271,7 @@
  	
  	//gets a list of collections this book is in 
  	//this appears ont he actual page.
- 	var arrCollections = $firebase(new Firebase('https://sweltering-fire-3219.firebaseio.com/collections/')).$asArray();
+ 	var arrCollections = $firebase(new Firebase(fsConfig.FIREBASE_URL+'/collections/')).$asArray();
       	$scope.arrCollections = arrCollections;
       	 arrCollections.$loaded().then(function() {
 /*
@@ -338,7 +311,7 @@
 		  	  }
 	  	  });
  
-  	var uCollections = $firebase(new Firebase("https://sweltering-fire-3219.firebaseio.com/users/").child(currentUser.uid).child('collections'));
+  	var uCollections = $firebase(new Firebase(fsConfig.FIREBASE_URL+"/users/").child(currentUser.uid).child('collections'));
  	var userCollectionArray = uCollections.$asArray();
   	   userCollectionArray.$loaded().then(function() {
  	   	 console.log('userCollectionArray length is ' + userCollectionArray.length);
@@ -367,7 +340,7 @@
  	var checkCollectionStatus = function(currentUser){
 	 		 isBookmarking = true;
 	 		 $scope.isBookmarking = isBookmarking;
-	    	var refUser = new Firebase("https://sweltering-fire-3219.firebaseio.com/users/").child(currentUser.uid);
+	    	var refUser = new Firebase(fsConfig.FIREBASE_URL+"/users/").child(currentUser.uid);
 	 	    refUser.child('collections/bookshelf').once('value', function(snapshot) {
 		    var hasBookshelf = (snapshot.val() !== null);
 		    if(hasBookshelf){
@@ -440,6 +413,7 @@
  		       });
  	};   
     
+/*
   	var getAppleDataID = function(sQuery) {
 			$scope.isLoadingApple = true;
 
@@ -460,12 +434,13 @@
    				   	$scope.noApple = true;
 		        }//ends if
  		       });
- 	};   
+ 	}; 
+*/  
     
     
  
 	function checkIfUserExists(userId) {
-	  var USERS_LOCATION = 'https://sweltering-fire-3219.firebaseio.com/users';
+	  var USERS_LOCATION = fsConfig.FIREBASE_URL+'/users';
 	  var userAccess = new Firebase(USERS_LOCATION);
 	  console.log(userAccess);
 	  userAccess.child(userId).once('value', function(snapshot) {
@@ -505,7 +480,7 @@
 	 	isBookmarking = true;
 	 	$scope.isBookmarking = isBookmarking;
 
-	  	var userCollections = new Firebase('https://sweltering-fire-3219.firebaseio.com').child('users').child(currentUser.uid).child('collections');
+	  	var userCollections = new Firebase(fsConfig.FIREBASE_URL).child('users').child(currentUser.uid).child('collections');
  		userCollections.child(collectionId).child('books').child(bookid).once('value', function(snapshot) {
   			var hasBook = (snapshot.val() !== null);
 			if(hasBook){
@@ -525,7 +500,7 @@
 	 	//$scope.isBookmarking = isBookmarking;
 	 	console.log(currentUser + book +bookid +collectionId);
 	 		if (bookid) {
- 			  	var userCollections = new Firebase('https://sweltering-fire-3219.firebaseio.com').child('users').child(currentUser.uid).child('collections');
+ 			  	var userCollections = new Firebase(fsConfig.FIREBASE_URL).child('users').child(currentUser.uid).child('collections');
  			  	userCollections.child(collectionId).child('books').child(bookid).remove();
 			   	inCollection = false;
 				$scope.inCollection=inCollection;
@@ -540,7 +515,7 @@
 		//alert('(eabout to add a book:)'+ bookid)
  		var addTimestamp = new Date().valueOf();
  			if (bookid) {
-  			  	var userCollections = new Firebase('https://sweltering-fire-3219.firebaseio.com').child('users').child(currentUser.uid).child('collections');
+  			  	var userCollections = new Firebase(fsConfig.FIREBASE_URL).child('users').child(currentUser.uid).child('collections');
  		  		userCollections.child(collectionId).child('books').child(bookid).update({
 					    bookid: bookid,
 						description: obj.description,
@@ -597,7 +572,7 @@
  	/////this section does the dialogs for collections /////
  	///////////////////////////////////////
  	
-	var refCollections = new Firebase("https://sweltering-fire-3219.firebaseio.com/collections/");
+	var refCollections = new Firebase(fsConfig.FIREBASE_URL+"/collections/");
  		refCollections.once('value', function(snapshot) {
 	    	var hasCollection = (snapshot.val() !== null);
  	    	$scope.refCollections = snapshot.val();
@@ -633,7 +608,7 @@
 				if(!newCollectionData.isPublic){
 					newCollectionData.isPublic = false;
 				}
-				var ref = 'https://sweltering-fire-3219.firebaseio.com';
+				var ref = fsConfig.FIREBASE_URL;
 			  	var globalCollections = new Firebase(ref).child('collections');
 			  	var userCollectionSet = new Firebase(ref).child('users').child(currentUser.uid).child('collections');
 			  	
@@ -692,7 +667,7 @@
 			$scope.bookProcessing = true;
 			console.log(obj);
 			if(collectionId){
-				var ref = 'https://sweltering-fire-3219.firebaseio.com';
+				var ref = fsConfig.FIREBASE_URL;
 			  	var globalCollectionSet = new Firebase(ref).child('collections').child(collectionId);
 			  	var userCollSet = new Firebase(ref).child('users').child(currentUser.uid).child('collections').child(collectionId);
 
@@ -735,7 +710,7 @@
 	 			bookProcessing = true;
 				$scope.bookProcessing = true;
 				if(collectionId){
-					var ref = 'https://sweltering-fire-3219.firebaseio.com';
+					var ref = fsConfig.FIREBASE_URL;
 				  	var globalCollectionSet = new Firebase(ref).child('collections').child(collectionId);
 				  	var userCollSet = new Firebase(ref).child('users').child(currentUser.uid).child('collections').child(collectionId);
 						
@@ -774,7 +749,7 @@
 
 			console.log(obj);
 			if(collectionId){
-				var ref = 'https://sweltering-fire-3219.firebaseio.com';
+				var ref = fsConfig.FIREBASE_URL;
 			  	var globalCollectionSet = new Firebase(ref).child('collections').child(collectionId);
 			  	var userCollSet = new Firebase(ref).child('users').child(currentUser.uid).child('collections').child(collectionId);
 
@@ -816,7 +791,7 @@
  			bookProcessing = true;
 			$scope.bookProcessing = true;
 			if(collectionId){
-				var ref = 'https://sweltering-fire-3219.firebaseio.com';
+				var ref = fsConfig.FIREBASE_URL;
 			  	var globalCollectionSet = new Firebase(ref).child('collections').child(collectionId);
 			  	var userCollSet = new Firebase(ref).child('users').child(currentUser.uid).child('collections').child(collectionId);
 					
@@ -855,8 +830,8 @@
 		$scope.collectionProcessing = false;
 		var collectionsArray = [];
 		
-		var uCollectionList =  new Firebase("https://sweltering-fire-3219.firebaseio.com/users/").child(currentUser.uid).child('collections');
-		var collArr = $firebase( new Firebase("https://sweltering-fire-3219.firebaseio.com/users/").child(currentUser.uid).child('collections')).$asArray();
+		var uCollectionList =  new Firebase(fsConfig.FIREBASE_URL+"/users/").child(currentUser.uid).child('collections');
+		var collArr = $firebase( new Firebase(fsConfig.FIREBASE_URL+"/users/").child(currentUser.uid).child('collections')).$asArray();
 		collArr.$loaded().then(function() {
 			//console.log(collArr);
 			//console.log(collArr.length);
@@ -924,7 +899,7 @@
 		 if(profile){
 	 		 var messageType = 'Edit';
 		 	 var theTimestamp = new Date().valueOf();
-		 	 var ref = new Firebase('https://sweltering-fire-3219.firebaseio.com/');
+		 	 var ref = new Firebase(fsConfig.FIREBASE_URL);
 		 	 var messages = ref.child("system/adminmessages");
 	  		 messages.push({
 				    title: 'Suggestion/Error report for '+obj.title,

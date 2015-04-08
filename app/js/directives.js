@@ -50,7 +50,7 @@ angular.module('myApp.directives', [])
     return $q.when('Promise fulfilled!');
   };
 })
-.directive('fsUserImg', ['$firebase', 'simpleLogin', function($firebase, simpleLogin){
+.directive('fsUserImg', ['fsConfig', '$firebase', 'simpleLogin', function(fsConfig, $firebase, simpleLogin){
 	return {
 	restrict: 'AE',
 	scope: {
@@ -66,7 +66,7 @@ angular.module('myApp.directives', [])
 		//IF IT"S A HEADER LOGO OR STANDARD PROFILE
 	   	if($scope.fsIconType == 'header'){
 			simpleLogin.$getCurrentUser().then( function(currentUser) {
-				var refUser = $firebase(new Firebase('https://sweltering-fire-3219.firebaseio.com/users/').child(currentUser.uid)).$asObject();
+				var refUser = $firebase(new Firebase(fsConfig.FIREBASE_URL+'/users/').child(currentUser.uid)).$asObject();
 				refUser.$loaded().then(function() {
 					console.log(refUser);
 					$scope.pictureUrl = refUser.picture_url; 
@@ -79,7 +79,7 @@ angular.module('myApp.directives', [])
 			}else if($scope.fsIconType == 'general'){	
 				//CHECK IF USERID EXISTS
 				if($scope.fsUserId){
-					var firebaseResource = $firebase(new Firebase('https://sweltering-fire-3219.firebaseio.com/users/').child($scope.fsUserId)).$asObject();
+					var firebaseResource = $firebase(new Firebase(fsConfig.FIREBASE_URL+'/users/').child($scope.fsUserId)).$asObject();
 					firebaseResource.$loaded().then(function() {
 						$scope.pictureUrl = firebaseResource.picture_url; 
 						$scope.userName = firebaseResource.displayName; 
@@ -102,7 +102,7 @@ angular.module('myApp.directives', [])
 //			var currentUser = simpleLogin.$getCurrentUser();
 
 		if(scope.fsIconType == 'header'){
-			var refUser = $firebase(new Firebase('https://sweltering-fire-3219.firebaseio.com/users/').child(userId)).$asObject();
+			var refUser = $firebase(new Firebase('https://.....firebaseio.com/users/').child(userId)).$asObject();
 			refUser.$loaded().then(function() {
 				console.log(refUser);
 				scope.pictureUrl = refUser.picture_url; 
@@ -129,7 +129,7 @@ angular.module('myApp.directives', [])
     };
   }])
 
-.directive('fsMessageCount', ['$firebase', 'simpleLogin', 'filterFilter', function($firebase, simpleLogin, filterFilter){
+.directive('fsMessageCount', ['fsConfig', '$firebase', 'simpleLogin', 'filterFilter', function(fsConfig, $firebase, simpleLogin, filterFilter){
 	return {
 		restrict: 'AE',
 		scope: {
@@ -147,7 +147,7 @@ angular.module('myApp.directives', [])
  			simpleLogin.$getCurrentUser().then(function(currentUser) {
 				if(currentUser){
 					$scope.userMessageCount = ''; 
-					var fbMsg = new Firebase('https://sweltering-fire-3219.firebaseio.com/messages/').child(currentUser.uid);
+					var fbMsg = new Firebase(fsConfig.FIREBASE_URL + '/messages/').child(currentUser.uid);
 		 			fbMsg.on('value', function(snapshot) {
 			 			var fbMessages = (snapshot.val());
 			 			var theNewMsgs = filterFilter(fbMessages, {isSeen:'!true'});

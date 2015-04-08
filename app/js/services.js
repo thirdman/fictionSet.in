@@ -13,9 +13,9 @@
 	      }
 	  }])
 	  
-  .service('FsGet', ['$http', '$firebase', function($http, $firebase) {
+  .service('FsGet', ["fsConfig", '$http', '$firebase', function(fsConfig, $http, $firebase) {
 	//GET AN OBJECT PROFILE FROM AN ID
-	var ref = new Firebase('https://sweltering-fire-3219.firebaseio.com/');
+	var ref = new Firebase(fsConfig.FIREBASE_URL);
 	return {
 		getBook: function (theBookId) {
 			var thisBook;
@@ -48,9 +48,9 @@
 	}
   }])
 	  
-  .service('FsNotifyWithId', ['$http', '$firebase', 'FsNotify', 'FsGet', function($http, $firebase, FsNotify, FsGet) {
+  .service('FsNotifyWithId', ['fsConfig', '$http', '$firebase', 'FsNotify', 'FsGet', function(fsConfig, $http, $firebase, FsNotify, FsGet) {
 	//GET AN OBJECT PROFILE FROM AN ID
-	var ref = new Firebase('https://sweltering-fire-3219.firebaseio.com/');
+	var ref = new Firebase(fsConfig.FIREBASE_URL);
 	return {
 		bookAdded: function(theUserId, theBookId){
 			var theUser, theBook;					
@@ -101,7 +101,7 @@
 	}
   }])
 	  
-  .service('FsNotify', ['$http', '$firebase', 'filterFilter', 'FsGet', function($http, $firebase, filterFilter, FsGet) {
+  .service('FsNotify', ['fsConfig', '$http', '$firebase', 'filterFilter', 'FsGet', function(fsConfig, $http, $firebase, filterFilter, FsGet) {
  	//MESSAGE ELEMENTS
 	/*
 	META:
@@ -140,7 +140,7 @@
 
 
  		//RESOURCES
- 		var ref = new Firebase('https://sweltering-fire-3219.firebaseio.com/');
+ 		var ref = new Firebase(fsConfig.FIREBASE_URL);
 		var refLocations = $firebase(ref.child('places')).$asArray(); 
 		var refUsers = $firebase(ref.child('users')).$asArray(); 
 		var refBooks = $firebase(ref.child('Books')).$asArray(); 

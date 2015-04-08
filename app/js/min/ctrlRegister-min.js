@@ -1,8 +1,8 @@
 'use strict';
 
-app.controller("RegisterCtrl",  ["$firebaseSimpleLogin", "$scope", "$location", "simpleLogin", '$http', function($firebaseSimpleLogin, $scope, $location, simpleLogin, $http) {
+app.controller("RegisterCtrl",  ["fsConfig","$firebaseSimpleLogin", "$scope", "$location", "simpleLogin", '$http', function(fsConfig, $firebaseSimpleLogin, $scope, $location, simpleLogin, $http) {
 
-  var ref = new Firebase("https://sweltering-fire-3219.firebaseio.com/"); //  location we're authenticating for
+  var ref = new Firebase(fsConfig.FIREBASE_URL); //  location we're authenticating for
   var isaNewUser = true;
   var userexists = false;
   var loading = false;
@@ -61,7 +61,7 @@ app.controller("RegisterCtrl",  ["$firebaseSimpleLogin", "$scope", "$location", 
 			//THEN NOTIFY US
 			//add a notificiation
 			var theTimestamp = new Date().valueOf();					
-			ref.child('/system/messages').push({
+			ref.child('/system/adminmessages').push({
 				title:"User Added (manual)",
 				messageContent:  newName + ' ('+ newEmail + ") registered.",
 				messageType: "User",

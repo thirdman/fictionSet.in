@@ -37,7 +37,10 @@ ul{
 				padding-bottom: .5em;
 				//border-bottom: 1px dotted #ccc;
 				border-bottom: 1px solid $fsLineGrey;	
-		
+				.homeBook & {
+				border-bottom: 0px solid transparent;	
+					
+				}
 			}
 
 			@media only screen and (min-width: 888px) and ( max-width: 2399px) {
@@ -138,12 +141,14 @@ transition: all .5s ease;
 		position: absolute;
 		left: 30%;
 		height: 100%;
-
+		overflow: hidden;
+		
 					@media only screen and (min-width: 0px) and (max-width: 887px) {
 					position: inherit;
 					overflow: visible;
 					height: auto;
-					width: 87%;					 
+					width: 87%;		
+					padding-bottom: 1em;			 
 					}
 		h3{}
 		h5{}
@@ -291,18 +296,62 @@ transition: all .5s ease;
 				}
 			}
 			
+		}
 			//SMALL VERSION
-			@media only screen and (min-width: 0px) and (max-width: 887px) {
-			position: relative;
-			width: 100%;
-			display: block;
-			border-top: 1px solid $fsLineGrey;
-			padding-top: .5em;
-			margin-top: .5em;
-			padding-bottom: 1em;
+		@media only screen and (min-width: 0px) and (max-width: 887px) {
+				.socialContent{
+				position: relative;
+				width: 100%;
+				display: block;
+				border-top: 1px solid $fsLineGrey;
+				padding-top: .5em;
+				margin-top: .5em;
+				padding-bottom: 0;
+				right: 0;
+				.btnWrap{
+						border-radius: 0 0 5px 5px;
+						overflow: hidden;
+						a{
+							border-radius: inherit;
+						}
+						.btn.hollow{
+							border-bottom: 1px solid #666;	
+							border-radius: 0;
+							color: $fsLightGrey;
+							background: lighten($fsBlack, 7%);
+							&:hover{
+								background: inherit;
+							}
+							&:first-child{
+								border-radius: 0;
+							}
+							&:last-child{
+							border-bottom: 0px solid #fff;	
+							}
+						}
+					}
+				}
+				.theContent{
+					width: 70%;
+					margin-left: .5em;
+					
+					h3{
+						font-size: 1.2em;
+					}
+				}
+				.imgWrap{
+					width: 20%;
+					margin-top: -1em;
+					margin-bottom: -8px;
+					margin-left: .5em;
+				
+					img{
+						box-shadow:1px 1px 3px rgba(0, 0, 0, 0.3); 
+					}
+				}
 			}
 
 			
-		}
+
 	}
 }

@@ -55,7 +55,6 @@
 				<p ng-show="item.description">{{  item.description | to_plain |cut:true:180:' ...' }}</p>
 					<div class="bookInfo ">
 						<div class="placeList">
-						Places:
 						<span ng-repeat="place in item.places" class="aTag"  >
 							<a ng-href="#/place/{{place.geonameId}}" ng-class="(place.name==place.countryName) ? 'countryName' : ''" class="placeName">{{place.name}}</a><span ng-if="place.name != place.countryName"> <a href="#/place/{{place.countryName}}" class="placeCountry"><span>{{place.countryCode}}<span></a></span>
 						</span>
