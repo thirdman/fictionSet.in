@@ -1,24 +1,31 @@
-var app = angular.module("myApp", 
-	["firebase", 'ngRoute', 'myApp.directives', 'myApp.services', 'angular-underscore','ngLodash', 'angucomplete-alt', 'angularMapbox', 'ngDialog', 'ngResource', 'ngTagsInput']
- 		);
+var app = angular.module("myApp", [
+	'firebase', 
+	'ngRoute', 
+	'myApp.directives', 
+	'myApp.services', 
+	'angular-underscore',
+	'ngLodash', 
+	'angucomplete-alt', 
+	'angularMapbox', 
+	'ngDialog', 
+	'ngResource', 
+	'ngTagsInput'
+]);
 
 app.constant("fsConfig", {
  	"FIREBASE_URL": "https://sweltering-fire-3219.firebaseio.com/",	//PRODUCTION VERSION
-//	"FIREBASE_URL": "https://fictionset-dev.firebaseio.com/",	//DEV VERSION
+ 	//"FIREBASE_URL": "https://fictionset-dev.firebaseio.com/",	//DEV VERSION
 	"DEV_STATUS": false
-	
-	});
+});
 
 app.config(["$routeProvider", '$locationProvider','ngDialogProvider', function($routeProvider, $locationProvider, ngDialogProvider) {
- 
- 	ngDialogProvider.setDefaults({
-        className: 'ngdialog-theme-default',
-        plain: true,
-        showClose: true,
-        closeByDocument: true,
-        closeByEscape: true
-    });
-    
+	ngDialogProvider.setDefaults({
+      className: 'ngdialog-theme-default',
+      plain: true,
+      showClose: true,
+      closeByDocument: true,
+      closeByEscape: true
+  });
 
   $routeProvider.when("/home", {
     controller: "BooksCtrl", //HomeCtrl
@@ -401,10 +408,10 @@ app.config(["$routeProvider", '$locationProvider','ngDialogProvider', function($
 
 
 app.run(['fsConfig', '$location', '$rootScope','$route', function(fsConfig, $location, $rootScope, $route) {
-    $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
-        $rootScope.pageTitle = $route.current.pageTitle;
-        //$rootScope.pageClass = $location.pageClass;
-        $rootScope.pageClass =  $route.current.pageClass ? $route.current.pageClass : '';
+	$rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
+  	$rootScope.pageTitle = $route.current.pageTitle;
+    //$rootScope.pageClass = $location.pageClass;
+    $rootScope.pageClass =  $route.current.pageClass ? $route.current.pageClass : '';
 			if (typeof ga === "undefined") {
           //if (!ga){
 	          	console.log('ga == undefined');
@@ -506,16 +513,15 @@ app.factory("simpleLogin", ["fsConfig", "$firebaseSimpleLogin", "Profile", "$roo
 	return $firebaseSimpleLogin(ref);
   }]);
 
+/*
 app.factory("getFirebase", ["fsConfig", "$scope", "$location", function(fsConfig, $scope, $Location) {
-   var getResults = new firebase(fsConfig.FIREBASE_URL+'/books').once('value', function(snap) {
-    var listOfRecordIds = snap.val();
-    console.log(snap.val());
-	
-
+  var getResults = new firebase(fsConfig.FIREBASE_URL+'/books').once('value', function(snap) {
+  var listOfRecordIds = snap.val();
+  	console.log(snap.val());
 	});
-
 	 return $firebase(getResults, tag); 
 }]);
+*/
 
 
 app.factory('AuthService', ['$rootScope', '$location', function($rootScope, $location) {
