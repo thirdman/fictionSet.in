@@ -1,13 +1,12 @@
 'use strict';
  
-app.controller("LoginCtrl",  ["fsConfig", "$scope", "$location", "currentUser", "simpleLogin", "simpleLogin1", '$http', function(fsConfig, $scope, $location, currentUser, simpleLogin, simpleLogin1, $http) {
+app.controller("LoginCtrl",  ["fsConfig", "$scope", "$location", "currentUser", "simpleLogin", '$http', function(fsConfig, $scope, $location, currentUser, simpleLogin, $http) {
   $scope.loginInfo = {}
   $scope.pageClass = "loginPage"; 
   $scope.theerror = '';
   $scope.iserror = false;
   $scope.loading = false;
 
-  //$scope.auth = simpleLogin1;
   var ref = new Firebase(fsConfig.FIREBASE_URL);
 
    var auth = new FirebaseSimpleLogin(ref, function(error, user) {

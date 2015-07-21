@@ -43,10 +43,9 @@
 	  	  ga('create', 'UA-56123146-1', 'fictionset.in');
 	  	  //	  ga('send', 'pageview');  //commented out for angularanalytics
  	</script>
- 
 
  	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/ng-tags-input/2.1.1-1/ng-tags-input.bootstrap.min.css"/>	
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/ng-tags-input/2.1.1-1/ng-tags-input.min.css"/>	
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/ng-tags-input/2.1.1-1/ng-tags-input.min.css"/>	
 	<link rel="stylesheet" href="vendor/angucomplete-alt.css"/>
 	<link rel="stylesheet" href="vendor/mapbox.css"/>
 	<link rel="stylesheet" href="vendor/css/ngDialog.min.css"/>	
@@ -54,7 +53,7 @@
   
 
 	 
-    <script src="js/app.js"></script>
+  <script src="js/app.js"></script>
 	<script src="js/services.js"></script>
 	<script src="js/directives.js"></script>
 	<script src="js/ctrlRegister.js"></script>
@@ -64,90 +63,76 @@
 	<script src="js/ctrlRequests.js"></script>
 	<script src="js/ctrlTags.js"></script>
 	
-  <meta name="viewport" content="initial-scale=1.0">
-  	<!-- facebook tags -->
-  	 <meta property="og:title" content="Fiction Set In ...">
-  	<meta property="og:description" content="Find books to read by the places they are set.">
-  	<meta property="og:image" content="http://fictionset.in/imgs/brand/coverimg.jpg">
-  	<meta property="og:image:type" content="image/jpeg">
+	<meta name="viewport" content="initial-scale=1.0">
+	<!-- facebook tags -->
+	<meta property="og:title" content="Fiction Set In ...">
+	<meta property="og:description" content="Find books to read by the places they are set.">
+	<meta property="og:image" content="http://fictionset.in/imgs/brand/coverimg.jpg">
+	<meta property="og:image:type" content="image/jpeg">
 
-  
   <base href="/">
-
-
- </head>
-<!-- <body ng-cloak> -->
+</head>
    <body ng-controller="AuthCtrl">
 
 <div id="header" class="header" style="" ng-class="(dev_status == true) ? 'devMode' : ''" >
-     <div class="navicon-button x">
-      <nav onmouseover="" class="hidden-large mobileNav" ng-class="(showMenu == true) ? 'uncollapsed' : 'collapsed'"  ng-init="showMenu = false">
-		<a href="" title="Menu" class="icon-three-bars icon-menu trigger" ng-click="showMenu=!showMenu"><span>Menu</span></a>
-		
-	    <span class="navGroup"   ng-class="(showMenu == true) ? 'uncollapsed' : 'collapsed'"> <!-- ng-show="!showMenu"-->
-	    <a href="#/home" title="Requests" class="icon-books"  ng-click="showMenu=!showMenu" >Books</a>
-	    <a href="#/places" title="Requests" class="icon-places" ng-click="showMenu=!showMenu" >Places</a>
-	    <a href="#/near" title="Requests" class="icon-near" ng-click="showMenu=!showMenu" >Near You</a>
-		<a href="#/requests" title="Requests" class="icon-requests" ng-click="showMenu=!showMenu">Suggestions</a> 
-		<a href="#/collections" title="Collections" class="icon-collections" ng-click="showMenu=!showMenu">Collections</a>
-		<a href="#/tags" title="Tags" class="icon-tags" ng-click="showMenu=!showMenu">Tags</a>
-		<a href="#/about" title="About" class="icon-about" ng-click="showMenu=!showMenu" >About</a>
-	    </span>
-	 </nav>
-	 
+  <div class="navicon-button x">
+		<nav onmouseover="" class="hidden-large mobileNav" ng-class="(showMenu == true) ? 'uncollapsed' : 'collapsed'"  ng-init="showMenu = false">
+			<a href="" title="Menu" class="icon-three-bars icon-menu trigger" ng-click="showMenu=!showMenu"><span>Menu</span></a>
+			<span class="navGroup"   ng-class="(showMenu == true) ? 'uncollapsed' : 'collapsed'"> <!-- ng-show="!showMenu"-->
+				<a href="#/home" title="Requests" class="icon-books"  ng-click="showMenu=!showMenu" >Books</a>
+				<a href="#/places" title="Requests" class="icon-places" ng-click="showMenu=!showMenu" >Places</a>
+				<a href="#/near" title="Requests" class="icon-near" ng-click="showMenu=!showMenu" >Near You</a>
+				<a href="#/requests" title="Requests" class="icon-requests" ng-click="showMenu=!showMenu">Suggestions</a> 
+				<a href="#/collections" title="Collections" class="icon-collections" ng-click="showMenu=!showMenu">Collections</a>
+				<a href="#/tags" title="Tags" class="icon-tags" ng-click="showMenu=!showMenu">Tags</a>
+				<a href="#/about" title="About" class="icon-about" ng-click="showMenu=!showMenu" >About</a>
+			</span>
+		</nav>
 	  <ul class="menu hidden-small">
 	    <li><a href="#/home">Books</a></li>
 	    <li><a href="#/places">Places</a></li>
 	    <li><a href="#/near">Near You</a></li>
 		<li class="dropdownWrap">
 		  <nav class="additionalNav" ng-class="(showAdditional == true) ? 'uncollapsed' : 'collapsed'"  ng-init="showAdditional = false">
-			<a href="" title="Menu" class="icon-three-bars trigger" ng-click="showAdditional=!showAdditional"><span>More&hellip;</span></a>
-	    <span class="navGroup" ng-class="(showAdditional == true) ? 'uncollapsed' : 'collapsed'">
-			<a href="#/requests" title="Requests" class="icon-requests" ng-click="showAdditional=!showAdditional">Suggestions</a> 
-			<a href="#/collections" title="Collections" class="icon-collections" ng-click="showAdditional=!showAdditional">Collections</a>
-			<a href="#/tags" title="Tags" class="icon-tags" ng-click="showAdditional=!showAdditional">Tags</a>
-			<a href="#/about" title="About" class="icon-about" ng-click="showAdditional=!showAdditional">About</a>
+				<a href="" title="Menu" class="icon-three-bars trigger" ng-click="showAdditional=!showAdditional"><span>More&hellip;</span></a>
+		    <span class="navGroup" ng-class="(showAdditional == true) ? 'uncollapsed' : 'collapsed'">
+				<a href="#/requests" title="Requests" class="icon-requests" ng-click="showAdditional=!showAdditional">Suggestions</a> 
+				<a href="#/collections" title="Collections" class="icon-collections" ng-click="showAdditional=!showAdditional">Collections</a>
+				<a href="#/tags" title="Tags" class="icon-tags" ng-click="showAdditional=!showAdditional">Tags</a>
+				<a href="#/about" title="About" class="icon-about" ng-click="showAdditional=!showAdditional">About</a>
 	    </span>
 		 </nav>
 		</li>
 	</ul>
-	  
-	  <ul class="menu user">
-	    <li ng-hide="auth.user"><a href="#/login">login</a> / <a href="#/register"><button  class="btn btnSignUp">Sign Up</button></a></li>
-		
-
-	    <li ng-show="auth.user">
-	    	<a href="#/addbook" class="dividerRight"><span class="icon icon-book-sans-add"></span>
-		    	<span class="hidden-small">Submit a Book</span>
-		    </a>
-	    	<a href="#/profile" class="profileLink"><span class="inlineUserIcon" fs-user-img user-id="auth.user.uid" fs-user-id="auth.user.uid" fs-icon-type="header" ></span>
-		    	<span fs-message-count  fs-user-id="auth.user.uid" ></span>
+		<ul class="menu user">
+	  <li ng-hide="auth.user"><a href="#/login">login</a> / <a href="#/register"><button  class="btn btnSignUp">Sign Up</button></a></li>
+	  <li ng-show="auth.user">
+	   	<a href="#/addbook" class="dividerRight"><span class="icon icon-book-sans-add"></span>
+		  	<span class="hidden-small">Submit a Book</span>
+		  </a>
+	    <a href="#/profile" class="profileLink"><span class="inlineUserIcon" fs-user-img user-id="auth.user.uid" fs-user-id="auth.user.uid" fs-icon-type="header" ></span>
+		  	<span fs-message-count  fs-user-id="auth.user.uid" ></span>
 				<span class="hidden-small"> {{auth.user.displayName ? auth.user.displayName : 'Account'}}</span>
 			</a>
-	    </li>
+		</li>
  <!--
  	    <li ng-show ="['logout','error']"><a href="#/login">login</a></li>
 	    <li ng-show-auth="'login'"><a href="#/account">{{auth.user.displayName}}</a></li>
 -->
- 	  </ul>
- 	  
- 	  <div class="logoWrap">
-		  	<img src="/imgs/brand/logo_line.svg" style="" class="logo">
- 	    	<a href="#" class="headerLogo hidden-small" ><span class="headerName">Fictionset.in</span><span class="alphaTag">alpha</span></a>
-	 		<form id="headerSearch">
-		 			<input class="search-text placeholder" type="text" name="q" placeholder="Search " delayed-model="searchBar.places" data-delay="50" value="">
-		 	</form>
-		</div>
-
-    </div>
+	</ul>
+		<div class="logoWrap">
+		<img src="/imgs/brand/logo_line.svg" style="" class="logo">
+		<a href="#" class="headerLogo hidden-small" ><span class="headerName">Fictionset.in</span><span class="alphaTag">alpha</span></a>
+		<form id="headerSearch">
+			<input class="search-text placeholder" type="text" name="q" placeholder="Search " delayed-model="searchBar.places" data-delay="50" value="">
+		</form>
+	</div>
+	</div>
 </div>    
- 	
- 	
-
-  	  <div class="view-animate-container  " ng-view> 
- 	  </div>
+<div class="view-animate-container  " ng-view> 
+</div>
 	
-  </body>
+</body>
 </html>
 
 
