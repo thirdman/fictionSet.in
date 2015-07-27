@@ -1,41 +1,48 @@
-'use strict';
- app.controller("BookCtrl", ["fsConfig", "$scope", "$rootScope", "currentUser", "$firebase", "$routeParams", "$location", "$timeout", "DataSource", "iTunesData", "Profile", "filterFilter", 'FsAdmin', 'ngDialog', "$log", function(fsConfig, $scope, $rootScope, currentUser, $firebase, $routeParams, $location, $timeout, DataSource, iTunesData, Profile, filterFilter, FsAdmin, ngDialog, $log, lodash ) { 
-   	$scope.isLoading = true;
-   	var isBookmarking = false;
-   	$scope.isBookmarking = isBookmarking;
-   	$scope.hasData = false;
-   	$scope.isLoadingAmazon = false;
-   	$scope.noAmazon = true;
-   	$scope.hasAmazon = false;
-   	$scope.amazonData = '';
-   	$scope.userAaa = false;
-   	$scope.userRole = 0;
-   	$scope.relatedBooks = '';
-   	$scope.thereport = '';
-   	var placesCount;
-   	$scope.placesCount = placesCount;
-   	var placesMarkers = '/';
-   	var mapBoxKey = 'pk.eyJ1IjoidGhpcmRtYW4iLCJhIjoidjBOQ0lrYyJ9.8zzETVcyoBg2nlMquUR1TA';
-   	var mapUrlStringStart =  'http://api.tiles.mapbox.com/v4/thirdman.j1o1gjim';
-   	var mapUrlString = '';
-   	var pageTitle, amazonObj, addABook, removeABook, collectionAdded, collectionProcessing, tempBooksArray, bookProcessing, bookRemoved, ngDialog;
-   	$scope.mapUrlString = mapUrlString;
-   	var bkZoom = 5;
-   	var bkLat;
+
+ app.controller("BookCtrl", ["fsConfig", "$scope", "$rootScope", "Auth", "currentUser", "$firebase", "$firebaseArray", "$firebaseObject", "$routeParams", "$location", "$timeout", "DataSource", "iTunesData", "Profile", "filterFilter",  'ngDialog', "$log", "FsStats", "FsGet",
+ function(fsConfig, $scope, $rootScope, Auth, currentUser,  $firebase, $firebaseArray, $firebaseObject, $routeParams, $location, $timeout, DataSource, iTunesData, Profile, filterFilter,  ngDialog, $log,  FsStats, FsGet ) { 
+	'use strict';
+	// TODO: refactor out user stuff so the page can load quicker, THEN update with user stuff ?
+	
+	$scope.isLoading = true;
+	$scope.auth = Auth;
+	var authData = Auth.$getAuth();
+  $scope.authData = authData;
+	var isBookmarking = false;
+	$scope.isBookmarking = isBookmarking;
+	$scope.hasData = false;
+	$scope.isLoadingAmazon = false;
+	$scope.noAmazon = true;
+	$scope.hasAmazon = false;
+	$scope.amazonData = '';
+	$scope.userAaa = false;
+	$scope.userRole = 0;
+	$scope.relatedBooks = '';
+	$scope.thereport = '';
+	$scope.bookplaces = {};
+	var placesCount;
+	$scope.placesCount = placesCount;
+	var placesMarkers = '/';
+	//var mapBoxKey = 'pk.eyJ1IjoidGhpcmRtYW4iLCJhIjoidjBOQ0lrYyJ9.8zzETVcyoBg2nlMquUR1TA';
+	//var mapUrlStringStart =  'http://api.tiles.mapbox.com/v4/thirdman.j1o1gjim';
+	//var bkZoom = 5;
+	var mapUrlString = '';
+	var amazonObj, addABook, removeABook, collectionAdded, collectionProcessing, tempBooksArray, bookProcessing, bookRemoved, sQuery;
+	$scope.mapUrlString = mapUrlString;
+	var bkLat;
 	var bkLng;
 	var mapCenterLatTop = '';
 	var mapCenterLatBottom = '';
 	var mapCenterLngTop = '';
-	var mapCenterLngBottom = '';
-	
-   	var inCollection = false;
-   	var neighbourCountries = [];
-   	var amazonid = '';
-   	var bookid = $routeParams.id;
-   	var inCollection;
-   	$scope.inCollection = inCollection;
-   	$scope.bookid = bookid;
-   	$scope.testContent = "ggg";
+	var mapCenterLngBottom = '';	
+	var inCollection = false;
+	var neighbourCountries = [];
+	var relatedBooks = [];
+
+ 	var bookid = $routeParams.id;
+ 	$scope.inCollection = inCollection;
+ 	$scope.bookid = bookid;
+ 	$scope.testContent = "ggg";
 	$scope.collectionFollowing = false;
 	$scope.collectionAdded = false;
 	$scope.collectionProcessing = false;	
@@ -45,297 +52,192 @@
 	$scope.collectionsObj  = collectionsObj;
 	var collectionsArray = [];
 	$scope.collectionsArray = collectionsArray;
-	var ngDialog;
-	//FIRST DO ADMIN
-/*	if(currentUser){
-		FsAdmin.bookView(bookid, currentUser.uid);
-	} else {
-		FsAdmin.bookView(bookid, 'anonymous');
- 	}
-*/	
-
-	//now everything else
-    var ref = new Firebase(fsConfig.FIREBASE_URL+'/Books/' + bookid);
-	var sync = $firebase(ref);
-	$scope.book = sync.$asObject();
-
-	
- 	var obj = $firebase(new Firebase(fsConfig.FIREBASE_URL+'/Books/' + bookid)).$asObject();  //.$asObject();
- 	var booksArray = $firebase(new Firebase(fsConfig.FIREBASE_URL+'/Books/')).$asArray();
+	var neighbourRelatedBooks = [];
 
 
- 	 $scope.bookplaces = {};
-     var placesRef =  new Firebase(fsConfig.FIREBASE_URL+'/places/');
-
- 	 var locationref2 = $firebase(new Firebase(fsConfig.FIREBASE_URL+'/Books/' + bookid + '/tags/0')).$asArray();  //.$asObject();
- 	 
-     obj.$loaded().then(function() {
+  var ref = new Firebase(fsConfig.FIREBASE_URL+'/Books/' + bookid);
+	$scope.book = $firebaseObject(ref);
+	var obj = $firebaseObject(new Firebase(fsConfig.FIREBASE_URL+'/Books/' + bookid));
+	var booksArray = $firebaseArray(new Firebase(fsConfig.FIREBASE_URL+'/Books/'));
+  //var placesRef =  new Firebase(fsConfig.FIREBASE_URL+'/places/');
+	obj.$loaded().then(function() {
 		$scope.hasData = true;
-  		$scope.isLoading = false;
-  		$rootScope.pageTitle = 'Book: '+ obj.title;
-  		console.log('Book Obj is:');
-  		console.log(obj);
-  		
-  		// DO VIEW COUNT SAVE
-  		var viewCountRef = obj.viewCount;
-  		if(!viewCountRef){
-	  		viewCountRef = 0;
-  		}
-   		obj.viewCount = viewCountRef +1;
-  		obj.$save();
-  		
-  		//SET UP DATA RETRIEVAL
+		$scope.isLoading = false;
+		$rootScope.pageTitle = 'Book: '+ obj.title;
+		console.log('Book Obj is:');
+		console.log(obj);
+
+		// DO VIEW COUNT SAVE
+		FsStats.addBookView(bookid);
+
+		//SET UP DATA RETRIEVAL
 		if(obj.amazon_id.length){
-     		var amazonUrl = 'http://fictionset.in/admin/amazon/amazon_getBook.php?search=' + obj.amazon_id;
-	 		getAmazonData(amazonUrl);
-     	}
-     	
-     	placesRef.once('value', function(snapshot) {
-		 	  var thePlacesList = snapshot.val();
- 		});
-
- 	 	if(obj.places){
- 	  	 // bookPlaces.$loaded().then(function(){
-		 	  var bookPlaces = [];
-		 	   bookPlaces = obj.places;
-		 	   $scope.bookPlaces = bookPlaces;
-		 	   var keepGoing = true;
-		 	   var theCount = 0;
-		 	   var lastCountry = "";
-		 	   var countryList = [];
-
-
-		 	   //new lets generate a list of countries this book is in.
-				angular.forEach(bookPlaces,function(place) {
-					if (mapCenterLatBottom == ''){
+	  	var amazonUrl = 'http://fictionset.in/admin/amazon/amazon_getBook.php?search=' + obj.amazon_id;
+			getAmazonData(amazonUrl);
+	  }
+	  
+		// DO PLACES
+		if(obj.places){
+			//TODO: refactor this into seperate service/function.
+			var bookPlaces = [];
+			bookPlaces = obj.places;
+			$scope.bookPlaces = bookPlaces;
+			var keepGoing = true;
+			var theCount = 0;
+			var lastCountry = "";
+			var countryList = [];
+	
+			// LIST OF PLACES
+			//generate a list of countries this book is in, with map markers
+			angular.forEach(bookPlaces,function(place) {
+				if (mapCenterLatBottom === ''){
+					mapCenterLatTop = place.lat;
+					mapCenterLatBottom = place.lat;
+				} else{
+					if(place.lat > mapCenterLatTop){
 						mapCenterLatTop = place.lat;
+					}
+					if(place.lat < mapCenterLatBottom){
 						mapCenterLatBottom = place.lat;
-					} else{
-						if(place.lat > mapCenterLatTop){
-							mapCenterLatTop = place.lat;
-						}
-						if(place.lat < mapCenterLatBottom){
-							mapCenterLatBottom = place.lat;
-						}
 					}
-					if (mapCenterLngBottom == ''){
+				}
+				if (mapCenterLngBottom === ''){
+					mapCenterLngTop = place.lng;
+					mapCenterLngBottom = place.lng;
+				} else {
+					if(place.lat > mapCenterLngTop){
 						mapCenterLngTop = place.lng;
+					}
+					if(place.lat < mapCenterLngBottom){
 						mapCenterLngBottom = place.lng;
-					} else {
-						if(place.lat > mapCenterLngTop){
-							mapCenterLngTop = place.lng;
-						}
-						if(place.lat < mapCenterLngBottom){
-							mapCenterLngBottom = place.lng;
-						}
 					}
-					
-					
-					
-					var thisPlaceMarker = 'pin-m-library+222('+ place.lng +','+ place.lat+')';
-					if (placesMarkers == '/'){
-						placesMarkers = placesMarkers + thisPlaceMarker;						
-					} else{
-						placesMarkers = placesMarkers + ',' + thisPlaceMarker;						
-					}
-
- 					if(lastCountry != place.countryId){
-					 	console.log('Locations is not from the same country');
- 					 	lastCountry = place.countryId;
-					 	countryList.push(place);
-					}
-
+				}
+				var thisPlaceMarker = 'pin-m-library+222('+ place.lng +','+ place.lat+')';
+				if (placesMarkers === '/'){
+					placesMarkers = placesMarkers + thisPlaceMarker;						
+				} else{
+					placesMarkers = placesMarkers + ',' + thisPlaceMarker;						
+				}
+				if(lastCountry !== place.countryId){
+					console.log('Locations is not from the same country');
+					lastCountry = place.countryId;
+					countryList.push(place);
+				}
+	
 				if(keepGoing) {
 					//TEMPORARY HACK, MUST FIX: this sets the map to the location of the first tag.
-					// Ideally it Should great a map zoomed to all the tags with markers on the map
-					 bkLat = place.lat;
-					 bkLng = place.lng;
- 				 	$scope.bkLng = bkLng;
-				 	$scope.bkLat = bkLat;	
-				    if(theCount == 1){
-				      keepGoing = false;
-				    }
-				  }
-				  theCount = theCount +1;
-				}); //ends forEach
-					
-				console.log('theCount length: ');
-				console.log(theCount);
-				placesCount = theCount;
-				$scope.placesCount = theCount;
-					/////////////// this is the hack way of making th emarkers on the image. Needs a map version
-					
-					//console.log(placesMarkers);
-					//console.log('bounds of markers are');					
-					
-					 mapCenterLatTop = parseFloat(mapCenterLatTop);
-					 mapCenterLatBottom = parseFloat(mapCenterLatBottom);
-					 mapCenterLngTop = parseFloat(mapCenterLngTop);
-					 mapCenterLngBottom = parseFloat(mapCenterLngBottom);
- 
-					//console.log(mapCenterLatTop);
-					//console.log(mapCenterLatBottom);
-					//console.log(mapCenterLngTop);
-					//console.log(mapCenterLngBottom);
-					
-					//Math.abs(a-b);
- 
-					var latDistance = Math.abs(mapCenterLatBottom - mapCenterLatTop)  ;
-					var lngDistance = Math.abs(mapCenterLngBottom - mapCenterLngTop)  ;
-					//var lngDistance = (mapCenterLngTop - mapCenterLngTop);
-
-				//	console.log('lngDistance:' +lngDistance);
-				//	console.log('latDistance:' +latDistance);
-
-					var topsTotal = Math.abs(mapCenterLngTop - mapCenterLatTop)/2  ;
-					var bottomsTotal = Math.abs(mapCenterLngBottom - mapCenterLatBottom)/2  ;
-
-//					console.log('topsTotal:' +topsTotal);
-//					console.log('bottomsTotal:' +bottomsTotal);
-
-					
-
-					if(topsTotal < 10 ){
-						bkZoom = 8;
-					} else if (topsTotal < 30){
-						bkZoom = 5;
-					} else if (topsTotal < 60){
-						bkZoom = 3;
-					} else if (topsTotal < 80){
-						bkZoom = 2;
-					} else {
-						bkZoom = 1;
+					// TODO: Ideally it Should great a map zoomed to all the tags with markers on the map
+					bkLat = place.lat;
+					bkLng = place.lng;
+					$scope.bkLng = bkLng;
+					$scope.bkLat = bkLat;	
+					if(theCount === 1){
+						keepGoing = false;
+					  }
 					}
-
-					console.log(bkZoom);
-					if(bottomsTotal < 10 ){
-						bkZoom = 8;
-					} else if (bottomsTotal < 30){
-						bkZoom = 6;
-					} else if (bottomsTotal < 60){
-						bkZoom = 4;
-					} else if (bottomsTotal < 60){
-						bkZoom = 3;
-					} else if (bottomsTotal < 140){
-						bkZoom = 2;
-					} else {
-						bkZoom = 1;
-					}
-					//console.log(bkZoom);
-										
-					console.log('bkZoom:'+ bkZoom);
-
-					bkLat = (( mapCenterLatTop + mapCenterLatBottom)/2); 
-					bkLng = (( mapCenterLngTop + mapCenterLngBottom)/2);
-					
-					
- 			   	var mapUrlString1 = mapUrlStringStart+placesMarkers;
-				var mapUrlString2 = '/'+bkLng+','+bkLat+','+bkZoom+'/1200x300.png?access_token=' +mapBoxKey;
-				var mapUrlString = mapUrlString1+ mapUrlString2;
-				$scope.mapUrlString = mapUrlString;
- 					
-				var relatedBooks = [];
-				booksArray.$loaded().then(function() {
-					angular.forEach(countryList,function(country) {
-						getRelated(country.countryId); //pushes this place to the function that fints neighbouring countries/places
- 			  			var countryBooks = filterFilter(booksArray, country.countryId );
-			  			console.log(countryBooks );
-			  			country.countryBooks = countryBooks;
-			  			relatedBooks.push(country);
-			  		$scope.relatedBooks = relatedBooks;		
- 			 	});
- 
-
+					theCount = theCount +1;
+			}); //ends forEach
+			console.log('theCount length: ');
+			console.log(theCount);
+			placesCount = theCount;
+			$scope.placesCount = theCount;
+	
+			//RELATED BOOKS FOR PLACE
+			booksArray.$loaded().then(function() {
+				angular.forEach(countryList,function(country) {
+					getRelated(country.countryId); //pushes this place to the function that finds neighbouring countries/places
+		 			var countryBooks = filterFilter(booksArray, country.countryId );
+					console.log(countryBooks );
+					country.countryBooks = countryBooks;
+					relatedBooks.push(country);
+					$scope.relatedBooks = relatedBooks;		
 				});
- 				 
-			   //});
-		} else {
-		$scope.bkLng = "100";
-		$scope.bkLat = "0";	 		 	
-	}
-
-	 		 if(obj.apple_id){
- 	 		 	console.log('Yo, apple id already here');
-     		 	var sQuery = obj.apple_id;
-     		 	getAppleDataID(sQuery);
-	 		 } else if (obj.isbn13){
- 	 		 	console.log('Yo, isbn13 in the house!');
-     		 	//var appleUrl = 'http://itunes.apple.com/lookup?isbn=' + obj.isbn13 + '&callback=getApple';
-     		 	var sQuery = obj.isbn13;
-     		 	getAppleData(sQuery);
- 	 		 }
- 	     
- 	 checkCollectionStatus(currentUser); //checks if it is in user collection
-
- 	});//ends obj.loaded
+			});
+			
+	
+			} else {
+			//IF THERE ARE NO OBJ.PLACES, set a default so it won't fuck up:
+			$scope.bkLng = "100";
+			$scope.bkLat = "0";	 		 	
+		}//ends obj.places.
+	
+		// DO info stuff for pricing.
+		if(obj.apple_id){
+			console.log('Yo, apple id already here');
+			sQuery = obj.apple_id;
+			getAppleDataID(sQuery);
+		} else if (obj.isbn13){
+			console.log('Yo, isbn13 in the house!');
+			sQuery = obj.isbn13;
+			getAppleData(sQuery);
+		}
+		checkCollectionStatus(currentUser); //checks if it is in user collection
+	});//ends obj.loaded
  	
  	//gets a list of collections this book is in 
  	//this appears ont he actual page.
- 	var arrCollections = $firebase(new Firebase(fsConfig.FIREBASE_URL+'/collections/')).$asArray();
-      	$scope.arrCollections = arrCollections;
-      	 arrCollections.$loaded().then(function() {
-/*
-		  	console.log('filtering collections for this book... ' );
- 		  	 var bookInCollectionsArray = filterFilter(arrCollections, bookid);
-		  	 console.log('bookInCollectionsArray length is: ' + bookInCollectionsArray.length);
-			 	if (bookInCollectionsArray.length){
-				 	console.log('in bookInCollectionsArray and collections is');
-				 	console.log(bookInCollectionsArray);
-			 	} else {
-				 	console.log('not in bookInCollectionsArray  ');
-  			 	}
- 			 $scope.bookInCollectionsArray = bookInCollectionsArray;
- 			 $scope.collectionsObj = bookInCollectionsArray;
-*/
+ 	var arrCollections = $firebaseArray(new Firebase(fsConfig.FIREBASE_URL+'/collections/'));
+	$scope.arrCollections = arrCollections;
+	arrCollections.$loaded().then(function() {
+		/*
+				  	console.log('filtering collections for this book... ' );
+		 		  	 var bookInCollectionsArray = filterFilter(arrCollections, bookid);
+				  	 console.log('bookInCollectionsArray length is: ' + bookInCollectionsArray.length);
+					 	if (bookInCollectionsArray.length){
+						 	console.log('in bookInCollectionsArray and collections is');
+						 	console.log(bookInCollectionsArray);
+					 	} else {
+						 	console.log('not in bookInCollectionsArray  ');
+		  			 	}
+		 			 $scope.bookInCollectionsArray = bookInCollectionsArray;
+		 			 $scope.collectionsObj = bookInCollectionsArray;
+		*/
+	});
 
- 		});
-
-
-
-
- 	// now for the user...
- 	// gets current user profile + collections
-     if(currentUser){
-		 var collectionList = {};
-      	 var profile = Profile(currentUser.uid);
-      	 profile.$loaded().then(function() {
- 	      	 $scope.profile = profile;
-		  	  console.log('profile collections');
-		  	  console.log(profile.collections);
-		  	  if(profile.collections){
- 			  	  collectionList = profile.collections;
-//			  	  var tempColl = filterFilter(collectionList, {'collectionId': placeid});
-			  	  //if(tempBooks.length){
-				  	//  $scope.isFollowing = true;				  	  
-			  	  //};
-		  	  }
-	  	  });
- 
-  	var uCollections = $firebase(new Firebase(fsConfig.FIREBASE_URL+"/users/").child(currentUser.uid).child('collections'));
- 	var userCollectionArray = uCollections.$asArray();
-  	   userCollectionArray.$loaded().then(function() {
- 	   	 console.log('userCollectionArray length is ' + userCollectionArray.length);
-	   	 $scope.userCollectionArray = userCollectionArray;
-   	 });
+	// now for the user...
+	// gets current user profile + collections
+	if(authData){
+	var collectionList = {};
+	var profile = FsGet.getUser1(authData.uid);
+	//var profile = new Profile(currentUser.uid);
+	profile.$loaded().then(function() {
+		$scope.profile = profile;
+	  if(profile.collections){
+		  console.log('profile collections:');
+			console.log(profile.collections);
+  	  collectionList = profile.collections;
+	  } else{
+			console.log('No profile collections:');
+			}
+	});
+	var theUserRole = FsGet.getRole(authData.uid);
+	theUserRole.$loaded()
+  .then(function() {
+		console.log(theUserRole);
+		var userAaa = (theUserRole.$value  > 50);
+		$scope.userRole = theUserRole.$value;
+		$scope.userAaa = userAaa;
+		console.log('$scope.userRole is ' + $scope.userRole);
+		console.log('$scope.userAaa is ' + $scope.userAaa);	
+  })
+  .catch(function(err) {
+    console.error(err);
+  });
+  
+	var userCollectionArray = $firebaseArray(new Firebase(fsConfig.FIREBASE_URL+"/users/").child(currentUser.uid).child('collections'));
+	userCollectionArray.$loaded().then(function() {
+	 console.log('userCollectionArray length is ' + userCollectionArray.length);
+	 $scope.userCollectionArray = userCollectionArray;
+	});
  	
  	
  	
 	  
  
-  	 /////////////
+  	 ////////////////////////////////////////////////////
   	 ///////////// THIS DOES THE BOOKSHELF
- 
-/*
- 	var userHasCollections = new Firebase("https://sweltering-fire-3219.firebaseio.com/users/").child(currentUser.uid).child('collections/bookshelf');
- 	var syncUserCollections = $firebase(userHasCollections);
- 	var userColl = syncUserCollections.$asArray();
-  	   userColl.$loaded().then(function() {
- 	   	console.log('userColl length is' + userColl.length);
-	   	 $scope.userColl = userColl.length;
-  	 });
-*/
-
-
+  	 ///////////// TODO: UGH, ugly! refactor into seperate services/funtions
+		 ///////////////////////////////////////
  
  	var checkCollectionStatus = function(currentUser){
 	 		 isBookmarking = true;
@@ -355,21 +257,17 @@
 				 	console.log('adding to sceope');
 				 	inCollection = true;
 				 	$scope.inCollection = inCollection;
-				 	//alert('(end of checking if has book incollection )'+ $scope.inCollection);
 			 	} else {
 				 	console.log('not in collection and their collection is');
 				 	console.log(userCollection);
 			 		inCollection = false;
 				  	$scope.inCollection = inCollection;
 			 	}
-	// 	 		console.log(userCollection);
 			}
-			// console.log('removing is bookmarking');
 			 isBookmarking = false;
 	 		 $scope.isBookmarking = isBookmarking;
-	 		 //alert('(ends of collectionstatus function )incollection is' + $scope.inCollection);
   		  });
-	  }
+	  };
  	}
 
   	var getAmazonData = function(amazonUrl) {
@@ -413,7 +311,6 @@
  		       });
  	};   
     
-/*
   	var getAppleDataID = function(sQuery) {
 			$scope.isLoadingApple = true;
 
@@ -434,43 +331,13 @@
    				   	$scope.noApple = true;
 		        }//ends if
  		       });
- 	}; 
-*/  
+ 	};   
     
     
  
-	function checkIfUserExists(userId) {
-	  var USERS_LOCATION = fsConfig.FIREBASE_URL+'/users';
-	  var userAccess = new Firebase(USERS_LOCATION);
-	  console.log(userAccess);
-	  userAccess.child(userId).once('value', function(snapshot) {
-	    var exists = (snapshot.val() !== null);
- 	    var val = snapshot.val();
- 		  var userRole = val.role;
-	      var userAaa = (val.role  > 50);
- 	      $scope.userRole = userRole;
-	      $scope.userAaa = userAaa;
-	  });
-	}
 
-	if(currentUser){
-	 //triggers the above user to see if they are an admin
-	 checkIfUserExists(currentUser.uid);
-	 }
+
  	
-/*
-   	$scope.pushToColl = function(book, collection) {
- 	  		var refUser = new Firebase("https://sweltering-fire-3219.firebaseio.com/users/").child(currentUser.uid).child('collections/bookshelf');
-	  		var syncUser = $firebase(refUser);
-	  		var addTimestamp = new Date().valueOf();
-	  		syncUser.child(bookid).$set({
-	  				    bookid: bookid,
-					    coverurl: obj.coverurl,
-					    title: obj.title,
-					    timestamp: addTimestamp
-	  		 });
-   	};
-*/
 
  	// ADD TO BOOKSHELF - SOMETIME UNIFY THESE WTIH THE DIALOG VERSION
  	$scope.collectionsAdd = function(book, collection, collectionId) {
@@ -493,7 +360,7 @@
 		});
 	  	$scope.isAdding = true;
   	 	$scope.isAdded = false;
-	}
+	};
   	 	 
 	var removeBook = function(currentUser, book, collectionId){
 	 	isBookmarking = true;
@@ -507,7 +374,7 @@
 				isBookmarking = false;
 			}
 		$scope.isBookmarking = isBookmarking;
- 		}
+ 		};
 
 	var addBook = function(currentUser, book, collectionId){
 	 	isBookmarking = true;
@@ -536,22 +403,20 @@
 				isBookmarking = false;
  				}
 			$scope.isBookmarking = isBookmarking;
-			}
+			};
 
-		 
-		var getRelated = function(geoid){
-  			var locationSrc = 'http://api.geonames.org/neighboursJSON?&lang=en&style=medium&maxRows=15&type=json&username=thirdman&geonameId='+geoid;
-	 			var getNeighbours = DataSource.get(locationSrc,function(data) {
- 		 				angular.forEach(data.geonames, function(item) {
-			 				neighbourCountries.push(item);
- 			 				$scope.neighbourCountries = neighbourCountries;
- 		 				});
-	 					getRelatedBooks();		 	
-	 			});
-  		};
+	var getRelated = function(geoid){
+		var locationSrc = 'http://api.geonames.org/neighboursJSON?&lang=en&style=medium&maxRows=15&type=json&username=thirdman&geonameId='+geoid;
+		DataSource.get(locationSrc,function(data) {
+			angular.forEach(data.geonames, function(item) {
+				neighbourCountries.push(item);
+				$scope.neighbourCountries = neighbourCountries;
+			});
+		getRelatedBooks();		 	
+		});
+	};
  		
- 		var neighbourRelatedBooks = [];
- 		var getRelatedBooks = function(){
+	var getRelatedBooks = function(){
 	 		booksArray.$loaded().then(function() {
  		 		if(neighbourCountries.length){
  		 					angular.forEach(neighbourCountries, function(country){
@@ -568,11 +433,12 @@
  	 		});
  		};
 
- 	///////////////////////////////////////
+ 	/////////////////////////////////////////////////////
  	/////this section does the dialogs for collections /////
- 	///////////////////////////////////////
+ 	/////////////////////////////////////////////////////
  	
 	var refCollections = new Firebase(fsConfig.FIREBASE_URL+"/collections/");
+	
  		refCollections.once('value', function(snapshot) {
 	    	var hasCollection = (snapshot.val() !== null);
  	    	$scope.refCollections = snapshot.val();
@@ -589,11 +455,11 @@
 			$scope.collectionProcessing = false;
 			collectionShowCreate = true;
 			$scope.collectionShowCreate = true;
-		}
+		};
 		$scope.showCollections = function(){
  			collectionShowCreate = false;
 			$scope.collectionShowCreate = false;
-		}
+		};
 		$scope.createNewCollection = function(newCollectionData){
  			var addTimestamp = new Date().valueOf();
 			collectionProcessing = true;
@@ -622,7 +488,7 @@
 				  	isPublic: newCollectionData.isPublic
 			  	});
 			  	// Get the unique ID generated by push()
-			  	var newCollectionID = newCollRef.name();
+			  	var newCollectionID = newCollRef.key();
 			  	userCollectionSet.child(newCollectionID).set({
 				  	collectionId: newCollectionID,
 				  	title: newCollectionData.title,
@@ -644,7 +510,7 @@
 				collectionProcessing = false;
 				$scope.collectionProcessing = false;
 			} //end if/else for newCollectionData
-		}
+		};
 		
 		$scope.toggleBookInCollection = function(collectionId, collectionsArrayIndex, theAction){
 			console.log('This is the toggle');
@@ -652,14 +518,14 @@
 			console.log('collectionsArrayIndex: ' + collectionsArrayIndex);	
 			console.log('theAction '+theAction);
 // 				if($scope.collectionsArray[collectionsArrayIndex].hasThisBook){
-				if(theAction == 'remove'){
+				if(theAction === 'remove'){
  					removeABook(collectionId, collectionsArrayIndex);	
-				}else if(theAction == 'add'){
+				}else if(theAction === 'add'){
 					addABook(collectionId, collectionsArrayIndex);		
 				}
 			};
 
-		addABook = function(collectionId, collectionsArrayIndex){
+		addABook = function(collectionId){
 			//alert('about to try to add a book');
  			var addTimestamp = new Date().valueOf();
  			console.log(profile);
@@ -671,7 +537,7 @@
 			  	var globalCollectionSet = new Firebase(ref).child('collections').child(collectionId);
 			  	var userCollSet = new Firebase(ref).child('users').child(currentUser.uid).child('collections').child(collectionId);
 
-			  	var newCollBookRef = globalCollectionSet.child('books').child(bookid).update({
+			  	globalCollectionSet.child('books').child(bookid).update({
 				  	bookid: obj.$id,
 				  	title: obj.title,
 				  	description: obj.description,
@@ -681,7 +547,7 @@
 				  	addedToCollectionDate: addTimestamp,
 			  	});
 			  	
-			 // 	var newCollBookRef1 = newCollBookRef.name();
+			 // 	var newCollBookRef1 = newCollBookRef.key();
 			  	userCollSet.child('books').child(bookid).update({
 				  	bookid: obj.$id,
 				  	title: obj.title,
@@ -738,7 +604,7 @@
 			
 			};
 		
-		$scope.addBookToCollection = function(collectionId){
+	$scope.addBookToCollection = function(collectionId){
 			console.log('adding book to collection');
  			console.log(collectionId);
  			console.log(bookid);
@@ -753,7 +619,7 @@
 			  	var globalCollectionSet = new Firebase(ref).child('collections').child(collectionId);
 			  	var userCollSet = new Firebase(ref).child('users').child(currentUser.uid).child('collections').child(collectionId);
 
-			  	var newCollBookRef = globalCollectionSet.child('books').child(bookid).update({
+			  	globalCollectionSet.child('books').child(bookid).update({
 				  	bookid: obj.$id,
 				  	title: obj.title,
 				  	description: obj.description,
@@ -762,7 +628,7 @@
 				  	addedToCollectionById:currentUser.uid,
 				  	addedToCollectionDate: addTimestamp
 			  	});
-			 // 	var newCollBookRef1 = newCollBookRef.name();
+			 // 	var newCollBookRef1 = newCollBookRef.key();
 			  	userCollSet.child('books').child(bookid).update({
 				  	bookid: obj.$id,
 				  	title: obj.title,
@@ -782,10 +648,9 @@
 
 			} else {
 			}
- 		}
+ 		};
 
-
-		$scope.removeBookFromCollection = function(collectionId){
+	$scope.removeBookFromCollection = function(collectionId){
 			console.log('removing book to collection');
 			var collectionsArray = $scope.collectionsArray;
  			bookProcessing = true;
@@ -816,50 +681,34 @@
 
 			} else {
  			}
- 		}
-		
- 
- 		
-
-
+ 		};
 	
- 	$scope.clickToOpen = function () {
+	$scope.clickToOpen = function () {
  	 	collectionAdded = false;
+ 	 	var hasthisbook;
 		$scope.collectionAdded=collectionAdded;
 		collectionProcessing = false;
 		$scope.collectionProcessing = false;
 		var collectionsArray = [];
-		
-		var uCollectionList =  new Firebase(fsConfig.FIREBASE_URL+"/users/").child(currentUser.uid).child('collections');
-		var collArr = $firebase( new Firebase(fsConfig.FIREBASE_URL+"/users/").child(currentUser.uid).child('collections')).$asArray();
+		//var uCollectionList =  new Firebase(fsConfig.FIREBASE_URL+"/users/").child(currentUser.uid).child('collections');
+		var collArr = $firebaseArray( new Firebase(fsConfig.FIREBASE_URL+"/users/").child(currentUser.uid).child('collections'));
 		collArr.$loaded().then(function() {
-			//console.log(collArr);
-			//console.log(collArr.length);
 			$scope.collArr = collArr;
 			angular.forEach(collArr, function(aCollection) {
-			//	console.log(aCollection);
-					tempBooksArray = [];
-					var thisbookid = obj.bookid;
+				tempBooksArray = [];
+				//var thisbookid = obj.bookid;
 				if(aCollection.books){
-					var hasthisbook = filterFilter(aCollection.books, {'bookid': bookid}).length;
-			//		console.log('the filter result for this collection is');
-			//		console.log(filterFilter(aCollection.books, {'bookid': bookid}));
-			//		console.log(hasthisbook);
-					
+					hasthisbook = filterFilter(aCollection.books, {'bookid': bookid}).length;
 					angular.forEach(aCollection.books,function(thisBook) {
  						tempBooksArray.push(thisBook);
 					});
 				} else{
-			//		console.log('no books');
-					var hasthisbook = false;
+					hasthisbook = false;
 				}
-			//		console.log(tempBooksArray);
-			//		console.log(tempBooksArray.length);
 					aCollection.bookCount = tempBooksArray.length;
 					aCollection.hasThisBook = hasthisbook;
 					collectionsArray.push(aCollection);
 			});
-			//console.log(collectionsArray);
 			$scope.collectionsArray = collectionsArray;
 		});
 
@@ -870,19 +719,19 @@
         	template: 'views/dialogs/dialogCollections.html',
         	scope: $scope
 			});
-    }; //ends clicktoopen
+    }; 
 
 
 
 
 
 
- 	///////////////////////////////////////
+ 	////////////////////////////////////////////////////
  	/////this section does the reporting dialogs/////
- 	///////////////////////////////////////
+ 	////////////////////////////////////////////////////
 
  	$scope.submitReport = function(thereport){
-	 	var messageType, theTimestamp;
+	 	var messageType, theTimestamp, isError;
 	 	$scope.isError = false;		 
 	 	$scope.errorMessage = '';		 
 	 	$scope.reportProcessing = true;		 
@@ -897,8 +746,8 @@
 	 	return;
 	 } else{
 		 if(profile){
-	 		 var messageType = 'Edit';
-		 	 var theTimestamp = new Date().valueOf();
+	 		 messageType = 'Edit';
+		 	 theTimestamp = new Date().valueOf();
 		 	 var ref = new Firebase(fsConfig.FIREBASE_URL);
 		 	 var messages = ref.child("system/adminmessages");
 	  		 messages.push({
@@ -912,8 +761,8 @@
 				    
 				  },function(error){
 					  if(error){
-						  console.log(error);
-						  isError = true;
+						console.log(error);
+						isError = true;
 						$scope.errorMessage.title = 'Error';
 						$scope.errorMessage.message = error;
 						reportProcessing = false;
@@ -943,20 +792,17 @@
  	};
 
  	$scope.dialogReport = function () {
-		var reportProcessing = false;
-		var reportDone = false;
+		//var reportProcessing = false;
+		//var reportDone = false;
 		$scope.reportProcessing = false;
 		$scope.reportDone = false;
 		$scope.isError = false;
-
-		
-        ngDialog.open({ 
+    ngDialog.open({ 
 			plain: false,
-        	template: 'views/dialogs/dialogReport.html',
-        	scope: $scope
+    	template: 'views/dialogs/dialogReport.html',
+      scope: $scope
 			});
-    }; //ends clicktoopen
+    };
 
-
-  }]);
+}]);
   

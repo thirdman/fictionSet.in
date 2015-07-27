@@ -1,24 +1,25 @@
 (function() {
    'use strict';
 
-   /* Services */
-   angular.module('myApp.services', ["firebase", 'ngRoute'])
-
-      // put your services here!
-      // .service('serviceName', ['dependency', function(dependency) {}]);
+  /* Services */
+  angular.module('myApp.services', ["firebase", 'ngRoute'])
+  // put your services here!
+	
+//FsAdmin is unused. What did it do? Do I need to rewrite it? TODO: remove code	
+/*
 	.factory('FsAdmin', ['$rootScope', '$location', function($rootScope, $location) {
 	    return {
 	        bookView: function(userId, pageId) {
-	        },
-	      }
+	        }
+	      };
 	  }])
+*/
 	  
-  .service('FsGet', ["fsConfig", '$http', '$firebase', function(fsConfig, $http, $firebase) {
+  .service('FsGet', ["fsConfig", '$http', '$firebase',  "$firebaseObject", function(fsConfig, $http, $firebase,  $firebaseObject) {
 	//GET AN OBJECT PROFILE FROM AN ID
 	var ref = new Firebase(fsConfig.FIREBASE_URL);
 	return {
 		getBook: function (theBookId) {
-			var thisBook;
 			var refBook = ref.child('Books').child(theBookId);		
 			//refBook.once('value', function(snapshot) {
 			//	thisBook = snapshot.val();
@@ -38,19 +39,53 @@
 			return refMessage;
 		},
 		getBook1: function(theBookId){
-					var refBooks = $firebase(ref.child('Books').child(theBookId)).$asObject(); 
+					var refBooks = $firebaseObject(ref.child('Books').child(theBookId)); 
 					return refBooks;
 		},
 		getUser1: function(theUserId){
-					var refUser = $firebase(ref.child('users').child(theUserId)).$asObject(); 
+					var refUser = $firebaseObject(ref.child('users').child(theUserId)); 
+					console.log('getUser1 was triggered with the id of' + theUserId);
 					return refUser;
+		},		
+		getRole: function(theUserId){
+					var userRole = $firebaseObject(ref.child('users').child(theUserId).child('role')); 
+					console.log('getRole was triggered with the id of' + theUserId);
+					return userRole;														
 		}		
-	}
+
+	};
   }])
-	  
+
+.service('FsStats', ["fsConfig", "$firebaseObject", 
+	function(fsConfig, $firebaseObject) {
+	var ref = new Firebase(fsConfig.FIREBASE_URL);
+	return {
+		addBookView: function (theBookId) {
+			console.log('addBookView was called');
+			console.log(theBookId);
+			//var refBook = ref.child('Books').child(theBookId);	
+			var refBook = $firebaseObject(ref.child('Books').child(theBookId));	
+			refBook.$loaded().then(function() {
+				var viewCountRef = refBook.viewCount;
+				if(!viewCountRef){
+  				viewCountRef = 0;
+				}
+				refBook.viewCount = viewCountRef +1;
+				refBook.$save();
+				return refBook;
+			});
+		}
+	};
+}])
+
+	/*
+	*  FsNotifywithId: This finds users to be notified based on id of object, then pushed to fsNotify.
+	*
+	*/
+
   .service('FsNotifyWithId', ['fsConfig', '$http', '$firebase', 'FsNotify', 'FsGet', function(fsConfig, $http, $firebase, FsNotify, FsGet) {
 	//GET AN OBJECT PROFILE FROM AN ID
-	var ref = new Firebase(fsConfig.FIREBASE_URL);
+	//	var ref = new Firebase(fsConfig.FIREBASE_URL);
 	return {
 		bookAdded: function(theUserId, theBookId){
 			var theUser, theBook;					
@@ -96,12 +131,11 @@
 			});
 
 		}
-
-		
-	}
+	};
   }])
 	  
-  .service('FsNotify', ['fsConfig', '$http', '$firebase', 'filterFilter', 'FsGet', function(fsConfig, $http, $firebase, filterFilter, FsGet) {
+  .service('FsNotify', ['fsConfig', '$http', '$firebase', "$firebaseArray", "$firebaseObject", 'filterFilter', 
+  function(fsConfig, $http, $firebase, $firebaseArray, $firebaseObject, filterFilter) {
  	//MESSAGE ELEMENTS
 	/*
 	META:
@@ -141,10 +175,10 @@
 
  		//RESOURCES
  		var ref = new Firebase(fsConfig.FIREBASE_URL);
-		var refLocations = $firebase(ref.child('places')).$asArray(); 
-		var refUsers = $firebase(ref.child('users')).$asArray(); 
-		var refBooks = $firebase(ref.child('Books')).$asArray(); 
-		var refCollections = $firebase(ref.child('collections')).$asArray(); 
+		var refLocations = $firebaseArray(ref.child('places')); 
+		var refUsers = $firebaseArray(ref.child('users')); 
+		var refBooks = $firebaseArray(ref.child('Books')); 
+		var refCollections = $firebaseArray(ref.child('collections')); 
 		//DESTINATIONS
 		var refMessages = ref.child("messages");
 		var adminLocation = ref.child('/system/adminmessages');
@@ -574,7 +608,98 @@ var promise = $http.get('data.json').success(function (data) {
 	      }
 	    };
 */
-	}]);
+	}])
+  
+  
+  
+  ///this is the old one///
+
+ .factory('Flickr',['$resource', '$q' , function($resource, $q ) {
+  var photosPublic = $resource('http://api.flickr.com/services/feeds/photos_public.gne', 
+      { format: 'json', jsoncallback: 'JSON_CALLBACK' }, 
+      { 'load': { 'method': 'JSONP' } });
+   return {
+    search: function(query) {
+      var q = $q.defer();
+      photosPublic.load({
+        tags: query
+      }, function(resp) {
+        q.resolve(resp);
+      }, function(err) {
+        q.reject(err);
+      })
+      
+      return q.promise;
+    }
+  }
+}])
+ 
+ .factory('FlickrPlace', ['$http', '$q' , function ($http, $q) {
+ 	 	var getplaceurl = 'https://api.flickr.com/services/rest/?method=flickr.places.find&api_key=f33601a59d5cc2e162113d896f47474e&format=json&nojsoncallback=1&auth_token=&api_sig=&query=';//Auckland+NZ
+ 
+	    return {
+	        getPlace: function( loc) {
+ 	            // the $http API is based on the deferred/promise APIs exposed by the $q service
+	            // so it returns a promise for us by default
+	            return $http.get(getplaceurl+loc).then(function(response) {
+	                    if (typeof response.data === 'object') {
+	                        return response.data;
+	                    } else {
+	                        // invalid response
+	                        return $q.reject(response.data);
+	                    }
+
+	                }, function(response) {
+	                    // something went wrong
+	                    return $q.reject(response.data);
+	            	});
+	        }
+	    };
+	}])
+
+ .factory('FlickrPlacePics', ['$http', '$q', function ($http, $q) {
+ var getpicsurl = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=f33601a59d5cc2e162113d896f47474e&format=json&nojsoncallback=1&auth_token=&api_sig=&per_page=20&min_taken_date=1262304000&extras=url_m,url_s&sort=interestingness-desc&place_id='
+ var bbox = '&bbox='+bbox;
+ var tags = '&tags=crete';
+ var is_getty= "&is_getty=true";
+
+	    return {
+	        getPics: function(locid, bbox) {
+	            // the $http API is based on the deferred/promise APIs exposed by the $q service
+	            // so it returns a promise for us by default
+	            return $http.get(getpicsurl+locid)
+	                .then(function(response) {
+	                    if (typeof response.data === 'object') {
+	                        return response.data;
+	                    } else {
+	                        // invalid response
+	                        return $q.reject(response.data);
+	                    }
+
+	                }, function(response) {
+	                    // something went wrong
+	                    return $q.reject(response.data);
+	            	});
+	        }
+	    };
+	}])
+	
+ .factory('DataSource', ['$http', function($http){
+		return {
+    	get: function(file,callback,transform){
+      	$http.get(file).
+        success(function(data, status) {
+						console.log("Request succeeded");
+            callback(data);
+        }).
+				error(function(data, status) {
+            console.log("Request failed " + status);
+        });
+			}
+		};
+	}]
+);
+  
 
   
   

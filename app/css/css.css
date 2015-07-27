@@ -323,7 +323,6 @@ ul {
     -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
     -webkit-animation: rotateanti .9s ease-in infinite 0s;
-    -ms-animation: rotateanti .9s ease-in infinite 0s;
     animation: rotateanti .9s ease-in infinite 0s; }
 
 @-webkit-keyframes rotateanti {
@@ -331,11 +330,6 @@ ul {
     -webkit-transform: rotateY(0deg); }
   from {
     -webkit-transform: rotateY(360deg); } }
-@-ms-keyframes rotateanti {
-  to {
-    -ms-transform: rotateY(0deg); }
-  from {
-    -ms-transform: rotateY(360deg); } }
 .fullWidth {
   width: 100%; }
   .fullWidth.homeFeat {
@@ -1441,7 +1435,8 @@ html.booksPage {
   .userImgIconWrap .userImgIcon {
     box-shadow: none;
     height: 100%;
-    width: auto; }
+    width: auto;
+    border: none; }
 
 .pageAccount .titleBlock {
   width: 100%;

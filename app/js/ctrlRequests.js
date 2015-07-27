@@ -1,26 +1,22 @@
-'use strict';
-app.controller("RequestsCtrl", [ "$scope", "currentUser", "$firebase", "$routeParams", "$location",  "DataSource", "Profile", "filterFilter", 'ngDialog', 
-function($scope,  currentUser, $firebase, $routeParams, $location,   DataSource,  Profile, filterFilter, ngDialog ) { 
+app.controller("RequestsCtrl", [ "fsConfig", "$scope", "currentUser",  "$firebaseArray", "$firebaseObject", "$routeParams", "$location",  "DataSource", "Profile", "filterFilter", 'ngDialog', 
+function(fsConfig, $scope,  currentUser, $firebase, $firebaseArray, $firebaseObject, $routeParams, $location,   DataSource,  Profile, filterFilter, ngDialog ) { 
+	'use strict';
 	var refRequests, nominatedBooks;
 	$scope.isLoading = true;
 	$scope.hasData = false;
-	
 	$scope.isLoading = false;
 	$scope.hasData = true;
-
-	var refRequests = $firebase(new Firebase('https://sweltering-fire-3219.firebaseio.com/nominated/Books/')).$asArray();
+	refRequests = $firebaseArray(new Firebase(fsConfig.FIREBASE_URL + '/nominated/Books/'));
 	refRequests.$loaded().then(function() {
 		$scope.hasData = true;
 		$scope.isLoading = false;
 		nominatedBooks = refRequests;
 		$scope.nominatedBooks = refRequests;
-		console.log(nominatedBooks);
 	});
 	
   	
 
   $scope.upgradeBookDialog = function (bookId, amazonId, book) {
-  	//alert(bookId);
   	$scope.bookId = bookId;
   	$scope.amazonId = amazonId;
   	$scope.book = book;
@@ -38,12 +34,7 @@ function($scope,  currentUser, $firebase, $routeParams, $location,   DataSource,
 	  console.log($scope);
 	  ngDialog.close();
 	  $location.path('/addbook/'+$scope.book.amazon_id).replace();
-	  //$scope.$apply();
-
-  }
-
-
-  	
+  };
 }]);
 
 

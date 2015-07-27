@@ -1,6 +1,5 @@
  <div ng-if="bkLat.length" class="headerFeature headerBookAlt">
 		<div class="mapImg fullWidth"  style="">
-<!-- 			<img src="{{mapUrlString}}" class="theBookMapImg"> -->
 		</div>
 		<ul class="placesWrap childPlaces-{{placesCount}}">
 			<li ng-repeat="place in bookPlaces" class="place.id placeItem" style="background-image: url(http://api.tiles.mapbox.com/v3/thirdman.j1o1gjim/{{place.lng}},{{place.lat}},{{(place.fcl == 'A') ? '5' : '9' }}/{{(placesCount == 1) ? '1200' : '700'}}x380.png)">
@@ -8,34 +7,8 @@
 				<span class="iconLocation " ng-class="(place.fcl == 'A') ? 'no-marker' : 'icon-marker' "></span>
 			</li>
 		</ul>
-<!--
-		<div class="placeMeta">
-			{{placesCount}}
-		</div>
--->
-<!-- 	 <div class="mapImg fullWidth"  style="background-image: url({{mapUrlString}})"></div> -->
  </div>
  
- 
- <div ng-if="bkLat.length" style="display: none;">
-	<div class="mapImg fullWidth"  style=""><img src="{{mapUrlString}}" class="theBookMapImg"> </div>
-</div>
-
-
-
-
-<!--
-older versionx
-http://api.tiles.mapbox.com/v4/thirdman.j1o1gjim/pin-m-library+222({{bkLng}},{{bkLat}})/{{bkLng}},{{bkLat}},5/1200x300.png?access_token=pk.eyJ1IjoidGhpcmRtYW4iLCJhIjoidjBOQ0lrYyJ9.8zzETVcyoBg2nlMquUR1TA
-background-image: url(http://api.tiles.mapbox.com/v3/thirdman.j1o1gjim/{{bkLng}},{{bkLat}},5/1200x300.png)
-http://api.tiles.mapbox.com/v3/thirdman.j1o1gjim/pin-s-library+444(38,1)/{{bkLng}},{{bkLat}},5/1200x300.png
-http://api.tiles.mapbox.com/v4/thirdman.j1o1gjim/-73.99,40.70,13/500x300.png?access_token=pk.eyJ1IjoidGhpcmRtYW4iLCJhIjoidjBOQ0lrYyJ9.8zzETVcyoBg2nlMquUR1TA)
-
-
-http://api.tiles.mapbox.com/v4/examples.map-zr0njcqy/pin-s-bus+f44(-73.99,40.70,13)/-73.99,40.70,13/500x300.png?access_token=pk.eyJ1IjoidGhpcmRtYW4iLCJhIjoidjBOQ0lrYyJ9.8zzETVcyoBg2nlMquUR1TA
-
-markers=icon:http://dev-nz.nomosone.com/i/themes/theme_23/images/mapMarker.png%7C%7C-45.8732755,170.50445650000006&amp;
--->
 <div ng-if="!bkLat.length">
     <div class="mapImg fullWidth" ></div>
 <!--     style="background-image: url(http://api.tiles.mapbox.com/v3/thirdman.j1o1gjim/172.633,-43.533,5/1200x300.png) -->

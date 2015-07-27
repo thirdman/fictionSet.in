@@ -1,0 +1,2 @@
+app.controller("TagCtrl",["fsConfig","$scope","$http","tags",function(a,t,n,o){"use strict";var r=new Firebase(a.FIREBASE_URL+"/tags/");r.once("value",function(a){var n=a.val(),r=[];angular.forEach(n,function(a){var t={};t.text=a.tagId,r.push(t)}),t.loadTags=function(a){return o.load(a,r)}})}]);
+//# sourceMappingURL=./ctrlTags-min.js.map

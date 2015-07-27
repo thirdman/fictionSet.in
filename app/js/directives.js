@@ -1,4 +1,3 @@
-'use strict';
 
 /* Directives */
 
@@ -16,6 +15,7 @@ angular.module('myApp.directives', []).
 angular.module('myApp.directives', [])
  //this is the delaying for the search	
  .directive('delayedModel', function() {
+	 'use strict';
     return {
         scope: {
             model: '=delayedModel'
@@ -44,48 +44,57 @@ angular.module('myApp.directives', [])
 })
 
 .service('AsyncService', function ($q) {
-  
+  'use strict';
   // Like Angular's $http.get, this function returns a promise.
   this.promiseToDoSomething = function() {
     return $q.when('Promise fulfilled!');
   };
 })
-.directive('fsUserImg', ['fsConfig', '$firebase', 'simpleLogin', function(fsConfig, $firebase, simpleLogin){
+ 
+.directive('fsUserImg', ['fsConfig', "Auth", "$firebaseArray", "$firebaseObject", 'simpleLogin', 'FsGet',
+	function(fsConfig,  Auth, $firebaseArray, $firebaseObject, simpleLogin, FsGet){
+	'use strict';
+
 	return {
 	restrict: 'AE',
 	scope: {
 		userId: '=userId',
-        fsUserId: '=fsUserId',
-        fsIconType: '@',
-        user: '@'
+    fsUserId: '=fsUserId',
+    fsIconType: '@',
+    user: '@'
 	},
-    //templateUrl: 'my-customer-plus-vojta.html'
-    template: '<span class="userImgIconWrap"><img class="userImgIcon" src="{{pictureUrl}}" title="{{userName}}"  />{{theProfileUrl}}</span>',
-	controller: ['$scope', 'AsyncService', function ($scope, asyncService) {
+  template: '<span class="userImgIconWrap"><img class="userImgIcon" src="{{pictureUrl}}" title="{{userName}}"  />{{theProfileUrl}}</span>',
+	controller: ['$scope', 'Auth', function ($scope, Auth) {
 		$scope.theProfileUrl = 'https://d22r54gnmuhwmk.cloudfront.net/rendr-fe/img/default-user-avatar-dc6f2da9.gif';
 		//IF IT"S A HEADER LOGO OR STANDARD PROFILE
-	   	if($scope.fsIconType == 'header'){
-			simpleLogin.$getCurrentUser().then( function(currentUser) {
-				var refUser = $firebase(new Firebase(fsConfig.FIREBASE_URL+'/users/').child(currentUser.uid)).$asObject();
+	  if($scope.fsIconType === 'header'){
+		Auth.$onAuth(function(authData) {
+    	 $scope.authData = authData;
+				if(authData){
+ 				var refUser = FsGet.getUser1(authData.uid);
 				refUser.$loaded().then(function() {
-					console.log(refUser);
+					if(refUser.picture_url){
 					$scope.pictureUrl = refUser.picture_url; 
 					$scope.userName = refUser.displayName; 
-					$scope.theProfileUrl = 'https://d22r54gnmuhwmk.cloudfront.net/rendr-fe/img/default-user-avatar-dc6f2da9.gif';
-	 	      	});
+					}else{
+						$scope.pictureUrl = 'https://d22r54gnmuhwmk.cloudfront.net/rendr-fe/img/default-user-avatar-dc6f2da9.gif';						
+					}
 		    });
+		  }
+    });
 			    
 			//OTHERWISE IF IT IS A GENERAL CASE OF SHOWING A USER ICON
-			}else if($scope.fsIconType == 'general'){	
+			}else if($scope.fsIconType === 'general'){	
 				//CHECK IF USERID EXISTS
 				if($scope.fsUserId){
-					var firebaseResource = $firebase(new Firebase(fsConfig.FIREBASE_URL+'/users/').child($scope.fsUserId)).$asObject();
+					var firebaseResource = $firebaseObject(new Firebase(fsConfig.FIREBASE_URL+'/users/').child($scope.fsUserId));
 					firebaseResource.$loaded().then(function() {
+						console.log('user exists, so lets show image...');
 						$scope.pictureUrl = firebaseResource.picture_url; 
 						$scope.userName = firebaseResource.displayName; 
 					});
 				} else{
-				  	$scope.theProfileUrl = 'https://d22r54gnmuhwmk.cloudfront.net/rendr-fe/img/default-user-avatar-dc6f2da9.gif';
+				  $scope.theProfileUrl = 'https://d22r54gnmuhwmk.cloudfront.net/rendr-fe/img/default-user-avatar-dc6f2da9.gif';
 					$scope.userName = 'user'; 
 				}
 			//OTHERWISE NOTHING TO SEE
@@ -94,83 +103,54 @@ angular.module('myApp.directives', [])
 				$scope.userName = 'user'; 
 			}
 		}]//ends controller
-    
-    
-/*
-	   link: function(scope, elem, attrs) {
-		console.log(scope);
-//			var currentUser = simpleLogin.$getCurrentUser();
-
-		if(scope.fsIconType == 'header'){
-			var refUser = $firebase(new Firebase('https://.....firebaseio.com/users/').child(userId)).$asObject();
-			refUser.$loaded().then(function() {
-				console.log(refUser);
-				scope.pictureUrl = refUser.picture_url; 
-				scope.userName = refUser.displayName; 
- 	      	});
-		} else{
-			
-			
-			if(scope.userId){
-				var firebaseResource = $firebase(new Firebase('https://sweltering-fire-3219.firebaseio.com/users/').child(scope.fsUserId)).$asObject();
-				firebaseResource.$loaded().then(function() {
-					scope.pictureUrl = firebaseResource.picture_url; 
-					scope.userName = firebaseResource.displayName; 
-	 	      	});
-	 		} else{
-				scope.pictureUrl = 'https://d22r54gnmuhwmk.cloudfront.net/rendr-fe/img/default-user-avatar-dc6f2da9.gif'; 
-				scope.userName = 'user'; 
-	 		}
-		}
- 	   }
-*/
-	   
-   
     };
   }])
+ 
 
-.directive('fsMessageCount', ['fsConfig', '$firebase', 'simpleLogin', 'filterFilter', function(fsConfig, $firebase, simpleLogin, filterFilter){
+.directive('fsMessageCount', ['fsConfig', '$firebase', 'Auth', 'simpleLogin', 'filterFilter', function(fsConfig, $firebase, Auth, simpleLogin, filterFilter){
+	"use strict";
 	return {
 		restrict: 'AE',
 		scope: {
-	        fsUserId: '=fsUserId',
-	        user: '@'
+	    fsUserId: '=fsUserId',
+	    user: '@'
 		},
-	    template: '<a ng-href="#/following"><span  class="userMessageIcon" title="{{userMessageCountDetail}}" ng-show="showIcon">{{newMsgCount}}</span></a>',
-		controller: ['$scope',  function ($scope) {
-			
+	  template: '<a ng-href="#/following"><span  class="userMessageIcon" title="{{userMessageCountDetail}}" ng-show="showIcon">{{newMsgCount}}</span></a>',
+		controller: ['$scope', "Auth", function ($scope, Auth) {			
 			var showIcon = false;
 			var newMsgCount;
 			$scope.showIcon = showIcon;
 			$scope.newMsgCount = newMsgCount;
- 			//LETS GET THE COUNT
- 			simpleLogin.$getCurrentUser().then(function(currentUser) {
-				if(currentUser){
+			$scope.auth = Auth;
+
+			Auth.$onAuth(function(authData){
+					console.log('onAuth has run...');
+					console.log(authData);
+					showIcon = false;
 					$scope.userMessageCount = ''; 
-					var fbMsg = new Firebase(fsConfig.FIREBASE_URL + '/messages/').child(currentUser.uid);
-		 			fbMsg.on('value', function(snapshot) {
-			 			var fbMessages = (snapshot.val());
-			 			var theNewMsgs = filterFilter(fbMessages, {isSeen:'!true'});
-			 			if(theNewMsgs.length){
-					 		showIcon = true;	
-			 			}else{
-				 			showIcon = false;
-			 			};
-			 			newMsgCount = theNewMsgs.length;
-			 			$scope.userMessageCountDetail = theNewMsgs.length + 'New notifications';
-			 			$scope.showIcon = showIcon;
-			 			$scope.newMsgCount = theNewMsgs.length;
-			 			console.log('showicon is :' + $scope.showIcon);
-					});
-	 			}//ends if current user check
-				    
-		    });	
+					if(authData){
+						var fbMsg = new Firebase(fsConfig.FIREBASE_URL + '/messages/').child(authData.uid);
+						fbMsg.on('value', function(snapshot) {
+							var fbMessages = (snapshot.val());
+							var theNewMsgs = filterFilter(fbMessages, {isSeen:'!true'});
+							if(theNewMsgs.length){
+								showIcon = true;	
+							}else{
+								showIcon = false;
+							}
+							newMsgCount = theNewMsgs.length;
+							$scope.userMessageCountDetail = theNewMsgs.length + 'New notifications';
+							$scope.showIcon = showIcon;
+							$scope.newMsgCount = theNewMsgs.length;
+							console.log('showicon is :' + $scope.showIcon);
+							});
+						}
+			}); // Check user onauth
+			
+		    
 		}]//ends controller
-	    
-	 
-	   
-    };
-  }])
+	};
+}])
   
 
 ;

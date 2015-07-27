@@ -2,7 +2,7 @@
   <div class="contentWrap">
 	
 <!-- SHOW SECTION IF LOGGED IN -->
-<span ng-if="auth.user" >
+<span ng-if="authData" >
 	<div class="titleBlock group">
 		<div class="coverImg userImg" ng-show="profile.picture_url" ><img class="featImg" src="{{profile.picture_url}}"/></div>
 		<h2 class="bookTitle">{{auth.user.displayName}}</h2>
@@ -87,7 +87,7 @@
 
 
 <!-- SHOW SECTION IF NOT LOGGED IN -->
-<div class="theContent columnWrap" ng-if="!auth.user" >
+<div class="theContent columnWrap" ng-if="!authData" >
     <div ng-hide="auth.user" class="bookDetail">
 		<h2>Profile</h2>
 		<p>Not logged in.</p>

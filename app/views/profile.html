@@ -1,19 +1,20 @@
  <div class="theContainer pageAccount">
   <div class="contentWrap">
-	
+	  
 <!-- SHOW SECTION IF LOGGED IN -->
-<span ng-if="auth.user" >
+<span ng-show="authData" >
 	<div class="titleBlock group">
 		<div class="coverImg userImg" ng-show="profile.picture_url" ><img class="featImg" src="{{profile.picture_url}}"/></div>
-		<h2 class="bookTitle">{{auth.user.displayName}}</h2>
+		<h2 class="bookTitle">{{authData.displayName}}</h2>
 		<div class="subMenu">
-			<a href="#/profile/{{auth.user.displayName}}" class="active">profile</a>
-<!-- 			<a href="#/collections/{{auth.user.id}}">collections</a> -->
+			<a href="#/profile/{{authData.displayName}}" class="active">profile</a>
+<!-- 			<a href="#/collections/{{authData.id}}">collections</a> -->
 			<a href="#/following">activity</a>
 			<a href="#/account" >account</a>
- 
+			<a href="#" ng-click="auth.$unauth()" >logout</a>
+						
 		</div>
-		<button class="btnLogout" ng-click="auth.$logout()">Logout</button>
+<!-- 		<button class="btnLogout" ng-click="auth.$unauth()">Logout</button> -->
 	</div>
 	
 	
@@ -31,7 +32,7 @@
 			<div class="columnRight column column50">	
  				<p><span class="iconFollowing infoLabel icon-globe-world">Following</span> <span class="infoNumber">{{(profile.following|filter:placeid).length}} places</span></p>				
 				<p><span class="iconCollections infoLabel icon-folder-open">Collecting</span> <span class="infoNumber">{{(profile.collections|filter:timestamp).length}} collections</span></p>
-				<p><span class="iconBooks infoLabel icon-book">Contributing</span> <span class="infoNumber">{{(allBooks | filter:{'addedById': auth.user.uid}).length}} books</span>{{currentUser.uid}}</p>
+				<p><span class="iconBooks infoLabel icon-book">Contributing</span> <span class="infoNumber">{{(allBooks | filter:{'addedById': authData.uid}).length}} books</span>{{currentUser.uid}}</p>
 			</div>
 		</div>
 		<div class="contentSection actionWrap" ng-if="userAaa">
@@ -130,8 +131,8 @@
 
 
 <!-- SHOW SECTION IF NOT LOGGED IN -->
-<div class="theContent columnWrap" ng-if="!auth.user" >
-    <div ng-hide="auth.user" class="bookDetail">
+<div class="theContent columnWrap" ng-show="!authData" >
+    <div class="bookDetail">
 		<h2>Profile</h2>
 		<p>Not logged in.</p>
 		<p>Return to front page or <a href="#/login">login</a> to view your account.</p>
