@@ -1,3 +1,4 @@
+/*global app: true*/   //FOR JSLINT
 var app = angular.module("myApp", [
 	'firebase', 
 	'ngRoute', 
@@ -14,7 +15,7 @@ var app = angular.module("myApp", [
 
 app.constant("fsConfig", {
  	"FIREBASE_URL": "https://sweltering-fire-3219.firebaseio.com/",	//PRODUCTION VERSION
- //	"FIREBASE_URL": "https://fictionset-dev.firebaseio.com/",	//DEV VERSION
+ 	//"FIREBASE_URL": "https://fictionset-dev.firebaseio.com/",	//DEV VERSION
 	"DEV_STATUS": false
 });
 
@@ -129,6 +130,30 @@ app.config(["$routeProvider", '$locationProvider','ngDialogProvider', function($
 		    }]
 		  }
   })
+   .when("/profile/:authorise", {
+    controller: "ProfileCtrl",
+    templateUrl: "views/profile.html",
+    pageTitle: 'Your Profile',
+    pageClass: 'profilePage',
+		resolve: {
+		    "currentUser": ["Auth", function(Auth) {
+		      return Auth.$waitForAuth();
+		    }]
+		  }
+  })
+    .when("/authorise/:provider/:success?/:action?/:session?", { ///:Goodreads/true/newuser/"); 
+    controller: "AuthoriseCtrl",
+    templateUrl: "views/user/authorise.html",
+    pageTitle: 'User Authorisation',
+    pageClass: 'profilePage',
+		resolve: {
+		    "currentUser": ["Auth", function(Auth) {
+		      return Auth.$waitForAuth();
+		    }]
+		  }
+  })  
+  
+/*
    .when("/profile/:displayName", {
     controller: "ProfileCtrl",
     templateUrl: "views/profile.html",
@@ -140,6 +165,7 @@ app.config(["$routeProvider", '$locationProvider','ngDialogProvider', function($
 		    }]
 		  }
   })
+*/
    .when("/following", {
     controller: "FollowingCtrl",
     templateUrl: "views/following.html",
@@ -260,6 +286,7 @@ app.config(["$routeProvider", '$locationProvider','ngDialogProvider', function($
   /////////////////////////////////////////////////////////////////
   ///////////// ADMINISTRATION 
   /////////////////////////////////////////////////////////////////
+/*
   
    .when("/setting/:setting", {
     controller: "SettingCtrl",
@@ -270,6 +297,7 @@ app.config(["$routeProvider", '$locationProvider','ngDialogProvider', function($
 		    }]
 		  }
   })
+*/
 
   .when("/manageplaces/", {
     controller: "ManagePlacesCtrl",
@@ -373,7 +401,7 @@ app.config(["$routeProvider", '$locationProvider','ngDialogProvider', function($
 		    }]
 		  }
   })  
-  .when("/admin/message/:userid", {
+  .when("/admin/message/:userid", { 
     controller: "UserMessageCtrl",
     templateUrl: "views/admin/managemessageuser.html",
     pageTitle: 'Admin: add message',
@@ -412,30 +440,37 @@ app.config(["$routeProvider", '$locationProvider','ngDialogProvider', function($
 
 app.run(['fsConfig', '$location', '$rootScope', 'Auth', '$route', function(fsConfig, $location, $rootScope, Auth, $route) {
 	$rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
+		$rootScope.thePreviousLocation = previous;
   	$rootScope.pageTitle = $route.current.pageTitle;
     $rootScope.pageClass =  $route.current.pageClass ? $route.current.pageClass : '';
+    /* jshint ignore:start */
+		var ga;
 			if (typeof ga === "undefined") {
-          //if (!ga){
-	          	console.log('ga == undefined');
+	        console.log('ga == undefined');
 		  		return;
 		  		}else{
 		  		ga('send', 'pageview', { 
 			  		page: $location.path(),
 			  		title:  $route.current.pageTitle
 			  		});
-		  		//console.log($location.path());
-		  		//console.log($route.current.pageTitle);
 		  		}
+		/* jshint ignore:end */
 		$rootScope.dev_status =  fsConfig.DEV_STATUS;
-		$rootScope.$on("$routeChangeError", function(event, next, previous, error) {
+		$rootScope.$on("$routeChangeError", function(next, previous, error) { //event,
 		  // We can catch the error thrown when the $requireAuth promise is rejected
 		  // and redirect the user back to the home page
 		  if (error === "AUTH_REQUIRED") {
 		    $location.path("/home");
 		  }
 		});
+		console.log('the route was changed');
 		Auth.$onAuth(function(authData){
 			console.log('auth status changed');
+			console.log(authData);
+			$rootScope.showUser = authData;
+		});
+		Auth.$getAuth(function(authData){
+			console.log('auth status found');
 			console.log(authData);
 			$rootScope.showUser = authData;
 		});
@@ -467,13 +502,13 @@ app.factory("Auth", ['fsConfig', "$firebaseAuth",
 
 app.factory("simpleLogin", ["fsConfig", "Auth", "$firebaseAuth", "Profile", "$rootScope", function(fsConfig, Auth, $firebaseAuth, Profile, $rootScope) {
   var ref = new Firebase(fsConfig.FIREBASE_URL); //sets the location we're authenticating for
-  var isaNewUser = true;
+  //var isaNewUser = true;
   var userexists = false;
   var currentUserImg;
-  var userRole = 0;
-  var userAaa = false;
+  //var userRole = 0;
+  //var userAaa = false;
   $rootScope.theerror = '';
-	authObj = $firebaseAuth(ref);
+	var authObj = $firebaseAuth(ref);
 
 	var authData =  authObj.$getAuth();
 	if (authData) {
@@ -487,7 +522,8 @@ app.factory("simpleLogin", ["fsConfig", "Auth", "$firebaseAuth", "Profile", "$ro
 
   //  return $firebaseSimpleLogin(ref);
 //  var auth = new FirebaseSimpleLogin(ref, function(error, user) {
-	  var auth = Auth.$getAuth(function(error, user, authData) {
+	  var auth;
+	  auth = Auth.$getAuth(function(error, user, authData) {
      console.log( authData);
 
 	  if (error) {
@@ -499,9 +535,11 @@ app.factory("simpleLogin", ["fsConfig", "Auth", "$firebaseAuth", "Profile", "$ro
 		      case "INVALID_EMAIL":
 			  console.log('invalid email');
 		      // handle an invalid email
+		      break;
 		      case "INVALID_PASSWORD":
 			  console.log('invalid password');
 		      // handle an invalid password
+		      break;
 		      default:
 			  console.log('Error');
 			//$scope.$apply();
@@ -513,7 +551,7 @@ app.factory("simpleLogin", ["fsConfig", "Auth", "$firebaseAuth", "Profile", "$ro
 		// user authenticated with Firebase
 	    console.log("authenticated");
 	    console.log("User ID: " + user.uid + ", Provider: " + user.provider);
-		console.log(user);
+		  console.log(user);
 
 		ref.child('users').child(user.uid).once('value', function(snapshot) {
  			console.log(snapshot.val() !== null);
@@ -521,10 +559,10 @@ app.factory("simpleLogin", ["fsConfig", "Auth", "$firebaseAuth", "Profile", "$ro
   			if (!userexists){
 	 			console.log('does not esixt, lets save');
 	 			 
-	 			 if(user.provider == 'google'){
+	 			 if(user.provider === 'google'){
 						console.log('provider is google');
 			 			currentUserImg = user.thirdPartyUserData.picture;
-			 		}else if(user.provider == 'facebook'){
+			 		}else if(user.provider === 'facebook'){
 						console.log('provider is facebook');
 						currentUserImg = user.thirdPartyUserData.picture.data.url;
 					}
@@ -540,7 +578,7 @@ app.factory("simpleLogin", ["fsConfig", "Auth", "$firebaseAuth", "Profile", "$ro
 				  //and notify us
 				  ref.child('/system/adminmessages').push({
 						title:"User Added (simplelogin)",
-						messageContent:  user.displayName + ' ('+ provider + ") was added.",
+						messageContent:  user.displayName + ' ('+ user.provider + ") was added.",
 						messageType: "User",
 						timestamp: theTimestamp
  					});
@@ -558,7 +596,7 @@ app.factory("simpleLogin", ["fsConfig", "Auth", "$firebaseAuth", "Profile", "$ro
   }]);
 
 
-app.factory('AuthService', ['$rootScope', '$location', function($rootScope, $location) {
+app.factory('AuthService', ['$rootScope', function($rootScope) {
     return {
         createUser: function(email, password, auth) {
             auth.logout();
@@ -579,7 +617,7 @@ app.factory('AuthService', ['$rootScope', '$location', function($rootScope, $loc
         logout: function(auth) {
             auth.logout();
         }
-      }
+      };
   }]);
   
 
@@ -611,24 +649,22 @@ app.factory('iTunesData', function($http) {
                         "id": sQuery
                     }
                 });
-        }
-        
-        
-   }
+        }   
+   };
 });
 
 app.factory("Profile", ["fsConfig", "$firebaseObject", function(fsConfig, $firebaseObject) {
   return function(username) {
     var ref = new Firebase(fsConfig.FIREBASE_URL+"/users/").child(username);
     return $firebaseObject(ref);
-  }
+  };
 }]);
 
 
- app.controller("AuthCtrl", ["$scope", "Auth", "simpleLogin", function($scope, Auth, simpleLogin) {
+ app.controller("AuthCtrl", ["$scope", "Auth",  function($scope, Auth) {
  // $scope.auth = simpleLogin;
   $scope.authData = Auth;
-}])
+}]);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -637,11 +673,11 @@ app.factory("Profile", ["fsConfig", "$firebaseObject", function(fsConfig, $fireb
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-app.controller("HomeCtrl", ["fsConfig", "$scope", "currentUser", "$firebase", "$location", function(fsConfig, $scope, currentUser, $firebase, $location) {
+app.controller("HomeCtrl", ["fsConfig", "$scope", "currentUser", "$firebaseArray", 
+function(fsConfig, $scope, currentUser, $firebaseArray) {
    $scope.hasData = false;
 	 var ref = new Firebase(fsConfig.FIREBASE_URL + '/Books');
-	 var sync = $firebase(ref);
-	   list = sync.$asArray();
+	 var list = $firebaseArray(ref);
 	   $scope.list = list;
 	   list.$loaded().then(function() {
 		 $scope.hasData = true;		 
@@ -684,13 +720,15 @@ function(fsConfig, $scope, currentUser, $firebaseArray) {
 }]);
 
 //BookCtrl: see BookCtrl.js
+/*
 
 app.controller("SettingCtrl", [ "fsConfig", "$scope", "currentUser", "$firebaseArray", "$routeParams", "$location", "filterFilter", function(fsConfig, $scope, currentUser, $firebaseArray, $routeParams, $location, filterFilter) {
    console.log($scope);
+   console.log('Hi Gareth');
    var settingtag = $routeParams.setting;
    $scope.settingtag = settingtag;
    var setting = null;
-	 var obj = $firebase(new $firebaseArray(fsConfig.FIREBASE_URL+'/Books/')); 
+	 var obj = $firebaseArray(fsConfig.FIREBASE_URL+'/Books/'); 
     obj.$loaded().then(function() {
           console.log( obj );
 		$scope.setting = filterFilter(obj, { tags: settingtag });
@@ -698,9 +736,11 @@ app.controller("SettingCtrl", [ "fsConfig", "$scope", "currentUser", "$firebaseA
      });
 	 $scope.setting = setting;
    }]);
+*/
 
 
-app.controller("PlacesCtrl", [ "fsConfig", "$scope", "currentUser", "$firebaseArray", "$routeParams", "$location", "filterFilter", "$filter", "DataSource", function(fsConfig, $scope, currentUser, $firebaseArray, $routeParams, $location,  filterFilter, $filter, DataSource) {
+app.controller("PlacesCtrl", [ "fsConfig", "$scope", "currentUser", "$firebaseArray", "$routeParams", "$location", "filterFilter",   
+function(fsConfig, $scope, currentUser, $firebaseArray, $routeParams, $location,  filterFilter) {
 	$scope.isLoading = true;
 	var placeList = null;
 	var refBooks = $firebaseArray(new Firebase(fsConfig.FIREBASE_URL+'/Books/'));
@@ -715,13 +755,13 @@ app.controller("PlacesCtrl", [ "fsConfig", "$scope", "currentUser", "$firebaseAr
 		   	angular.forEach(placesref, function(place){
 					var tempBooks = filterFilter(refBooks, {places: place.geonameId});
 					if (tempBooks.length){
-						place.bookCount = tempBooks.length
+						place.bookCount = tempBooks.length;
 						place.books = tempBooks;
 						placesArray.push(place);
 				  } else {
-						place.bookCount = 0
+						place.bookCount = 0;
 						placesArray.push(place);
-					};
+					}
 			  });
 			});
 
@@ -752,7 +792,6 @@ app.controller("PlaceCtrl", [ "fsConfig", "$scope", "currentUser", "$firebaseArr
     $scope.isLoading = true;
    	var placeInfo = null;
    	var othername = null;
-  	var photolocation = "";
   	$scope.userAaa = false;
 		$scope.othername = null;
 		$scope.isFollowing = false;
@@ -764,8 +803,8 @@ app.controller("PlaceCtrl", [ "fsConfig", "$scope", "currentUser", "$firebaseArr
   	if(currentUser){
 		var refProfile = new Firebase(fsConfig.FIREBASE_URL+'/users/').child(currentUser.uid);
 	}
-	var ref = new Firebase(fsConfig.FIREBASE_URL+'/Books/');
-	var placeref = new Firebase(fsConfig.FIREBASE_URL+'/places/'+placeid);
+	//var ref = new Firebase(fsConfig.FIREBASE_URL+'/Books/');
+	//var placeref = new Firebase(fsConfig.FIREBASE_URL+'/places/'+placeid);
 	var thePlace = null;
    	var placeImages = $firebaseArray(new Firebase(fsConfig.FIREBASE_URL+'/places/'+placeid +'/images/')); 
   	placeImages.$loaded().then(function(){
@@ -794,41 +833,42 @@ app.controller("PlaceCtrl", [ "fsConfig", "$scope", "currentUser", "$firebaseArr
 		placeobj.viewCount = viewCountRef +1;
 		placeobj.$save();
 
+		var photolocation = placeobj.$id;
+		if (placeobj.geonameId){
+  		photolocation = placeobj.name + ' ' +placeobj.countryName;
+		}
 
-  		var photolocation = placeobj.$id;
-  		if (placeobj.geonameId){
-	  		photolocation = placeobj.name + ' ' +placeobj.countryName;
-  		};
 
-
-      if(currentUser){
+    if(currentUser){
 		 var followingList = [];
-      	 var profile = Profile(currentUser.uid);
+      	 var profile = new Profile(currentUser.uid);
       	 profile.$loaded().then(function() {
- 	      	 $scope.profile = profile;
+	      	 $scope.profile = profile;
 		  	  console.log($scope.profile);
 		  	  console.log(profile.following);
 		  	  if(profile.following){
- 			  	  followingList = profile.following;
+			  	  followingList = profile.following;
 			  	  var tempBooks = filterFilter(followingList, {'placeid': placeid});
 			  	  if(tempBooks.length){
 				  	  $scope.isFollowing = true;				  	  
-			  	  };
+			  	  }
 		  	  }
-	  	  });
+	  	 });
 	  }
         
 	  $scope.stopFollowing = function(){
   			 var removeItemRef =  new Firebase(fsConfig.FIREBASE_URL+'/users/').child(currentUser.uid).child('/following/');
-		  	 $scope.removeItemList = $firebase(removeItemRef);
+		  	 var removeItemList;
+		  	 $scope.removeItemList = $firebaseArray(removeItemRef);
 		  	 removeItemList = $scope.removeItemList;
  		  	 removeItemList.$remove(placeid);
  		  	 $scope.isFollowing = false;
- 	  }
+ 	  };
 
 
   		// FLICKR WITH FACTORY
-  		var doFindPlace = function(loc) {
+  		var doFindPlace;
+  		doFindPlace = function(loc) {
 	        // This service's function returns a promise, but we'll deal with that shortly
 	        FlickrPlace.getPlace(loc)
 	            // then() called when loc gets back
@@ -836,20 +876,21 @@ app.controller("PlaceCtrl", [ "fsConfig", "$scope", "currentUser", "$firebaseArr
 	                // promise fulfilled
 	                console.log('data is returned');
 					console.log(data);
-					return data.places.place[0].place_id;
-	                if (data.places.place[0].place_id != '') {
-	                	//alert('nooot good');
-	                	console.log(data.places.place[0].place_id);
-	                   // prepareFishingTrip();
-	                } else {
-	                	//alert('good');
-	                	console.log(data.places.place[0].place_id);
- 	                }
-	            }, function(error) {
+					if (data.places.place[0].place_id !== '') {
+					  //alert('nooot good');
+	          console.log(data.places.place[0].place_id);
+	        	return data.places.place[0].place_id;
+	          } else {
+						//alert('good');
+	          console.log(data.places.place[0].place_id);
+	          return data.places.place[0].place_id;
+ 	          }
+	         }, function(error) {
 	                // promise rejected, could log the error with: console.log('error', error);
- 				console.log('promise rejected');
+									console.log('promise rejected');
+									console.log(error);
 	            })//ends first then
-	            .then(function(locid, bbox) {
+	            .then(function(locid) {
 	            	console.log('OK, now we have an id, lets get some pics');	
 	            	console.log(locid);	
  					FlickrPlacePics.getPics(locid).then(function(resp) {
@@ -902,10 +943,9 @@ app.controller("PlaceCtrl", [ "fsConfig", "$scope", "currentUser", "$firebaseArr
         	});
     }; //ends clicktoopen
   
-  $scope.followPlace = function(placeid, userid){
+  $scope.followPlace = function(placeid){
 		console.log(currentUser);	
 		console.log(placeobj);
-
 		if (placeid) {
 		$scope.followProcessing = true;	
   		 	refProfile.child('following').child(placeid).update({
@@ -920,7 +960,7 @@ app.controller("PlaceCtrl", [ "fsConfig", "$scope", "currentUser", "$firebaseArr
 			} else {
 				$scope.isFollowing = false;
 				$scope.followProcessing = false;	
-			}; //endif
+			} 
 
    };
       
@@ -930,19 +970,17 @@ app.controller("PlaceCtrl", [ "fsConfig", "$scope", "currentUser", "$firebaseArr
    	 console.log(data.id + ' has been dismissed.');
    	});
 */
-     $scope.closeThisDialog = function(passedValue){
-		 console.log('it was closed and the value that was passed was...');
-	   	 console.log(passedValue);	     
-	   	 
-     }
+	$scope.closeThisDialog = function(passedValue){
+		console.log('it was closed and the value that was passed was...');
+		console.log(passedValue);	     
+	};
       
       
-      function checkIfUserExists(userId) {
+	function checkIfUserExists(userId) {
 		  var USERS_LOCATION = fsConfig.FIREBASE_URL+'/users';
 		  var userAccess = new Firebase(USERS_LOCATION);
 		  console.log(userAccess);
 		  userAccess.child(userId).once('value', function(snapshot) {
-		    var exists = (snapshot.val() !== null);
 		    var val = snapshot.val();
 		  	  var userRole = val.role;
 		      var userAaa = (val.role  > 50);
@@ -958,12 +996,13 @@ app.controller("PlaceCtrl", [ "fsConfig", "$scope", "currentUser", "$firebaseArr
    }]);
 
 
-app.controller("NearCtrl", [ "fsConfig", "$scope", "currentUser", "$firebaseArray", "$firebaseObject", "$routeParams", "$location", "filterFilter",   "DataSource", function(fsConfig, $scope, currentUser, $firebaseArray, $firebaseObject, $routeParams, $location,  filterFilter,  DataSource) {
+app.controller("NearCtrl", [ "fsConfig", "$scope", "currentUser", "$firebaseArray", "$firebaseObject", "$routeParams", "$location", "filterFilter",   "DataSource", "distance",
+function(fsConfig, $scope, currentUser, $firebaseArray, $firebaseObject, $routeParams, $location,  filterFilter,  DataSource, distance) {
  	$scope.isLoading = true;
  	$scope.isLoadingPlaces = true;
  	$scope.isLoadingBooks = true;
  	var placeList = null;
- 	var ref = new Firebase(fsConfig.FIREBASE_URL+'/Books/');
+ 	//var ref = new Firebase(fsConfig.FIREBASE_URL+'/Books/');
  	var placesref = $firebaseArray(new Firebase(fsConfig.FIREBASE_URL+'/places/')); 
   placesref.$loaded().then(function() {
   	$scope.placeList = placesref;
@@ -974,20 +1013,23 @@ app.controller("NearCtrl", [ "fsConfig", "$scope", "currentUser", "$firebaseArra
   $scope.mgLocation = "Finding location...";
     
    // var userPosition = navigator.geolocation.getCurrentPosition();
-  navigator.geolocation.getCurrentPosition(function(position) {
-		do_location(position.coords.latitude, position.coords.longitude),
-		do_error()
-		,{
-			timeout:10000
-		}
-	});
-	
+  var geo_options = {
+  	timeout : 10000
+	};
 	var do_error = function( ){
 		console.log('error getting location');	
 		 	$scope.isLoading = false;
 		 	$scope.isLoadingPlaces = false;
 		 	$scope.isLoadingBooks = false;
 	};
+
+  navigator.geolocation.getCurrentPosition(function(position) {
+		do_location(position.coords.latitude, position.coords.longitude);
+		}, 
+		do_error(), 
+		geo_options 
+	);
+	
 	
  	
 	var do_location = function(lat, lng){
@@ -995,17 +1037,18 @@ app.controller("NearCtrl", [ "fsConfig", "$scope", "currentUser", "$firebaseArra
 			$scope.msgLocation = 'Calculated GPS location is ' + lat +', '+lng;
 			var userLat = lat;
 			var userLng = lng;
+			var getUserLoc;
 			do_closestBooks(userLat, userLng);
 			$scope.userLat = lat;
 			$scope.userLat = lng;
 			var APISOURCE = 'http://api.geonames.org/findNearby?&lang=en&style=medium&maxRows=5&type=json&username=thirdman&lat='+lat+'&lng='+lng;
- 			//GET LODATION DATA 	
- 			 var getUserLoc = DataSource.get(APISOURCE,function(data) {
- 				 var theLoc = []
-				var theLoc = data.geonames;
+			//GET LODATION DATA 	
+			getUserLoc = DataSource.get(APISOURCE,function(data) {
+				var theLoc = [];
+				theLoc = data.geonames;
 				var theLocData =data.geonames[0];
- 	        	console.log(theLocData);
- 	        	$scope.userCountry = theLocData.countryName;
+	      console.log(theLocData);
+				$scope.userCountry = theLocData.countryName;
 				//$scope.msgLocation = 'Current gps is ' + lat +', '+lng+' and it looks like you are in '+theLocData.countryName ;
 				$scope.msgLocation = 'You appear to be in '+theLocData.name+', '+theLocData.countryName +'. The closest 10 places are:';
 
@@ -1035,18 +1078,17 @@ app.controller("NearCtrl", [ "fsConfig", "$scope", "currentUser", "$firebaseArra
 				}
 			});//ends getData
   		
-  		 	$scope.isLoading = false;
-			 	$scope.isLoadingPlaces = false;
-    		} else{	
-				$scope.mgLocation = "Location Data Unavailable";
+			$scope.isLoading = false;
+			$scope.isLoadingPlaces = false;
+  		} else{	
+			$scope.mgLocation = "Location Data Unavailable";
 		}
-		
-	}
+	};
  
  
 	  var do_closestBooks = function(userLat, userLng){
-	  var userLat = userLat;
-	  var userLng = userLng;
+	  userLat = userLat;
+	  userLng = userLng;
 	  	
 	  $scope.booksMsg = 'Hunting books.';
 		var theBooks = null;
@@ -1056,8 +1098,9 @@ app.controller("NearCtrl", [ "fsConfig", "$scope", "currentUser", "$firebaseArra
 		var theBooks = obj;
 	  $scope.theBooks = obj;
 	  var booksByDistance = [];
+	  var itemClosestDistance;
 		angular.forEach(theBooks,function(item) {
-			var placesTempList = []
+			var placesTempList = [];
 			var placesExist = (item.places !== null);
 			if(placesExist){
 				placesTempList = item.places;
@@ -1088,7 +1131,7 @@ app.controller("NearCtrl", [ "fsConfig", "$scope", "currentUser", "$firebaseArra
 		$scope.theBooks = theBooks;
   	$scope.isLoading = false;
   	$scope.isLoadingBooks = false;
-	}// ends do_closestBooks
+	};// ends do_closestBooks
 }]);
 
 
@@ -1099,12 +1142,13 @@ app.controller("NearCtrl", [ "fsConfig", "$scope", "currentUser", "$firebaseArra
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-app.controller("CollectionCtrl", [ "fsConfig", "$scope", "currentUser", "$firebaseArray", "$firebaseObject", "$routeParams", "$location", "filterFilter", 'ngDialog', 'Profile', function(fsConfig, $scope, currentUser, $firebaseArray, $firebaseObject, $routeParams, $location, filterFilter,  ngDialog, Profile) {
-	var collectionid, theCollection;
-	var collectionid = $routeParams.collectionid;
+app.controller("CollectionCtrl", [ "fsConfig", "$scope", "currentUser", "$firebaseArray", "$firebaseObject", "$routeParams", "$location", "filterFilter", 'ngDialog',
+function(fsConfig, $scope, currentUser, $firebaseArray, $firebaseObject, $routeParams, $location, filterFilter,  ngDialog) {
+	var collectionid;
+	collectionid = $routeParams.collectionid;
 	$scope.placeid = collectionid;
 	if(currentUser){
-		var refProfile = new Firebase(fsConfig.FIREBASE_URL+'/users/').child(currentUser.uid);
+		//var refProfile = new Firebase(fsConfig.FIREBASE_URL+'/users/').child(currentUser.uid);
 	}
 	var collectionobj = $firebaseObject( new Firebase(fsConfig.FIREBASE_URL+'/collections/'+collectionid));
 	var booksArray = $firebaseObject( new Firebase(fsConfig.FIREBASE_URL+'/collections/'+collectionid +'/books/'));
@@ -1116,9 +1160,8 @@ app.controller("CollectionCtrl", [ "fsConfig", "$scope", "currentUser", "$fireba
 		$scope.bookCount = count;
   });
   collectionobj.$loaded().then(function() {
-  	var theCollection = collectionobj;
+  	//var theCollection = collectionobj;
     $scope.theCollection = collectionobj;
-
 		// DO VIEW COUNT SAVE
 		var viewCountRef = collectionobj.viewCount;
 		if(!viewCountRef){
@@ -1130,11 +1173,13 @@ app.controller("CollectionCtrl", [ "fsConfig", "$scope", "currentUser", "$fireba
 	});
 	
 	$scope.updateOtherCollection = function(theCollectionIdtoUpdate){
+		var fsCollectionVal;
+		var userCollectionVal;
 		if(currentUser){
 			var fsCollection = new Firebase(fsConfig.FIREBASE_URL+'/collections/').child(theCollectionIdtoUpdate);
 			var userCollection = new Firebase(fsConfig.FIREBASE_URL+"/users").child(currentUser.uid).child('collections').child(theCollectionIdtoUpdate);
 			userCollection.once('value', function(snapshot) {
-				var userCollectionVal = snapshot.val();
+				userCollectionVal = snapshot.val();
   				  		 	userCollection.update({
 							    description: $scope.theCollection.description,
 							    title: $scope.theCollection.title,
@@ -1143,7 +1188,8 @@ app.controller("CollectionCtrl", [ "fsConfig", "$scope", "currentUser", "$fireba
 			});			
 
 			fsCollection.once('value', function(snapshot) {
-				var fsCollectionVal = snapshot.val();
+				fsCollectionVal = snapshot.val();
+				
 				  		 	fsCollection.update({
 							    description: $scope.theCollection.description,
 							    title: $scope.theCollection.title,
@@ -1151,10 +1197,10 @@ app.controller("CollectionCtrl", [ "fsConfig", "$scope", "currentUser", "$fireba
 							  });
 			});			
 		}	
-	}
+	};
 
 	$scope.dialogDelete = function () {
-		var dialogProcessing = false;
+		//var dialogProcessing = false;
 		$scope.dialogProcessing = false;
 		$scope.dialogDone = false;
 		$scope.isError = false;
@@ -1169,8 +1215,8 @@ app.controller("CollectionCtrl", [ "fsConfig", "$scope", "currentUser", "$fireba
     }; //ends dialogDelete
 
 	$scope.doDelete = function (thecollectionid) {
- 	 	var theTimestamp;
-		var dialogProcessing = true;
+ 	 	//var theTimestamp;
+		//var dialogProcessing = true;
 		$scope.dialogProcessing = true;
 		$scope.dialogDone = false;
 		$scope.isError = false;
@@ -1201,9 +1247,8 @@ app.controller("CollectionCtrl", [ "fsConfig", "$scope", "currentUser", "$fireba
 }]);
 	
 
-
-app.controller("TagsCtrl", ["fsConfig", "$scope", "$firebaseArray", "$routeParams", "$location", "filterFilter", function(fsConfig, $scope, $firebaseArray, $routeParams, $location, filterFilter) {
-	var arrTags;
+app.controller("TagsCtrl", ["fsConfig", "$scope", "$firebaseArray",  
+function(fsConfig, $scope, $firebaseArray){
 	$scope.isLoading = true;
 	$scope.hasData = false;
 	var ref = new Firebase(fsConfig.FIREBASE_URL);
@@ -1220,22 +1265,21 @@ app.controller("TagsCtrl", ["fsConfig", "$scope", "$firebaseArray", "$routeParam
 	*/
 	$scope.countBooks = function(bookObj) {
         return Object.keys(bookObj).length;
-    }	 
+    };
   });
 }]);
 
 
-
 app.controller("ViewTagCtrl", [ "fsConfig", "$scope",  "$firebaseArray", "$firebaseObject", "$routeParams", "$location", "filterFilter",  function(fsConfig, $scope, $firebaseArray, $firebaseObject, $routeParams, $location, filterFilter) {
-	var tagId, theTag, theTagBooks;
-	var tagBooks = [];
-	var tagId = $routeParams.tagId;
 	$scope.isLoading = true;
 	$scope.hasData = false;
+	var tagId, theTag, theTagBooks, refBooks;
+	var tagBooks = [];
+	tagId = $routeParams.tagId;
 	var ref = new Firebase(fsConfig.FIREBASE_URL);
-	var theTag = $firebaseObject(ref.child('tags').child(tagId));
-	var theTagBooks = $firebaseArray(ref.child('tags').child(tagId).child('books'));
-	var refBooks = $firebaseArray(ref.child('Books'));
+	theTag = $firebaseObject(ref.child('tags').child(tagId));
+	theTagBooks = $firebaseArray(ref.child('tags').child(tagId).child('books'));
+	refBooks = $firebaseArray(ref.child('Books'));
   theTag.$loaded().then(function() {
 		$scope.theTag = theTag;
 		console.log('the tag is:');
@@ -1244,7 +1288,7 @@ app.controller("ViewTagCtrl", [ "fsConfig", "$scope",  "$firebaseArray", "$fireb
 		refBooks.$loaded().then(function() {
 			$scope.isLoading = false;
 			$scope.hasData = true;
-			angular.forEach( theTag.books, function(bookId, key) {
+			angular.forEach( theTag.books, function(bookId) {
 				console.log('the book id is :' );
 				console.log(bookId);
 				var thebookid = bookId;
@@ -1274,293 +1318,9 @@ app.controller("ViewTagCtrl", [ "fsConfig", "$scope",  "$firebaseArray", "$fireb
 
 //ctrlAddBookResponse.js
 
-app.controller("NominateBookCtrl", [ "fsConfig", "$scope", "currentUser", "$firebase", "$routeParams", "$location", "filterFilter", "DataSource", "$q", "$http", function(fsConfig, $scope, currentUser, $firebase, $routeParams, $location, filterFilter, DataSource, $q, $http) {
-	$scope.hasData = false;
-	$scope.isLooking = false;
-	$scope.hasDataNominate = false;
-	$scope.isLookingNominate = false;
-	var currentBooks;
-	$scope.limitCurrent = 3;
-	
-	var ref = new Firebase(fsConfig.FIREBASE_URL);
-	var refCurrent = $firebase(ref.child('Books')).$asArray();
+//ctrlNominateBookSearch.js
 
-
-	refCurrent.$loaded().then(function() {
-      	 $scope.currentBooks = refCurrent;
-	});
-
-	$scope.showAllCurrent = function(){
-		$scope.limitCurrent = 100;
-	};
-
- 	$scope.searchBooksNominate = function() {
- 		$scope.hasDataNominate = false;
- 		$scope.isLookingNominate = true;
-  		//GET LODATION DATA 	
-		 var SEARCHURL = 'http://fictionset.in/admin/amazon/amazon_searchbooks.php?search='+$scope.searchStringNominate;
-			searchDataNominate = function(data) {
-				$scope.isLookingNominate = false;
-				$scope.hasDataNominate = true;
-				$scope.dataSearchNominate = data;
-	        	//console.log(data);
-  				};
- 			DataSource.get(SEARCHURL,searchDataNominate);  //this is the locations
- 	}//ends search funciton
-
- 	
-}]);
- 	 
-app.controller("NominateBookDetailCtrl", [ "fsConfig", "$scope", "currentUser", "$firebase", "$routeParams", "$location", "filterFilter", "DataSource", "$q", "$http", 'ngDialog', "to_linesFilter", "FsNotify", "FsNotifyWithId", function(fsConfig, $scope, currentUser, $firebase, $routeParams, $location, filterFilter, DataSource, $q, $http, ngDialog, $to_linesFilter, FsNotify, FsNotifyWithId) {
-	    var testMode = false;
-		var tempBook = {};
-		var tempPlaces = [];
-		var tempExcerpts = [];
-		var tempTags = [];
-		var newSetting = null;
-		var ngDialog;
-		$scope.amazonDescHtml = "";
-		$scope.userComment = "";
-	    $scope.newSetting = null;
-	    $scope.tempExcerpts = tempExcerpts;
-	    $scope.newExcerpt = null;
-    	$scope.tempBook = tempBook;
-    	$scope.tempPlaces = tempPlaces;
-    	$scope.tempTags = tempTags;
- 		$scope.amazonid = $routeParams.amazonid;
- 		$scope.hasData = false;
- 		$scope.isLooking = true;
- 		$scope.isSaving = false;
- 		$scope.errorPlaces = false;		
-		
- 		var ref = new Firebase(fsConfig.FIREBASE_URL);
- 		 // get user
-  		if(currentUser){
-	  		var refProfile = new Firebase(fsConfig.FIREBASE_URL+ '/users/').child(currentUser.uid); 			
- 			refProfile.once('value', function(snapshot) {
-			    var exists = (snapshot.val() !== null);
-			    var profile = snapshot.val();
-				$scope.profile = profile;
-				var userName = profile.displayName;
-				$scope.userName = userName;
-		  		console.log(profile.name);					
-		  		console.log(profile);
-				});
-		}
- 
- 
- 		 var AMAZONURL = 'http://fictionset.in/admin/amazon/amazon_getBook.php?search='+$routeParams.amazonid;
-   		amazonObj = function(data) {
-   				var amazonData = data[0];
-				$scope.isLooking = true;
-				$scope.hasData = true;
-				$scope.amazonData = amazonData;
-
-   				if (amazonData.ItemAttributes.Title.length){
-	    			$scope.hasData = true;
-					$scope.amazonData = amazonData;
-	    			$scope.hasData = true;
-					} else {
-						return 'no data';
-					}    
-				console.log('amazon data is...');
-  				 console.log(amazonData);
-
-  				 if(amazonData.EditorialReviews){
-  				   	if(amazonData.EditorialReviews.EditorialReview[0]){
-  				   		$scope.theDesc = $to_linesFilter(amazonData.EditorialReviews.EditorialReview[0].Content);
-  				   		$scope.amazonDescHtml =  amazonData.EditorialReviews.EditorialReview[0].Content;
-
-  				   	} else if(amazonData.EditorialReviews.EditorialReview.Content){
-  				   		$scope.theDesc = $to_linesFilter(amazonData.EditorialReviews.EditorialReview.Content);
-  				   		$scope.amazonDescHtml =  amazonData.EditorialReviews.EditorialReview.Content;
-  				   	} else {
-	  				   	$scope.theDesc = "";
-	  				   	$scope.amazonDescHtml ="";
-  				   	};
-  				}else{
-	  			$scope.amazonDescHtml = "";	
- 				}
- 				};
- 			DataSource.get(AMAZONURL,amazonObj);  //this is the locations
-
- 					// NOW DO THE PLACES SEARCH & TEMP LIST
-		 			 $scope.autoObject = function(selectedObject) {
-		 				newSetting = selectedObject.originalObject;
-		 				var bookplaceref = tempPlaces;
-		                  
-		                tempPlaces.push(newSetting);
-		 				$scope.newSetting = newSetting; 
-		                };
-		                
-		                $scope.newSetting = newSetting;
-
-
-					$scope.removePlace = function(place){
- 						$scope.tempPlaces.splice( $scope.tempPlaces.indexOf(place), 1 );
- 						tempPlaces = $scope.tempPlaces;
-					}
-					// NOW DO THE TAGS 				
-					 $scope.addTag = function( ) {
- 					 	console.log($scope.newTag);
-				 		 if ($scope.newTag) {
-				  		 	tempTags.push($scope.newTag);
- 							console.log(tempTags);
-							$scope.newTag = null;
-							}
-					}
-					$scope.removeTag = function(tempTag){
- 						//tempExcerpts = $filter('filter')(tempExcerpts, {!tempExcerpt})
-						$scope.tempTags.splice( $scope.tempTags.indexOf(tempTag), 1 );
- 						tempTags = $scope.tempTags;
-					}
-
- 
- 
- 			// NOW SAVE THE BOOK 									
-			$scope.saveBook = function(){
-				if (tempPlaces.length){
-					console.log('has places: ');
-					console.log(tempPlaces);
-					$scope.errorPlaces = false;		
-				
-					if (testMode ==false){
-							console.log('testMode is' + testMode);
-						//carry on with saving///
-						$scope.isSaving = true;
-
-						$scope.tempBook.title = $scope.amazonData.ItemAttributes.Title;
-						if($scope.amazonData.ItemAttributes.Author){
-							$scope.tempBook.author = $scope.amazonData.ItemAttributes.Author;
-						};
-						if($scope.amazonData.ItemAttributes.PublicationDate){
- 						$scope.tempBook.publicationDate = $scope.amazonData.ItemAttributes.PublicationDate;
-						};
-						if($scope.amazonData.ItemAttributes.Publisher){
-							$scope.tempBook.publisher = $scope.amazonData.ItemAttributes.Publisher;
-						};
-						if($scope.amazonData.ItemAttributes.ISBN){
-							$scope.tempBook.isbn = $scope.amazonData.ItemAttributes.ISBN;
-						};
-						if($scope.amazonData.ItemAttributes.EAN){
-							$scope.tempBook.isbn13 = $scope.amazonData.ItemAttributes.EAN;
-						};
-						if($scope.amazonData.EditorialReviews){
-							if($scope.amazonData.EditorialReviews.EditorialReview[0]){
-								$scope.tempBook.description = $scope.amazonData.EditorialReviews.EditorialReview[0].Content;
-							};
-							if($scope.amazonData.EditorialReviews.EditorialReview[1]){
-								$scope.tempBook.amazonreview = $scope.amazonData.EditorialReviews.EditorialReview[1].Content;
-							}; 
-							}else{
-							
-						};
- 						$scope.tempBook.description = $scope.theDesc;
-						$scope.tempBook.amazonDescHtml = $scope.amazonDescHtml;
-
- 						$scope.tempBook.coverurl = $scope.amazonData.LargeImage.URL;
-						if($scope.bookLink){
-	 						$scope.tempBook.bookLink = $scope.bookLink;
-	 					}
-						//IDs
-						$scope.tempBook.amazon_id = $scope.amazonid;
-							//$scope.tempBook.gr_id = 
-							//$scope.tempBook.apple_id = 
-
-						//META DATA
-						var newtimestamp = new Date().valueOf();
- 						$scope.tempBook.timestamp = newtimestamp;
-						$scope.tempBook.addedById = currentUser.uid;
-						if($scope.userName){
-							$scope.tempBook.addedByName = $scope.userName;
-						} else if(currentUser.displayName){
-							$scope.tempBook.addedByName = currentUser.displayName;
-						} else {
-							$scope.tempBook.addedByName = 'Anonymous User';
-						}
-						$scope.tempBook.userComment = $scope.userComment;
-						
-
-
-					//SET LOCATIONS
-					var refBook = ref.child('nominated').child('Books');
- 					var refPlaces = ref.child('nominated').child('places');
- 					var refTags = ref.child('nominated').child('tags');
- 						
-					var cleanedTempBook = $scope.tempBook;
-					console.log(cleanedTempBook);
-					var cleanedTempBook = angular.copy(cleanedTempBook);
- 					//SAVE BOOK
-					var newPostRef = refBook.push(cleanedTempBook);
-					var postID = newPostRef.key();
-						$scope.tempBook.places = tempPlaces;
- 
-					//do places
-					var cleanedPlaces = $scope.tempPlaces;
-					var cleanedPlaces = angular.copy(cleanedPlaces);
-					angular.forEach( cleanedPlaces, function(aPlace, key) {
-						aPlace = angular.copy(aPlace);
-						refBook.child(postID).child('places').child(aPlace.geonameId).set(aPlace);
-						refPlaces.child(aPlace.geonameId).set(aPlace);
- 					     });
-					var cleanedTags = $scope.tempTags;
-					var cleanedTags = angular.copy(cleanedTags);
- 					angular.forEach(cleanedTags, function(aTag, key) {
-						refBook.child(postID).child('tags').child(aTag.text).set({
-							tagId: aTag.text
-						});
- 						refTags.child(aTag.text).child('books').push(postID);
-					});
-
-					
-					//add a notificiation
-					var messageType = 'Nomination';
-					var theTimestamp = new Date().valueOf();
-					var theAuthorName = $scope.messageAuthor;
-					var theAuthorId = currentUser.uid;
-					
-					FsNotifyWithId.bookSuggested(currentUser.uid, postID); //SENDS ONLY IDS
-
-					/*
-					ref.child('/system/adminmessages').push({
-						title:"A Book was nominated",
-						messageContent:  $scope.tempBook.title + " was nominated",
-						messageType: messageType,
-						authorName: $scope.userName,
-						authorId: currentUser.uid,
- 						timestamp: theTimestamp	
- 					});
-					*/
-
-			   	 	$location.path("/requests/"); 
-			   	 	}//ends edit mode check
-				}else{//contintues if else for hasplaces...
-					console.log('does not have places')
-					console.log(tempPlaces);
-					$scope.isSaving = false;
-					$scope.errorPlaces = true;		
-				}
-
-
- 			}//ends addbook
-
-
- 
-			
-			
-			
-
- 	$scope.clickToOpenGuidelines = function () {
-        ngDialog.open({ 
- 			plain: false,
-         	template: 'views/dialogs/dialogGuidelines.html',
-        	scope: $scope
-			});
-    }; //ends clicktoopen
-
-
-
-}]);
+//ctrlNominateBookDetail.js
  	 
  	 
 
@@ -1572,7 +1332,7 @@ app.controller("NominateBookDetailCtrl", [ "fsConfig", "$scope", "currentUser", 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-app.controller("DialogFollowPlaceCtrl",  ["fsConfig", "$scope", "$location", "ngDialog", function(fsConfig, $scope, $location,  ngDialog) {
+app.controller("DialogFollowPlaceCtrl",  ["fsConfig", "$scope",  function(fsConfig, $scope) {
 	console.log('loaded controller');
 	console.log($scope.$parent);
 }]);
@@ -1585,7 +1345,6 @@ app.controller("DialogCollectionsAdd",  ["fsConfig", "$scope", "$location", "ngD
 	console.log($scope.$parent);
 	console.log($scope);
 	console.log($scope.$id);
-	console.log(bookid);
 	console.log(currentUser);	
 }]);
  	 
@@ -1596,169 +1355,28 @@ app.controller("DialogCollectionsAdd",  ["fsConfig", "$scope", "$location", "ngD
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
  
-app.controller("AccountCtrl", ["fsConfig", "$scope", "Auth", "Profile", "currentUser", "$firebase", "$location","filterFilter",
-  function(fsConfig, $scope, Auth, Profile, currentUser, $firebase, $location, filterFilter) {
-  	var unreadMessages, userProfile, profileUserImg, currentUserImg, locationObject;
-  	$scope.unreadMessages = unreadMessages;
-		$scope.aaa = false;
-		$scope.isLoadingMessages = true;
-		$scope.locationObject = locationObject;
-		var authData = Auth.$getAuth();
-		$scope.auth = Auth;
-	  // any time auth status updates, add the user data to scope
-	  $scope.auth.$onAuth(function(authData) {
-	    $scope.authData = authData;
-	    console.log('got authdata');
-	  });
-  
-    var currentUser = authData;
-    if(currentUser){
-	    
-    	userProfile = Profile(currentUser.uid);
- 	    userProfile.$loaded().then(function() {
-      	$scope.profile = userProfile;
-      	console.log(userProfile);
-      	
-				var userId = currentUser.uid;
-				profileUserImg = userProfile.picture_url;
-				
-				if(currentUser.provider == 'google'){
-					console.log('provider is google');
-					currentUserImg = currentUser.thirdPartyUserData.picture;
-				}else if(currentUser.provider == 'facebook'){
-					 console.log('provider is facebook');
-					 //currentUserImg = currentUser.thirdPartyUserData.picture.data.url;
-					 currentUserImg = currentUser.facebook.profileImageURL;
-				}
-		 
-				if( (currentUserImg)  && profileUserImg !== currentUserImg){
-					console.log('profile images are different, so change them');
-					new Firebase(fsConfig.FIREBASE_URL+'/users').child(currentUser.uid).update({
-						picture_url: currentUserImg
-					});
-				} else {
-					console.log('profile images match, as you were.');
-				}
-
-				$scope.autoObject = function(retselectedObject) {
- 					locationObject = retselectedObject;
- 					$scope.locationObject = retselectedObject;
- 					$scope.profile.location = locationObject.title;
-  				console.log($scope.locationObject);
- 				}
-
-
-
- /*
- 	 var refMessages = new Firebase('https:// .... .firebaseio.com/messages/');
- 			 			refMessages.once('value', function(snapshot) {
-						    var exists = (snapshot.val() !== null);
-							unreadMessages = snapshot.val();
-						         console.log(unreadMessages);
-						         $scope.unreadMessages = unreadMessages;
- 							});
-  	 var syncMessages = $firebase(refMessages);
-	 var msgs = syncMessages.$asArray();
-	   msgs.$loaded().then(function() {
-	   	 $scope.notifications = msgs;
-	   	 console.log(msgs);
- 		 $scope.hasData = true;	
- 		 $scope.isLoadingMessages = false;
- 		 var unreadMessagesArray = filterFilter(msgs, {isRead:!true} );
- 		 $scope.unreadMessagesArray = unreadMessagesArray;
- 		 console.log(unreadMessagesArray);
-  		 // To iterate the key/value pairs of the object, use `angular.forEach()`
-        angular.forEach(msgs, function(value, key) {
-           console.log(key, value);
-            var item = msgs.$getRecord( value.$id );
-
-			
-//			$scope.data[i].duration = (new Date() - $scope.data[i].time)
-			if(!item.isRead){
-				console.log('not readbefore');
-				var theTimestamp = new Date().valueOf();					
-				item.isRead = true;
-				item.readDate = theTimestamp;
-				msgs.$save(item);
-		   	}else{
-				console.log('readdade is '+ item.readDate);
-				console.log('isread is '+ item.isRead);
-				var theDifference = (new Date() - item.readDate);
-				console.log(theDifference);
-				item.readDistance = theDifference;
-				msgs.$save(item);
-			}
-
-         });
-         
- 		 //// set the current read timestamp 
- 		 var refUsers = new Firebase('https://....firebaseio.com/users/');
- 		 var theTimestamp = new Date().valueOf();					
- 		 refUsers.child(currentUser.uid).update({
-	 		 messagesViewed: theTimestamp
-		 });
-   		 	 
-  	 });
-*/
-  	 checkIfUserExists(userId);
-	 }); //ends if profile loaded 
-
-        } else {
-	        //not a current user... move on
-	          $location.path('#/home').replace();
-	          $scope.$apply();
-        }
-
-
-
-		function checkIfUserExists(userId) {
-		  var USERS_LOCATION = fsConfig.FIREBASE_URL+'/users';
-		  var userAccess = new Firebase(USERS_LOCATION);
-		  console.log(userAccess);
-		  userAccess.child(userId).once('value', function(snapshot) {
-		    var exists = (snapshot.val() !== null);
-		    //userExistsCallback(userId, exists);
-		    var val = snapshot.val();
-		    //console.log('gettings access...');
-				if(val.role){
-					var userRole = val.role;					
-				}else{
-					var userRole = 0;
-				}
-				var userAaa = (val.role  > 50);
-	 	      $scope.userRole = userRole;
-		      $scope.userAaa = userAaa;
-		  });
-		} 
-  
-  }
-]);
+//see ctrlAccount.js
 
 //see ctrlProfile.js
 
-app.controller("FollowingCtrl", ["fsConfig", "$scope", "Profile", "currentUser", "$firebaseArray","$location","filterFilter",
-  function(fsConfig, $scope, Profile, currentUser, $firebaseArray, $location, filterFilter) {
+app.controller("FollowingCtrl", ["fsConfig", "$scope", "Profile", "currentUser", "$firebaseArray","$location", 
+  function(fsConfig, $scope, Profile, currentUser, $firebaseArray, $location) {
   	var unreadMessages;
   	$scope.unreadMessages = unreadMessages;
  	$scope.aaa = false;
 	$scope.isLoadingMessages = true;
     if(currentUser){
-      	 $scope.profile = Profile(currentUser.uid);
-	  	 var userId = currentUser.uid;
-	  	 var refMessages = new Firebase(fsConfig.FIREBASE_URL+'/messages/').child(currentUser.uid);
+    	$scope.profile = new Profile(currentUser.uid);
+	  	var refMessages = new Firebase(fsConfig.FIREBASE_URL+'/messages/').child(currentUser.uid);
 			refMessages.orderByKey().limitToLast(8).on('value', function(snapshot) { 
-			var exists = (snapshot.val() !== null);
-			unreadMessages = snapshot.val();
+				unreadMessages = snapshot.val();
 				$scope.isLoadingMessages = false;
-	        	console.log('unreadmessages:');
-	        	console.log(unreadMessages);
+				console.log('unreadmessages:');
+				console.log(unreadMessages);
 				$scope.unreadMessages = unreadMessages;
 		    });	
-
-
-
-
 				var msgs = $firebaseArray(refMessages);
+				$scope.msgs = msgs;
 				/*
 		 msgs.$loaded().then(function() {
 		   	 $scope.notifications = msgs;
@@ -1800,10 +1418,7 @@ app.controller("FollowingCtrl", ["fsConfig", "$scope", "Profile", "currentUser",
 		$location.path('#/home').replace();
 	    $scope.$apply();
     }
-
-
-   
-  }]);
+}]);
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1817,303 +1432,5 @@ app.controller("FollowingCtrl", ["fsConfig", "$scope", "Profile", "currentUser",
 
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// MISC FUNCTIONS
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-/*
-
-app.filter('currentBooksFilter', function(){
-   return function(dataArray, searchTerm){
-      if(!dataArray ) return;
-       if( !searchTerm){
-          return dataArray
-       }else{
-            console.log(searchTerm);
-           var term = angular.lowercase(searchTerm);
-           console.log(searchTerm);
-           return dataArray.filter(function( item){
-
-              return item.title.lowercase().indexOf(term) > -1 || item.author.lowercase().indexOf(term) > -1;    
-           });
-       } 
-  }    
-});
-*/
-
-	app.filter('currentBooksFilter', function(){
-	/* array is first argument, each addiitonal argument is prefixed by a ":" in filter markup*/
-	return function(dataArray, searchTerm){
-	    if(!dataArray ) return;
-	    /* when term is cleared, return full array*/
-	    if( !searchTerm){
-	    	return dataArray
-	    }else{
-	    	/* otherwise filter the array */
-			var term = searchTerm.toLowerCase();
-			return dataArray.filter(function(item){
-			return (item.title && (item.title.toString().toLowerCase().indexOf(term) > -1)) || 
-				(item.author && (item.author.toString().toLowerCase().indexOf(term) > -1)) || 
-				(item.isbn && (item.isbn.indexOf(term) > -1)) || 
-				(item.isbn13 && (item.isbn13.indexOf(term) > -1));     //.toString().toLowerCase()
-	    });
-		}
-	}    
-});
-
-
- 
-
-app.service('tags', function($q, filterFilter) {
-	// EXAMPLE: 
-	//  var tags = [
-	//    { "text": "Tag1" },
-	//    { "text": "Tag2" }
-	//  ];
-	this.load = function(query, tagArray) {
-    	var deferred = $q.defer();
-		var newTagArray = filterFilter(tagArray, query);
-	  	console.log(newTagArray);
-	  	deferred.resolve(newTagArray);
-	  	return deferred.promise;
-	};
-});
-
-
-
-/*
- 
-function getAccessLevel(userid){ 
-   	 var objAccess = $firebase( new Firebase('https://.....firebaseio.com').child('users').child(}).child('role')).$asObject();     
- 	 	 objAccess.$loaded().then(function() {
- 	    	if(objAccess.$value > 50){
-		    	$scope.aaa =true;
-	    	} else{
-		    	$scope.aaa = false;
-	    	}
-		});
-}
-*/
-
- 
-
-
-
-
-
- // this collects the unique tags
- app.filter('uniqueTags', function() {
-    return function(list) {
-        var tags = {};
-        angular.forEach(list, function(obj, key) {
-            angular.forEach(obj.tags, function(value) {
-                tags[value] = 1;
-            })
-        });
-        var uniqueTags = [];
-		
-        for (var key in tags) {
-            uniqueTags.push(key);
-        }
-//    console.log(tags);
-//	console.log(uniqueTags);
-
-        return uniqueTags;
-
-    }
-});
-
-/*
-app.filter('unique', function() {
-    return function(input, key) {
-        var unique = {};
-        var uniqueList = [];
-        for(var i = 0; i < input.length; i++){
-            if(typeof unique[input[i][key]] == "undefined"){
-                unique[input[i][key]] = "";
-                uniqueList.push(input[i]);
-            }
-        }
-        return uniqueList;
-    };
-});
-*/
-
- 
- app.filter('to_trusted', ['$sce', function($sce){
-        return function(text) {
-            return $sce.trustAsHtml(text);
-        };
- }]);
-
- app.filter('to_trusted_lines', ['$sce', function($sce){
-        return function(text) {
- 			var thetext =  String(text).replace(/<p>/gm, '###startp###');
-			 thetext =  thetext.replace(/<\/p>/gm, '###endp###');
-			 thetext =  thetext.replace(/<br>/gm, '###br###');
-			 thetext =  thetext.replace(/<br\/>/gm, '###br###');			
-			 thetext = thetext.replace(/<[^>]+>/gm, '');
- 			thetext =  thetext.replace(/###startp###/gm, '<p>');
-			 thetext =  thetext.replace(/###endp###/gm, '</p>');
-			 thetext =  thetext.replace(/###br###/gm, '<br>');
-			 thetext =  thetext.replace(/###startp###/gm, '<p>');
-			 thetext =  thetext.replace(/\s{2,}/g, ' '); //removes double spaces
-
-             return $sce.trustAsHtml(thetext);
-         };
- }]);
-
-
- app.filter('to_lines', ['$sce', function($sce){
-        return function(text) {
- 			var thetext =  String(text).replace(/<p>/gm, '###startp###');
-			 thetext =  thetext.replace(/<\/p>/gm, '###endp###');
-			 thetext =  thetext.replace(/<br>/gm, '###br###');
-			 thetext =  thetext.replace(/<br\/>/gm, '###br###');			
-			 thetext = thetext.replace(/<[^>]+>/gm, '');
-			 
-  			 thetext =  thetext.replace(/###startp###/gm, '');
-			 thetext =  thetext.replace(/###endp###/gm, '\n\r\n');
-			 thetext =  thetext.replace(/###br###/gm, '');
-			 thetext =  thetext.replace(/\s{2,}/g, ' '); //removes double spaces
-              return (thetext);
-         };
- }]);
-
-
- app.filter('to_plain', function(){
- 	return function(text) {
-  return String(text).replace(/<[^>]+>/gm, '');
-	};
- });
- 
-
-// validHTMLTags  =/^(?:a|abbr|acronym|address|applet|area|article|aside|audio|b|base|basefont|bdi|bdo|bgsound|big|blink|blockquote|body|br|button|canvas|caption|center|cite|code|col|colgroup|data|datalist|dd|del|details|dfn|dir|div|dl|dt|em|embed|fieldset|figcaption|figure|font|footer|form|frame|frameset|h1|h2|h3|h4|h5|h6|head|header|hgroup|hr|html|i|iframe|img|input|ins|isindex|kbd|keygen|label|legend|li|link|listing|main|map|mark|marquee|menu|menuitem|meta|meter|nav|nobr|noframes|noscript|object|ol|optgroup|option|output|p|param|plaintext|pre|progress|q|rp|rt|ruby|s|samp|script|section|select|small|source|spacer|span|strike|strong|style|sub|summary|sup|table|tbody|td|textarea|tfoot|th|thead|time|title|tr|track|tt|u|ul|var|video|wbr|xmp)$/i;
-
-var validHTMLTags  =/^(?:i|p|br)$/i;
-
-
- app.filter('to_plain_keep_some', function(){
-        return function(text) {
-
-			return String(text).replace(/<[^>]+>/gm, '');
-        };
- });
- 
-
-  /*
-  var // This regex normalises anything between quotes
-        normaliseQuotes = /=(["'])(?=[^\1]*[<>])[^\1]*\1/g,
-        normaliseFn = function ($0, q, sym) { 
-            return $0.replace(/</g, '&lt;').replace(/>/g, '&gt;'); 
-        },
-        replaceInvalid = function ($0, tag, off, text) {
-            var 
-                // Is it a valid tag?
-				invalidTag = !validHTMLTags.test(tag),
- 
-                // Is the tag complete?
-                isComplete = text.slice(off+1).search(/^[^<]+>/) > -1;
- 		
- 				console.log(invalidTag || !isComplete ? '&lt;' + tag : $0);
-
-            return invalidTag || !isComplete ? '&lt;' + tag : $0;
-        };
-
-    text = text.replace(normaliseQuotes, normaliseFn)
-             .replace(/<(\w+)/g, replaceInvalid);
-             
-			 return String(text);
-
-*/
-
-/*
-function sanitize(txt) {
-    var // This regex normalises anything between quotes
-        normaliseQuotes = /=(["'])(?=[^\1]*[<>])[^\1]*\1/g,
-        normaliseFn = function ($0, q, sym) { 
-            return $0.replace(/</g, '&lt;').replace(/>/g, '&gt;'); 
-        },
-        replaceInvalid = function ($0, tag, off, txt) {
-            var 
-                // Is it a valid tag?
-                invalidTag = protos && 
-                    document.createElement(tag) instanceof HTMLUnknownElement
-                    || !validHTMLTags.test(tag),
-
-                // Is the tag complete?
-                isComplete = txt.slice(off+1).search(/^[^<]+>/) > -1;
-
-            return invalidTag || !isComplete ? '&lt;' + tag : $0;
-        };
-
-    txt = txt.replace(normaliseQuotes, normaliseFn)
-             .replace(/<(\w+)/g, replaceInvalid);
-             
-			 return String(txt);
-        }
-*/
- 
-
-
-
-// this fucntion cutes the length of the title/text
-angular.module('ng').filter('cut', function () {
-        return function (value, wordwise, max, tail) {
-            if (!value) return '';
-
-            max = parseInt(max, 10);
-            if (!max) return value;
-            if (value.length <= max) return value;
-
-            value = value.substr(0, max);
-            if (wordwise) {
-                var lastspace = value.lastIndexOf(' ');
-                if (lastspace != -1) {
-                    value = value.substr(0, lastspace);
-                }
-            }
-
-            return value + (tail || ' ?');
-        };
-    });
-
-
-
-////////////////////////////////////////
-/// DISTANCE FUNCTION ///
-////////////////////////////////////////
-
-function distance(lat1, lon1, lat2, lon2, unit) {
-	var radlat1 = Math.PI * lat1/180;
-	var radlat2 = Math.PI * lat2/180;
-	var radlon1 = Math.PI * lon1/180;
-	var radlon2 = Math.PI * lon2/180;
-	var theta = lon1-lon2;
-	var radtheta = Math.PI * theta/180;
-	var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
-	dist = Math.acos(dist);
-	dist = dist * 180/Math.PI;
-	dist = dist * 60 * 1.1515;
-	if (unit==="K") { dist = dist * 1.609344 }
-	if (unit==="N") { dist = dist * 0.8684 }
-	return dist;
-}              
-                                                             
-
-////////////////////////////////////////
-/// GETS INDEX OF ///
-////////////////////////////////////////
-
-function arrayObjectIndexOf(arr, obj){
-    for(var i = 0; i < arr.length; i++){
-        if(angular.equals(arr[i], obj)){
-            return i;
-        }
-    }
-    return -1;
-} 
 
 

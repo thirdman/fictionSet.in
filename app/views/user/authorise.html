@@ -1,0 +1,84 @@
+ <div class="theContainer pageAccount">
+  <div class="contentWrap">
+	  
+<!-- SHOW SECTION IF LOGGED IN -->
+<span ng-show="authData" >
+	<div class="titleBlock group">
+		<div class="coverImg userImg" ng-show="profile.picture_url" ><img class="featImg" src="{{profile.picture_url}}"/></div>
+		<h2 class="bookTitle">{{authData.displayName}}</h2>
+		<div class="subMenu">
+			<a href="#/profile/{{authData.displayName}}" class="active">profile</a>
+			<a href="#/following">activity</a>
+			<a href="#/account" >account</a>
+			<a href="#" ng-click="auth.$unauth()" >logout</a>
+		</div>
+	</div>
+	
+	
+<div class="theContent columnWrap" >
+	<div class="columnLeft column column50">		
+		<span ng-show="grProcessing">
+			<p>Loading</p>
+		</span>
+	 		
+		<div class="contentSection apiWrap" ng-hide="grProcessing" >
+			<h3>Authorisation</h3>
+			<p>
+				<span class="loading" ng-show="grProcessing">Authorising...</span>
+				<span class="loading" ng-show="grGettingUser">Getting User Profile...</span>
+				<span class="loading" ng-show="grGettingData">Loading Content...</span>
+				<span class="loading" ng-show="grDone">Returning to your profile</span>
+				
+				</p>
+		</div>
+	</div><!-- ends col left -->
+	<div class="columnRight column column50">	
+ 		<div class="contentSection  collectionWrap" >
+	 		<span ng-show="grProcessing">
+				<p>Loading</p>
+	 		</span>
+	 		
+	 		<span ng-show="oauthSession">
+			<span ng-show="(grDone) && (!grProcessing)">
+		  	<h4>Connected As</h4>
+				<p>Boom! Welcome.</p>
+				<p>NAME: {{grData.displayName}}</p>
+				<p>ID: {{grData.identifier}}</p>
+				<p><img src="{{grData.photoURL}}"></p>
+			</span>
+		</span>
+
+			<span ng-hide="oauthSession">
+			<h3>No User Info</h3>
+			<p>OAUTH SESSION: {{oauthSession}}</p>
+			<p>TODO: {{todo}}</p>
+			<p>Action message: {{actionMessage}}</p>
+	 		</span>
+	 			 		
+		</div>
+
+
+ 
+
+
+
+	</div><!-- column right -->
+ </div><!-- ends columnwrap -->
+ <span><!-- ends logged in user -->
+
+
+<!-- SHOW SECTION IF NOT LOGGED IN -->
+<div class="theContent columnWrap" ng-show="!authData" >
+    <div class="bookDetail">
+		<h2>Profile</h2>
+		<p>Not logged in.</p>
+		<p>Return to front page or <a href="#/login">login</a> to view your account.</p>
+    </div>
+</div><!-- ends not logged in user -->
+
+
+ </div>
+</div>
+
+
+

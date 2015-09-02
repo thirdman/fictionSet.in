@@ -41,7 +41,60 @@
 			<p ng-if="userAaa"><a ng-href="#/admin/messages" class="btn">New System Message</a> ADMIN: Add New System Notification</p>
 			<p><a ng-href="#/admin/users" class="btn">Manage Users</a> Edit Users and badges</p>
 		</div>
+		<div class="contentSection apiWrap" >
 
+
+
+			<h3>Linked Accounts</h3>
+			<span ng-hide="grProcessing">
+				<p ng-hide="grDataActive" ><img src="imgs/misc/goodreads.jpg" class="goodreadsUserIcon" ><a href="/admin/grLogin.php?provider=Goodreads" ng-click="doExternalLink()"  class="btn">Link Goodreads Account</a></p>
+				
+				<div ng-show="grDataActive" class="goodreadsBox" style="">
+						<h4>Goodreads</h4>
+					<div class="iconsWrap">
+						<img src="imgs/misc/goodreads.jpg" class="goodreadsUserIcon" >						
+						<img src="{{grData.picture_url}}" class="goodreadsUserIcon"  >						
+					</div>
+					<div class="infoWrap">
+						<p><span class="infoTitle">Status:</span> Connected  <a href="" ng-click="doGoodreadLogout()" class="connectLink">Logout</a> 
+						<span class="infoTitle">Name:</span> {{grData.displayName}} <span class="infoTitle">ID:</span> {{grData.provider_id}} <a href="{{grData.profile_url}}" target="_blank" class="connectLink">View Profile</a>
+						
+						</p>
+					</div>
+				</div>
+				
+				<div class="grUser" ng-show="grUser">
+						<span class="infoTitle">Last Active:</span> {{grUser.last_active}} 
+						<span class="infoTitle">Reviews:</span> {{grUser.reviews_count}} 
+						<span class="infoTitle">{{(grUser.user_shelves.user_shelf).length }} </span>Shelves
+						<!--
+<ul>
+						<li ng-repeat="shelf in grUser.user_shelves.user_shelf" class="shelfItem" >
+							<h5 style="text-transform: capitalize">{{shelf.name}}, Id:({{shelf.id}}) <span style="float:right;"><span class="">{{ shelf.book_count}} Books</span></span></h5>
+						</li>
+					</ul>
+-->
+				</div> 
+
+
+				<div class="grShelf contentSection collectionWrap" >
+					<div ng-repeat="shelf in grShelfArray" >
+						<h4 class="subtitle"><span class="iconCollections infoLabel icon-folder-open">{{shelf.name}}</span><span style="float:right">{{shelf.meta.book_count}} Books</span></h4>
+						
+						<ul>
+							<li ng-repeat="shelfItem in shelf.content" class="collectionItem" >
+								<a href="#/book/{{shelfItem.book.link}}" class="collectionImgLink"><img src="{{shelfItem.book.image_url}}" class="collectionImg"></a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				
+
+	 		</span>
+	 		<span ng-show="grProcessing">
+				<p class="loading" >Working...</p>
+	 		</span>
+		</div>
 		<div class="contentSection badgeWrap " >
 			<h3>Badges</h3>
 			<div ng-repeat="badge in profile.badges" class="aBadge" >

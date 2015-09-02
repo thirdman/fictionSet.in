@@ -25,7 +25,7 @@
 	</div>
 
 <div class="theContainer">
-<div class="homeBook booksWrap contentWrap" ><!--    ng-repeat="randombook in collection  |  limitTo: 100 | filter:searchBar | orderBy: '-timestamp' "   -->
+<div class="homeBook booksWrap contentWrap" >
 	<div class="loading" ng-hide="hasData">
 <!-- 		<img src="/imgs/brand/logo_line_white.svg" style="" class="logo"> loading... -->
 		<ul class="bookList placeholder">
@@ -98,7 +98,7 @@
 	</div>
 	
 	<ul class="bookList">
-		<li ng-repeat="item in list | orderBy: '-timestamp' |  limitTo: 100 | filter:searchBar  " class="listItem" >
+		<li ng-repeat="item in list | orderBy: '-timestamp' |  limitTo: 100 | filter:searchBar" class="listItem" >
 				        <div class="imgWrap">
 				    		<a ng-href="#/book/{{item.$id}}" class="front">
 				    			<img ng-src="{{item.coverurl}}" class="bookImg bookImgSmall" >

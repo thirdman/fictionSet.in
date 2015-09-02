@@ -18,7 +18,7 @@
   
 <div class="theContainer">
   <div class="contentWrap">
-	<div class="bookmarkSection"   > <!-- ng-if="userAaa" -->
+	<div class="bookmarkSection" style="display: none;"   > <!-- ng-if="userAaa" -->
 		<div class="icon collectionAdd iconBookmark" ng-class="(inCollection) ? 'inCollection' : ''"  ng-click="collectionsAdd(bookid, bookshelf, 'bookshelf')"  >
 			<span ng-show="inCollection">In Your Bookshelf</span>
 			<span ng-show="!inCollection">Save to Your Bookshelf</span>
@@ -35,6 +35,18 @@ add <a href="#" ng-click="pushToColl()">add book</a>
 	<div class="titleBlock group">
 		<div class="coverImg"><img class="featImg" ng-if="book.coverurl" src="{{book.coverurl}}"/></div>
 		<h2 class="bookTitle">{{ book.title }}</h2>
+		<div class="manageBookshelf" style="position: absolute; right:0; bottom: 1.5em; ">
+			<div class="inCollectionWrap " ng-class="(inCollection) ? 'inCollection' : ''"  >
+				<span  class="bookshelfLink icon-heart active btn fsBtn" style="background: #E50000; " ng-show="inCollection"  ng-click="collectionsAdd(bookid, bookshelf, 'bookshelf')">Saved</span>
+			</div>
+			
+			<div ng-class="(inCollection) ? 'addCollectionWrap  inCollection' : 'addCollectionWrap '"  >
+				<span class="bookshelfLink  icon-bookmark-2 btn fsBtn hollow" ng-show="!inCollection"  ng-click="collectionsAdd(bookid, bookshelf, 'bookshelf')" style="border: none;">
+						<span ng-show="!isBookmarking">Save</span>
+						<div class="doingBookmarking" ng-show="isBookmarking">Saving...</div>
+						</span>
+			</div>
+		</div>
 		<h5 class="bookSubtitle">by {{  book.author }}</h5>
 	</div>
  
@@ -99,13 +111,15 @@ add <a href="#" ng-click="pushToColl()">add book</a>
 		<div class="theContent column columnRight" >
 			<h4><span class="iconLabel icon-book-alt2">Description:</h4>
 			<!--<span class="descriptionWrap">{{  book.description | to_lines}}</span> -->
-			<!--<span class="descriptionWrap" ng-bind-html="book.description | to_lines"  ></span> -->
-			<!--<span ng-bind-html="book.description | to_trusted_lines"  ></span> -->
-			<p class="descriptionWrap" ng-bind="book.description | to_plain"  ></p>
+<!--
+			<span class="descriptionWrap" ng-bind-html="book.description | to_lines"  ></span>
+			<span ng-bind-html="book.description | to_trusted_lines"  ></span>
+-->
+<!-- 			<p class="descriptionWrap" ng-bind="book.description | to_plain"  ></p> -->
+			<div class="descriptionWrap" ng-bind-html="book.amazonDescHtml | to_trusted"   ></div> 
+<!-- 			<p class="descriptionWrap" ng-bind="book.description"  ></p> -->
  
-			<!-- <p>{{  book.description }}</p> -->
-
-			 <div class="bookImages" ng-if="book.locationimg">
+ 			 <div class="bookImages" ng-if="book.locationimg">
 			    <img class="locationImg" ng-if="book.locationimg" src="{{book.locationimg}}" style="height: 200px;"/>
 			</div>
 			

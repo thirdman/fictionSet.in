@@ -1,6 +1,5 @@
-
- app.controller("BookCtrl", ["fsConfig", "$scope", "$rootScope", "Auth", "currentUser", "$firebase", "$firebaseArray", "$firebaseObject", "$routeParams", "$location", "$timeout", "DataSource", "iTunesData", "Profile", "filterFilter",  'ngDialog', "$log", "FsStats", "FsGet",
- function(fsConfig, $scope, $rootScope, Auth, currentUser,  $firebase, $firebaseArray, $firebaseObject, $routeParams, $location, $timeout, DataSource, iTunesData, Profile, filterFilter,  ngDialog, $log,  FsStats, FsGet ) { 
+ app.controller("BookCtrl", ["fsConfig", "$scope", "$rootScope", "Auth", "currentUser",  "$firebaseArray", "$firebaseObject", "$routeParams", "$location", "$timeout", "DataSource", "iTunesData", "Profile", "filterFilter",  'ngDialog', "$log", "FsStats", "FsGet",
+ function(fsConfig, $scope, $rootScope, Auth, currentUser,  $firebaseArray, $firebaseObject, $routeParams, $location, $timeout, DataSource, iTunesData, Profile, filterFilter,  ngDialog, $log,  FsStats, FsGet ) { 
 	'use strict';
 	// TODO: refactor out user stuff so the page can load quicker, THEN update with user stuff ?
 	
@@ -456,10 +455,12 @@
 			collectionShowCreate = true;
 			$scope.collectionShowCreate = true;
 		};
+		
 		$scope.showCollections = function(){
  			collectionShowCreate = false;
 			$scope.collectionShowCreate = false;
 		};
+		
 		$scope.createNewCollection = function(newCollectionData){
  			var addTimestamp = new Date().valueOf();
 			collectionProcessing = true;

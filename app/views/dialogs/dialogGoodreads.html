@@ -1,0 +1,51 @@
+ <!-- for when sent -->
+<span ng-show="(grDone) && (!grProcessing)">
+  	<h4>Goodreads</h4>
+		<p>Boom! Welcome.</p>
+		<p>NAME: {{grData.displayName}}</p>
+		<p>ID: {{grData.identifier}}</p>
+		<p><img src="{{grData.photoURL}}"></p>
+		<div class="ngdialog-buttons">
+			<button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="closeThisDialog()">Close</button>
+		</div>
+</span>
+
+ <!-- for when sending -->
+<span ng-show="(grProcessing) && (!grDone)" class="loading">
+	<p>Working...</p>
+</span>
+
+ <!-- for when Error -->
+<span ng-show="(isError)">
+  <h4>Error</h4>
+	<h3>{{errorMessage.title}}</h3>
+	<p>{{errorMessage.message}}</p>
+</span>
+
+
+<!-- for when initial state - show form -->
+<span ng-hide="grDone">
+  	<h4>Goodreads</h4>
+ 		 <form  class="borderTop">
+		     <div class="  group">
+			     <p>Click to link your goodreads profile in FictionSet.in</p>
+<!--
+				 	<br>
+		<br>
+		<a href="admin/login.php?provider=Goodreads">Goodreads login</a><br />
+		<a href="admin/login.php?logout=true">Goodreads LOGOUT</a><br />
+-->
+			  </div>
+		 </form> 
+ 
+  	
+	<div class="ngdialog-buttons">
+		<button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="doGoodreadsAction()">Authorise</button>
+		<button type="button" class="ngdialog-button ngdialog-button-secondary" ng-click="closeThisDialog('button')">Cancel</button>
+<!-- 		<button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="submitReport(thereport)">Submit</button> -->
+	</div>
+</span>
+
+
+
+ 

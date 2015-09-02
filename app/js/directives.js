@@ -107,7 +107,7 @@ angular.module('myApp.directives', [])
   }])
  
 
-.directive('fsMessageCount', ['fsConfig', '$firebase', 'Auth', 'simpleLogin', 'filterFilter', function(fsConfig, $firebase, Auth, simpleLogin, filterFilter){
+.directive('fsMessageCount', ['fsConfig',   'Auth', 'simpleLogin', 'filterFilter', '$rootScope', function(fsConfig,  Auth, simpleLogin, filterFilter, $rootScope){
 	"use strict";
 	return {
 		restrict: 'AE',
@@ -124,8 +124,7 @@ angular.module('myApp.directives', [])
 			$scope.auth = Auth;
 
 			Auth.$onAuth(function(authData){
-					console.log('onAuth has run...');
-					console.log(authData);
+					$rootScope.showUser = authData;
 					showIcon = false;
 					$scope.userMessageCount = ''; 
 					if(authData){

@@ -187,7 +187,8 @@ function(fsConfig, $scope, currentUser, $firebaseArray, $firebaseObject, $routeP
 }]);
     
     
-app.controller("ManagePlaceCtrl", [ "fsConfig", "$scope", "currentUser", "$firebase", "$routeParams", "$location", "filterFilter", "DataSource", function(fsConfig, $scope, currentUser, $firebase, $routeParams, $location, filterFilter, DataSource) {
+app.controller("ManagePlaceCtrl", [ "fsConfig", "$scope", "currentUser", "$firebaseArray", "$routeParams", "$location", "filterFilter", "DataSource", 
+function(fsConfig, $scope, currentUser, $firebaseArray, $routeParams, $location, filterFilter, DataSource) {
     var placename = $routeParams.place;
     var placeid = $routeParams.placeid;
    	$scope.placename = placename;
@@ -195,7 +196,7 @@ app.controller("ManagePlaceCtrl", [ "fsConfig", "$scope", "currentUser", "$fireb
     console.log(placename);
  	 var ref = new Firebase(fsConfig.FIREBASE_URL+'/places/').child(placeid);
  	 ref.setPriority(1000);
- 	 var sync = $firebase(ref);
+ 	 var sync = $firebaseArray(ref);
  	   // if ref points to a single record
 	   var rec = sync.$asObject();
 	   rec.$loaded().then(function() {

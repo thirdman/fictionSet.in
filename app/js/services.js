@@ -15,7 +15,7 @@
 	  }])
 */
 	  
-  .service('FsGet', ["fsConfig", '$http', '$firebase',  "$firebaseObject", function(fsConfig, $http, $firebase,  $firebaseObject) {
+  .service('FsGet', ["fsConfig", '$http',  "$firebaseObject", function(fsConfig, $http,  $firebaseObject) {
 	//GET AN OBJECT PROFILE FROM AN ID
 	var ref = new Firebase(fsConfig.FIREBASE_URL);
 	return {
@@ -44,12 +44,12 @@
 		},
 		getUser1: function(theUserId){
 					var refUser = $firebaseObject(ref.child('users').child(theUserId)); 
-					console.log('getUser1 was triggered with the id of' + theUserId);
+					console.log('getUser1 was triggered with the id of ' + theUserId);
 					return refUser;
 		},		
 		getRole: function(theUserId){
 					var userRole = $firebaseObject(ref.child('users').child(theUserId).child('role')); 
-					console.log('getRole was triggered with the id of' + theUserId);
+					console.log('getRole was triggered with the id of ' + theUserId);
 					return userRole;														
 		}		
 
@@ -174,18 +174,19 @@
 
 
  		//RESOURCES
+ 		var refLocations,refCollections,refBooks;
  		var ref = new Firebase(fsConfig.FIREBASE_URL);
-		var refLocations = $firebaseArray(ref.child('places')); 
+		refLocations = $firebaseArray(ref.child('places')); 
 		var refUsers = $firebaseArray(ref.child('users')); 
-		var refBooks = $firebaseArray(ref.child('Books')); 
-		var refCollections = $firebaseArray(ref.child('collections')); 
+		refBooks = $firebaseArray(ref.child('Books')); 
+		refCollections = $firebaseArray(ref.child('collections')); 
 		//DESTINATIONS
 		var refMessages = ref.child("messages");
 		var adminLocation = ref.child('/system/adminmessages');
 		
 	    return {
 		  bookAdded: function (theUser, theBook, getData) {
-		  	var goAhead = false;
+		  	//var goAhead = false;
 			 //SET getData default to false
 			 getData = typeof getData !== 'undefined' ? getData : false;
 
@@ -224,12 +225,13 @@
 		  // WE SHOULD: 
 		  // -- notify admin.
 		  // -- notify all who follow the places in the book	
-
+			var activatorId,messageContent,messageTitle;
+			
 		  var theTimestamp = new Date().valueOf();
 		  var messageType = 'bookAdded';
-		  var messageTitle = "New Book Added";
-		  var messageContent = theBook.title + " was added.";
-		  var activatorId = theUser.$id;
+		  messageTitle = "New Book Added";
+		  messageContent = theBook.title + " was added.";
+		  activatorId = theUser.$id;
 		  
 		  
 		  	//NOTIFY ADMIN		  
@@ -255,7 +257,7 @@
 					var thisCountryId =  parseFloat(thePlace.countryId);
 					console.log(parseFloat(thePlace.geonameId));
 					console.log(parseFloat(thePlace.countryId));
-					if(thisLocationId == thisCountryId){
+					if(thisLocationId === thisCountryId){
 						isCountry = true;
 						console.log('IT IS A COUNTRY');
 					}
@@ -263,7 +265,7 @@
 					// LETS SEND A NOTE TO EVERYONE WHO FOLLOWS THAT COUNTRY
 					console.log('sentcountryid:' + sentCountryId);
 					console.log('placecountry id:' +  parseFloat(thePlace.countryId));
-					if(sentCountryId != parseFloat(thePlace.countryId)){
+					if(sentCountryId !== parseFloat(thePlace.countryId)){
 						var bookUserSetCountry = filterFilter(refUsers, {following:thisCountryId} );
 						console.log( bookUserSetCountry);
 							if(!bookUserSetCountry.length){
@@ -276,12 +278,13 @@
 						// THE SAME USER IS FOLLOWING MORE 
 						// THAN ONE PLACE SO THEY ONLY GET
 						// ONE MESSAGE, NOT SEVERAL
+						var thisfollowingid;
 						angular.forEach(bookUserSetCountry, function(user){
 							if(user.following[parseFloat(thePlace.countryId)]){
-								var thisfollowingid = user.following[parseFloat(thePlace.countryId)].countryId;
+								thisfollowingid = user.following[parseFloat(thePlace.countryId)].countryId;
 							}
 							console.log(thisfollowingid);
-							if(thisfollowingid == parseFloat(thePlace.countryId)){  //THIS JUST RECONFIRMS YOUARE FOLLOWING THE COUNTRY
+							if(thisfollowingid === parseFloat(thePlace.countryId)){  //THIS JUST RECONFIRMS YOUARE FOLLOWING THE COUNTRY
 								console.log('yep, ets do this');
 							console.log('notifying a country');
 							var recipientId = user.$id; 
@@ -394,11 +397,11 @@
 		  // -- notify admin.
 		  // -- notify all who follow the places in the book	
 		  // -- FUTURE: Notify all who have flagged they want to be notified of suggestions
-		  
+		  var messageTitle, messageContent;
 		  var theTimestamp = new Date().valueOf();
 		  var messageType = 'bookSuggested';
-		  var messageTitle = "New Book Suggested";
-		  var messageContent = theBook.title + " was suggested.";
+		  messageTitle = "New Book Suggested";
+		  messageContent = theBook.title + " was suggested.";
 
 		  	//NOTIFY ADMIN		  
 		  	adminLocation.push({
@@ -425,7 +428,7 @@
 					var thisCountryId =  parseFloat(thePlace.countryId);
 					console.log(parseFloat(thePlace.geonameId));
 					console.log(parseFloat(thePlace.countryId));
-					if(thisLocationId == thisCountryId){
+					if(thisLocationId === thisCountryId){
 						isCountry = true;
 						console.log('IT IS A COUNTRY');
 					}
@@ -433,7 +436,7 @@
 					// LETS SEND A NOTE TO EVERYONE WHO FOLLOWS THAT COUNTRY
 					console.log('sentcountryid:' + sentCountryId);
 					console.log('placecountry id:' +  parseFloat(thePlace.countryId));
-					if(sentCountryId != parseFloat(thePlace.countryId)){
+					if(sentCountryId !== parseFloat(thePlace.countryId)){
 						var bookUserSetCountry = filterFilter(refUsers, {following:thisCountryId} );
 						console.log( bookUserSetCountry);
 							if(!bookUserSetCountry.length){
@@ -446,12 +449,13 @@
 						// THE SAME USER IS FOLLOWING MORE 
 						// THAN ONE PLACE SO THEY ONLY GET
 						// ONE MESSAGE, NOT SEVERAL
+						var thisfollowingid;
 						angular.forEach(bookUserSetCountry, function(user){
 							if(user.following[parseFloat(thePlace.countryId)]){
-								var thisfollowingid = user.following[parseFloat(thePlace.countryId)].countryId;
+								thisfollowingid = user.following[parseFloat(thePlace.countryId)].countryId;
 							}
 							console.log(thisfollowingid);
-							if(thisfollowingid == parseFloat(thePlace.countryId)){  //THIS JUST RECONFIRMS YOUARE FOLLOWING THE COUNTRY
+							if(thisfollowingid === parseFloat(thePlace.countryId)){  //THIS JUST RECONFIRMS YOUARE FOLLOWING THE COUNTRY
 								console.log('yep, ets do this');
 							console.log('notifying a country');
 							var recipientId = user.$id; 
@@ -627,11 +631,11 @@ var promise = $http.get('data.json').success(function (data) {
         q.resolve(resp);
       }, function(err) {
         q.reject(err);
-      })
+      });
       
       return q.promise;
     }
-  }
+  };
 }])
  
  .factory('FlickrPlace', ['$http', '$q' , function ($http, $q) {
@@ -658,10 +662,10 @@ var promise = $http.get('data.json').success(function (data) {
 	}])
 
  .factory('FlickrPlacePics', ['$http', '$q', function ($http, $q) {
- var getpicsurl = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=f33601a59d5cc2e162113d896f47474e&format=json&nojsoncallback=1&auth_token=&api_sig=&per_page=20&min_taken_date=1262304000&extras=url_m,url_s&sort=interestingness-desc&place_id='
- var bbox = '&bbox='+bbox;
- var tags = '&tags=crete';
- var is_getty= "&is_getty=true";
+ var getpicsurl = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=f33601a59d5cc2e162113d896f47474e&format=json&nojsoncallback=1&auth_token=&api_sig=&per_page=20&min_taken_date=1262304000&extras=url_m,url_s&sort=interestingness-desc&place_id=';
+ //var bbox = '&bbox='+bbox;
+ //var tags = '&tags=crete';
+ //var is_getty= "&is_getty=true";
 
 	    return {
 	        getPics: function(locid, bbox) {
@@ -689,11 +693,12 @@ var promise = $http.get('data.json').success(function (data) {
     	get: function(file,callback,transform){
       	$http.get(file).
         success(function(data, status) {
-						console.log("Request succeeded");
-            callback(data);
+					console.log("Request succeeded");
+          callback(data);
         }).
 				error(function(data, status) {
-            console.log("Request failed " + status);
+          console.log("Request failed " + status +" and data: ");
+          console.log(data);
         });
 			}
 		};
@@ -707,8 +712,8 @@ var promise = $http.get('data.json').success(function (data) {
   
   
 function extend(base) {
-    var parts = Array.prototype.slice.call(arguments, 1);
-    parts.forEach(function (p) {
+  var parts = Array.prototype.slice.call(arguments, 1);
+		parts.forEach(function (p) {
         if (p && typeof (p) === 'object') {
             for (var k in p) {
                 if (p.hasOwnProperty(k)) {
@@ -718,8 +723,7 @@ function extend(base) {
         }
     });
     return base;
-}
-  
+}  
 })();
 
 

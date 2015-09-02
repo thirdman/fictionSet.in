@@ -1541,6 +1541,43 @@ html.booksPage {
   margin-left: -11px;
   font-size: 10px; }
 
+/*//////////////////////////////////////////////////////*/
+/*///////// GOODREADS //////////////////////////////*/
+/*//////////////////////////////////////////////////////*/
+.goodreadsBox {
+  padding: 0;
+  height: 110px;
+  width: 100%; }
+  .goodreadsBox .iconsWrap {
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    width: 19%; }
+    .goodreadsBox .iconsWrap img {
+      width: 40px;
+      height: 40px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: #fff;
+      border: 2px solid #fff;
+      border-radius: 40px;
+      overflow: hidden;
+      z-index: 2; }
+      .goodreadsBox .iconsWrap img + img {
+        left: 30px;
+        z-index: 1; }
+  .goodreadsBox .infoWrap {
+    display: inline-block;
+    vertical-align: top;
+    width: 80%;
+    line-height: 1.2em; }
+    .goodreadsBox .infoWrap .infoTitle {
+      text-transform: uppercase;
+      color: #ddd; }
+    .goodreadsBox .infoWrap .connectLink {
+      float: right; }
+
 /*///////////////////////////*/
 /*///////// Book Page ////////*/
 /*///////////////////////////*/

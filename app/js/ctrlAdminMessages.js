@@ -1,4 +1,4 @@
-app.controller("AddMessageCtrl", [ "fsConfig", "$scope", "currentUser", "$firebase", "$routeParams", "$location", "filterFilter", "DataSource", "Profile", "FsNotifyWithId", function(fsConfig, $scope, currentUser, $firebase, $routeParams, $location, filterFilter, DataSource, Profile, FsNotifyWithId) {
+app.controller("AddMessageCtrl", [ "fsConfig", "$scope", "currentUser", "$routeParams", "$location", "filterFilter", "DataSource", "Profile", "FsNotifyWithId", function(fsConfig, $scope, currentUser, $routeParams, $location, filterFilter, DataSource, Profile, FsNotifyWithId) {
 	"use strict";
 	$scope.isLoading = false;
 	$scope.messageAuthor = "";

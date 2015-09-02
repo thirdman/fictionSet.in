@@ -1,4 +1,21 @@
 
+/*
+app.filter('unique', function() {
+    return function(input, key) {
+        var unique = {};
+        var uniqueList = [];
+        for(var i = 0; i < input.length; i++){
+            if(typeof unique[input[i][key]] == "undefined"){
+                unique[input[i][key]] = "";
+                uniqueList.push(input[i]);
+            }
+        }
+        return uniqueList;
+    };
+});
+*/
+
+
 app.controller("BookCtrl", [ "$scope", "$rootScope", "currentUser", "$firebase", "$routeParams", "$location", "$timeout", "DataSource", "iTunesData", "Profile", "filterFilter", 'ngDialog', "$log", function($scope, $rootScope, currentUser, $firebase, $routeParams, $location, $timeout, DataSource, iTunesData, Profile, filterFilter, ngDialog, $log, lodash ) { 
    	$scope.isLoading = true;
    	var isBookmarking = false;
